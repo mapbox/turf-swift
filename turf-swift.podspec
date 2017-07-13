@@ -2,16 +2,12 @@ Pod::Spec.new do |s|
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
-  s.name = "Geometry.swift"
+  s.name = "Turf-swift"
   s.version = "0.0.1"
-  s.summary = "."
+  s.summary = "Turf-swift is a port of Turf.js for Swift."
 
-  s.description  = <<-DESC
-  Geometry.swift provides the core spatial functions, mostly ported from Turf.js.
-                   DESC
-
-  s.homepage = "https://www.mapbox.com/navigation-sdk/"
-  s.documentation_url = "https://mapbox.github.io/mapbox-navigation-ios/navigation/"
+  s.homepage = "https://www.github.com/mapbox/turf-swift"
+  s.documentation_url = "https://mapbox.github.io/turf-swift"
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
@@ -29,16 +25,16 @@ Pod::Spec.new do |s|
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
-  s.source = { :git => "https://github.com/mapbox/mapbox-navigation-ios.git", :tag => "v#{s.version.to_s}" }
+  s.source = { :git => "https://github.com/mapbox/turf-swift.git", :tag => "v#{s.version.to_s}" }
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
-  s.source_files = "Geometry"
+  s.source_files = "Turf/**/*"
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   s.requires_arc = true
-  s.module_name = "Geometry"
+  s.module_name = "Turf"
 
   s.frameworks = 'CoreLocation'
 
