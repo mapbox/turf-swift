@@ -11,6 +11,7 @@
 		35650AFF1F150DC500B5C158 /* TurfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35650AFE1F150DC500B5C158 /* TurfTests.swift */; };
 		35650B011F150DC500B5C158 /* Turf.h in Headers */ = {isa = PBXBuildFile; fileRef = 35650AF31F150DC500B5C158 /* Turf.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		35650B0B1F150DDB00B5C158 /* Turf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35650B0A1F150DDB00B5C158 /* Turf.swift */; };
+		356D24541F17948C003BBB9D /* CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356D24531F17948C003BBB9D /* CoreLocation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +32,7 @@
 		35650AFE1F150DC500B5C158 /* TurfTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurfTests.swift; sourceTree = "<group>"; };
 		35650B001F150DC500B5C158 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		35650B0A1F150DDB00B5C158 /* Turf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Turf.swift; sourceTree = "<group>"; };
+		356D24531F17948C003BBB9D /* CoreLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 				35650AF31F150DC500B5C158 /* Turf.h */,
 				35650B0A1F150DDB00B5C158 /* Turf.swift */,
 				35650AF41F150DC500B5C158 /* Info.plist */,
+				356D24531F17948C003BBB9D /* CoreLocation.swift */,
 			);
 			path = Turf;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35650B0B1F150DDB00B5C158 /* Turf.swift in Sources */,
+				356D24541F17948C003BBB9D /* CoreLocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
