@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "35650AEF1F150DC500B5C158"
-               BuildableName = "Geometry.framework"
-               BlueprintName = "Geometry"
-               ReferencedContainer = "container:Geometry.xcodeproj">
+               BuildableName = "Turf.framework"
+               BlueprintName = "Turf"
+               ReferencedContainer = "container:Turf.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,26 +29,7 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "35650AF81F150DC500B5C158"
-               BuildableName = "GeometryTests.xctest"
-               BlueprintName = "GeometryTests"
-               ReferencedContainer = "container:Geometry.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "35650AEF1F150DC500B5C158"
-            BuildableName = "Geometry.framework"
-            BlueprintName = "Geometry"
-            ReferencedContainer = "container:Geometry.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -67,9 +48,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "35650AEF1F150DC500B5C158"
-            BuildableName = "Geometry.framework"
-            BlueprintName = "Geometry"
-            ReferencedContainer = "container:Geometry.xcodeproj">
+            BuildableName = "Turf.framework"
+            BlueprintName = "Turf"
+            ReferencedContainer = "container:Turf.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -85,9 +66,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "35650AEF1F150DC500B5C158"
-            BuildableName = "Geometry.framework"
-            BlueprintName = "Geometry"
-            ReferencedContainer = "container:Geometry.xcodeproj">
+            BuildableName = "Turf.framework"
+            BlueprintName = "Turf"
+            ReferencedContainer = "container:Turf.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
