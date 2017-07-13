@@ -29,7 +29,26 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "35650AF81F150DC500B5C158"
+               BuildableName = "TurfTests.xctest"
+               BlueprintName = "TurfTests"
+               ReferencedContainer = "container:Turf.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "35650AEF1F150DC500B5C158"
+            BuildableName = "Turf.framework"
+            BlueprintName = "Turf"
+            ReferencedContainer = "container:Turf.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>

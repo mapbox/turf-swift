@@ -12,6 +12,8 @@
 		35650B011F150DC500B5C158 /* Turf.h in Headers */ = {isa = PBXBuildFile; fileRef = 35650AF31F150DC500B5C158 /* Turf.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		35650B0B1F150DDB00B5C158 /* Turf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35650B0A1F150DDB00B5C158 /* Turf.swift */; };
 		356D24541F17948C003BBB9D /* CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356D24531F17948C003BBB9D /* CoreLocation.swift */; };
+		356D24561F179B32003BBB9D /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356D24551F179B32003BBB9D /* Fixture.swift */; };
+		356D24591F179B72003BBB9D /* dc-line.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 356D24581F179B72003BBB9D /* dc-line.geojson */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +35,8 @@
 		35650B001F150DC500B5C158 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		35650B0A1F150DDB00B5C158 /* Turf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Turf.swift; sourceTree = "<group>"; };
 		356D24531F17948C003BBB9D /* CoreLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocation.swift; sourceTree = "<group>"; };
+		356D24551F179B32003BBB9D /* Fixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fixture.swift; sourceTree = "<group>"; };
+		356D24581F179B72003BBB9D /* dc-line.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "dc-line.geojson"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,10 +90,20 @@
 		35650AFD1F150DC500B5C158 /* TurfTests */ = {
 			isa = PBXGroup;
 			children = (
+				356D24571F179B4A003BBB9D /* Fixtures */,
 				35650AFE1F150DC500B5C158 /* TurfTests.swift */,
 				35650B001F150DC500B5C158 /* Info.plist */,
+				356D24551F179B32003BBB9D /* Fixture.swift */,
 			);
 			path = TurfTests;
+			sourceTree = "<group>";
+		};
+		356D24571F179B4A003BBB9D /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				356D24581F179B72003BBB9D /* dc-line.geojson */,
+			);
+			path = Fixtures;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +205,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				356D24591F179B72003BBB9D /* dc-line.geojson in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35650AFF1F150DC500B5C158 /* TurfTests.swift in Sources */,
+				356D24561F179B32003BBB9D /* Fixture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,9 +397,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				INFOPLIST_FILE = GeometryTests/Info.plist;
+				INFOPLIST_FILE = TurfTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.GeometryTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.TurfTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -394,9 +410,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				INFOPLIST_FILE = GeometryTests/Info.plist;
+				INFOPLIST_FILE = TurfTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.GeometryTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.TurfTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

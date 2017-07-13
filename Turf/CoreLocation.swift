@@ -11,10 +11,14 @@ extension CLLocationDegrees {
     }
 }
 
-extension CLLocationCoordinate2D {
+extension CLLocationCoordinate2D: Equatable {
     init(_ radianCoordinate: RadianCoordinate2D) {
         latitude = radianCoordinate.latitude.toDegrees()
         longitude = radianCoordinate.longitude.toDegrees()
+    }
+    
+    public static func ==(lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
+        return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
     }
     
     /// Returns the direction from the receiver to the given coordinate.
