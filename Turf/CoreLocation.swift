@@ -12,7 +12,9 @@ extension CLLocationDegrees {
 }
 
 extension CLLocationCoordinate2D: Equatable {
-    init(_ radianCoordinate: RadianCoordinate2D) {
+    
+    /// Instantiates a CLLocationCoordinate from a RadianCoordinate2D
+    public init(_ radianCoordinate: RadianCoordinate2D) {
         latitude = radianCoordinate.latitude.toDegrees()
         longitude = radianCoordinate.longitude.toDegrees()
     }
@@ -22,12 +24,12 @@ extension CLLocationCoordinate2D: Equatable {
     }
     
     /// Returns the direction from the receiver to the given coordinate.
-    func direction(to coordinate: CLLocationCoordinate2D) -> CLLocationDirection {
+    public func direction(to coordinate: CLLocationCoordinate2D) -> CLLocationDirection {
         return RadianCoordinate2D(self).direction(to: RadianCoordinate2D(coordinate)).toDegrees()
     }
     
     /// Returns a coordinate a certain Haversine distance away in the given direction.
-    func coordinate(at distance: CLLocationDistance, facing direction: CLLocationDirection) -> CLLocationCoordinate2D {
+    public func coordinate(at distance: CLLocationDistance, facing direction: CLLocationDirection) -> CLLocationCoordinate2D {
         let radianCoordinate = RadianCoordinate2D(self).coordinate(at: distance / metersPerRadian, facing: direction.toRadians())
         return CLLocationCoordinate2D(radianCoordinate)
     }
