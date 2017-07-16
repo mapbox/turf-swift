@@ -8,7 +8,7 @@ typealias RadianDirection = Double
 let metersPerRadian = 6_373_000.0
 
 
-struct RadianCoordinate2D {
+public struct RadianCoordinate2D {
     var latitude: LocationRadians
     var longitude: LocationRadians
     
