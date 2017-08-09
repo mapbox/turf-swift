@@ -1,43 +1,39 @@
 import CoreLocation
 
-typealias LocationRadians = Double
-typealias RadianDistance = Double
-typealias RadianDirection = Double
-
+public typealias LocationRadians = Double
+public typealias RadianDistance = Double
+public typealias RadianDirection = Double
 
 let metersPerRadian = 6_373_000.0
 
-
 public struct RadianCoordinate2D {
-    var latitude: LocationRadians
-    var longitude: LocationRadians
+    private(set) var latitude: LocationRadians
+    private(set) var longitude: LocationRadians
     
-    init(latitude: LocationRadians, longitude: LocationRadians) {
+    public init(latitude: LocationRadians, longitude: LocationRadians) {
         self.latitude = latitude
         self.longitude = longitude
     }
     
-    init(_ degreeCoordinate: CLLocationCoordinate2D) {
+    public init(_ degreeCoordinate: CLLocationCoordinate2D) {
         latitude = degreeCoordinate.latitude.toRadians()
         longitude = degreeCoordinate.longitude.toRadians()
     }
     
-    
     /**
      Returns direction given two coordinates.
      */
-    func direction(to coordinate: RadianCoordinate2D) -> RadianDirection {
+    public func direction(to coordinate: RadianCoordinate2D) -> RadianDirection {
         let a = sin(coordinate.longitude - longitude) * cos(coordinate.latitude)
         let b = cos(latitude) * sin(coordinate.latitude)
             - sin(latitude) * cos(coordinate.latitude) * cos(coordinate.longitude - longitude)
         return atan2(a, b)
     }
     
-    
     /**
      Returns coordinate at a given distance and direction away from coordinate.
      */
-    func coordinate(at distance: RadianDistance, facing direction: RadianDirection) -> RadianCoordinate2D {
+    public func coordinate(at distance: RadianDistance, facing direction: RadianDirection) -> RadianCoordinate2D {
         let distance = distance, direction = direction
         let otherLatitude = asin(sin(latitude) * cos(distance)
             + cos(latitude) * sin(distance) * cos(direction))
