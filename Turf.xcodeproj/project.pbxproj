@@ -375,7 +375,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Turf/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.turf;
 				PRODUCT_NAME = Turf;
 				SDKROOT = macosx;
@@ -399,7 +399,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Turf/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.turf;
 				PRODUCT_NAME = Turf;
 				SDKROOT = macosx;
