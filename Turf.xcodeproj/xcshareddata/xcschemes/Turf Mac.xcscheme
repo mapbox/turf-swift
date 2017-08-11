@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "353E9B061F3E093A007CFA23"
-               BuildableName = "TurfMac.framework"
+               BuildableName = "Turf.framework"
                BlueprintName = "TurfMac"
                ReferencedContainer = "container:Turf.xcodeproj">
             </BuildableReference>
@@ -44,7 +44,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "353E9B061F3E093A007CFA23"
-            BuildableName = "TurfMac.framework"
+            BuildableName = "Turf.framework"
             BlueprintName = "TurfMac"
             ReferencedContainer = "container:Turf.xcodeproj">
          </BuildableReference>
@@ -67,7 +67,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "353E9B061F3E093A007CFA23"
-            BuildableName = "TurfMac.framework"
+            BuildableName = "Turf.framework"
             BlueprintName = "TurfMac"
             ReferencedContainer = "container:Turf.xcodeproj">
          </BuildableReference>
@@ -85,7 +85,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "353E9B061F3E093A007CFA23"
-            BuildableName = "TurfMac.framework"
+            BuildableName = "Turf.framework"
             BlueprintName = "TurfMac"
             ReferencedContainer = "container:Turf.xcodeproj">
          </BuildableReference>
