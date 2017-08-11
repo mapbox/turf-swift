@@ -1,5 +1,8 @@
 import CoreLocation
 
+#if os(OSX)
+let CLLocationDistanceMax: CLLocationDistance = .greatestFiniteMagnitude
+#endif
 
 extension CLLocationDegrees {
     func toRadians() -> LocationRadians {
