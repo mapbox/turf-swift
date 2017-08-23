@@ -38,7 +38,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		353E9B011F3E08BD007CFA23 /* Turf copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Turf copy-Info.plist"; path = "/Users/fredrik/Workspace/mapbox/turf-swift/Turf copy-Info.plist"; sourceTree = "<absolute>"; };
 		353E9B071F3E093A007CFA23 /* Turf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Turf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		353E9B0F1F3E093A007CFA23 /* TurfMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurfMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		35650AF01F150DC500B5C158 /* Turf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Turf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
