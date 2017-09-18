@@ -111,7 +111,7 @@ class TurfTests: XCTestCase {
         let dist = Polyline(line).distance()
         let increment = dist / metersPerMile / 10
         for i in 0..<10 {
-            let point = Polyline(line).coordinateFromStart(at: increment * Double(i) * metersPerMile)
+            let point = Polyline(line).coordinateFromStart(distance: increment * Double(i) * metersPerMile)
             XCTAssertNotNil(point)
             if let point = point {
                 let snapped = Polyline(line).closestCoordinate(to: point)
@@ -128,7 +128,7 @@ class TurfTests: XCTestCase {
             CLLocationCoordinate2D(latitude: 37.72003306385638, longitude: -122.45717525482178),
             CLLocationCoordinate2D(latitude: 37.718242366859215, longitude: -122.45717525482178),
         ]
-        let pointAlong = Polyline(line).coordinateFromStart(at: 0.019 * metersPerMile)
+        let pointAlong = Polyline(line).coordinateFromStart(distance: 0.019 * metersPerMile)
         XCTAssertNotNil(pointAlong)
         if let point = pointAlong {
             let snapped = Polyline(line).closestCoordinate(to: point)
@@ -167,15 +167,15 @@ class TurfTests: XCTestCase {
         let line = ((json["geometry"] as! [String: Any])["coordinates"] as! [[Double]]).map { CLLocationCoordinate2D(latitude: $0[0], longitude: $0[1]) }
         
         let pointsAlong = [
-            Polyline(line).coordinateFromStart(at: 1 * metersPerMile),
-            Polyline(line).coordinateFromStart(at: 1.2 * metersPerMile),
-            Polyline(line).coordinateFromStart(at: 1.4 * metersPerMile),
-            Polyline(line).coordinateFromStart(at: 1.6 * metersPerMile),
-            Polyline(line).coordinateFromStart(at: 1.8 * metersPerMile),
-            Polyline(line).coordinateFromStart(at: 2 * metersPerMile),
-            Polyline(line).coordinateFromStart(at: 100 * metersPerMile),
-            Polyline(line).coordinateFromStart(at: 0 * metersPerMile),
-            ]
+            Polyline(line).coordinateFromStart(distance: 1 * metersPerMile),
+            Polyline(line).coordinateFromStart(distance: 1.2 * metersPerMile),
+            Polyline(line).coordinateFromStart(distance: 1.4 * metersPerMile),
+            Polyline(line).coordinateFromStart(distance: 1.6 * metersPerMile),
+            Polyline(line).coordinateFromStart(distance: 1.8 * metersPerMile),
+            Polyline(line).coordinateFromStart(distance: 2 * metersPerMile),
+            Polyline(line).coordinateFromStart(distance: 100 * metersPerMile),
+            Polyline(line).coordinateFromStart(distance: 0 * metersPerMile)
+        ]
         for point in pointsAlong {
             XCTAssertNotNil(point)
         }

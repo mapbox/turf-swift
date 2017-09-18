@@ -140,7 +140,7 @@ public struct Polyline {
     /**
      Returns a coordinate along a polyline at a certain distance from the start of the polyline.
      */
-    public func coordinateFromStart(at distance: CLLocationDistance) -> CLLocationCoordinate2D? {
+    public func coordinateFromStart(distance: CLLocationDistance) -> CLLocationCoordinate2D? {
         // Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-along/index.js
         var traveled: CLLocationDistance = 0
         
