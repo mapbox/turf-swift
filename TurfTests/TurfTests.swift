@@ -190,7 +190,7 @@ class TurfTests: XCTestCase {
         
         // https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-distance/test.js
         let a = Polyline(line).distance()
-        XCTAssertEqualWithAccuracy(a, 97_159.57803131901, accuracy: 1)
+        XCTAssertEqual(a, 97_159.57803131901, accuracy: 1)
     }
     
     func testPolylineAlong() {
@@ -210,13 +210,13 @@ class TurfTests: XCTestCase {
             CLLocationCoordinate2D(latitude: 22.175960091218524, longitude: -97.82089233398438),
             CLLocationCoordinate2D(latitude: 22.051208078134735, longitude: -97.7384672234217),
             ]
-        XCTAssertEqualWithAccuracy(line1Out.first!.latitude, 22.247393614241204, accuracy: 0.001)
-        XCTAssertEqualWithAccuracy(line1Out.first!.longitude, -97.83572934173804, accuracy: 0.001)
+        XCTAssertEqual(line1Out.first!.latitude, 22.247393614241204, accuracy: 0.001)
+        XCTAssertEqual(line1Out.first!.longitude, -97.83572934173804, accuracy: 0.001)
         
         XCTAssertEqual(line1Out[1], line1[1])
         
-        XCTAssertEqualWithAccuracy(line1Out.last!.latitude, 22.051208078134735, accuracy: 0.001)
-        XCTAssertEqualWithAccuracy(line1Out.last!.longitude, -97.7384672234217, accuracy: 0.001)
+        XCTAssertEqual(line1Out.last!.latitude, 22.051208078134735, accuracy: 0.001)
+        XCTAssertEqual(line1Out.last!.longitude, -97.7384672234217, accuracy: 0.001)
         XCTAssertEqual(sliced.count, 2)
         
         // turf-line-slice -- vertical
@@ -237,12 +237,12 @@ class TurfTests: XCTestCase {
         let line = [point1, point2]
         
         let a = Polyline(line).distance()
-        XCTAssertEqualWithAccuracy(a, 2_928_304, accuracy: 1)
+        XCTAssertEqual(a, 2_928_304, accuracy: 1)
         
         
         // Adapted from: https://gist.github.com/bsudekum/2604b72ae42b6f88aa55398b2ff0dc22
         let b = Polyline(line).distance(from: CLLocationCoordinate2D(latitude: 30, longitude: 30), to: CLLocationCoordinate2D(latitude: 40, longitude: 40))
-        XCTAssertEqualWithAccuracy(b, 1_546_971, accuracy: 1)
+        XCTAssertEqual(b, 1_546_971, accuracy: 1)
     }
     
     func testWrap() {
@@ -257,11 +257,11 @@ class TurfTests: XCTestCase {
         let point1 = CLLocationCoordinate2D(latitude: 35, longitude: 35)
         let point2 = CLLocationCoordinate2D(latitude: -10, longitude: -10)
         let a = point1.direction(to: point2)
-        XCTAssertEqualWithAccuracy(a, -128, accuracy: 1)
+        XCTAssertEqual(a, -128, accuracy: 1)
         
         let b = point1.coordinate(at: 20, facing: 20)
-        XCTAssertEqualWithAccuracy(b.latitude, 35, accuracy: 0.1)
-        XCTAssertEqualWithAccuracy(b.longitude, 35, accuracy: 0.1)
+        XCTAssertEqual(b.latitude, 35, accuracy: 0.1)
+        XCTAssertEqual(b.longitude, 35, accuracy: 0.1)
     }
     
     func testIntersection() {
@@ -273,10 +273,10 @@ class TurfTests: XCTestCase {
     func testCLLocationDegrees() {
         let degree: CLLocationDegrees = 100
         let a = degree.toRadians()
-        XCTAssertEqualWithAccuracy(a, 2, accuracy: 1)
+        XCTAssertEqual(a, 2, accuracy: 1)
         
         let radian: LocationRadians = 4
         let b = radian.toDegrees()
-        XCTAssertEqualWithAccuracy(b, 229, accuracy: 1)
+        XCTAssertEqual(b, 229, accuracy: 1)
     }
 }
