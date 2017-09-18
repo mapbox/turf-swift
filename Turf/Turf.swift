@@ -118,14 +118,26 @@ public struct Turf {
     }
 }
 
+/**
+ A `Polyline` struct represents a shape consisting of two or more coordinates,
+ specified as [CLLocationCoordinate2D]
+ */
 public struct Polyline {
     
+    /**
+     `IndexedCoordinate` is a coordinate with additional information such as
+     the index from its position in the polyline and distance from the start
+     of the polyline.
+     */
     public struct IndexedCoordinate {
         let coordinate: Array<CLLocationCoordinate2D>.Element
         let index: Array<CLLocationCoordinate2D>.Index
         let distance: CLLocationDistance
     }
     
+    /**
+     The coordinates that the `Polyline` was initialized with.
+     */
     public var coordinates: [CLLocationCoordinate2D]
     
     /**
