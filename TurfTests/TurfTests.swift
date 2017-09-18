@@ -204,7 +204,7 @@ class TurfTests: XCTestCase {
             ]
         var start = CLLocationCoordinate2D(latitude: 22.254624939561698, longitude: -97.79617309570312)
         var stop = CLLocationCoordinate2D(latitude: 22.057641623615734, longitude: -97.72750854492188)
-        var sliced = Polyline(line1).polyline(from: start, to: stop)
+        var sliced = Polyline(line1).sliced(from: start, to: stop)
         let line1Out = [
             CLLocationCoordinate2D(latitude: 22.247393614241204, longitude: -97.83572934173804),
             CLLocationCoordinate2D(latitude: 22.175960091218524, longitude: -97.82089233398438),
@@ -217,7 +217,7 @@ class TurfTests: XCTestCase {
         
         XCTAssertEqual(line1Out.last!.latitude, 22.051208078134735, accuracy: 0.001)
         XCTAssertEqual(line1Out.last!.longitude, -97.7384672234217, accuracy: 0.001)
-        XCTAssertEqual(sliced.count, 2)
+        XCTAssertEqual(sliced.coordinates.count, 2)
         
         // turf-line-slice -- vertical
         let vertical = [
@@ -226,9 +226,9 @@ class TurfTests: XCTestCase {
             ]
         start = CLLocationCoordinate2D(latitude: 38.70582415504791, longitude: -121.25447809696198)
         stop = CLLocationCoordinate2D(latitude: 38.70634324369764, longitude: -121.25447809696198)
-        sliced = Polyline(vertical).polyline(from: start, to: stop)
-        XCTAssertEqual(sliced.count, 2, "no duplicated coords")
-        XCTAssertNotEqual(sliced.first, sliced.last, "vertical slice should not collapse to first coordinate")
+        sliced = Polyline(vertical).sliced(from: start, to: stop)
+        XCTAssertEqual(sliced.coordinates.count, 2, "no duplicated coords")
+        XCTAssertNotEqual(sliced.coordinates.first, sliced.coordinates.last, "vertical slice should not collapse to first coordinate")
     }
     
     func testDistanceAlong() {

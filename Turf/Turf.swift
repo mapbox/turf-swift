@@ -69,13 +69,6 @@ func -(left: CLLocationCoordinate2D, right: CLLocationCoordinate2D) -> CLLocatio
 public typealias LineSegment = (CLLocationCoordinate2D, CLLocationCoordinate2D)
 
 
-public struct CoordinateAlongPolyline {
-    let coordinate: Array<CLLocationCoordinate2D>.Element
-    let index: Array<CLLocationCoordinate2D>.Index
-    let distance: CLLocationDistance
-}
-
-
 public struct Turf {
     
     /**
@@ -126,6 +119,12 @@ public struct Turf {
 }
 
 public struct Polyline {
+    
+    public struct IndexedCoordinate {
+        let coordinate: Array<CLLocationCoordinate2D>.Element
+        let index: Array<CLLocationCoordinate2D>.Index
+        let distance: CLLocationDistance
+    }
     
     public var coordinates: [CLLocationCoordinate2D]
     
@@ -179,10 +178,10 @@ public struct Polyline {
             return 0
         }
         
-        let sliced = polyline(from: start, to: end)
+        let slicedCoordinates = sliced(from: start, to: end).coordinates
         
         // Zip together the starts and ends of each segment, then map those pairs of coordinates to the distances between them, then take the sum.
-        let distance = zip(sliced.prefix(upTo: sliced.count - 1), sliced.suffix(from: 1)).map { args in args.0 - args.1 }.reduce(0, +)
+        let distance = zip(slicedCoordinates.prefix(upTo: slicedCoordinates.count - 1), slicedCoordinates.suffix(from: 1)).map { args in args.0 - args.1 }.reduce(0, +)
         return distance
     }
     
@@ -190,15 +189,15 @@ public struct Polyline {
     /**
      Returns a subset of the polyline between given coordinates.
      */
-    public func polyline(from start: CLLocationCoordinate2D? = nil, to end: CLLocationCoordinate2D? = nil) -> [CLLocationCoordinate2D] {
+    public func sliced(from start: CLLocationCoordinate2D? = nil, to end: CLLocationCoordinate2D? = nil) -> Polyline {
         // Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-line-slice/index.js
         guard !coordinates.isEmpty else {
-            return []
+            return Polyline([])
         }
         
-        let startVertex = (start != nil ? closestCoordinate(to: start!) : nil) ?? CoordinateAlongPolyline(coordinate: coordinates.first!, index: 0, distance: 0)
-        let endVertex = (end != nil ? closestCoordinate(to: end!) : nil) ?? CoordinateAlongPolyline(coordinate: coordinates.last!, index: coordinates.indices.last!, distance: 0)
-        let ends: (CoordinateAlongPolyline, CoordinateAlongPolyline)
+        let startVertex = (start != nil ? closestCoordinate(to: start!) : nil) ?? IndexedCoordinate(coordinate: coordinates.first!, index: 0, distance: 0)
+        let endVertex = (end != nil ? closestCoordinate(to: end!) : nil) ?? IndexedCoordinate(coordinate: coordinates.last!, index: coordinates.indices.last!, distance: 0)
+        let ends: (IndexedCoordinate, IndexedCoordinate)
         if startVertex.index <= endVertex.index {
             ends = (startVertex, endVertex)
         } else {
@@ -209,17 +208,17 @@ public struct Polyline {
         coords.insert(ends.0.coordinate, at: 0)
         coords.append(ends.1.coordinate)
         
-        return coords
+        return Polyline(coords)
     }
     
     
     /**
-     Returns a coordinate along a polyline with x units away from a coordinate.
+     Returns a polyline along a polyline within a distance from a coordinate.
      */
-    public func polyline(within distance: CLLocationDistance, of coordinate: CLLocationCoordinate2D) -> [CLLocationCoordinate2D] {
+    public func trimmed(from coordinate: CLLocationCoordinate2D, distance: CLLocationDistance) -> Polyline {
         let startVertex = closestCoordinate(to: coordinate)
         guard startVertex != nil && distance != 0 else {
-            return []
+            return Polyline([])
         }
         
         var vertices: [CLLocationCoordinate2D] = [startVertex!.coordinate]
@@ -255,7 +254,7 @@ public struct Polyline {
             }
         }
         assert(round(cumulativeDistance) <= round(abs(distance)))
-        return vertices
+        return Polyline(vertices)
     }
     
     /**
@@ -263,17 +262,17 @@ public struct Polyline {
      
      The returned coordinate may not correspond to one of the polyline’s vertices, but it always lies along the polyline.
      */
-    public func closestCoordinate(to coordinate: CLLocationCoordinate2D) -> CoordinateAlongPolyline? {
+    public func closestCoordinate(to coordinate: CLLocationCoordinate2D) -> IndexedCoordinate? {
         // Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-point-on-line/index.js
         
         guard !coordinates.isEmpty else {
             return nil
         }
         guard coordinates.count > 1 else {
-            return CoordinateAlongPolyline(coordinate: coordinates.first!, index: 0, distance: coordinate - coordinates.first!)
+            return IndexedCoordinate(coordinate: coordinates.first!, index: 0, distance: coordinate - coordinates.first!)
         }
         
-        var closestCoordinate: CoordinateAlongPolyline?
+        var closestCoordinate: IndexedCoordinate?
         
         for index in 0..<coordinates.count - 1 {
             let segment = (coordinates[index], coordinates[index + 1])
@@ -287,13 +286,13 @@ public struct Polyline {
             let intersectionDistance: CLLocationDistance? = intersectionPoint != nil ? coordinate - intersectionPoint! : nil
             
             if distances.0 < closestCoordinate?.distance ?? CLLocationDistanceMax {
-                closestCoordinate = CoordinateAlongPolyline(coordinate: segment.0, index: index, distance: distances.0)
+                closestCoordinate = IndexedCoordinate(coordinate: segment.0, index: index, distance: distances.0)
             }
             if distances.1 < closestCoordinate?.distance ?? CLLocationDistanceMax {
-                closestCoordinate = CoordinateAlongPolyline(coordinate: segment.1, index: index+1, distance: distances.1)
+                closestCoordinate = IndexedCoordinate(coordinate: segment.1, index: index+1, distance: distances.1)
             }
             if intersectionDistance != nil && intersectionDistance! < closestCoordinate?.distance ?? CLLocationDistanceMax {
-                closestCoordinate = CoordinateAlongPolyline(coordinate: intersectionPoint!, index: (distances.0 < distances.1 ? index : index+1), distance: intersectionDistance!)
+                closestCoordinate = IndexedCoordinate(coordinate: intersectionPoint!, index: (distances.0 < distances.1 ? index : index+1), distance: intersectionDistance!)
             }
         }
         
