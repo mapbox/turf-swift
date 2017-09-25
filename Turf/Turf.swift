@@ -6,6 +6,10 @@ public typealias RadianDirection = Double
 
 let metersPerRadian = 6_373_000.0
 
+/**
+ A `RadianCoordinate2D` is a coordinate represented in radians as opposed to
+ `CLLocationCoordinate2D` which is represented in latitude and longitude.
+ */
 public struct RadianCoordinate2D {
     private(set) var latitude: LocationRadians
     private(set) var longitude: LocationRadians
@@ -47,7 +51,7 @@ public struct RadianCoordinate2D {
 /**
  Returns the Haversine distance between two coordinates measured in radians.
  */
-func -(left: RadianCoordinate2D, right: RadianCoordinate2D) -> RadianDistance {
+public func -(left: RadianCoordinate2D, right: RadianCoordinate2D) -> RadianDistance {
     let a = pow(sin((right.latitude - left.latitude) / 2), 2)
         + pow(sin((right.longitude - left.longitude) / 2), 2) * cos(left.latitude) * cos(right.latitude)
     return 2 * atan2(sqrt(a), sqrt(1 - a))
@@ -57,7 +61,7 @@ func -(left: RadianCoordinate2D, right: RadianCoordinate2D) -> RadianDistance {
 /**
  Returns the Haversine distance between two coordinates measured in degrees.
  */
-func -(left: CLLocationCoordinate2D, right: CLLocationCoordinate2D) -> CLLocationDistance {
+public func -(left: CLLocationCoordinate2D, right: CLLocationCoordinate2D) -> CLLocationDistance {
     return (RadianCoordinate2D(left) - RadianCoordinate2D(right)) * metersPerRadian
 }
 
@@ -127,11 +131,11 @@ public struct Polyline {
      */
     public struct IndexedCoordinate {
         /// The coordinate
-        let coordinate: Array<CLLocationCoordinate2D>.Element
+        public let coordinate: Array<CLLocationCoordinate2D>.Element
         /// The index of the coordinate
-        let index: Array<CLLocationCoordinate2D>.Index
+        public let index: Array<CLLocationCoordinate2D>.Index
         /// The coordinate’s distance from the start of the polyline
-        let distance: CLLocationDistance
+        public let distance: CLLocationDistance
     }
     
     /**

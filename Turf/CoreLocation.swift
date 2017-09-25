@@ -37,3 +37,4 @@ extension CLLocationCoordinate2D: Equatable {
         return CLLocationCoordinate2D(radianCoordinate)
     }
 }
+
