@@ -18,6 +18,9 @@
 		356D24541F17948C003BBB9D /* CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356D24531F17948C003BBB9D /* CoreLocation.swift */; };
 		356D24561F179B32003BBB9D /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356D24551F179B32003BBB9D /* Fixture.swift */; };
 		356D24591F179B72003BBB9D /* dc-line.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 356D24581F179B72003BBB9D /* dc-line.geojson */; };
+		35CB7F6D1F79899C008A18C8 /* TurfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35650AFE1F150DC500B5C158 /* TurfTests.swift */; };
+		35CB7F6E1F798A4B008A18C8 /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356D24551F179B32003BBB9D /* Fixture.swift */; };
+		35CB7F6F1F798A51008A18C8 /* dc-line.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 356D24581F179B72003BBB9D /* dc-line.geojson */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,7 +95,6 @@
 				35650AF21F150DC500B5C158 /* Turf */,
 				35650AFD1F150DC500B5C158 /* TurfTests */,
 				35650AF11F150DC500B5C158 /* Products */,
-				353E9B011F3E08BD007CFA23 /* Turf copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -288,6 +290,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35CB7F6F1F798A51008A18C8 /* dc-line.geojson in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +325,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35CB7F6D1F79899C008A18C8 /* TurfTests.swift in Sources */,
+				35CB7F6E1F798A4B008A18C8 /* Fixture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,7 +384,7 @@
 				PRODUCT_NAME = Turf;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -403,7 +408,7 @@
 				PRODUCT_NAME = Turf;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -415,13 +420,13 @@
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = TurfMacTests/Info.plist;
+				INFOPLIST_FILE = TurfTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.TurfMacTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -433,13 +438,13 @@
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = TurfMacTests/Info.plist;
+				INFOPLIST_FILE = TurfTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.TurfMacTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
