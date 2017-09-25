@@ -120,7 +120,7 @@ public struct Turf {
 
 /**
  A `Polyline` struct represents a shape consisting of two or more coordinates,
- specified as [CLLocationCoordinate2D]
+ specified as `[CLLocationCoordinate2D]`
  */
 public struct Polyline {
     
@@ -130,8 +130,11 @@ public struct Polyline {
      of the polyline.
      */
     public struct IndexedCoordinate {
+        /// The coordinate
         let coordinate: Array<CLLocationCoordinate2D>.Element
+        /// The index of the coordinate
         let index: Array<CLLocationCoordinate2D>.Index
+        /// The coordinate’s distance from the start of the polyline
         let distance: CLLocationDistance
     }
     
