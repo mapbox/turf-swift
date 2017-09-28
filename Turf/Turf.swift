@@ -45,26 +45,16 @@ public struct RadianCoordinate2D {
                                                cos(distance) - sin(latitude) * sin(otherLatitude))
         return RadianCoordinate2D(latitude: otherLatitude, longitude: otherLongitude)
     }
+    
+    /**
+     Returns the Haversine distance between two coordinates measured in radians.
+     */
+    public func distance(to coordinate: RadianCoordinate2D) -> RadianDistance {
+        let a = pow(sin((coordinate.latitude - self.latitude) / 2), 2)
+            + pow(sin((coordinate.longitude - self.longitude) / 2), 2) * cos(self.latitude) * cos(coordinate.latitude)
+        return 2 * atan2(sqrt(a), sqrt(1 - a))
+    }
 }
-
-
-/**
- Returns the Haversine distance between two coordinates measured in radians.
- */
-public func -(left: RadianCoordinate2D, right: RadianCoordinate2D) -> RadianDistance {
-    let a = pow(sin((right.latitude - left.latitude) / 2), 2)
-        + pow(sin((right.longitude - left.longitude) / 2), 2) * cos(left.latitude) * cos(right.latitude)
-    return 2 * atan2(sqrt(a), sqrt(1 - a))
-}
-
-
-/**
- Returns the Haversine distance between two coordinates measured in degrees.
- */
-public func -(left: CLLocationCoordinate2D, right: CLLocationCoordinate2D) -> CLLocationDistance {
-    return (RadianCoordinate2D(left) - RadianCoordinate2D(right)) * metersPerRadian
-}
-
 
 public typealias LineSegment = (CLLocationCoordinate2D, CLLocationCoordinate2D)
 
@@ -177,7 +167,7 @@ public struct Polyline {
                 return coordinates[i].coordinate(at: overshoot, facing: direction)
             }
             
-            traveled += coordinates[i] - coordinates[i + 1]
+            traveled += coordinates[i].distance(to: coordinates[i + 1])
         }
         
         return coordinates.last
@@ -194,10 +184,8 @@ public struct Polyline {
         }
         
         let slicedCoordinates = sliced(from: start, to: end).coordinates
-        
-        // Zip together the starts and ends of each segment, then map those pairs of coordinates to the distances between them, then take the sum.
-        let distance = zip(slicedCoordinates.prefix(upTo: slicedCoordinates.count - 1), slicedCoordinates.suffix(from: 1)).map { args in args.0 - args.1 }.reduce(0, +)
-        return distance
+        let zippedCoordinates = zip(slicedCoordinates.prefix(upTo: slicedCoordinates.count - 1), slicedCoordinates.suffix(from: 1))
+        return zippedCoordinates.map { $0.distance(to: $1) }.reduce(0, +)
     }
     
     
@@ -240,7 +228,7 @@ public struct Polyline {
         var cumulativeDistance: CLLocationDistance = 0
         let addVertex = { (vertex: CLLocationCoordinate2D) -> Bool in
             let lastVertex = vertices.last!
-            let incrementalDistance = lastVertex - vertex
+            let incrementalDistance = lastVertex.distance(to: vertex)
             if cumulativeDistance + incrementalDistance <= abs(distance) {
                 vertices.append(vertex)
                 cumulativeDistance += incrementalDistance
@@ -284,21 +272,21 @@ public struct Polyline {
             return nil
         }
         guard coordinates.count > 1 else {
-            return IndexedCoordinate(coordinate: coordinates.first!, index: 0, distance: coordinate - coordinates.first!)
+            return IndexedCoordinate(coordinate: coordinates.first!, index: 0, distance: coordinate.distance(to: coordinates.first!))
         }
         
         var closestCoordinate: IndexedCoordinate?
         
         for index in 0..<coordinates.count - 1 {
             let segment = (coordinates[index], coordinates[index + 1])
-            let distances = (coordinate - segment.0, coordinate - segment.1)
+            let distances = (coordinate.distance(to: segment.0), coordinate.distance(to: segment.1))
             
             let maxDistance = max(distances.0, distances.1)
             let direction = segment.0.direction(to: segment.1)
             let perpendicularPoint1 = coordinate.coordinate(at: maxDistance, facing: direction + 90)
             let perpendicularPoint2 = coordinate.coordinate(at: maxDistance, facing: direction - 90)
             let intersectionPoint = Turf.intersection((perpendicularPoint1, perpendicularPoint2), segment)
-            let intersectionDistance: CLLocationDistance? = intersectionPoint != nil ? coordinate - intersectionPoint! : nil
+            let intersectionDistance: CLLocationDistance? = intersectionPoint != nil ? coordinate.distance(to: intersectionPoint!) : nil
             
             if distances.0 < closestCoordinate?.distance ?? CLLocationDistanceMax {
                 closestCoordinate = IndexedCoordinate(coordinate: segment.0, index: index, distance: distances.0)
