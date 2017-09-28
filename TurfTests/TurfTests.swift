@@ -124,7 +124,7 @@ class TurfTests: XCTestCase {
                 let snapped = Polyline(line).closestCoordinate(to: point)
                 XCTAssertNotNil(snapped)
                 if let snapped = snapped {
-                    let shift = point - snapped.coordinate
+                    let shift = point.distance(to: snapped.coordinate)
                     XCTAssertLessThan(shift / metersPerMile, 0.000001, "point should not shift far")
                 }
             }
@@ -141,7 +141,7 @@ class TurfTests: XCTestCase {
             let snapped = Polyline(line).closestCoordinate(to: point)
             XCTAssertNotNil(snapped)
             if let snapped = snapped {
-                let shift = point - snapped.coordinate
+                let shift = point.distance(to: snapped.coordinate)
                 XCTAssertLessThan(shift / metersPerMile, 0.00001, "point should not shift far")
             }
         }
