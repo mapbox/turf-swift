@@ -253,10 +253,10 @@ class TurfTests: XCTestCase {
     }
     
     func testWrap() {
-        let a = Turf.wrap(380, min: 0, max: 360)
+        let a = (380 as CLLocationDirection).wrap(min: 0, max: 360)
         XCTAssertEqual(a, 20)
         
-        let b = Turf.wrap(-30, min: 0, max: 360)
+        let b = (-30 as CLLocationDirection).wrap(min: 0, max: 360)
         XCTAssertEqual(b, 330)
     }
     
