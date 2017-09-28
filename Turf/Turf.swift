@@ -89,23 +89,6 @@ public struct Turf {
         let intersectsWithLine2 = b > 0 && b < 1
         return intersectsWithLine1 && intersectsWithLine2 ? intersection : nil
     }
-    
-    
-    /**
-     Returns a normalized number given min and max bounds.
-     */
-    public static func wrap(_ value: Double, min minValue: Double, max maxValue: Double) -> Double {
-        let d = maxValue - minValue
-        return fmod((fmod((value - minValue), d) + d), d) + minValue
-    }
-    
-    /**
-     Returns the smallest angle between two angles.
-     */
-    public static func differenceBetweenAngles(_ alpha: CLLocationDirection, _ beta: CLLocationDirection) -> CLLocationDirection {
-        let phi = abs(beta - alpha).truncatingRemainder(dividingBy: 360)
-        return phi > 180 ? 360 - phi : phi
-    }
 }
 
 /**

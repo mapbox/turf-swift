@@ -4,6 +4,16 @@ import CoreLocation
 let CLLocationDistanceMax: CLLocationDistance = .greatestFiniteMagnitude
 #endif
 
+extension CLLocationDirection {
+    /**
+     Returns a normalized number given min and max bounds.
+     */
+    public func wrap(min minimumValue: CLLocationDirection, max maximumValue: CLLocationDirection) -> CLLocationDirection {
+        let d = maximumValue - minimumValue
+        return fmod((fmod((self - minimumValue), d) + d), d) + minimumValue
+    }
+}
+
 extension CLLocationDegrees {
     func toRadians() -> LocationRadians {
         return self * .pi / 180.0
@@ -11,6 +21,16 @@ extension CLLocationDegrees {
     
     func toDegrees() -> CLLocationDirection {
         return self * 180.0 / .pi
+    }
+}
+
+extension CLLocationDirection {
+    /**
+     Returns the smallest angle between two angles.
+     */
+    public func differenceBetween(_ beta: CLLocationDirection) -> CLLocationDirection {
+        let phi = abs(beta - self).truncatingRemainder(dividingBy: 360)
+        return phi > 180 ? 360 - phi : phi
     }
 }
 
