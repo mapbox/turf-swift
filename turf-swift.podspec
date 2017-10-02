@@ -6,8 +6,8 @@ Pod::Spec.new do |s|
   s.version = "0.0.3"
   s.summary = "Turf-swift is a port of Turf.js for Swift."
 
-  s.homepage = "https://www.github.com/mapbox/turf-swift"
-  s.documentation_url = "https://mapbox.github.io/turf-swift"
+  s.homepage = "https://github.com/mapbox/turf-swift"
+  s.documentation_url = "https://github.com/mapbox/turf-swift"
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
