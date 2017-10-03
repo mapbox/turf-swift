@@ -15,11 +15,17 @@ extension CLLocationDirection {
 }
 
 extension CLLocationDegrees {
-    func toRadians() -> LocationRadians {
+    /**
+     Returns the direction in radians.
+     */
+    public func toRadians() -> LocationRadians {
         return self * .pi / 180.0
     }
     
-    func toDegrees() -> CLLocationDirection {
+    /**
+     Returns the direction in degrees.
+     */
+    public func toDegrees() -> CLLocationDirection {
         return self * 180.0 / .pi
     }
 }
