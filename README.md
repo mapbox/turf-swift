@@ -12,7 +12,7 @@ A [spatial analysis](http://en.wikipedia.org/wiki/Spatial_analysis) library writ
 Although there has not yet been a beta release of this library yet, you can still experiment with it in your application by using CocoaPods to install it. Edit your Podfile to include:
 
 ```
-pod 'Turf-swift', :git => 'git@github.com:mapbox/turf-swift.git'
+pod 'Turf-swift', '~> 0.0.4'
 ```
 
 Alternatively, you can clone this repo and drag and drop Turf.swift and CoreLocation.swift into your project in Xcode.
