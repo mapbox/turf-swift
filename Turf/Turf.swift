@@ -285,3 +285,65 @@ public struct Polyline {
         return closestCoordinate
     }
 }
+
+public struct Polygon {
+    var radius:Float = 6378137
+    var coordinates: [CLLocationCoordinate2D]
+    
+    var polygonArea: Float {
+        return 0
+    }
+    
+    /**
+     * Calculate the approximate area of the polygon were it projected onto the earth.
+     * Note that this area will be positive if ring is oriented clockwise, otherwise it will be negative.
+     *
+     * Reference:
+     * Robert. G. Chamberlain and William H. Duquette, "Some Algorithms for Polygons on a Sphere", JPL Publication 07-03, Jet Propulsion
+     * Laboratory, Pasadena, CA, June 2007 http://trs-new.jpl.nasa.gov/dspace/handle/2014/40409
+     *
+     */
+    
+    var ringArea: Float {
+        var p1:CLLocationCoordinate2D
+        var p2:CLLocationCoordinate2D
+        var p3:CLLocationCoordinate2D
+        var lowerIndex:Int
+        var middleIndex:Int
+        var upperIndex:Int
+        var i:Int
+        var area:Float = 0
+        var coordsLength:Int = coordinates.count
+        
+        if (coordsLength > 2) {
+            for(index, coordinate) in coordinates.enumerated() {
+                if (index == coordsLength - 2) {
+                    lowerIndex = coordsLength - 2
+                    middleIndex = coordsLength - 1
+                    upperIndex = 0
+                } else if(index == coordsLength - 1) {
+                    lowerIndex = coordsLength - 1;
+                    middleIndex = 0;
+                    upperIndex = 1;
+                } else {
+                    lowerIndex = index
+                    middleIndex = index + 1
+                    upperIndex = index + 2
+                }
+                
+                p1 = coordinates[lowerIndex]
+                p2 = coordinates[middleIndex]
+                p3 = coordinates[upperIndex]
+                area += (p3.longitude.toRadians() - p1.longitude.toRadians()) * sin(p2.latitude.toRadians())
+            }
+            var RADIUS = 6378137
+            
+            area = area * radius * radius / 2;
+            
+        }
+        
+        return 0
+    }
+    
+    
+}
