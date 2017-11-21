@@ -5,6 +5,7 @@ public typealias RadianDistance = Double
 public typealias RadianDirection = Double
 
 let metersPerRadian = 6_373_000.0
+let equitorialRadius:Double = 6378137
 
 /**
  A `RadianCoordinate2D` is a coordinate represented in radians as opposed to
@@ -287,11 +288,10 @@ public struct Polyline {
 }
 
 public struct Polygon {
-    var radius:Float = 6378137
     var coordinates: [CLLocationCoordinate2D]
     
-    var polygonArea: Float {
-        return 0
+    var polygonArea: Double {
+        return 0;
     }
     
     /**
@@ -304,7 +304,7 @@ public struct Polygon {
      *
      */
     
-    var ringArea: Float {
+    var ringArea: Double {
         var p1:CLLocationCoordinate2D
         var p2:CLLocationCoordinate2D
         var p3:CLLocationCoordinate2D
@@ -312,7 +312,7 @@ public struct Polygon {
         var middleIndex:Int
         var upperIndex:Int
         var i:Int
-        var area:Float = 0
+        var area:Double = 0
         var coordsLength:Int = coordinates.count
         
         if (coordsLength > 2) {
@@ -336,14 +336,11 @@ public struct Polygon {
                 p3 = coordinates[upperIndex]
                 area += (p3.longitude.toRadians() - p1.longitude.toRadians()) * sin(p2.latitude.toRadians())
             }
-            var RADIUS = 6378137
             
-            area = area * radius * radius / 2;
+            area = area * equitorialRadius * equitorialRadius / 2;
             
         }
         
-        return 0
+        return area
     }
-    
-    
 }
