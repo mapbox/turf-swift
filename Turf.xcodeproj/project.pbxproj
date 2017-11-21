@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		052521D81FC47A1300DD266A /* dc-polygon.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 052521D71FC47A0300DD266A /* dc-polygon.geojson */; };
+		052521D91FC47A1900DD266A /* dc-polygon.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 052521D71FC47A0300DD266A /* dc-polygon.geojson */; };
 		353E9B101F3E093A007CFA23 /* Turf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353E9B071F3E093A007CFA23 /* Turf.framework */; };
 		353E9B1E1F3E09D3007CFA23 /* CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356D24531F17948C003BBB9D /* CoreLocation.swift */; };
 		353E9B1F1F3E09D8007CFA23 /* Turf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35650B0A1F150DDB00B5C158 /* Turf.swift */; };
@@ -41,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		052521D71FC47A0300DD266A /* dc-polygon.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = "dc-polygon.geojson"; sourceTree = "<group>"; };
 		353E9B071F3E093A007CFA23 /* Turf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Turf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		353E9B0F1F3E093A007CFA23 /* TurfMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurfMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		35650AF01F150DC500B5C158 /* Turf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Turf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				356D24581F179B72003BBB9D /* dc-line.geojson */,
+				052521D71FC47A0300DD266A /* dc-polygon.geojson */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -291,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35CB7F6F1F798A51008A18C8 /* dc-line.geojson in Resources */,
+				052521D91FC47A1900DD266A /* dc-polygon.geojson in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				356D24591F179B72003BBB9D /* dc-line.geojson in Resources */,
+				052521D81FC47A1300DD266A /* dc-polygon.geojson in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

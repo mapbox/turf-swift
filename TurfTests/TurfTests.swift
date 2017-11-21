@@ -286,4 +286,12 @@ class TurfTests: XCTestCase {
         let b = radian.toDegrees()
         XCTAssertEqual(b, 229, accuracy: 1)
     }
+    
+    func testPolygonArea() {
+        let json = Fixture.JSONFromFileNamed(name: "dc-polygon")
+        let coordinates = ((json["geometry"] as! [String: Any])["coordinates"] as! [[Double]]).map { CLLocationCoordinate2D(latitude: $0[0], longitude: $0[1]) }
+        let polygon = Polygon(coordinates: coordinates)
+        
+        XCTAssertEqual(polygon.ringArea, 611152631.86)
+    }
 }
