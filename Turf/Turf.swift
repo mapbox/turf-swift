@@ -291,7 +291,17 @@ public struct Polygon {
     var coordinates: [CLLocationCoordinate2D]
     
     var polygonArea: Double {
-        return 0;
+        var area = 0;
+   
+        if (!coordinates.isEmpty && coordinates.count > 0) {
+            
+            area += abs(ringArea(coordinates[0]))
+
+            for coordinate in coordinates {
+                area -= abs(ringArea(coordinate))
+            }
+        }
+        return area;
     }
     
     /**
@@ -338,9 +348,7 @@ public struct Polygon {
             }
             
             area = area * equitorialRadius * equitorialRadius / 2;
-            
         }
-        
         return area
     }
 }
