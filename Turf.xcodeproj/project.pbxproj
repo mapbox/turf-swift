@@ -36,7 +36,7 @@
 			containerPortal = 35650AE71F150DC500B5C158 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 35650AEF1F150DC500B5C158;
-			remoteInfo = Geometry;
+			remoteInfo = Turf;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -211,7 +211,7 @@
 			dependencies = (
 			);
 			name = Turf;
-			productName = Geometry;
+			productName = Turf;
 			productReference = 35650AF01F150DC500B5C158 /* Turf.framework */;
 			productType = "com.apple.product-type.framework";
 		};
@@ -229,7 +229,7 @@
 				35650AFC1F150DC500B5C158 /* PBXTargetDependency */,
 			);
 			name = TurfTests;
-			productName = GeometryTests;
+			productName = TurfTests;
 			productReference = 35650AF91F150DC500B5C158 /* TurfTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -241,7 +241,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 0910;
-				ORGANIZATIONNAME = "Fredrik Karlsson";
+				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					353E9B061F3E093A007CFA23 = {
 						CreatedOnToolsVersion = 9.0;
