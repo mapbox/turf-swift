@@ -288,10 +288,10 @@ public struct Polyline {
 }
 
 public struct Polygon {
-    var coordinates: [CLLocationCoordinate2D]
+    var coordinates: [[CLLocationCoordinate2D]]
     
     var polygonArea: Double {
-        var area = 0;
+        var area:Double = 0
    
         if (!coordinates.isEmpty && coordinates.count > 0) {
             
@@ -313,8 +313,7 @@ public struct Polygon {
      * Laboratory, Pasadena, CA, June 2007 http://trs-new.jpl.nasa.gov/dspace/handle/2014/40409
      *
      */
-    
-    var ringArea: Double {
+    private func ringArea(_ listOfCoordinates: [CLLocationCoordinate2D]) -> Double {
         var p1:CLLocationCoordinate2D
         var p2:CLLocationCoordinate2D
         var p3:CLLocationCoordinate2D
@@ -323,7 +322,7 @@ public struct Polygon {
         var upperIndex:Int
         var i:Int
         var area:Double = 0
-        var coordsLength:Int = coordinates.count
+        var coordsLength:Int = listOfCoordinates.count
         
         if (coordsLength > 2) {
             for(index, coordinate) in coordinates.enumerated() {
@@ -341,9 +340,9 @@ public struct Polygon {
                     upperIndex = index + 2
                 }
                 
-                p1 = coordinates[lowerIndex]
-                p2 = coordinates[middleIndex]
-                p3 = coordinates[upperIndex]
+                p1 = listOfCoordinates[lowerIndex]
+                p2 = listOfCoordinates[middleIndex]
+                p3 = listOfCoordinates[upperIndex]
                 area += (p3.longitude.toRadians() - p1.longitude.toRadians()) * sin(p2.latitude.toRadians())
             }
             

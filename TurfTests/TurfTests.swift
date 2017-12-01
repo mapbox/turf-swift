@@ -288,10 +288,17 @@ class TurfTests: XCTestCase {
     }
     
     func testPolygonArea() {
-        let json = Fixture.JSONFromFileNamed(name: "dc-polygon")
-        let coordinates = ((json["geometry"] as! [String: Any])["coordinates"] as! [[Double]]).map { CLLocationCoordinate2D(latitude: $0[0], longitude: $0[1]) }
+        let json = Fixture.JSONFromFileNamed(name: "polygon")
+        let geometry = json["geometry"] as! [String: Any]
+        let geoJSONCoordinates = geometry["coordinates"] as! [[[Double]]]
+        let coordinates = geoJSONCoordinates.map {
+            return $0.map {
+                return CLLocationCoordinate2D(latitude: $0[0], longitude: $0[1])
+            }
+        }
+        
         let polygon = Polygon(coordinates: coordinates)
         
-        XCTAssertEqual(polygon.ringArea, 611152631.86)
+        XCTAssertEqual(polygon.polygonArea, 7766240997209)
     }
 }
