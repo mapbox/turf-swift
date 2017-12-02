@@ -293,7 +293,7 @@ class TurfTests: XCTestCase {
         let geoJSONCoordinates = geometry["coordinates"] as! [[[Double]]]
         let coordinates = geoJSONCoordinates.map {
             return $0.map {
-                return CLLocationCoordinate2D(latitude: $0[0], longitude: $0[1])
+                return CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0])
             }
         }
         

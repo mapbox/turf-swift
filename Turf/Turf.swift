@@ -297,7 +297,7 @@ public struct Polygon {
             
             area += abs(ringArea(coordinates[0]))
 
-            for coordinate in coordinates {
+            for coordinate in coordinates.suffix(from: 1) {
                 area -= abs(ringArea(coordinate))
             }
         }
