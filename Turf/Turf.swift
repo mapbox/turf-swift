@@ -4,8 +4,10 @@ public typealias LocationRadians = Double
 public typealias RadianDistance = Double
 public typealias RadianDirection = Double
 
-let metersPerRadian = 6_373_000.0
-let equitorialRadius:Double = 6378137
+struct Constants {
+    static let metersPerRadian = 6_373_000.0
+    static let equatorialRadius:Double = 6378137
+}
 
 /**
  A `RadianCoordinate2D` is a coordinate represented in radians as opposed to
@@ -345,7 +347,7 @@ public struct Polygon {
                 area += (p3.longitude.toRadians() - p1.longitude.toRadians()) * sin(p2.latitude.toRadians())
             }
             
-            area = area * equitorialRadius * equitorialRadius / 2
+            area = area * Constants.equatorialRadius * Constants.equatorialRadius / 2
         }
         return area
     }
