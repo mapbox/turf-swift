@@ -320,12 +320,11 @@ public struct Polygon {
         var lowerIndex:Int
         var middleIndex:Int
         var upperIndex:Int
-        var i:Int
         var area:Double = 0
-        var coordsLength:Int = listOfCoordinates.count
+        let coordsLength:Int = listOfCoordinates.count
         
         if (coordsLength > 2) {
-            for(index, coordinate) in coordinates.enumerated() {
+            for(index, _) in listOfCoordinates.enumerated() {
                 if (index == coordsLength - 2) {
                     lowerIndex = coordsLength - 2
                     middleIndex = coordsLength - 1
