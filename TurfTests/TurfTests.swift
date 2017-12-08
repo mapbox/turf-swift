@@ -297,7 +297,7 @@ class TurfTests: XCTestCase {
             }
         }
         
-        let polygon = Polygon(coordinates: coordinates)
+        let polygon = Polygon(polygonCoordinates: coordinates)
         
         XCTAssertEqual(polygon.polygonArea, 7766240997209, accuracy: 0.1)
     }

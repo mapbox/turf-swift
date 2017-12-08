@@ -288,20 +288,20 @@ public struct Polyline {
 }
 
 public struct Polygon {
-    var coordinates: [[CLLocationCoordinate2D]]
+    var polygonCoordinates: [[CLLocationCoordinate2D]]
     
     var polygonArea: Double {
         var area:Double = 0
    
-        if (!coordinates.isEmpty && coordinates.count > 0) {
+        if (!polygonCoordinates.isEmpty && polygonCoordinates.count > 0) {
             
-            area += abs(ringArea(coordinates[0]))
+            area += abs(ringArea(polygonCoordinates[0]))
 
-            for coordinate in coordinates.suffix(from: 1) {
+            for coordinate in polygonCoordinates.suffix(from: 1) {
                 area -= abs(ringArea(coordinate))
             }
         }
-        return area;
+        return area
     }
     
     /**
@@ -313,39 +313,39 @@ public struct Polygon {
      * Laboratory, Pasadena, CA, June 2007 http://trs-new.jpl.nasa.gov/dspace/handle/2014/40409
      *
      */
-    private func ringArea(_ listOfCoordinates: [CLLocationCoordinate2D]) -> Double {
-        var p1:CLLocationCoordinate2D
-        var p2:CLLocationCoordinate2D
-        var p3:CLLocationCoordinate2D
-        var lowerIndex:Int
-        var middleIndex:Int
-        var upperIndex:Int
-        var area:Double = 0
-        let coordsLength:Int = listOfCoordinates.count
+    private func ringArea(_ coordinates: [CLLocationCoordinate2D]) -> Double {
+        var p1: CLLocationCoordinate2D
+        var p2: CLLocationCoordinate2D
+        var p3: CLLocationCoordinate2D
+        var lowerIndex: Int
+        var middleIndex: Int
+        var upperIndex: Int
+        var area: Double = 0
+        let coordinatesCount: Int = coordinates.count
         
-        if (coordsLength > 2) {
-            for(index, _) in listOfCoordinates.enumerated() {
-                if (index == coordsLength - 2) {
-                    lowerIndex = coordsLength - 2
-                    middleIndex = coordsLength - 1
+        if (coordinatesCount > 2) {
+            for index in 0...coordinatesCount - 1 {
+                if (index == coordinatesCount - 2) {
+                    lowerIndex = coordinatesCount - 2
+                    middleIndex = coordinatesCount - 1
                     upperIndex = 0
-                } else if(index == coordsLength - 1) {
-                    lowerIndex = coordsLength - 1;
-                    middleIndex = 0;
-                    upperIndex = 1;
+                } else if(index == coordinatesCount - 1) {
+                    lowerIndex = coordinatesCount - 1
+                    middleIndex = 0
+                    upperIndex = 1
                 } else {
                     lowerIndex = index
                     middleIndex = index + 1
                     upperIndex = index + 2
                 }
                 
-                p1 = listOfCoordinates[lowerIndex]
-                p2 = listOfCoordinates[middleIndex]
-                p3 = listOfCoordinates[upperIndex]
+                p1 = coordinates[lowerIndex]
+                p2 = coordinates[middleIndex]
+                p3 = coordinates[upperIndex]
                 area += (p3.longitude.toRadians() - p1.longitude.toRadians()) * sin(p2.latitude.toRadians())
             }
             
-            area = area * equitorialRadius * equitorialRadius / 2;
+            area = area * equitorialRadius * equitorialRadius / 2
         }
         return area
     }
