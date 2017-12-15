@@ -4,10 +4,9 @@ public typealias LocationRadians = Double
 public typealias RadianDistance = Double
 public typealias RadianDirection = Double
 
-struct Constants {
-    static let metersPerRadian = 6_373_000.0
-    static let equatorialRadius:Double = 6378137
-}
+
+let metersPerRadian: CLLocationDistance = 6_373_000.0
+let equatorialRadius: CLLocationDistance = 6378137
 
 /**
  A `RadianCoordinate2D` is a coordinate represented in radians as opposed to
@@ -289,22 +288,8 @@ public struct Polyline {
     }
 }
 
-public struct Polygon {
-    var polygonCoordinates: [[CLLocationCoordinate2D]]
-    
-    var polygonArea: Double {
-        var area:Double = 0
-   
-        if (!polygonCoordinates.isEmpty && polygonCoordinates.count > 0) {
-            
-            area += abs(ringArea(polygonCoordinates[0]))
-
-            for coordinate in polygonCoordinates.suffix(from: 1) {
-                area -= abs(ringArea(coordinate))
-            }
-        }
-        return area
-    }
+struct Ring {
+    var coordinates: [CLLocationCoordinate2D]
     
     /**
      * Calculate the approximate area of the polygon were it projected onto the earth.
@@ -315,40 +300,47 @@ public struct Polygon {
      * Laboratory, Pasadena, CA, June 2007 http://trs-new.jpl.nasa.gov/dspace/handle/2014/40409
      *
      */
-    private func ringArea(_ coordinates: [CLLocationCoordinate2D]) -> Double {
-        var p1: CLLocationCoordinate2D
-        var p2: CLLocationCoordinate2D
-        var p3: CLLocationCoordinate2D
-        var lowerIndex: Int
-        var middleIndex: Int
-        var upperIndex: Int
+    internal func area() -> Double {
         var area: Double = 0
         let coordinatesCount: Int = coordinates.count
         
-        if (coordinatesCount > 2) {
-            for index in 0...coordinatesCount - 1 {
-                if (index == coordinatesCount - 2) {
-                    lowerIndex = coordinatesCount - 2
-                    middleIndex = coordinatesCount - 1
-                    upperIndex = 0
-                } else if(index == coordinatesCount - 1) {
-                    lowerIndex = coordinatesCount - 1
-                    middleIndex = 0
-                    upperIndex = 1
+        if coordinatesCount > 2 {
+            for index in 0..<coordinatesCount {
+                
+                let controlPoints: (CLLocationCoordinate2D, CLLocationCoordinate2D, CLLocationCoordinate2D)
+                
+                if index == coordinatesCount - 2 {
+                    controlPoints = (coordinates[coordinatesCount - 2],
+                                     coordinates[coordinatesCount - 1],
+                                     coordinates[0])
+                } else if index == coordinatesCount - 1 {
+                    controlPoints = (coordinates[coordinatesCount - 1],
+                                     coordinates[0],
+                                     coordinates[1])
                 } else {
-                    lowerIndex = index
-                    middleIndex = index + 1
-                    upperIndex = index + 2
+                    controlPoints = (coordinates[index],
+                                     coordinates[index + 1],
+                                     coordinates[index + 2])
                 }
                 
-                p1 = coordinates[lowerIndex]
-                p2 = coordinates[middleIndex]
-                p3 = coordinates[upperIndex]
-                area += (p3.longitude.toRadians() - p1.longitude.toRadians()) * sin(p2.latitude.toRadians())
+                area += (controlPoints.2.longitude.toRadians() - controlPoints.0.longitude.toRadians()) * sin(controlPoints.1.latitude.toRadians())
             }
             
-            area = area * Constants.equatorialRadius * Constants.equatorialRadius / 2
+            area *= equatorialRadius * equatorialRadius / 2
         }
         return area
+    }
+}
+
+public struct Polygon {
+    var outerRing: Ring
+    var innerRings: [Ring]
+    
+    // Ported from https://github.com/Turfjs/turf/blob/a94151418cb969868fdb42955a19a133512da0fd/packages/turf-area/index.js
+    
+    var area: Double {
+        return abs(outerRing.area()) - innerRings
+            .map { abs($0.area()) }
+            .reduce(0, +)
     }
 }

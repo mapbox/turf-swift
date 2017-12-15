@@ -59,7 +59,7 @@ extension CLLocationCoordinate2D: Equatable {
     
     /// Returns a coordinate a certain Haversine distance away in the given direction.
     public func coordinate(at distance: CLLocationDistance, facing direction: CLLocationDirection) -> CLLocationCoordinate2D {
-        let radianCoordinate = RadianCoordinate2D(self).coordinate(at: distance / Constants.metersPerRadian, facing: direction.toRadians())
+        let radianCoordinate = RadianCoordinate2D(self).coordinate(at: distance / metersPerRadian, facing: direction.toRadians())
         return CLLocationCoordinate2D(radianCoordinate)
     }
     
@@ -67,7 +67,7 @@ extension CLLocationCoordinate2D: Equatable {
      Returns the Haversine distance between two coordinates measured in degrees.
      */
     public func distance(to coordinate: CLLocationCoordinate2D) -> CLLocationDistance {
-        return RadianCoordinate2D(self).distance(to: RadianCoordinate2D(coordinate)) * Constants.metersPerRadian
+        return RadianCoordinate2D(self).distance(to: RadianCoordinate2D(coordinate)) * metersPerRadian
     }
 }
 

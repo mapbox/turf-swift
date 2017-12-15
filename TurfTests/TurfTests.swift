@@ -291,12 +291,13 @@ class TurfTests: XCTestCase {
         let json = Fixture.JSONFromFileNamed(name: "polygon")
         let geometry = json["geometry"] as! [String: Any]
         let geoJSONCoordinates = geometry["coordinates"] as! [[[Double]]]
-        let coordinates = geoJSONCoordinates.map {
+        let allRings = geoJSONCoordinates.map {
            $0.map { CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0]) }
         }
+        let outerRing = Ring(coordinates: allRings.first!)
         
-        let polygon = Polygon(polygonCoordinates: coordinates)
+        let polygon = Polygon(outerRing: outerRing, innerRings: [])
         
-        XCTAssertEqual(polygon.polygonArea, 7766240997209, accuracy: 0.1)
+        XCTAssertEqual(polygon.area, 7766240997209, accuracy: 0.1)
     }
 }
