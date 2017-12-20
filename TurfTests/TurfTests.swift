@@ -299,6 +299,6 @@ class TurfTests: XCTestCase {
         
         let polygon = Polygon(outerRing: outerRing, innerRings: [innerRing])
         
-        XCTAssertEqual(polygon.area, 7766240997209, accuracy: 0.1)
+        XCTAssertEqual(polygon.area, 78588446934.43, accuracy: 0.1)
     }
 }
