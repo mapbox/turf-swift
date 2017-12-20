@@ -6,7 +6,7 @@ public typealias RadianDirection = Double
 
 
 let metersPerRadian: CLLocationDistance = 6_373_000.0
-let equatorialRadius: CLLocationDistance = 6378137
+let equatorialRadius: CLLocationDistance = 6_378_137
 
 /**
  A `RadianCoordinate2D` is a coordinate represented in radians as opposed to
@@ -300,7 +300,7 @@ struct Ring {
      * Laboratory, Pasadena, CA, June 2007 http://trs-new.jpl.nasa.gov/dspace/handle/2014/40409
      *
      */
-    internal func area() -> Double {
+    var area: Double {
         var area: Double = 0
         let coordinatesCount: Int = coordinates.count
         
@@ -339,8 +339,8 @@ public struct Polygon {
     // Ported from https://github.com/Turfjs/turf/blob/a94151418cb969868fdb42955a19a133512da0fd/packages/turf-area/index.js
     
     var area: Double {
-        return abs(outerRing.area()) - innerRings
-            .map { abs($0.area()) }
+        return abs(outerRing.area) - innerRings
+            .map { abs($0.area) }
             .reduce(0, +)
     }
 }
