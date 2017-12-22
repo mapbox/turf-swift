@@ -288,7 +288,7 @@ public struct Polyline {
     }
 }
 
-struct Ring {
+public struct Ring {
     var coordinates: [CLLocationCoordinate2D]
     
     /**
@@ -300,7 +300,7 @@ struct Ring {
      * Laboratory, Pasadena, CA, June 2007 http://trs-new.jpl.nasa.gov/dspace/handle/2014/40409
      *
      */
-    var area: Double {
+    public var area: Double {
         var area: Double = 0
         let coordinatesCount: Int = coordinates.count
         
@@ -338,7 +338,7 @@ public struct Polygon {
     
     // Ported from https://github.com/Turfjs/turf/blob/a94151418cb969868fdb42955a19a133512da0fd/packages/turf-area/index.js
     
-    var area: Double {
+    public var area: Double {
         return abs(outerRing.area) - innerRings
             .map { abs($0.area) }
             .reduce(0, +)
