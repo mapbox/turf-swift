@@ -6,6 +6,7 @@ public typealias RadianDirection = Double
 
 
 let metersPerRadian: CLLocationDistance = 6_373_000.0
+// WGS84 equatorial radius as specified by the International Union of Geodesy and Geophysics
 let equatorialRadius: CLLocationDistance = 6_378_137
 
 /**
@@ -292,12 +293,12 @@ public struct Ring {
     var coordinates: [CLLocationCoordinate2D]
     
     /**
-     * Calculate the approximate area of the polygon were it projected onto the earth.
+     * Calculate the approximate area of the polygon were it projected onto the earth, in square meters.
      * Note that this area will be positive if ring is oriented clockwise, otherwise it will be negative.
      *
      * Reference:
      * Robert. G. Chamberlain and William H. Duquette, "Some Algorithms for Polygons on a Sphere", JPL Publication 07-03, Jet Propulsion
-     * Laboratory, Pasadena, CA, June 2007 http://trs-new.jpl.nasa.gov/dspace/handle/2014/40409
+     * Laboratory, Pasadena, CA, June 2007 https://trs.jpl.nasa.gov/handle/2014/41271
      *
      */
     public var area: Double {
