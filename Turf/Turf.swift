@@ -289,6 +289,10 @@ public struct Polyline {
     }
 }
 
+
+/**
+ Creates a `Ring` struct that represents a closed figure that is bounded by three or more straight line segments.
+ */
 public struct Ring {
     var coordinates: [CLLocationCoordinate2D]
     
@@ -333,6 +337,10 @@ public struct Ring {
     }
 }
 
+/**
+ Creates a `Polygon` struct from an outer ring and optional inner rings.
+ Inner rings represent any holes the polygon may have.
+ */
 public struct Polygon {
     var outerRing: Ring
     var innerRings: [Ring]
