@@ -1,11 +1,11 @@
 # Turf-swift 
 
-**Warning:** The Turf-swift API is **experimental** and will change. It is published to be able to get feedback from the community. Please use with caution and open issues for any problems you see or missing features that should be added.
-
 📱[![](https://www.bitrise.io/app/49f5bcca71bf6c8d/status.svg?token=SzGBTkEtxsbuAnbcF9MTog&branch=master)](https://www.bitrise.io/app/49f5bcca71bf6c8d)
 🖥💻[![](https://www.bitrise.io/app/b72273651db53613/status.svg?token=ODv2UnyAHoOxV8APATEBFw&branch=master)](https://www.bitrise.io/app/b72273651db53613)
 
 A [spatial analysis](http://en.wikipedia.org/wiki/Spatial_analysis) library written in Swift for native iOS and macOS applications, ported from [Turf.js](https://github.com/Turfjs/turf/).
+
+The Turf-swift API is **experimental** and is subject to change. Please use with caution and open issues for any problems you see or missing features that should be added.
 
 ### Installation
 
