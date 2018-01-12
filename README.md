@@ -27,6 +27,7 @@ Turf.js | Turf-swift
 [turf-area](https://github.com/Turfjs/turf/blob/master/packages/turf-area/) | `Polygon.area`
 [turf-destination](https://github.com/Turfjs/turf/tree/master/packages/turf-destination/) | `CLLocationCoordinate2D.coordinate(at:facing:)`<br>`RadianCoordinate2D.coordinate(at:facing:)`
 [turf-distance](https://github.com/Turfjs/turf/tree/master/packages/turf-distance/) | `CLLocationCoordinate2D.distance(to:)`<br>`RadianCoordinate2D.distance(to:)`
+[turf-helpers#polygon](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/#polygon) | `Polygon(outerRing:innerRings:)`
 [turf-helpers#lineString](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/#linestring) | `Polyline(_:)`
 [turf-helpers#degrees2radians](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/#degrees2radians) | `CLLocationDegrees.toRadians()`
 [turf-helpers#radians2degrees](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/#radians2degrees) | `CLLocationDegrees.toDegrees()`
