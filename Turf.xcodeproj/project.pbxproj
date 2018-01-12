@@ -95,8 +95,8 @@
 		35650AE61F150DC500B5C158 = {
 			isa = PBXGroup;
 			children = (
-				35650AF21F150DC500B5C158 /* Turf */,
-				35650AFD1F150DC500B5C158 /* TurfTests */,
+				35650AF21F150DC500B5C158 /* Sources */,
+				35650AFD1F150DC500B5C158 /* Tests */,
 				35650AF11F150DC500B5C158 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,7 +112,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		35650AF21F150DC500B5C158 /* Turf */ = {
+		35650AF21F150DC500B5C158 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				35650AF31F150DC500B5C158 /* Turf.h */,
@@ -120,10 +120,10 @@
 				35650AF41F150DC500B5C158 /* Info.plist */,
 				356D24531F17948C003BBB9D /* CoreLocation.swift */,
 			);
-			path = Turf;
+			path = Sources;
 			sourceTree = "<group>";
 		};
-		35650AFD1F150DC500B5C158 /* TurfTests */ = {
+		35650AFD1F150DC500B5C158 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				356D24571F179B4A003BBB9D /* Fixtures */,
@@ -131,7 +131,7 @@
 				35650B001F150DC500B5C158 /* Info.plist */,
 				356D24551F179B32003BBB9D /* Fixture.swift */,
 			);
-			path = TurfTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		356D24571F179B4A003BBB9D /* Fixtures */ = {
