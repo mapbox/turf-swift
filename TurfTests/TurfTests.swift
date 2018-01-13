@@ -303,4 +303,22 @@ class TurfTests: XCTestCase {
         
         XCTAssertEqual(polygon.area, 78588446934.43, accuracy: 0.1)
     }
+    
+    func testCentroid() {
+        let json = Fixture.JSONFromFileNamed(name: "centroid")
+        let geometry = json["geometry"] as! [String: Any]
+        let geoJSONCoordinates = geometry["coordinates"] as! [[[Double]]]
+        let allRings = geoJSONCoordinates.map {
+            $0.map { CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0]) }
+        }
+        let outerRing = Ring(coordinates: allRings.first!)
+        
+        let polygon = Polygon(outerRing: outerRing, innerRings: [])
+        
+        let centroid = polygon.centroid
+        let targetCoordinate = CLLocationCoordinate2DMake(45.75807143030368, 4.841194152832031)
+        
+        XCTAssertEqual(centroid.latitude, targetCoordinate.latitude, accuracy: 0.000001)
+        XCTAssertEqual(centroid.longitude, targetCoordinate.longitude, accuracy: 0.000001)
+    }
 }

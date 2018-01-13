@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		050B1221200AC3AF0052EBB6 /* centroid.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 050B1220200AC3AF0052EBB6 /* centroid.geojson */; };
+		050B1222200AC3AF0052EBB6 /* centroid.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 050B1220200AC3AF0052EBB6 /* centroid.geojson */; };
+		050B1223200AC3AF0052EBB6 /* centroid.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 050B1220200AC3AF0052EBB6 /* centroid.geojson */; };
+		050B1224200AC3AF0052EBB6 /* centroid.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 050B1220200AC3AF0052EBB6 /* centroid.geojson */; };
 		052521D81FC47A1300DD266A /* polygon.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 052521D71FC47A0300DD266A /* polygon.geojson */; };
 		052521D91FC47A1900DD266A /* polygon.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 052521D71FC47A0300DD266A /* polygon.geojson */; };
 		353E9B101F3E093A007CFA23 /* Turf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 353E9B071F3E093A007CFA23 /* Turf.framework */; };
@@ -43,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		050B1220200AC3AF0052EBB6 /* centroid.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = centroid.geojson; sourceTree = "<group>"; };
 		052521D71FC47A0300DD266A /* polygon.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = polygon.geojson; sourceTree = "<group>"; };
 		353E9B071F3E093A007CFA23 /* Turf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Turf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		353E9B0F1F3E093A007CFA23 /* TurfMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurfMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,6 +144,7 @@
 			children = (
 				356D24581F179B72003BBB9D /* dc-line.geojson */,
 				052521D71FC47A0300DD266A /* polygon.geojson */,
+				050B1220200AC3AF0052EBB6 /* centroid.geojson */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -288,6 +294,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				050B1223200AC3AF0052EBB6 /* centroid.geojson in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +304,7 @@
 			files = (
 				35CB7F6F1F798A51008A18C8 /* dc-line.geojson in Resources */,
 				052521D91FC47A1900DD266A /* polygon.geojson in Resources */,
+				050B1224200AC3AF0052EBB6 /* centroid.geojson in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +312,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				050B1221200AC3AF0052EBB6 /* centroid.geojson in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +322,7 @@
 			files = (
 				356D24591F179B72003BBB9D /* dc-line.geojson in Resources */,
 				052521D81FC47A1300DD266A /* polygon.geojson in Resources */,
+				050B1222200AC3AF0052EBB6 /* centroid.geojson in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

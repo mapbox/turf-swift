@@ -352,4 +352,23 @@ public struct Polygon {
             .map { abs($0.area) }
             .reduce(0, +)
     }
+    
+    // Ported from https://github.com/Turfjs/turf/blob/ba6bc08f4c3f3d6a6134dc428c04d2b40eadd448/packages/turf-centroid/index.js
+    
+    public var centroid: CLLocationCoordinate2D {
+        var xSum: Double = 0
+        var ySum: Double = 0
+        var len: Double = 0
+        
+        for coordinate in outerRing.coordinates {
+            ySum += coordinate.latitude
+            xSum += coordinate.longitude
+            len += 1
+        }
+        
+        let lat = CLLocationDegrees(ySum / len)
+        let lng = CLLocationDegrees(xSum / len)
+        
+        return CLLocationCoordinate2DMake(lat, lng)
+    }
 }
