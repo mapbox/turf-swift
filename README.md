@@ -32,7 +32,7 @@ Turf.js | Turf-swift
 [turf-helpers#degreesToRadians](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/#degreesToRadians) | `CLLocationDegrees.toRadians()`
 [turf-helpers#radiansToDegrees](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/#radiansToDegrees) | `CLLocationDegrees.toDegrees()`
 [turf-helpers#convertLength](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers#convertlength)<br>[turf-helpers#convertArea](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers#convertarea) | `Measurement.converted(to:)`
-[turf-line-distance](https://github.com/Turfjs/turf/tree/master/packages/turf-line-distance/) | `Polyline.distance(from:to:)`
+[turf-length](https://github.com/Turfjs/turf/tree/master/packages/turf-length/) | `Polyline.distance(from:to:)`
 [turf-line-intersect](https://github.com/Turfjs/turf/tree/master/packages/turf-line-intersect/) | `Turf.intersection(_:_:)`
 [turf-line-slice](https://github.com/Turfjs/turf/tree/master/packages/turf-line-slice/) | `Polyline.sliced(from:to:)`
 [turf-line-slice-along](https://github.com/Turfjs/turf/tree/master/packages/turf-line-slice-along/) | `Polyline.trimmed(from:distance:)`
