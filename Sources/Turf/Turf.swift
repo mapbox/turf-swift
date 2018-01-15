@@ -1,4 +1,7 @@
+import Foundation
+#if !os(Linux)
 import CoreLocation
+#endif
 
 public typealias LocationRadians = Double
 public typealias RadianDistance = Double
@@ -274,13 +277,13 @@ public struct Polyline {
             let intersectionPoint = Turf.intersection((perpendicularPoint1, perpendicularPoint2), segment)
             let intersectionDistance: CLLocationDistance? = intersectionPoint != nil ? coordinate.distance(to: intersectionPoint!) : nil
             
-            if distances.0 < closestCoordinate?.distance ?? CLLocationDistanceMax {
+            if distances.0 < closestCoordinate?.distance ?? .greatestFiniteMagnitude {
                 closestCoordinate = IndexedCoordinate(coordinate: segment.0, index: index, distance: distances.0)
             }
-            if distances.1 < closestCoordinate?.distance ?? CLLocationDistanceMax {
+            if distances.1 < closestCoordinate?.distance ?? .greatestFiniteMagnitude {
                 closestCoordinate = IndexedCoordinate(coordinate: segment.1, index: index+1, distance: distances.1)
             }
-            if intersectionDistance != nil && intersectionDistance! < closestCoordinate?.distance ?? CLLocationDistanceMax {
+            if intersectionDistance != nil && intersectionDistance! < closestCoordinate?.distance ?? .greatestFiniteMagnitude {
                 closestCoordinate = IndexedCoordinate(coordinate: intersectionPoint!, index: (distances.0 < distances.1 ? index : index+1), distance: intersectionDistance!)
             }
         }

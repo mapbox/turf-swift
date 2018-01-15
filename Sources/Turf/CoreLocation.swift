@@ -1,7 +1,14 @@
+import Foundation
+#if os(Linux)
+public struct CLLocationCoordinate2D {
+    let latitude: Double
+    let longitude: Double
+}
+public typealias CLLocationDirection = Double
+public typealias CLLocationDistance = Double
+public typealias CLLocationDegrees = Double
+#else
 import CoreLocation
-
-#if os(OSX)
-let CLLocationDistanceMax: CLLocationDistance = .greatestFiniteMagnitude
 #endif
 
 extension CLLocationDirection {
