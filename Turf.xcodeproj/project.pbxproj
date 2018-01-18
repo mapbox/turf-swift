@@ -45,7 +45,7 @@
 
 /* Begin PBXFileReference section */
 		353E9B071F3E093A007CFA23 /* Turf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Turf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		353E9B0F1F3E093A007CFA23 /* TurfMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurfMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		353E9B0F1F3E093A007CFA23 /* TurfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3547ECEF200C3C78009DA062 /* Turf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Turf.h; sourceTree = "<group>"; };
 		3547ECF0200C3C78009DA062 /* CoreLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLocation.swift; sourceTree = "<group>"; };
 		3547ECF1200C3C78009DA062 /* Turf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Turf.swift; sourceTree = "<group>"; };
@@ -140,7 +140,7 @@
 				35650AF01F150DC500B5C158 /* Turf.framework */,
 				35650AF91F150DC500B5C158 /* TurfTests.xctest */,
 				353E9B071F3E093A007CFA23 /* Turf.framework */,
-				353E9B0F1F3E093A007CFA23 /* TurfMacTests.xctest */,
+				353E9B0F1F3E093A007CFA23 /* TurfTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -217,7 +217,7 @@
 			);
 			name = TurfMacTests;
 			productName = TurfMacTests;
-			productReference = 353E9B0F1F3E093A007CFA23 /* TurfMacTests.xctest */;
+			productReference = 353E9B0F1F3E093A007CFA23 /* TurfTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		35650AEF1F150DC500B5C158 /* Turf */ = {
@@ -453,7 +453,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.TurfTests;
-				PRODUCT_NAME = "TurfTests";
+				PRODUCT_NAME = TurfTests;
 				SDKROOT = macosx;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
