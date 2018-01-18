@@ -34,7 +34,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "353E9B0E1F3E093A007CFA23"
-               BuildableName = "TurfMacTests.xctest"
+               BuildableName = "TurfTests.xctest"
                BlueprintName = "TurfMacTests"
                ReferencedContainer = "container:Turf.xcodeproj">
             </BuildableReference>
