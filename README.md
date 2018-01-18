@@ -8,13 +8,20 @@
 [![CocoaPods](https://img.shields.io/cocoapods/v/Turf.svg)](http://cocoadocs.org/docsets/Turf/) &nbsp;&nbsp;&nbsp;
 [![SPM compatible](https://img.shields.io/badge/SPM-compatible-4BC51D.svg?style=flat)](https://swift.org/package-manager/) &nbsp;&nbsp;&nbsp;
 
-A [spatial analysis](http://en.wikipedia.org/wiki/Spatial_analysis) library written in Swift for native iOS, macOS, tvOS, and watchOS applications, ported from [Turf.js](https://github.com/Turfjs/turf/).
+A [spatial analysis](http://en.wikipedia.org/wiki/Spatial_analysis) library written in Swift for native iOS, macOS, tvOS, watchOS, and Linux applications, ported from [Turf.js](https://github.com/Turfjs/turf/).
 
 Turf for Swift is **experimental** and its public API is subject to change. Please use with care and open issues for any problems you see or missing features that should be added.
 
 ## Requirements
 
-Turf is written in Swift 4, requires Xcode 9 to build, and deploys back to iOS 8.
+Turf is written in Swift 4. It requires Xcode 9.x and supports the following minimum deployment targets:
+
+* iOS 8.0 and above
+* macOS 10.10.0 (Yosemite) and above
+* tvOS 9.0 and above
+* watchOS 2.0 and above
+
+Alternatively, you can incorporate Turf into a command line tool without Xcode on any platform that [Swift](https://swift.org/download/) supports, including Linux.
 
 ## Installation
 
