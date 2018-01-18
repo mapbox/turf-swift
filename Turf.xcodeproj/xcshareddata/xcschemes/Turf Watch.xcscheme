@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0910"
+   LastUpgradeVersion = "0920"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "353E9B061F3E093A007CFA23"
+               BlueprintIdentifier = "DA94249A2010283900CDB4E6"
                BuildableName = "Turf.framework"
-               BlueprintName = "TurfMac"
+               BlueprintName = "TurfWatch"
                ReferencedContainer = "container:Turf.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,26 +29,7 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "353E9B0E1F3E093A007CFA23"
-               BuildableName = "TurfTests.xctest"
-               BlueprintName = "TurfMacTests"
-               ReferencedContainer = "container:Turf.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "353E9B061F3E093A007CFA23"
-            BuildableName = "Turf.framework"
-            BlueprintName = "TurfMac"
-            ReferencedContainer = "container:Turf.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -66,9 +47,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "353E9B061F3E093A007CFA23"
+            BlueprintIdentifier = "DA94249A2010283900CDB4E6"
             BuildableName = "Turf.framework"
-            BlueprintName = "TurfMac"
+            BlueprintName = "TurfWatch"
             ReferencedContainer = "container:Turf.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -84,9 +65,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "353E9B061F3E093A007CFA23"
+            BlueprintIdentifier = "DA94249A2010283900CDB4E6"
             BuildableName = "Turf.framework"
-            BlueprintName = "TurfMac"
+            BlueprintName = "TurfWatch"
             ReferencedContainer = "container:Turf.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
