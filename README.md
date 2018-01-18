@@ -2,6 +2,8 @@
 
 📱[![](https://www.bitrise.io/app/49f5bcca71bf6c8d/status.svg?token=SzGBTkEtxsbuAnbcF9MTog&branch=master)](https://www.bitrise.io/app/49f5bcca71bf6c8d)
 🖥💻[![](https://www.bitrise.io/app/b72273651db53613/status.svg?token=ODv2UnyAHoOxV8APATEBFw&branch=master)](https://www.bitrise.io/app/b72273651db53613)
+📺[![](https://www.bitrise.io/app/0b037542c2395ffb/status.svg?token=yOtMqbu-5bj8grB1Jmoefg)](https://www.bitrise.io/app/0b037542c2395ffb)
+⌚️[![](https://www.bitrise.io/app/0d4d611f02295183/status.svg?token=NiLB_E_0IvYYqV4Mj973TQ)](https://www.bitrise.io/app/0d4d611f02295183)
 
 A [spatial analysis](http://en.wikipedia.org/wiki/Spatial_analysis) library written in Swift for native iOS, macOS, tvOS, and watchOS applications, ported from [Turf.js](https://github.com/Turfjs/turf/).
 
