@@ -32,6 +32,9 @@
 		DA39EB80201023E4004D87F7 /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3547ECFD200C3C82009DA062 /* Fixture.swift */; };
 		DA39EB81201024A3004D87F7 /* dc-line.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3547ECFB200C3C82009DA062 /* dc-line.geojson */; };
 		DA39EB82201024A3004D87F7 /* polygon.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3547ECFC200C3C82009DA062 /* polygon.geojson */; };
+		DA9424A32010296300CDB4E6 /* Turf.h in Headers */ = {isa = PBXBuildFile; fileRef = 3547ECEF200C3C78009DA062 /* Turf.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DA9424A42010298300CDB4E6 /* CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3547ECF0200C3C78009DA062 /* CoreLocation.swift */; };
+		DA9424A52010298300CDB4E6 /* Turf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3547ECF1200C3C78009DA062 /* Turf.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +78,7 @@
 		35650AF91F150DC500B5C158 /* TurfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA39EB6520101F98004D87F7 /* Turf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Turf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA39EB6D20101F99004D87F7 /* TurfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA94249B2010283900CDB4E6 /* Turf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Turf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +124,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA39EB6E20101F99004D87F7 /* Turf.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA9424972010283900CDB4E6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +186,7 @@
 				353E9B0F1F3E093A007CFA23 /* TurfTests.xctest */,
 				DA39EB6520101F98004D87F7 /* Turf.framework */,
 				DA39EB6D20101F99004D87F7 /* TurfTests.xctest */,
+				DA94249B2010283900CDB4E6 /* Turf.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -220,6 +232,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA39EB7C20101FB9004D87F7 /* Turf.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA9424982010283900CDB4E6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA9424A32010296300CDB4E6 /* Turf.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +354,24 @@
 			productReference = DA39EB6D20101F99004D87F7 /* TurfTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		DA94249A2010283900CDB4E6 /* TurfWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA9424A02010283A00CDB4E6 /* Build configuration list for PBXNativeTarget "TurfWatch" */;
+			buildPhases = (
+				DA9424962010283900CDB4E6 /* Sources */,
+				DA9424972010283900CDB4E6 /* Frameworks */,
+				DA9424982010283900CDB4E6 /* Headers */,
+				DA9424992010283900CDB4E6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TurfWatch;
+			productName = TurfWatch;
+			productReference = DA94249B2010283900CDB4E6 /* Turf.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -368,6 +406,10 @@
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 					};
+					DA94249A2010283900CDB4E6 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 35650AEA1F150DC500B5C158 /* Build configuration list for PBXProject "Turf" */;
@@ -388,6 +430,7 @@
 				353E9B0E1F3E093A007CFA23 /* TurfMacTests */,
 				DA39EB6420101F98004D87F7 /* TurfTV */,
 				DA39EB6C20101F99004D87F7 /* TurfTVTests */,
+				DA94249A2010283900CDB4E6 /* TurfWatch */,
 			);
 		};
 /* End PBXProject section */
@@ -439,6 +482,13 @@
 			files = (
 				DA39EB82201024A3004D87F7 /* polygon.geojson in Resources */,
 				DA39EB81201024A3004D87F7 /* dc-line.geojson in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA9424992010283900CDB4E6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +546,15 @@
 			files = (
 				DA39EB7F201023E4004D87F7 /* TurfTests.swift in Sources */,
 				DA39EB80201023E4004D87F7 /* Fixture.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA9424962010283900CDB4E6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA9424A52010298300CDB4E6 /* Turf.swift in Sources */,
+				DA9424A42010298300CDB4E6 /* CoreLocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,6 +726,7 @@
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -724,6 +784,7 @@
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -876,6 +937,54 @@
 			};
 			name = Release;
 		};
+		DA9424A12010283A00CDB4E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = GJZR2MEM28;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Turf/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.turf;
+				PRODUCT_NAME = Turf;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Debug;
+		};
+		DA9424A22010283A00CDB4E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = GJZR2MEM28;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Turf/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.turf;
+				PRODUCT_NAME = Turf;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -938,6 +1047,15 @@
 			buildConfigurations = (
 				DA39EB7820101F99004D87F7 /* Debug */,
 				DA39EB7920101F99004D87F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA9424A02010283A00CDB4E6 /* Build configuration list for PBXNativeTarget "TurfWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA9424A12010283A00CDB4E6 /* Debug */,
+				DA9424A22010283A00CDB4E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
