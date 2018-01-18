@@ -268,9 +268,11 @@
 				TargetAttributes = {
 					353E9B061F3E093A007CFA23 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0920;
 					};
 					353E9B0E1F3E093A007CFA23 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0920;
 					};
 					35650AEF1F150DC500B5C158 = {
 						CreatedOnToolsVersion = 9.0;
@@ -410,7 +412,8 @@
 				PRODUCT_NAME = Turf;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -433,7 +436,8 @@
 				PRODUCT_NAME = Turf;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -451,7 +455,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.TurfTests;
 				PRODUCT_NAME = "TurfTests";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -469,7 +474,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.TurfTests;
 				PRODUCT_NAME = TurfTests;
 				SDKROOT = macosx;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
