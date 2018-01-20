@@ -84,7 +84,7 @@ Turf.js | Turf-swift
 [turf-line-intersect](https://github.com/Turfjs/turf/tree/master/packages/turf-line-intersect/) | `Turf.intersection(_:_:)`
 [turf-line-slice](https://github.com/Turfjs/turf/tree/master/packages/turf-line-slice/) | `Polyline.sliced(from:to:)`
 [turf-line-slice-along](https://github.com/Turfjs/turf/tree/master/packages/turf-line-slice-along/) | `Polyline.trimmed(from:distance:)`
-[turf-point-on-line](https://github.com/Turfjs/turf/tree/master/packages/turf-point-on-line/) | `Polyline.closestCoordinate(to:)`
+[turf-nearest-point-on-line](https://github.com/Turfjs/turf/tree/master/packages/turf-nearest-point-on-line/) | `Polyline.closestCoordinate(to:)`
 — | `CLLocationCoordinate2D.direction(to:)`<br>`RadianCoordinate2D.direction(to:)`
 — | `CLLocationDirection.differenceBetween(_:)`
 — | `CLLocationDirection.wrap(min:max:)`
