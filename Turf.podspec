@@ -4,10 +4,10 @@ Pod::Spec.new do |s|
 
   s.name = "Turf"
   s.version = "0.0.5"
-  s.summary = "Turf is a port of Turf.js for Swift."
+  s.summary = "Simple spatial analysis."
+  s.description = "A spatial analysis library written in Swift for native iOS, macOS, tvOS, watchOS, and Linux applications, ported from Turf.js."
 
   s.homepage = "https://github.com/mapbox/turf-swift"
-  s.documentation_url = "https://github.com/mapbox/turf-swift"
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
