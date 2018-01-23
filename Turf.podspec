@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   s.name = "Turf"
-  s.version = "0.0.4"
+  s.version = "0.0.5"
   s.summary = "Turf is a port of Turf.js for Swift."
 
   s.homepage = "https://github.com/mapbox/turf-swift"
