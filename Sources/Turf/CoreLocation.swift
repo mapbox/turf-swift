@@ -39,9 +39,12 @@ extension CLLocationDegrees {
 
 extension CLLocationDirection {
     /**
-     Returns the smallest angle between two angles.
+     Returns the smaller difference between the receiver and another direction.
+     
+     To obtain the larger difference between the two directions, subtract the
+     return value from 360°.
      */
-    public func differenceBetween(_ beta: CLLocationDirection) -> CLLocationDirection {
+    public func difference(from beta: CLLocationDirection) -> CLLocationDirection {
         let phi = abs(beta - self).truncatingRemainder(dividingBy: 360)
         return phi > 180 ? 360 - phi : phi
     }
