@@ -7,6 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3502F791201F507500399EFE /* GeoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502F790201F507500399EFE /* GeoJSON.swift */; };
+		3502F792201F507500399EFE /* GeoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502F790201F507500399EFE /* GeoJSON.swift */; };
+		3502F793201F507500399EFE /* GeoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502F790201F507500399EFE /* GeoJSON.swift */; };
+		3502F794201F507500399EFE /* GeoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502F790201F507500399EFE /* GeoJSON.swift */; };
+		3502F796201F53FC00399EFE /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502F795201F53FC00399EFE /* Codable.swift */; };
+		3502F797201F53FC00399EFE /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502F795201F53FC00399EFE /* Codable.swift */; };
+		3502F798201F53FC00399EFE /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502F795201F53FC00399EFE /* Codable.swift */; };
+		3502F799201F53FC00399EFE /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502F795201F53FC00399EFE /* Codable.swift */; };
+		3502F79F201F565400399EFE /* GeoJSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502F79E201F565400399EFE /* GeoJSONTests.swift */; };
+		3502F7A0201F565400399EFE /* GeoJSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502F79E201F565400399EFE /* GeoJSONTests.swift */; };
+		3502F7A1201F565400399EFE /* GeoJSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502F79E201F565400399EFE /* GeoJSONTests.swift */; };
+		3502F7A3201F568000399EFE /* point.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3502F7A2201F568000399EFE /* point.geojson */; };
+		3502F7A4201F568000399EFE /* point.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3502F7A2201F568000399EFE /* point.geojson */; };
+		3502F7A5201F568000399EFE /* point.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3502F7A2201F568000399EFE /* point.geojson */; };
+		3502F7A7201F616E00399EFE /* simple-line.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3502F7A6201F616E00399EFE /* simple-line.geojson */; };
+		3502F7A8201F616E00399EFE /* simple-line.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3502F7A6201F616E00399EFE /* simple-line.geojson */; };
+		3502F7A9201F616E00399EFE /* simple-line.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3502F7A6201F616E00399EFE /* simple-line.geojson */; };
 		3534C3B8200C419100F93581 /* dc-line.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3547ECFB200C3C82009DA062 /* dc-line.geojson */; };
 		3534C3B9200C419100F93581 /* polygon.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3547ECFC200C3C82009DA062 /* polygon.geojson */; };
 		3534C3BA200C419200F93581 /* dc-line.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3547ECFB200C3C82009DA062 /* dc-line.geojson */; };
@@ -62,6 +79,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3502F790201F507500399EFE /* GeoJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJSON.swift; sourceTree = "<group>"; };
+		3502F795201F53FC00399EFE /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
+		3502F79E201F565400399EFE /* GeoJSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJSONTests.swift; sourceTree = "<group>"; };
+		3502F7A2201F568000399EFE /* point.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = point.geojson; sourceTree = "<group>"; };
+		3502F7A6201F616E00399EFE /* simple-line.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "simple-line.geojson"; sourceTree = "<group>"; };
 		353E9B071F3E093A007CFA23 /* Turf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Turf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		353E9B0F1F3E093A007CFA23 /* TurfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3547ECEF200C3C78009DA062 /* Turf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Turf.h; sourceTree = "<group>"; };
@@ -144,6 +166,8 @@
 				3547ECF0200C3C78009DA062 /* CoreLocation.swift */,
 				3547ECF1200C3C78009DA062 /* Turf.swift */,
 				3547ECF2200C3C78009DA062 /* Info.plist */,
+				3502F790201F507500399EFE /* GeoJSON.swift */,
+				3502F795201F53FC00399EFE /* Codable.swift */,
 			);
 			path = Turf;
 			sourceTree = "<group>";
@@ -151,10 +175,11 @@
 		3547ECF8200C3C82009DA062 /* TurfTests */ = {
 			isa = PBXGroup;
 			children = (
-				3547ECF9200C3C82009DA062 /* TurfTests.swift */,
-				3547ECFA200C3C82009DA062 /* Fixtures */,
 				3547ECFD200C3C82009DA062 /* Fixture.swift */,
+				3547ECFA200C3C82009DA062 /* Fixtures */,
 				3547ECFE200C3C82009DA062 /* Info.plist */,
+				3547ECF9200C3C82009DA062 /* TurfTests.swift */,
+				3502F79E201F565400399EFE /* GeoJSONTests.swift */,
 			);
 			path = TurfTests;
 			sourceTree = "<group>";
@@ -162,6 +187,8 @@
 		3547ECFA200C3C82009DA062 /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
+				3502F7A6201F616E00399EFE /* simple-line.geojson */,
+				3502F7A2201F568000399EFE /* point.geojson */,
 				3547ECFB200C3C82009DA062 /* dc-line.geojson */,
 				3547ECFC200C3C82009DA062 /* polygon.geojson */,
 			);
@@ -449,6 +476,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3534C3BB200C419200F93581 /* polygon.geojson in Resources */,
+				3502F7A8201F616E00399EFE /* simple-line.geojson in Resources */,
+				3502F7A4201F568000399EFE /* point.geojson in Resources */,
 				3534C3BA200C419200F93581 /* dc-line.geojson in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -465,6 +494,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3534C3B9200C419100F93581 /* polygon.geojson in Resources */,
+				3502F7A7201F616E00399EFE /* simple-line.geojson in Resources */,
+				3502F7A3201F568000399EFE /* point.geojson in Resources */,
 				3534C3B8200C419100F93581 /* dc-line.geojson in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,6 +512,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA39EB82201024A3004D87F7 /* polygon.geojson in Resources */,
+				3502F7A9201F616E00399EFE /* simple-line.geojson in Resources */,
+				3502F7A5201F568000399EFE /* point.geojson in Resources */,
 				DA39EB81201024A3004D87F7 /* dc-line.geojson in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -501,6 +534,8 @@
 			files = (
 				3534C3BD200C442A00F93581 /* Turf.swift in Sources */,
 				3534C3BC200C442700F93581 /* CoreLocation.swift in Sources */,
+				3502F797201F53FC00399EFE /* Codable.swift in Sources */,
+				3502F792201F507500399EFE /* GeoJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,6 +544,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3547ED0F200C3E01009DA062 /* TurfTests.swift in Sources */,
+				3502F7A0201F565400399EFE /* GeoJSONTests.swift in Sources */,
 				3547ED11200C3E0C009DA062 /* Fixture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -519,6 +555,8 @@
 			files = (
 				3547ECF6200C3C78009DA062 /* Turf.swift in Sources */,
 				3547ECF5200C3C78009DA062 /* CoreLocation.swift in Sources */,
+				3502F796201F53FC00399EFE /* Codable.swift in Sources */,
+				3502F791201F507500399EFE /* GeoJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,6 +565,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3547ED0E200C3E00009DA062 /* TurfTests.swift in Sources */,
+				3502F79F201F565400399EFE /* GeoJSONTests.swift in Sources */,
 				3547ED10200C3E0B009DA062 /* Fixture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -537,6 +576,8 @@
 			files = (
 				DA39EB7E20101FCD004D87F7 /* Turf.swift in Sources */,
 				DA39EB7D20101FCD004D87F7 /* CoreLocation.swift in Sources */,
+				3502F798201F53FC00399EFE /* Codable.swift in Sources */,
+				3502F793201F507500399EFE /* GeoJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,6 +586,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA39EB7F201023E4004D87F7 /* TurfTests.swift in Sources */,
+				3502F7A1201F565400399EFE /* GeoJSONTests.swift in Sources */,
 				DA39EB80201023E4004D87F7 /* Fixture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -555,6 +597,8 @@
 			files = (
 				DA9424A52010298300CDB4E6 /* Turf.swift in Sources */,
 				DA9424A42010298300CDB4E6 /* CoreLocation.swift in Sources */,
+				3502F799201F53FC00399EFE /* Codable.swift in Sources */,
+				3502F794201F507500399EFE /* GeoJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

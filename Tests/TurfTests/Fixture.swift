@@ -15,6 +15,15 @@ class Fixture {
         }
     }
     
+    class func geosjonData(from name: String) throws -> Data? {
+        guard let path = Bundle(for: self).path(forResource: name, ofType: "geojson") else {
+            XCTAssert(false, "Fixture \(name) not found.")
+            return nil
+        }
+        let filePath = URL(fileURLWithPath: path)
+        return try Data(contentsOf: filePath)
+    }
+    
     class func JSONFromFileNamed(name: String) -> [String: Any] {
         guard let path = Bundle(for: self).path(forResource: name, ofType: "json") ?? Bundle(for: self).path(forResource: name, ofType: "geojson") else {
             XCTAssert(false, "Fixture \(name) not found.")
