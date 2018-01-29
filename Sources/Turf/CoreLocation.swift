@@ -50,6 +50,20 @@ extension CLLocationDirection {
     }
 }
 
+extension CLLocationCoordinate2D: Codable {
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        try container.encode(longitude)
+        try container.encode(latitude)
+    }
+    
+    public init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+        longitude = try container.decode(CLLocationDegrees.self)
+        latitude = try container.decode(CLLocationDegrees.self)
+    }
+}
+
 extension CLLocationCoordinate2D: Equatable {
     
     /// Instantiates a CLLocationCoordinate from a RadianCoordinate2D
