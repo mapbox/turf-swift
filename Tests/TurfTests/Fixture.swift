@@ -15,7 +15,7 @@ class Fixture {
         }
     }
     
-    class func geosjonData(from name: String) throws -> Data? {
+    class func geojsonData(from name: String) throws -> Data? {
         guard let path = Bundle(for: self).path(forResource: name, ofType: "geojson") else {
             XCTAssert(false, "Fixture \(name) not found.")
             return nil

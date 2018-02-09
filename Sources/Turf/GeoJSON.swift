@@ -3,7 +3,22 @@ import Foundation
 import CoreLocation
 #endif
 
-public struct GeoJSON: Codable {
+public protocol GeoJSONFeature: Codable { }
+
+public struct LineString: Codable {
+    var coordinates: [CLLocationCoordinate2D]
+}
+
+public struct Point: Codable {
+    var coordinates: CLLocationCoordinate2D
+}
+
+// TODO: Replace with Polygon from Turf.swift with inner and outer rings
+public struct GeoJSONPolygon: Codable {
+    var coordinates: [[CLLocationCoordinate2D]]
+}
+
+public struct GeoJSON<Geometry: Codable>: GeoJSONFeature {
     
     private enum CodingKeys: String, CodingKey {
         case geoJSONType = "type"
@@ -17,36 +32,12 @@ public struct GeoJSON: Codable {
     
     public var geoJSONType: GeoJSONType?
     public var properties: [String: AnyJSONType]?
-    public var geometry: Geometry
+    public var geometry: Geometry?
     
-    public struct Geometry: Codable {
-        
-        public init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-            geometryType = try container.decode(GeometryType.self, forKey: .geometryType)
-            switch geometryType {
-            case .Point:
-                coordinates = [try container.decode(CLLocationCoordinate2D.self, forKey: .coordinates)]
-            default:
-                coordinates = try container.decode([CLLocationCoordinate2D].self, forKey: .coordinates)
-            }
-        }
-        
-        private enum CodingKeys: String, CodingKey {
-            case geometryType = "type"
-            case coordinates
-        }
-        
-        public enum GeometryType: String, Codable {
-            case Point
-            case LineString
-            case Polygon
-            case MultiPoint
-            case MultiLineString
-            case MultiPolygon
-        }
-        
-        public var geometryType: GeometryType
-        public var coordinates: [CLLocationCoordinate2D]
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        geoJSONType = try container.decode(GeoJSONType.self, forKey: .geoJSONType)
+        properties = try container.decodeIfPresent([String: AnyJSONType].self, forKey: .properties)
+        geometry = try container.decode(Geometry.self, forKey: .geometry)
     }
 }
