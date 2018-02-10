@@ -45,10 +45,22 @@ class GeoJSONTests: XCTestCase {
     }
     
     func testGeoJSONMultiLineString() {
-        // TODO:
+        let data = try! Fixture.geojsonData(from: "multiline")!
+        let geojson = try! JSONDecoder().decode(GeoJSON<MultiLineString>.self, from: data)
+        
+        let firstCoordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        let lastCoordinate = CLLocationCoordinate2D(latitude: 6, longitude: 6)
+        XCTAssert(geojson.geometry?.coordinates.first?.first == firstCoordinate)
+        XCTAssert(geojson.geometry?.coordinates.last?.last == lastCoordinate)
     }
     
     func testGeoJSONMultiPolygon() {
-        // TODO:
+        let data = try! Fixture.geojsonData(from: "multipolygon")!
+        let geojson = try! JSONDecoder().decode(GeoJSON<MultiPolygon>.self, from: data)
+        
+        let firstCoordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        let lastCoordinate = CLLocationCoordinate2D(latitude: 11, longitude: 11)
+        XCTAssert(geojson.geometry?.coordinates.first?.first?.first == firstCoordinate)
+        XCTAssert(geojson.geometry?.coordinates.last?.last?.last == lastCoordinate)
     }
 }
