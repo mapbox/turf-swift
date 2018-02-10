@@ -27,6 +27,12 @@
 		35166856202E6CEE0032A97E /* multipoint.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 35166855202E6CEE0032A97E /* multipoint.geojson */; };
 		35166857202E6CEE0032A97E /* multipoint.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 35166855202E6CEE0032A97E /* multipoint.geojson */; };
 		35166858202E6CEE0032A97E /* multipoint.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 35166855202E6CEE0032A97E /* multipoint.geojson */; };
+		3516685A202EFE690032A97E /* multiline.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 35166859202EFE680032A97E /* multiline.geojson */; };
+		3516685B202EFE690032A97E /* multiline.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 35166859202EFE680032A97E /* multiline.geojson */; };
+		3516685C202EFE690032A97E /* multiline.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 35166859202EFE680032A97E /* multiline.geojson */; };
+		3516685E202EFF130032A97E /* multipolygon.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3516685D202EFF130032A97E /* multipolygon.geojson */; };
+		3516685F202EFF130032A97E /* multipolygon.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3516685D202EFF130032A97E /* multipolygon.geojson */; };
+		35166860202EFF130032A97E /* multipolygon.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3516685D202EFF130032A97E /* multipolygon.geojson */; };
 		3534C3B8200C419100F93581 /* dc-line.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3547ECFB200C3C82009DA062 /* dc-line.geojson */; };
 		3534C3B9200C419100F93581 /* polygon.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3547ECFC200C3C82009DA062 /* polygon.geojson */; };
 		3534C3BA200C419200F93581 /* dc-line.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3547ECFB200C3C82009DA062 /* dc-line.geojson */; };
@@ -88,6 +94,8 @@
 		3502F7A2201F568000399EFE /* point.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = point.geojson; sourceTree = "<group>"; };
 		3502F7A6201F616E00399EFE /* simple-line.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "simple-line.geojson"; sourceTree = "<group>"; };
 		35166855202E6CEE0032A97E /* multipoint.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = multipoint.geojson; sourceTree = "<group>"; };
+		35166859202EFE680032A97E /* multiline.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = multiline.geojson; sourceTree = "<group>"; };
+		3516685D202EFF130032A97E /* multipolygon.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = multipolygon.geojson; sourceTree = "<group>"; };
 		353E9B071F3E093A007CFA23 /* Turf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Turf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		353E9B0F1F3E093A007CFA23 /* TurfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3547ECEF200C3C78009DA062 /* Turf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Turf.h; sourceTree = "<group>"; };
@@ -191,6 +199,8 @@
 		3547ECFA200C3C82009DA062 /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
+				35166859202EFE680032A97E /* multiline.geojson */,
+				3516685D202EFF130032A97E /* multipolygon.geojson */,
 				3502F7A6201F616E00399EFE /* simple-line.geojson */,
 				3502F7A2201F568000399EFE /* point.geojson */,
 				3547ECFB200C3C82009DA062 /* dc-line.geojson */,
@@ -481,9 +491,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3534C3BB200C419200F93581 /* polygon.geojson in Resources */,
+				3516685B202EFE690032A97E /* multiline.geojson in Resources */,
 				3502F7A8201F616E00399EFE /* simple-line.geojson in Resources */,
 				35166857202E6CEE0032A97E /* multipoint.geojson in Resources */,
 				3502F7A4201F568000399EFE /* point.geojson in Resources */,
+				3516685F202EFF130032A97E /* multipolygon.geojson in Resources */,
 				3534C3BA200C419200F93581 /* dc-line.geojson in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -500,9 +512,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3534C3B9200C419100F93581 /* polygon.geojson in Resources */,
+				3516685A202EFE690032A97E /* multiline.geojson in Resources */,
 				3502F7A7201F616E00399EFE /* simple-line.geojson in Resources */,
 				35166856202E6CEE0032A97E /* multipoint.geojson in Resources */,
 				3502F7A3201F568000399EFE /* point.geojson in Resources */,
+				3516685E202EFF130032A97E /* multipolygon.geojson in Resources */,
 				3534C3B8200C419100F93581 /* dc-line.geojson in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -519,9 +533,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA39EB82201024A3004D87F7 /* polygon.geojson in Resources */,
+				3516685C202EFE690032A97E /* multiline.geojson in Resources */,
 				3502F7A9201F616E00399EFE /* simple-line.geojson in Resources */,
 				35166858202E6CEE0032A97E /* multipoint.geojson in Resources */,
 				3502F7A5201F568000399EFE /* point.geojson in Resources */,
+				35166860202EFF130032A97E /* multipolygon.geojson in Resources */,
 				DA39EB81201024A3004D87F7 /* dc-line.geojson in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
