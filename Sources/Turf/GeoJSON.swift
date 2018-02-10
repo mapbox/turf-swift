@@ -13,6 +13,10 @@ public struct Point: Codable {
     var coordinates: CLLocationCoordinate2D
 }
 
+public struct MultiPoint: Codable {
+    var coordinates: [CLLocationCoordinate2D]
+}
+
 // TODO: Replace with Polygon from Turf.swift with inner and outer rings
 public struct GeoJSONPolygon: Codable {
     var coordinates: [[CLLocationCoordinate2D]]
