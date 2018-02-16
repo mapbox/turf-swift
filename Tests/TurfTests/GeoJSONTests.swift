@@ -2,6 +2,10 @@ import XCTest
 import CoreLocation
 @testable import Turf
 
+#if os(OSX)
+import struct Turf.Polygon // Conflicts with MapKit’s Polygon
+#endif
+
 class GeoJSONTests: XCTestCase {
     
     func testGeoJSONPoint() {
