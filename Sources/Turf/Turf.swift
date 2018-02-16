@@ -299,6 +299,10 @@ public struct Polyline {
 public struct Ring {
     var coordinates: [CLLocationCoordinate2D]
     
+    public init(coordinates: [CLLocationCoordinate2D]) {
+        self.coordinates = coordinates
+    }
+    
     /**
      * Calculate the approximate area of the polygon were it projected onto the earth, in square meters.
      * Note that this area will be positive if ring is oriented clockwise, otherwise it will be negative.
@@ -344,12 +348,9 @@ public struct Ring {
  Creates a `Polygon` struct from an outer ring and optional inner rings.
  Inner rings represent any holes the polygon may have.
  */
-public struct Polygon {
-    var outerRing: Ring
-    var innerRings: [Ring]
+extension Polygon {
     
     // Ported from https://github.com/Turfjs/turf/blob/a94151418cb969868fdb42955a19a133512da0fd/packages/turf-area/index.js
-    
     public var area: Double {
         return abs(outerRing.area) - innerRings
             .map { abs($0.area) }

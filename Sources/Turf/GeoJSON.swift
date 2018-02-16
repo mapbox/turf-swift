@@ -25,9 +25,15 @@ public struct MultiPolygon: Codable {
     var coordinates: [[[CLLocationCoordinate2D]]]
 }
 
-// TODO: Replace with Polygon from Turf.swift with inner and outer rings
-public struct GeoJSONPolygon: Codable {
-    var coordinates: [[CLLocationCoordinate2D]]
+public struct Polygon {
+    
+    var outerRing: Ring
+    var innerRings: [Ring]
+    
+    init(outerRing: Ring, innerRings: [Ring]) {
+        self.outerRing = outerRing
+        self.innerRings = innerRings
+    }
 }
 
 public struct GeoJSON<Geometry: Codable>: GeoJSONFeature {

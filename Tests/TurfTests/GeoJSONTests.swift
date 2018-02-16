@@ -24,14 +24,15 @@ class GeoJSONTests: XCTestCase {
     
     func testGeoJSONPolygon() {
         let data = try! Fixture.geojsonData(from: "polygon")!
-        let geojson = try! JSONDecoder().decode(GeoJSON<GeoJSONPolygon>.self, from: data)
+        let geojson = try! JSONDecoder().decode(GeoJSON<Polygon>.self, from: data)
         
         let firstCoordinate = CLLocationCoordinate2D(latitude: 37.00255267215955, longitude: -109.05029296875)
         let lastCoordinate = CLLocationCoordinate2D(latitude: 40.6306300839918, longitude: -108.56689453125)
-        XCTAssert(geojson.geometry?.coordinates.first?.first == firstCoordinate)
-        XCTAssert(geojson.geometry?.coordinates.last?.last == lastCoordinate)
-        XCTAssert(geojson.geometry?.coordinates[0].count == 5)
-        XCTAssert(geojson.geometry?.coordinates[1].count == 5)
+        
+        XCTAssert(geojson.geometry?.outerRing.coordinates.first == firstCoordinate)
+        XCTAssert(geojson.geometry?.innerRings.last?.coordinates.last == lastCoordinate)
+        XCTAssert(geojson.geometry?.outerRing.coordinates.count == 5)
+        XCTAssert(geojson.geometry?.innerRings.first?.coordinates.count == 5)
     }
     
     func testGeoJSONMultiPoint() {

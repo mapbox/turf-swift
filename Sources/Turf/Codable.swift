@@ -1,4 +1,7 @@
 import Foundation
+#if !os(Linux)
+import CoreLocation
+#endif
 
 public protocol JSONType: Codable {
     var jsonValue: Any { get }
@@ -43,5 +46,35 @@ public struct AnyJSONType: JSONType {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(self)
+    }
+}
+
+extension Ring: Codable {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self = Ring(coordinates: try container.decode([CLLocationCoordinate2D].self))
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(coordinates)
+    }
+}
+
+extension Polygon: Codable {
+    private enum CodingKeys: String, CodingKey {
+        case coordinates
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let rings = try container.decode([Ring].self, forKey: .coordinates)
+        outerRing = rings.first!
+        innerRings = Array(rings.suffix(from: 1))
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode([outerRing]+innerRings, forKey: .coordinates)
     }
 }
