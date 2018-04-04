@@ -54,6 +54,7 @@ extension CLLocationCoordinate2D: Equatable {
     
     /// Instantiates a CLLocationCoordinate from a RadianCoordinate2D
     public init(_ radianCoordinate: RadianCoordinate2D) {
+        self.init()
         latitude = radianCoordinate.latitude.toDegrees()
         longitude = radianCoordinate.longitude.toDegrees()
     }
