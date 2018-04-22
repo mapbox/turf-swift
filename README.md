@@ -24,6 +24,8 @@ Turf is written in Swift 4. It requires Xcode 9.x and supports the following min
 
 Alternatively, you can incorporate Turf into a command line tool without Xcode on any platform that [Swift](https://swift.org/download/) supports, including Linux.
 
+If your project is written in Objective-C, you’ll need to write a compatibility layer between turf-swift and your Objective-C code. If your project is written in Objective-C++, you may be able to use [spatial-algorithms](https://github.com/mapbox/spatial-algorithms/) as an alternative to Turf.
+
 ## Installation
 
 Although a stable release of this library is not yet available, prereleases are available for installation using any of the popular Swift dependency managers.
