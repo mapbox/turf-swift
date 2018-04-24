@@ -59,9 +59,9 @@ extension CLLocationCoordinate2D: Codable {
     
     public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
-        self.init()
-        longitude = try container.decode(CLLocationDegrees.self)
-        latitude = try container.decode(CLLocationDegrees.self)
+        let longitude = try container.decode(CLLocationDegrees.self)
+        let latitude = try container.decode(CLLocationDegrees.self)
+        self.init(latitude: latitude, longitude: longitude)
     }
 }
 
