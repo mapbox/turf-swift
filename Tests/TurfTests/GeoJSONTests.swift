@@ -69,7 +69,7 @@ class GeoJSONTests: XCTestCase {
         XCTAssert(geojson.geometry?.coordinates.last?.last?.last == lastCoordinate)
     }
     
-    func testGeoJSONFeatureCollection() {
+    func testFeatureCollection() {
         let data = try! Fixture.geojsonData(from: "featurecollection")!
         let geojson = try! JSONDecoder().decode(FeatureCollection.self, from: data)
         
