@@ -50,6 +50,9 @@
 		3547ED11200C3E0C009DA062 /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3547ECFD200C3C82009DA062 /* Fixture.swift */; };
 		3547ED12200C3E49009DA062 /* Turf.h in Headers */ = {isa = PBXBuildFile; fileRef = 3547ECEF200C3C78009DA062 /* Turf.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		35650AFA1F150DC500B5C158 /* Turf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35650AF01F150DC500B5C158 /* Turf.framework */; };
+		357495BE208E3432007D7477 /* featurecollection.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 357495BD208E3432007D7477 /* featurecollection.geojson */; };
+		357495BF208E3432007D7477 /* featurecollection.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 357495BD208E3432007D7477 /* featurecollection.geojson */; };
+		357495C0208E3432007D7477 /* featurecollection.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 357495BD208E3432007D7477 /* featurecollection.geojson */; };
 		DA39EB6E20101F99004D87F7 /* Turf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA39EB6520101F98004D87F7 /* Turf.framework */; };
 		DA39EB7C20101FB9004D87F7 /* Turf.h in Headers */ = {isa = PBXBuildFile; fileRef = 3547ECEF200C3C78009DA062 /* Turf.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA39EB7D20101FCD004D87F7 /* CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3547ECF0200C3C78009DA062 /* CoreLocation.swift */; };
@@ -110,6 +113,7 @@
 		3547ED09200C3C8A009DA062 /* LinuxMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinuxMain.swift; sourceTree = "<group>"; };
 		35650AF01F150DC500B5C158 /* Turf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Turf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		35650AF91F150DC500B5C158 /* TurfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		357495BD208E3432007D7477 /* featurecollection.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = featurecollection.geojson; sourceTree = "<group>"; };
 		DA39EB6520101F98004D87F7 /* Turf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Turf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA39EB6D20101F99004D87F7 /* TurfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA94249B2010283900CDB4E6 /* Turf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Turf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,6 +210,7 @@
 				3547ECFB200C3C82009DA062 /* dc-line.geojson */,
 				3547ECFC200C3C82009DA062 /* polygon.geojson */,
 				35166855202E6CEE0032A97E /* multipoint.geojson */,
+				357495BD208E3432007D7477 /* featurecollection.geojson */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -421,7 +426,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					353E9B061F3E093A007CFA23 = {
@@ -494,6 +499,7 @@
 				3516685B202EFE690032A97E /* multiline.geojson in Resources */,
 				3502F7A8201F616E00399EFE /* simple-line.geojson in Resources */,
 				35166857202E6CEE0032A97E /* multipoint.geojson in Resources */,
+				357495BF208E3432007D7477 /* featurecollection.geojson in Resources */,
 				3502F7A4201F568000399EFE /* point.geojson in Resources */,
 				3516685F202EFF130032A97E /* multipolygon.geojson in Resources */,
 				3534C3BA200C419200F93581 /* dc-line.geojson in Resources */,
@@ -515,6 +521,7 @@
 				3516685A202EFE690032A97E /* multiline.geojson in Resources */,
 				3502F7A7201F616E00399EFE /* simple-line.geojson in Resources */,
 				35166856202E6CEE0032A97E /* multipoint.geojson in Resources */,
+				357495BE208E3432007D7477 /* featurecollection.geojson in Resources */,
 				3502F7A3201F568000399EFE /* point.geojson in Resources */,
 				3516685E202EFF130032A97E /* multipolygon.geojson in Resources */,
 				3534C3B8200C419100F93581 /* dc-line.geojson in Resources */,
@@ -536,6 +543,7 @@
 				3516685C202EFE690032A97E /* multiline.geojson in Resources */,
 				3502F7A9201F616E00399EFE /* simple-line.geojson in Resources */,
 				35166858202E6CEE0032A97E /* multipoint.geojson in Resources */,
+				357495C0208E3432007D7477 /* featurecollection.geojson in Resources */,
 				3502F7A5201F568000399EFE /* point.geojson in Resources */,
 				35166860202EFF130032A97E /* multipolygon.geojson in Resources */,
 				DA39EB81201024A3004D87F7 /* dc-line.geojson in Resources */,
@@ -747,6 +755,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -754,6 +763,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -812,6 +822,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -819,6 +830,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
