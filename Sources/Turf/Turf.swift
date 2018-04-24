@@ -352,7 +352,7 @@ extension Polygon {
     
     // Ported from https://github.com/Turfjs/turf/blob/a94151418cb969868fdb42955a19a133512da0fd/packages/turf-area/index.js
     public var area: Double {
-        return abs(outerRing.area) - innerRings
+        return abs(outerRing!.area) - innerRings!
             .map { abs($0.area) }
             .reduce(0, +)
     }

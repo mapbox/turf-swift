@@ -36,7 +36,7 @@ public struct AnyJSONType: JSONType {
             jsonValue = doubleValue
         } else if let doubleValue = try? container.decode([AnyJSONType].self) {
             jsonValue = doubleValue
-        } else if let doubleValue = try? container.decode([String:AnyJSONType].self) {
+        } else if let doubleValue = try? container.decode([String: AnyJSONType].self) {
             jsonValue = doubleValue
         } else {
             throw DecodingError.typeMismatch(JSONType.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Unsupported JSON type"))
@@ -45,7 +45,19 @@ public struct AnyJSONType: JSONType {
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
-        try container.encode(self)
+        if let intValue = jsonValue as? Int {
+            try container.encode(intValue)
+        } else if let stringValue = jsonValue as? String {
+            try container.encode(stringValue)
+        } else if let boolValue = jsonValue as? Bool {
+            try container.encode(boolValue)
+        } else if let doubleValue = jsonValue as? Double {
+            try container.encode(doubleValue)
+        } else if let arrayValue = jsonValue as? [AnyJSONType] {
+            try container.encode(arrayValue)
+        } else if let dictionaryValue = jsonValue as? [String: AnyJSONType] {
+            try container.encode(dictionaryValue)
+        }
     }
 }
 
@@ -61,20 +73,3 @@ extension Ring: Codable {
     }
 }
 
-extension Polygon: Codable {
-    private enum CodingKeys: String, CodingKey {
-        case coordinates
-    }
-    
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        let rings = try container.decode([Ring].self, forKey: .coordinates)
-        outerRing = rings.first!
-        innerRings = Array(rings.suffix(from: 1))
-    }
-    
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode([outerRing]+innerRings, forKey: .coordinates)
-    }
-}
