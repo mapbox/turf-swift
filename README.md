@@ -91,3 +91,16 @@ Turf.js | Turf-swift
 — | `CLLocationCoordinate2D.direction(to:)`<br>`RadianCoordinate2D.direction(to:)`
 — | `CLLocationDirection.difference(from:)`
 — | `CLLocationDirection.wrap(min:max:)`
+
+
+## GeoJSON
+
+turf-swift also contains an experimental GeoJSON encoder/decoder with support for Codable.
+
+```swift
+// Decode unknown GeoJSON type
+let geojson = try! GeoJSON.parse(data: data)
+
+// Decode known GeoJSON type
+let geojson = try! GeoJSON.parse(data: data, as: FeatureCollection.self)
+```
