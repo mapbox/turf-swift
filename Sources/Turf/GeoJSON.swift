@@ -4,31 +4,48 @@ import CoreLocation
 #endif
 
 
-public class Feature: Codable {
-    
-    public var type: String
-    public var properties: [String : AnyJSONType]?
-    
-    // Used to extract the geometry’s type w/o double decoding its coordinates
-    fileprivate var simplifiedGeometry: Geometry
-    
+public class BaseFeature: Codable {
     private enum CodingKeys: String, CodingKey {
-        case type
         case properties
-        case simplifiedGeometry = "geometry"
     }
+    
+    public var properties: [String : AnyJSONType]?
     
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         properties = try container.decode([String : AnyJSONType]?.self, forKey: .properties)
-        type = try container.decode(String.self, forKey: .type)
-        simplifiedGeometry = try container.decode(Geometry.self, forKey: .simplifiedGeometry)
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(properties, forKey: .properties)
-        try container.encode(type, forKey: .type)
+    }
+}
+
+public class Feature: BaseFeature {
+    public var type: GeoJSONType
+    
+    // Used to extract the geometry’s type w/o double decoding its coordinates
+    fileprivate var simplifiedGeometry: Geometry?
+    
+    private enum CodingKeys: String, CodingKey {
+        case type
+        //case properties
+        case simplifiedGeometry = "geometry"
+    }
+    
+    public required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        simplifiedGeometry = try container.decodeIfPresent(Geometry.self, forKey: .simplifiedGeometry)
+        type = try GeoJSONType(rawValue: container.decode(String.self, forKey: .type))!
+        
+        try super.init(from: decoder)
+    }
+    
+    public override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(type.rawValue, forKey: .type)
+        try super.encode(to: encoder)
     }
 }
 
@@ -37,12 +54,12 @@ public struct Geometry: Codable {
 }
 
 public struct LineString: Codable {
-    var type: String
+    var type: String = GeometryType.LineString.rawValue
     var coordinates: [CLLocationCoordinate2D]
 }
 
 public struct Polygon: Codable {
-    var type: String = GeoJSON.GeometryType.Polygon.rawValue
+    var type: String = GeometryType.Polygon.rawValue
     var coordinates: [[CLLocationCoordinate2D]]
     
     init(coordinates: [[CLLocationCoordinate2D]]) {
@@ -59,19 +76,22 @@ public struct Polygon: Codable {
 }
 
 public struct Point: Codable {
-    var type: String
+    var type: String = GeometryType.Point.rawValue
     var coordinates: CLLocationCoordinate2D
 }
 
 public struct MultiPoint: Codable {
+    var type: String = GeometryType.MultiPoint.rawValue
     var coordinates: [CLLocationCoordinate2D]
 }
 
 public struct MultiLineString: Codable {
+    var type: String = GeometryType.MultiLineString.rawValue
     var coordinates: [[CLLocationCoordinate2D]]
 }
 
 public struct MultiPolygon: Codable {
+    var type: String = GeometryType.MultiLineString.rawValue
     var coordinates: [[[CLLocationCoordinate2D]]]
 }
 
@@ -201,9 +221,8 @@ public class MultiLineStringFeature: Feature {
     }
 }
 
-public struct FeatureCollection: Codable {
+public class FeatureCollection: BaseFeature {
     
-    public var properties: [String : AnyJSONType]?
     public var features: [Feature]
     
     private enum CodingKeys: String, CodingKey {
@@ -215,10 +234,8 @@ public struct FeatureCollection: Codable {
         case type
     }
     
-    public init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        properties = try container.decode([String : AnyJSONType]?.self, forKey: .properties)
-        
         var features = [Feature]()
         var featureTypes = [Feature.Type]()
         
@@ -226,7 +243,7 @@ public struct FeatureCollection: Codable {
             while (!unkeyedContainer.isAtEnd) {
                 let feature = try unkeyedContainer.decode(Feature.self)
                 
-                if let geometryType = GeoJSON.GeometryType(rawValue: feature.simplifiedGeometry.type) {
+                if let geometryType = GeometryType(rawValue: feature.simplifiedGeometry!.type) {
                     featureTypes.append(geometryType.featureType)
                 }
             }
@@ -241,40 +258,97 @@ public struct FeatureCollection: Codable {
         }
         
         self.features = features
+        
+        try super.init(from: decoder)
     }
     
-    public func encode(to encoder: Encoder) throws {
+    public override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(self.properties, forKey: .properties)
         try container.encode(self.features, forKey: .features)
+        
+        try super.encode(to: encoder)
     }
 }
 
-public class GeoJSON {
+public enum GeometryType: String {
+    case Point
+    case LineString
+    case Polygon
+    case MultiPoint
+    case MultiLineString
+    case MultiPolygon
     
-    public enum GeometryType: String {
-        case LineString
-        case Polygon
-        case Point
-        case MultiPoint
-        case MultiLineString
-        case MultiPolygon
-        
-        var featureType: Feature.Type {
-            switch self {
-            case .LineString:
-                return LineStringFeature.self
-            case .Polygon:
-                return PolygonFeature.self
-            case .Point:
-                return PointFeature.self
-            case .MultiPoint:
-                return MultiPointFeature.self
-            case .MultiLineString:
-                return MultiLineStringFeature.self
-            case .MultiPolygon:
-                return MultiPolygonFeature.self
-            }
+    static let allValues: [GeometryType] = [.Point, .LineString, .Polygon, .MultiPoint, .MultiLineString, .MultiPolygon]
+    
+    var featureType: Feature.Type {
+        switch self {
+        case .LineString:
+            return LineStringFeature.self
+        case .Polygon:
+            return PolygonFeature.self
+        case .Point:
+            return PointFeature.self
+        case .MultiPoint:
+            return MultiPointFeature.self
+        case .MultiLineString:
+            return MultiLineStringFeature.self
+        case .MultiPolygon:
+            return MultiPolygonFeature.self
         }
+    }
+}
+
+public enum GeoJSONType: String {
+    case Feature
+    case FeatureCollection
+    static let allValues: [GeoJSONType] = [.Feature, .FeatureCollection]
+}
+
+public enum GeoJSONError: Error {
+    case unknownType
+    case noTypeFound
+}
+
+
+
+public class GeoJSON: Codable {
+    
+    var value: Codable?
+    
+    public required init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let feature = try container.decode(Feature.self)
+        
+        if feature.type == .Feature {
+            guard let type = GeometryType(rawValue: feature.simplifiedGeometry!.type) else {
+                throw GeoJSONError.unknownType
+            }
+            self.value = try container.decode(type.featureType)
+        } else if feature.type == .FeatureCollection {
+            self.value = try container.decode(FeatureCollection.self)
+        } else {
+            throw GeoJSONError.noTypeFound
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        
+        if let value = value as? FeatureCollection {
+            try container.encode(value)
+        } else if let value = value as? Feature {
+            try container.encode(value)
+        } else {
+            throw GeoJSONError.unknownType
+        }
+    }
+    
+    public static func parse(data: Data) throws -> GeoJSON {
+        return try JSONDecoder().decode(GeoJSON.self, from: data)
+    }
+    
+    public static func parse<T: BaseFeature>(data: Data, as: T.Type) throws -> T {
+        return try JSONDecoder().decode(T.self, from: data)
     }
 }
