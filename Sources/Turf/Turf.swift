@@ -97,11 +97,7 @@ public struct Turf {
     }
 }
 
-/**
- A `Polyline` struct represents a shape consisting of two or more coordinates,
- specified as `[CLLocationCoordinate2D]`
- */
-public struct Polyline {
+extension LineString {
     
     /**
      `IndexedCoordinate` is a coordinate with additional information such as
@@ -118,20 +114,14 @@ public struct Polyline {
     }
     
     /**
-     The coordinates that the `Polyline` was initialized with.
-     */
-    public var coordinates: [CLLocationCoordinate2D]
-    
-    /**
      Initializes a Polyline from the given coordinates.
      */
     public init(_ coordinates: [CLLocationCoordinate2D]) {
         self.coordinates = coordinates
     }
     
-    
     /**
-     Returns a coordinate along a polyline at a certain distance from the start of the polyline.
+     Returns a coordinate along a LineString at a certain distance from the start of the polyline.
      */
     public func coordinateFromStart(distance: CLLocationDistance) -> CLLocationCoordinate2D? {
         // Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-along/index.js
@@ -164,7 +154,7 @@ public struct Polyline {
     
     
     /**
-     Returns the distance along a slice of a polyline with the given endpoints.
+     Returns the distance along a slice of a LineString with the given endpoints.
      */
     public func distance(from start: CLLocationCoordinate2D? = nil, to end: CLLocationCoordinate2D? = nil) -> CLLocationDistance {
         // Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-line-slice/index.js
@@ -179,12 +169,12 @@ public struct Polyline {
     
     
     /**
-     Returns a subset of the polyline between given coordinates.
+     Returns a subset of the LineString between given coordinates.
      */
-    public func sliced(from start: CLLocationCoordinate2D? = nil, to end: CLLocationCoordinate2D? = nil) -> Polyline {
+    public func sliced(from start: CLLocationCoordinate2D? = nil, to end: CLLocationCoordinate2D? = nil) -> LineString {
         // Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-line-slice/index.js
         guard !coordinates.isEmpty else {
-            return Polyline([])
+            return LineString([])
         }
         
         let startVertex = (start != nil ? closestCoordinate(to: start!) : nil) ?? IndexedCoordinate(coordinate: coordinates.first!, index: 0, distance: 0)
@@ -200,17 +190,17 @@ public struct Polyline {
         coords.insert(ends.0.coordinate, at: 0)
         coords.append(ends.1.coordinate)
         
-        return Polyline(coords)
+        return LineString(coords)
     }
     
     
     /**
      Returns a polyline along a polyline within a distance from a coordinate.
      */
-    public func trimmed(from coordinate: CLLocationCoordinate2D, distance: CLLocationDistance) -> Polyline {
+    public func trimmed(from coordinate: CLLocationCoordinate2D, distance: CLLocationDistance) -> LineString {
         let startVertex = closestCoordinate(to: coordinate)
         guard startVertex != nil && distance != 0 else {
-            return Polyline([])
+            return LineString([])
         }
         
         var vertices: [CLLocationCoordinate2D] = [startVertex!.coordinate]
@@ -246,7 +236,7 @@ public struct Polyline {
             }
         }
         assert(round(cumulativeDistance) <= round(abs(distance)))
-        return Polyline(vertices)
+        return LineString(vertices)
     }
     
     /**

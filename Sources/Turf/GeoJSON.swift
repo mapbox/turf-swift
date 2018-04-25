@@ -53,6 +53,10 @@ public struct Geometry: Codable {
     public var type: String
 }
 
+/**
+ A `LineString` struct represents a shape consisting of two or more coordinates,
+ specified as `[CLLocationCoordinate2D]`
+ */
 public struct LineString: Codable {
     var type: String = GeometryType.LineString.rawValue
     var coordinates: [CLLocationCoordinate2D]
