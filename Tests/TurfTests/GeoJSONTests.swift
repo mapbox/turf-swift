@@ -13,6 +13,7 @@ class GeoJSONTests: XCTestCase {
         let geojson = try! GeoJSON.parse(data: data, as: PointFeature.self)
         let coordinate = CLLocationCoordinate2D(latitude: 26.194876675795218, longitude: 14.765625)
         XCTAssert(geojson.geometry?.coordinates == coordinate)
+        XCTAssert(geojson.identifier?.value as! Int == 1)
     }
     
     func testLineStringFeature() {
@@ -24,6 +25,7 @@ class GeoJSONTests: XCTestCase {
         let last = CLLocationCoordinate2D(latitude: 10, longitude: 0)
         XCTAssert(geojson.geometry.coordinates.first == first)
         XCTAssert(geojson.geometry.coordinates.last == last)
+        XCTAssert(geojson.identifier?.value as! String == "1")
     }
     
     func testPolygonFeature() {
