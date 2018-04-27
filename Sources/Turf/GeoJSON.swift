@@ -3,17 +3,56 @@ import Foundation
 import CoreLocation
 #endif
 
+public typealias FeatureIdentifierNumber = Numeric & Codable
+public typealias FeatureIdentifierString = StringProtocol & Codable
+
+public struct FeatureIdentifier<T: FeatureIdentifierNumber, U: FeatureIdentifierString>: Codable {
+    var t: T?
+    var u: U?
+    
+    public var value: Codable {
+        return t ?? u
+    }
+    
+    init(_ value: T) {
+        t = value
+    }
+    
+    init(_ value: U) {
+        u = value
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        if let t = t {
+            try? container.encode(t)
+        }
+        if let u = u {
+            try? container.encode(u)
+        }
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        t = try? container.decode(T.self)
+        if t == nil {
+            u = try? container.decode(U.self)
+        }
+    }
+}
+
 public protocol GeometryObject: Codable {
 }
 
 public protocol GeoJSONObject: Codable {
-    //associatedtype GeoJSONType
+    var identifier: FeatureIdentifier<Int, String>? { get set }
     var properties: [String: AnyJSONType]? { get set }
 }
 
 private enum GeoJSONCodingKeys: String, CodingKey {
     case properties
     case geometry
+    case identifier = "id"
 }
 
 public struct Feature: Codable {
@@ -101,33 +140,27 @@ public struct MultiPolygon: Codable {
 }
 
 public struct LineStringFeature: GeoJSONObject, GeometryObject {
-    public typealias GeometryType = LineString
-    
-    public typealias geometryType = LineString
-    public typealias GeoJSONType = Feature
+    public var identifier: FeatureIdentifier<Int, String>?
     public var geometry: LineString!
     public var properties: [String : AnyJSONType]?
-    
-    public init() {
-        
-    }
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
         geometry = try container.decode(LineString.self, forKey: .geometry)
         properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
+        identifier = try container.decodeIfPresent(FeatureIdentifier<Int, String>.self, forKey: .identifier)
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: GeoJSONCodingKeys.self)
         try container.encode(geometry, forKey: .geometry)
         try container.encode(properties, forKey: .properties)
+        try container.encodeIfPresent(identifier, forKey: .identifier)
     }
 }
 
 public struct PolygonFeature: GeoJSONObject {
-    public typealias GeometryType = Polygon
-    public typealias GeoJSONType = Feature
+    public var identifier: FeatureIdentifier<Int, String>?
     public var geometry: Polygon!
     public var properties: [String : AnyJSONType]?
     
@@ -135,18 +168,19 @@ public struct PolygonFeature: GeoJSONObject {
         let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
         geometry = try container.decode(Polygon.self, forKey: .geometry)
         properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
+        identifier = try container.decodeIfPresent(FeatureIdentifier<Int, String>.self, forKey: .identifier)
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: GeoJSONCodingKeys.self)
         try container.encode(geometry, forKey: .geometry)
         try container.encode(properties, forKey: .properties)
+        try container.encodeIfPresent(identifier, forKey: .identifier)
     }
 }
 
 public class PointFeature: GeoJSONObject {
-    public typealias GeometryType = Point
-    public typealias GeoJSONType = Feature
+    public var identifier: FeatureIdentifier<Int, String>?
     public var geometry: Point!
     public var properties: [String : AnyJSONType]?
     
@@ -154,18 +188,19 @@ public class PointFeature: GeoJSONObject {
         let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
         geometry = try container.decode(Point.self, forKey: .geometry)
         properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
+        identifier = try container.decodeIfPresent(FeatureIdentifier<Int, String>.self, forKey: .identifier)
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: GeoJSONCodingKeys.self)
         try container.encode(geometry, forKey: .geometry)
         try container.encode(properties, forKey: .properties)
+        try container.encodeIfPresent(identifier, forKey: .identifier)
     }
 }
 
 public struct MultiPolygonFeature: GeoJSONObject {
-    public typealias GeometryType = MultiPolygon
-    public typealias GeoJSONType = Feature
+    public var identifier: FeatureIdentifier<Int, String>?
     public var geometry: MultiPolygon!
     public var properties: [String : AnyJSONType]?
     
@@ -173,18 +208,19 @@ public struct MultiPolygonFeature: GeoJSONObject {
         let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
         geometry = try container.decode(MultiPolygon.self, forKey: .geometry)
         properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
+        identifier = try container.decodeIfPresent(FeatureIdentifier<Int, String>.self, forKey: .identifier)
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: GeoJSONCodingKeys.self)
         try container.encode(geometry, forKey: .geometry)
         try container.encode(properties, forKey: .properties)
+        try container.encodeIfPresent(identifier, forKey: .identifier)
     }
 }
 
 public struct MultiPointFeature: GeoJSONObject {
-    public typealias GeometryType = MultiPoint
-    public typealias GeoJSONType = Feature
+    public var identifier: FeatureIdentifier<Int, String>?
     public var geometry: MultiPoint!
     public var properties: [String : AnyJSONType]?
     
@@ -192,18 +228,19 @@ public struct MultiPointFeature: GeoJSONObject {
         let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
         geometry = try container.decode(MultiPoint.self, forKey: .geometry)
         properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
+        identifier = try container.decodeIfPresent(FeatureIdentifier<Int, String>.self, forKey: .identifier)
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: GeoJSONCodingKeys.self)
         try container.encode(geometry, forKey: .geometry)
         try container.encode(properties, forKey: .properties)
+        try container.encodeIfPresent(identifier, forKey: .identifier)
     }
 }
 
 public struct MultiLineStringFeature: GeoJSONObject {
-    public typealias GeometryType = MultiLineString
-    public typealias GeoJSONType = Feature
+    public var identifier: FeatureIdentifier<Int, String>?
     public var geometry: MultiLineString!
     public var properties: [String : AnyJSONType]?
     
@@ -211,17 +248,19 @@ public struct MultiLineStringFeature: GeoJSONObject {
         let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
         geometry = try container.decode(MultiLineString.self, forKey: .geometry)
         properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
+        identifier = try container.decodeIfPresent(FeatureIdentifier<Int, String>.self, forKey: .identifier)
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: GeoJSONCodingKeys.self)
         try container.encode(geometry, forKey: .geometry)
         try container.encode(properties, forKey: .properties)
+        try container.encodeIfPresent(identifier, forKey: .identifier)
     }
 }
 
 public struct FeatureCollection: GeoJSONObject {
-    public typealias GeoJSONType = FeatureCollection
+    public var identifier: FeatureIdentifier<Int, String>?
     public var features: Array<GeoJSONObject> = []
     public var properties: [String : AnyJSONType]?
     
