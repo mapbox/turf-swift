@@ -3,11 +3,20 @@ import Foundation
 import CoreLocation
 #endif
 
+public protocol GeometryObject: Codable {
+}
+
 public protocol GeoJSONObject: Codable {
+    //associatedtype GeoJSONType
     var properties: [String: AnyJSONType]? { get set }
 }
 
-public class Feature: GeoJSONObject {
+private enum GeoJSONCodingKeys: String, CodingKey {
+    case properties
+    case geometry
+}
+
+public struct Feature: Codable {
     public var type: GeoJSONType
     
     public var properties: [String : AnyJSONType]?
@@ -20,7 +29,7 @@ public class Feature: GeoJSONObject {
         case simplifiedGeometry = "geometry"
     }
     
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         simplifiedGeometry = try container.decodeIfPresent(Geometry.self, forKey: .simplifiedGeometry)
         type = try GeoJSONType(rawValue: container.decode(String.self, forKey: .type))!
@@ -36,6 +45,10 @@ public class Feature: GeoJSONObject {
 
 public struct Geometry: Codable {
     public var type: String
+    
+    public var geometryType: GeometryType? {
+        return GeometryType(rawValue: type)
+    }
 }
 
 // Polyline has been renamed to `LineString`. This alias is for backwards compatibility.
@@ -87,135 +100,129 @@ public struct MultiPolygon: Codable {
     var coordinates: [[[CLLocationCoordinate2D]]]
 }
 
-public class LineStringFeature: Feature {
+public struct LineStringFeature: GeoJSONObject, GeometryObject {
+    public typealias GeometryType = LineString
+    
+    public typealias geometryType = LineString
+    public typealias GeoJSONType = Feature
     public var geometry: LineString!
+    public var properties: [String : AnyJSONType]?
     
-    private enum CodingKeys: String, CodingKey {
-        case properties
-        case geometry
+    public init() {
+        
     }
     
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
         geometry = try container.decode(LineString.self, forKey: .geometry)
-        try super.init(from: decoder)
+        properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
     }
     
-    public override func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: GeoJSONCodingKeys.self)
         try container.encode(geometry, forKey: .geometry)
-        try super.encode(to: encoder)
+        try container.encode(properties, forKey: .properties)
     }
 }
 
-public class PolygonFeature: Feature {
+public struct PolygonFeature: GeoJSONObject {
+    public typealias GeometryType = Polygon
+    public typealias GeoJSONType = Feature
     public var geometry: Polygon!
+    public var properties: [String : AnyJSONType]?
     
-    private enum CodingKeys: String, CodingKey {
-        case properties
-        case geometry
-    }
-    
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
         geometry = try container.decode(Polygon.self, forKey: .geometry)
-        try super.init(from: decoder)
+        properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
     }
     
-    public override func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: GeoJSONCodingKeys.self)
         try container.encode(geometry, forKey: .geometry)
-        try super.encode(to: encoder)
+        try container.encode(properties, forKey: .properties)
     }
 }
 
-public class PointFeature: Feature {
+public class PointFeature: GeoJSONObject {
+    public typealias GeometryType = Point
+    public typealias GeoJSONType = Feature
     public var geometry: Point!
-    
-    private enum CodingKeys: String, CodingKey {
-        case properties
-        case geometry
-    }
+    public var properties: [String : AnyJSONType]?
     
     public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
         geometry = try container.decode(Point.self, forKey: .geometry)
-        try super.init(from: decoder)
+        properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
     }
     
-    public override func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: GeoJSONCodingKeys.self)
         try container.encode(geometry, forKey: .geometry)
-        try super.encode(to: encoder)
+        try container.encode(properties, forKey: .properties)
     }
 }
 
-public class MultiPolygonFeature: Feature {
+public struct MultiPolygonFeature: GeoJSONObject {
+    public typealias GeometryType = MultiPolygon
+    public typealias GeoJSONType = Feature
     public var geometry: MultiPolygon!
+    public var properties: [String : AnyJSONType]?
     
-    private enum CodingKeys: String, CodingKey {
-        case properties
-        case geometry
-    }
-    
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
         geometry = try container.decode(MultiPolygon.self, forKey: .geometry)
-        try super.init(from: decoder)
+        properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
     }
     
-    public override func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: GeoJSONCodingKeys.self)
         try container.encode(geometry, forKey: .geometry)
-        try super.encode(to: encoder)
+        try container.encode(properties, forKey: .properties)
     }
 }
 
-public class MultiPointFeature: Feature {
+public struct MultiPointFeature: GeoJSONObject {
+    public typealias GeometryType = MultiPoint
+    public typealias GeoJSONType = Feature
     public var geometry: MultiPoint!
+    public var properties: [String : AnyJSONType]?
     
-    private enum CodingKeys: String, CodingKey {
-        case properties
-        case geometry
-    }
-    
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
         geometry = try container.decode(MultiPoint.self, forKey: .geometry)
-        try super.init(from: decoder)
+        properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
     }
     
-    public override func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: GeoJSONCodingKeys.self)
         try container.encode(geometry, forKey: .geometry)
-        try super.encode(to: encoder)
+        try container.encode(properties, forKey: .properties)
     }
 }
 
-public class MultiLineStringFeature: Feature {
+public struct MultiLineStringFeature: GeoJSONObject {
+    public typealias GeometryType = MultiLineString
+    public typealias GeoJSONType = Feature
     public var geometry: MultiLineString!
+    public var properties: [String : AnyJSONType]?
     
-    private enum CodingKeys: String, CodingKey {
-        case properties
-        case geometry
-    }
-    
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
         geometry = try container.decode(MultiLineString.self, forKey: .geometry)
-        try super.init(from: decoder)
+        properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
     }
     
-    public override func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: GeoJSONCodingKeys.self)
         try container.encode(geometry, forKey: .geometry)
-        try super.encode(to: encoder)
+        try container.encode(properties, forKey: .properties)
     }
 }
 
-public class FeatureCollection: GeoJSONObject {
-    
-    public var features: [Feature]
+public struct FeatureCollection: GeoJSONObject {
+    public typealias GeoJSONType = FeatureCollection
+    public var features: Array<GeoJSONObject> = []
     public var properties: [String : AnyJSONType]?
     
     private enum CodingKeys: String, CodingKey {
@@ -227,26 +234,50 @@ public class FeatureCollection: GeoJSONObject {
         case type
     }
     
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        var features = [Feature]()
-        var featureTypes = [Feature.Type]()
+        var features: Array<GeoJSONObject> = []
+        var featureTypes: Array<GeoJSONObject.Type> = []
         
         if var unkeyedContainer = try? container.nestedUnkeyedContainer(forKey: .features) {
             while (!unkeyedContainer.isAtEnd) {
                 let feature = try unkeyedContainer.decode(Feature.self)
-                
-                if let geometryType = GeometryType(rawValue: feature.simplifiedGeometry!.type) {
-                    featureTypes.append(geometryType.featureType)
+
+                if let test = feature.simplifiedGeometry?.geometryType {
+                    switch test {
+                    case .LineString:
+                        featureTypes.append(LineStringFeature.self)
+                    case .MultiLineString:
+                        featureTypes.append(MultiLineStringFeature.self)
+                    case .Point:
+                        featureTypes.append(PointFeature.self)
+                    case .Polygon:
+                        featureTypes.append(PolygonFeature.self)
+                    case .MultiPolygon:
+                        featureTypes.append(MultiPolygonFeature.self)
+                    case .MultiPoint:
+                        featureTypes.append(MultiPointFeature.self)
+                    }
                 }
             }
         }
         
         if var mappedContainer = try? container.nestedUnkeyedContainer(forKey: .features) {
             while (!mappedContainer.isAtEnd) {
-                let type = featureTypes[mappedContainer.currentIndex]
-                let feature = try mappedContainer.decode(type.self)
-                features.append(feature)
+                let featureType = featureTypes[mappedContainer.currentIndex]
+                if featureType is LineStringFeature.Type {
+                    features.append(try mappedContainer.decode(LineStringFeature.self))
+                } else if featureType is PolygonFeature.Type {
+                    features.append(try mappedContainer.decode(PolygonFeature.self))
+                } else if featureType is PointFeature.Type {
+                    features.append(try mappedContainer.decode(PointFeature.self))
+                } else if featureType is MultiPoint.Type {
+                    features.append(try mappedContainer.decode(MultiPointFeature.self))
+                } else if featureType is MultiLineString.Type {
+                    features.append(try mappedContainer.decode(MultiLineStringFeature.self))
+                } else if featureType is MultiPolygon.Type {
+                    features.append(try mappedContainer.decode(MultiPolygonFeature.self))
+                }
             }
         }
         
@@ -256,7 +287,8 @@ public class FeatureCollection: GeoJSONObject {
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(features, forKey: .features)
+        // TODO: Using 'GeoJSONObject' as a concrete type conforming to protocol 'Encodable' is not supported
+        //try container.encode(features, forKey: .features)
         try container.encode(properties, forKey: .properties)
     }
 }
@@ -270,23 +302,6 @@ public enum GeometryType: String {
     case MultiPolygon
     
     static let allValues: [GeometryType] = [.Point, .LineString, .Polygon, .MultiPoint, .MultiLineString, .MultiPolygon]
-    
-    var featureType: Feature.Type {
-        switch self {
-        case .LineString:
-            return LineStringFeature.self
-        case .Polygon:
-            return PolygonFeature.self
-        case .Point:
-            return PointFeature.self
-        case .MultiPoint:
-            return MultiPointFeature.self
-        case .MultiLineString:
-            return MultiLineStringFeature.self
-        case .MultiPolygon:
-            return MultiPolygonFeature.self
-        }
-    }
 }
 
 public enum GeoJSONType: String {
@@ -300,21 +315,34 @@ public enum GeoJSONError: Error {
     case noTypeFound
 }
 
-
-
 public class GeoJSON: Codable {
     
     var value: Codable?
     
     public required init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        let feature = try container.decode(Feature.self)
         
+        let feature = try container.decode(Feature.self)
         if feature.type == .Feature {
-            guard let type = GeometryType(rawValue: feature.simplifiedGeometry!.type) else {
+            
+            guard let geometryType = feature.simplifiedGeometry?.geometryType else {
                 throw GeoJSONError.unknownType
             }
-            self.value = try container.decode(type.featureType)
+            
+            switch geometryType {
+            case .Point:
+                self.value = try container.decode(PointFeature.self)
+            case .LineString:
+                self.value = try container.decode(LineStringFeature.self)
+            case .Polygon:
+                self.value = try container.decode(PolygonFeature.self)
+            case .MultiLineString:
+                self.value = try container.decode(MultiLineStringFeature.self)
+            case .MultiPoint:
+                self.value = try container.decode(MultiPointFeature.self)
+            case .MultiPolygon:
+                self.value = try container.decode(MultiPolygonFeature.self)
+            }
         } else if feature.type == .FeatureCollection {
             self.value = try container.decode(FeatureCollection.self)
         } else {
