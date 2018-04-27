@@ -3,34 +3,20 @@ import Foundation
 import CoreLocation
 #endif
 
-
-public class BaseFeature: Codable {
-    private enum CodingKeys: String, CodingKey {
-        case properties
-    }
-    
-    public var properties: [String : AnyJSONType]?
-    
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        properties = try container.decode([String : AnyJSONType]?.self, forKey: .properties)
-    }
-    
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(properties, forKey: .properties)
-    }
+public protocol GeoJSONObject: Codable {
+    var properties: [String: AnyJSONType]? { get set }
 }
 
-public class Feature: BaseFeature {
+public class Feature: GeoJSONObject {
     public var type: GeoJSONType
     
+    public var properties: [String : AnyJSONType]?
     // Used to extract the geometry’s type w/o double decoding its coordinates
     fileprivate var simplifiedGeometry: Geometry?
     
     private enum CodingKeys: String, CodingKey {
         case type
-        //case properties
+        case properties
         case simplifiedGeometry = "geometry"
     }
     
@@ -38,14 +24,13 @@ public class Feature: BaseFeature {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         simplifiedGeometry = try container.decodeIfPresent(Geometry.self, forKey: .simplifiedGeometry)
         type = try GeoJSONType(rawValue: container.decode(String.self, forKey: .type))!
-        
-        try super.init(from: decoder)
+        properties = try container.decode([String : AnyJSONType]?.self, forKey: .properties)
     }
     
-    public override func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(type.rawValue, forKey: .type)
-        try super.encode(to: encoder)
+        try container.encode(properties, forKey: .properties)
     }
 }
 
@@ -53,7 +38,7 @@ public struct Geometry: Codable {
     public var type: String
 }
 
-// Polyline has been renamed to `LineString`. This alias is for backward compatibility.
+// Polyline has been renamed to `LineString`. This alias is for backwards compatibility.
 public typealias Polyline = LineString
 
 /**
@@ -228,9 +213,10 @@ public class MultiLineStringFeature: Feature {
     }
 }
 
-public class FeatureCollection: BaseFeature {
+public class FeatureCollection: GeoJSONObject {
     
     public var features: [Feature]
+    public var properties: [String : AnyJSONType]?
     
     private enum CodingKeys: String, CodingKey {
         case properties
@@ -265,16 +251,13 @@ public class FeatureCollection: BaseFeature {
         }
         
         self.features = features
-        
-        try super.init(from: decoder)
+        self.properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
     }
     
-    public override func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.properties, forKey: .properties)
-        try container.encode(self.features, forKey: .features)
-        
-        try super.encode(to: encoder)
+        try container.encode(features, forKey: .features)
+        try container.encode(properties, forKey: .properties)
     }
 }
 
@@ -355,7 +338,7 @@ public class GeoJSON: Codable {
         return try JSONDecoder().decode(GeoJSON.self, from: data)
     }
     
-    public static func parse<T: BaseFeature>(data: Data, as: T.Type) throws -> T {
+    public static func parse<T: GeoJSONObject>(data: Data, as: T.Type) throws -> T {
         return try JSONDecoder().decode(T.self, from: data)
     }
 }
