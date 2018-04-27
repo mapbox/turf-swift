@@ -53,6 +53,9 @@ public struct Geometry: Codable {
     public var type: String
 }
 
+// Polyline has been renamed to `LineString`. This alias is for backward compatibility.
+public typealias Polyline = LineString
+
 /**
  A `LineString` struct represents a shape consisting of two or more coordinates,
  specified as `[CLLocationCoordinate2D]`
