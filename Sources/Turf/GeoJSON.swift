@@ -302,7 +302,7 @@ public struct FeatureCollection: GeoJSONObject {
         }
         
         if var mappedContainer = try? container.nestedUnkeyedContainer(forKey: .features) {
-            while (!mappedContainer.isAtEnd) {
+            while !mappedContainer.isAtEnd {
                 let featureType = featureTypes[mappedContainer.currentIndex]
                 if featureType is LineStringFeature.Type {
                     features.append(try mappedContainer.decode(LineStringFeature.self))
@@ -356,34 +356,31 @@ public enum GeoJSONError: Error {
 
 public class GeoJSON: Codable {
     
-    var value: Codable?
+    var decoded: Codable?
     
     public required init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        
         let feature = try container.decode(Feature.self)
+        
         if feature.type == .Feature {
-            
-            guard let geometryType = feature.simplifiedGeometry?.geometryType else {
-                throw GeoJSONError.unknownType
-            }
+            guard let geometryType = feature.simplifiedGeometry?.geometryType else { throw GeoJSONError.unknownType }
             
             switch geometryType {
             case .Point:
-                self.value = try container.decode(PointFeature.self)
+                self.decoded = try container.decode(PointFeature.self)
             case .LineString:
-                self.value = try container.decode(LineStringFeature.self)
+                self.decoded = try container.decode(LineStringFeature.self)
             case .Polygon:
-                self.value = try container.decode(PolygonFeature.self)
+                self.decoded = try container.decode(PolygonFeature.self)
             case .MultiLineString:
-                self.value = try container.decode(MultiLineStringFeature.self)
+                self.decoded = try container.decode(MultiLineStringFeature.self)
             case .MultiPoint:
-                self.value = try container.decode(MultiPointFeature.self)
+                self.decoded = try container.decode(MultiPointFeature.self)
             case .MultiPolygon:
-                self.value = try container.decode(MultiPolygonFeature.self)
+                self.decoded = try container.decode(MultiPolygonFeature.self)
             }
         } else if feature.type == .FeatureCollection {
-            self.value = try container.decode(FeatureCollection.self)
+            self.decoded = try container.decode(FeatureCollection.self)
         } else {
             throw GeoJSONError.noTypeFound
         }
@@ -392,9 +389,9 @@ public class GeoJSON: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         
-        if let value = value as? FeatureCollection {
+        if let value = decoded as? FeatureCollection {
             try container.encode(value)
-        } else if let value = value as? Feature {
+        } else if let value = decoded as? Feature {
             try container.encode(value)
         } else {
             throw GeoJSONError.unknownType
