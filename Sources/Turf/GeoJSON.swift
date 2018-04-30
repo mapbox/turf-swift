@@ -3,49 +3,49 @@ import Foundation
 import CoreLocation
 #endif
 
-public typealias FeatureIdentifierNumber = Numeric & Codable
-public typealias FeatureIdentifierString = StringProtocol & Codable
+public enum FeatureIdentifier {
+    case string(String)
+    case int(Int)
+    
+    var value: Any? {
+        switch self {
+        case .int(let value):
+            return value
+        case .string(let value):
+            return value
+        }
+    }
+}
 
-public struct FeatureIdentifier<T: FeatureIdentifierNumber, U: FeatureIdentifierString>: Codable {
-    var t: T?
-    var u: U?
-    
-    public var value: Codable {
-        return t ?? u
-    }
-    
-    init(_ value: T) {
-        t = value
-    }
-    
-    init(_ value: U) {
-        u = value
-    }
-    
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        if let t = t {
-            try? container.encode(t)
-        }
-        if let u = u {
-            try? container.encode(u)
-        }
+extension FeatureIdentifier: Codable {
+    enum CodingKeys: String, CodingKey {
+        case string, int
     }
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        t = try? container.decode(T.self)
-        if t == nil {
-            u = try? container.decode(U.self)
+        if let value = try? container.decode(String.self) {
+            self = .string(value)
+        } else {
+            self = .int(try container.decode(Int.self))
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .string(let value):
+            try container.encode(value)
+        case .int(let value):
+            try container.encode(value)
         }
     }
 }
 
-public protocol GeometryObject: Codable {
-}
+public protocol GeometryObject: Codable { }
 
 public protocol GeoJSONObject: Codable {
-    var identifier: FeatureIdentifier<Int, String>? { get set }
+    var identifier: FeatureIdentifier? { get set }
     var properties: [String: AnyJSONType]? { get set }
 }
 
@@ -139,8 +139,28 @@ public struct MultiPolygon: Codable {
     var coordinates: [[[CLLocationCoordinate2D]]]
 }
 
+public class PointFeature: GeoJSONObject {
+    public var identifier: FeatureIdentifier?
+    public var geometry: Point!
+    public var properties: [String : AnyJSONType]?
+    
+    public required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
+        geometry = try container.decode(Point.self, forKey: .geometry)
+        properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
+        identifier = try container.decodeIfPresent(FeatureIdentifier.self, forKey: .identifier)
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: GeoJSONCodingKeys.self)
+        try container.encode(geometry, forKey: .geometry)
+        try container.encode(properties, forKey: .properties)
+        try container.encodeIfPresent(identifier, forKey: .identifier)
+    }
+}
+
 public struct LineStringFeature: GeoJSONObject, GeometryObject {
-    public var identifier: FeatureIdentifier<Int, String>?
+    public var identifier: FeatureIdentifier?
     public var geometry: LineString!
     public var properties: [String : AnyJSONType]?
     
@@ -148,7 +168,7 @@ public struct LineStringFeature: GeoJSONObject, GeometryObject {
         let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
         geometry = try container.decode(LineString.self, forKey: .geometry)
         properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
-        identifier = try container.decodeIfPresent(FeatureIdentifier<Int, String>.self, forKey: .identifier)
+        identifier = try container.decodeIfPresent(FeatureIdentifier.self, forKey: .identifier)
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -160,7 +180,7 @@ public struct LineStringFeature: GeoJSONObject, GeometryObject {
 }
 
 public struct PolygonFeature: GeoJSONObject {
-    public var identifier: FeatureIdentifier<Int, String>?
+    public var identifier: FeatureIdentifier?
     public var geometry: Polygon!
     public var properties: [String : AnyJSONType]?
     
@@ -168,27 +188,7 @@ public struct PolygonFeature: GeoJSONObject {
         let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
         geometry = try container.decode(Polygon.self, forKey: .geometry)
         properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
-        identifier = try container.decodeIfPresent(FeatureIdentifier<Int, String>.self, forKey: .identifier)
-    }
-    
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: GeoJSONCodingKeys.self)
-        try container.encode(geometry, forKey: .geometry)
-        try container.encode(properties, forKey: .properties)
-        try container.encodeIfPresent(identifier, forKey: .identifier)
-    }
-}
-
-public class PointFeature: GeoJSONObject {
-    public var identifier: FeatureIdentifier<Int, String>?
-    public var geometry: Point!
-    public var properties: [String : AnyJSONType]?
-    
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
-        geometry = try container.decode(Point.self, forKey: .geometry)
-        properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
-        identifier = try container.decodeIfPresent(FeatureIdentifier<Int, String>.self, forKey: .identifier)
+        identifier = try container.decodeIfPresent(FeatureIdentifier.self, forKey: .identifier)
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -200,7 +200,7 @@ public class PointFeature: GeoJSONObject {
 }
 
 public struct MultiPolygonFeature: GeoJSONObject {
-    public var identifier: FeatureIdentifier<Int, String>?
+    public var identifier: FeatureIdentifier?
     public var geometry: MultiPolygon!
     public var properties: [String : AnyJSONType]?
     
@@ -208,7 +208,7 @@ public struct MultiPolygonFeature: GeoJSONObject {
         let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
         geometry = try container.decode(MultiPolygon.self, forKey: .geometry)
         properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
-        identifier = try container.decodeIfPresent(FeatureIdentifier<Int, String>.self, forKey: .identifier)
+        identifier = try container.decodeIfPresent(FeatureIdentifier.self, forKey: .identifier)
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -220,7 +220,7 @@ public struct MultiPolygonFeature: GeoJSONObject {
 }
 
 public struct MultiPointFeature: GeoJSONObject {
-    public var identifier: FeatureIdentifier<Int, String>?
+    public var identifier: FeatureIdentifier?
     public var geometry: MultiPoint!
     public var properties: [String : AnyJSONType]?
     
@@ -228,7 +228,7 @@ public struct MultiPointFeature: GeoJSONObject {
         let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
         geometry = try container.decode(MultiPoint.self, forKey: .geometry)
         properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
-        identifier = try container.decodeIfPresent(FeatureIdentifier<Int, String>.self, forKey: .identifier)
+        identifier = try container.decodeIfPresent(FeatureIdentifier.self, forKey: .identifier)
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -240,7 +240,7 @@ public struct MultiPointFeature: GeoJSONObject {
 }
 
 public struct MultiLineStringFeature: GeoJSONObject {
-    public var identifier: FeatureIdentifier<Int, String>?
+    public var identifier: FeatureIdentifier?
     public var geometry: MultiLineString!
     public var properties: [String : AnyJSONType]?
     
@@ -248,7 +248,7 @@ public struct MultiLineStringFeature: GeoJSONObject {
         let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
         geometry = try container.decode(MultiLineString.self, forKey: .geometry)
         properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
-        identifier = try container.decodeIfPresent(FeatureIdentifier<Int, String>.self, forKey: .identifier)
+        identifier = try container.decodeIfPresent(FeatureIdentifier.self, forKey: .identifier)
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -260,7 +260,7 @@ public struct MultiLineStringFeature: GeoJSONObject {
 }
 
 public struct FeatureCollection: GeoJSONObject {
-    public var identifier: FeatureIdentifier<Int, String>?
+    public var identifier: FeatureIdentifier?
     public var features: Array<GeoJSONObject> = []
     public var properties: [String : AnyJSONType]?
     
