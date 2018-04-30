@@ -35,9 +35,9 @@ class GeoJSONTests: XCTestCase {
         let firstCoordinate = CLLocationCoordinate2D(latitude: 37.00255267215955, longitude: -109.05029296875)
         let lastCoordinate = CLLocationCoordinate2D(latitude: 40.6306300839918, longitude: -108.56689453125)
         
-        XCTAssert(geojson.geometry?.outerRing!.coordinates.first == firstCoordinate)
+        XCTAssert(geojson.geometry?.outerRing.coordinates.first == firstCoordinate)
         XCTAssert(geojson.geometry?.innerRings!.last?.coordinates.last == lastCoordinate)
-        XCTAssert(geojson.geometry?.outerRing!.coordinates.count == 5)
+        XCTAssert(geojson.geometry?.outerRing.coordinates.count == 5)
         XCTAssert(geojson.geometry?.innerRings!.first?.coordinates.count == 5)
     }
     
