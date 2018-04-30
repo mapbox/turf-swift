@@ -101,13 +101,13 @@ class GeoJSONTests: XCTestCase {
     func testUnkownPointFeature() {
         let data = try! Fixture.geojsonData(from: "point")!
         let geojson = try! GeoJSON.parse(data: data)
-        XCTAssert(geojson.value is PointFeature)
+        XCTAssert(geojson.decoded is PointFeature)
     }
     
     func testUnkownFeatureCollection() {
         let data = try! Fixture.geojsonData(from: "featurecollection")!
         let geojson = try! GeoJSON.parse(data: data)
-        XCTAssert(geojson.value is FeatureCollection)
+        XCTAssert(geojson.decoded is FeatureCollection)
     }
 }
 
