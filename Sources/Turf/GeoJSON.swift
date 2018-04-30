@@ -332,7 +332,7 @@ public class GeoJSON: Codable {
         return try JSONDecoder().decode(GeoJSON.self, from: data)
     }
     
-    public static func parse<T: GeoJSONObject>(data: Data, as: T.Type) throws -> T {
+    public static func parse<T: GeoJSONObject>(_ type: T.Type, from data: Data) throws -> T {
         return try JSONDecoder().decode(T.self, from: data)
     }
 }

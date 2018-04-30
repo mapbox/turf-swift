@@ -10,7 +10,7 @@ class GeoJSONTests: XCTestCase {
     
     func testPointFeature() {
         let data = try! Fixture.geojsonData(from: "point")!
-        let geojson = try! GeoJSON.parse(data: data, as: PointFeature.self)
+        let geojson = try! GeoJSON.parse(PointFeature.self, from: data)
         let coordinate = CLLocationCoordinate2D(latitude: 26.194876675795218, longitude: 14.765625)
         XCTAssert(geojson.geometry?.coordinates == coordinate)
         XCTAssert(geojson.identifier!.value as! Int == 1)
@@ -18,7 +18,7 @@ class GeoJSONTests: XCTestCase {
     
     func testLineStringFeature() {
         let data = try! Fixture.geojsonData(from: "simple-line")!
-        let geojson = try! GeoJSON.parse(data: data, as: LineStringFeature.self)
+        let geojson = try! GeoJSON.parse(LineStringFeature.self, from: data)
         
         XCTAssert(geojson.geometry.coordinates.count == 6)
         let first = CLLocationCoordinate2D(latitude: 0, longitude: 0)
@@ -30,7 +30,7 @@ class GeoJSONTests: XCTestCase {
     
     func testPolygonFeature() {
         let data = try! Fixture.geojsonData(from: "polygon")!
-        let geojson = try! GeoJSON.parse(data: data, as: PolygonFeature.self)
+        let geojson = try! GeoJSON.parse(PolygonFeature.self, from: data)
         
         let firstCoordinate = CLLocationCoordinate2D(latitude: 37.00255267215955, longitude: -109.05029296875)
         let lastCoordinate = CLLocationCoordinate2D(latitude: 40.6306300839918, longitude: -108.56689453125)
@@ -43,7 +43,7 @@ class GeoJSONTests: XCTestCase {
     
     func testMultiPointFeature() {
         let data = try! Fixture.geojsonData(from: "multipoint")!
-        let geojson = try! GeoJSON.parse(data: data, as: MultiPointFeature.self)
+        let geojson = try! GeoJSON.parse(MultiPointFeature.self, from: data)
         
         let firstCoordinate = CLLocationCoordinate2D(latitude: 26.194876675795218, longitude: 14.765625)
         let lastCoordinate = CLLocationCoordinate2D(latitude: 24.926294766395593, longitude: 17.75390625)
@@ -53,7 +53,7 @@ class GeoJSONTests: XCTestCase {
     
     func testMultiLineStringFeature() {
         let data = try! Fixture.geojsonData(from: "multiline")!
-        let geojson = try! GeoJSON.parse(data: data, as: MultiLineStringFeature.self)
+        let geojson = try! GeoJSON.parse(MultiLineStringFeature.self, from: data)
         
         let firstCoordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
         let lastCoordinate = CLLocationCoordinate2D(latitude: 6, longitude: 6)
@@ -63,7 +63,7 @@ class GeoJSONTests: XCTestCase {
     
     func testMultiPolygonFeature() {
         let data = try! Fixture.geojsonData(from: "multipolygon")!
-        let geojson = try! GeoJSON.parse(data: data, as: MultiPolygonFeature.self)
+        let geojson = try! GeoJSON.parse(MultiPolygonFeature.self, from: data)
         
         let firstCoordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
         let lastCoordinate = CLLocationCoordinate2D(latitude: 11, longitude: 11)
@@ -73,7 +73,7 @@ class GeoJSONTests: XCTestCase {
     
     func testFeatureCollection() {
         let data = try! Fixture.geojsonData(from: "featurecollection")!
-        let geojson = try! GeoJSON.parse(data: data, as: FeatureCollection.self)
+        let geojson = try! GeoJSON.parse(FeatureCollection.self, from: data)
         
         XCTAssert(geojson.features[0] is LineStringFeature)
         XCTAssert(geojson.features[1] is PolygonFeature)
