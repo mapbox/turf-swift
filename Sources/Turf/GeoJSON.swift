@@ -114,8 +114,8 @@ public struct Polygon: Codable {
         get { return Array(coordinates.suffix(from: 1)).map { Ring(coordinates: $0) } }
     }
     
-    var outerRing: Ring? {
-        get { return Ring(coordinates: coordinates.first ?? []) }
+    var outerRing: Ring {
+        get { return Ring(coordinates: coordinates.first! ) }
     }
 }
 
