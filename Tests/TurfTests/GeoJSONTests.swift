@@ -13,7 +13,7 @@ class GeoJSONTests: XCTestCase {
         let geojson = try! GeoJSON.parse(PointFeature.self, from: data)
         let coordinate = CLLocationCoordinate2D(latitude: 26.194876675795218, longitude: 14.765625)
         XCTAssert(geojson.geometry?.coordinates == coordinate)
-        XCTAssert(geojson.identifier!.value as! Int == 1)
+        XCTAssert((geojson.identifier!.value as! Number).value! as! Int == 1)
     }
     
     func testLineStringFeature() {
@@ -35,6 +35,7 @@ class GeoJSONTests: XCTestCase {
         let firstCoordinate = CLLocationCoordinate2D(latitude: 37.00255267215955, longitude: -109.05029296875)
         let lastCoordinate = CLLocationCoordinate2D(latitude: 40.6306300839918, longitude: -108.56689453125)
         
+        XCTAssert((geojson.identifier!.value as! Number).value! as! Double == 1.01)
         XCTAssert(geojson.geometry?.outerRing.coordinates.first == firstCoordinate)
         XCTAssert(geojson.geometry?.innerRings!.last?.coordinates.last == lastCoordinate)
         XCTAssert(geojson.geometry?.outerRing.coordinates.count == 5)
@@ -100,13 +101,13 @@ class GeoJSONTests: XCTestCase {
     
     func testUnkownPointFeature() {
         let data = try! Fixture.geojsonData(from: "point")!
-        let geojson = try! GeoJSON.parse(data: data)
+        let geojson = try! GeoJSON.parse(data)
         XCTAssert(geojson.decoded is PointFeature)
     }
     
     func testUnkownFeatureCollection() {
         let data = try! Fixture.geojsonData(from: "featurecollection")!
-        let geojson = try! GeoJSON.parse(data: data)
+        let geojson = try! GeoJSON.parse(data)
         XCTAssert(geojson.decoded is FeatureCollection)
     }
 }
