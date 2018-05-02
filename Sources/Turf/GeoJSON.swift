@@ -3,13 +3,52 @@ import Foundation
 import CoreLocation
 #endif
 
-public enum FeatureIdentifier {
-    case string(String)
+public enum Number {
     case int(Int)
+    case double(Double)
     
     var value: Any? {
         switch self {
         case .int(let value):
+            return value
+        case .double(let value):
+            return value
+        }
+    }
+}
+
+extension Number: Codable {
+    enum CodingKeys: String, CodingKey {
+        case int, double
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let value = try? container.decode(Int.self) {
+            self = .int(value)
+        } else {
+            self = .double(try container.decode(Double.self))
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .int(let value):
+            try container.encode(value)
+        case .double(let value):
+            try container.encode(value)
+        }
+    }
+}
+
+public enum FeatureIdentifier {
+    case string(String)
+    case number(Number)
+    
+    var value: Any? {
+        switch self {
+        case .number(let value):
             return value
         case .string(let value):
             return value
@@ -19,7 +58,7 @@ public enum FeatureIdentifier {
 
 extension FeatureIdentifier: Codable {
     enum CodingKeys: String, CodingKey {
-        case string, int
+        case string, number
     }
     
     public init(from decoder: Decoder) throws {
@@ -27,7 +66,7 @@ extension FeatureIdentifier: Codable {
         if let value = try? container.decode(String.self) {
             self = .string(value)
         } else {
-            self = .int(try container.decode(Int.self))
+            self = .number(try container.decode(Number.self))
         }
     }
     
@@ -36,7 +75,7 @@ extension FeatureIdentifier: Codable {
         switch self {
         case .string(let value):
             try container.encode(value)
-        case .int(let value):
+        case .number(let value):
             try container.encode(value)
         }
     }
@@ -328,7 +367,7 @@ public class GeoJSON: Codable {
         }
     }
     
-    public static func parse(data: Data) throws -> GeoJSON {
+    public static func parse(_ data: Data) throws -> GeoJSON {
         return try JSONDecoder().decode(GeoJSON.self, from: data)
     }
     
