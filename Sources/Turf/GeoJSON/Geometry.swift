@@ -39,6 +39,9 @@ public struct LineString: Codable {
     var coordinates: [CLLocationCoordinate2D]
 }
 
+/**
+ A `Polygon` struct represents a shape constisting of a closed `LineString`.
+ */
 public struct Polygon: Codable {
     var type: String = GeometryType.Polygon.rawValue
     var coordinates: [[CLLocationCoordinate2D]]
