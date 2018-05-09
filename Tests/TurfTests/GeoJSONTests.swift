@@ -14,6 +14,11 @@ class GeoJSONTests: XCTestCase {
         let coordinate = CLLocationCoordinate2D(latitude: 26.194876675795218, longitude: 14.765625)
         XCTAssert(geojson.geometry?.coordinates == coordinate)
         XCTAssert((geojson.identifier!.value as! Number).value! as! Int == 1)
+        
+        let encodedData = try! JSONEncoder().encode(geojson)
+        let decoded = try! GeoJSON.parse(PointFeature.self, from: encodedData)
+        XCTAssertEqual(geojson.geometry, decoded.geometry)
+        XCTAssertEqual(geojson.identifier!.value as! Number, decoded.identifier!.value! as! Number)
     }
     
     func testLineStringFeature() {
@@ -26,6 +31,11 @@ class GeoJSONTests: XCTestCase {
         XCTAssert(geojson.geometry.coordinates.first == first)
         XCTAssert(geojson.geometry.coordinates.last == last)
         XCTAssert(geojson.identifier!.value as! String == "1")
+        
+        let encodedData = try! JSONEncoder().encode(geojson)
+        let decoded = try! GeoJSON.parse(LineStringFeature.self, from: encodedData)
+        XCTAssertEqual(geojson.geometry, decoded.geometry)
+        XCTAssertEqual(geojson.identifier!.value as! String, decoded.identifier!.value! as! String)
     }
     
     func testPolygonFeature() {
@@ -40,6 +50,15 @@ class GeoJSONTests: XCTestCase {
         XCTAssert(geojson.geometry?.innerRings!.last?.coordinates.last == lastCoordinate)
         XCTAssert(geojson.geometry?.outerRing.coordinates.count == 5)
         XCTAssert(geojson.geometry?.innerRings!.first?.coordinates.count == 5)
+        
+        let encodedData = try! JSONEncoder().encode(geojson)
+        let decoded = try! GeoJSON.parse(PolygonFeature.self, from: encodedData)
+        XCTAssertEqual(geojson.geometry, decoded.geometry)
+        XCTAssertEqual(geojson.identifier!.value as! Number, decoded.identifier!.value! as! Number)
+        XCTAssert(decoded.geometry?.outerRing.coordinates.first == firstCoordinate)
+        XCTAssert(decoded.geometry?.innerRings!.last?.coordinates.last == lastCoordinate)
+        XCTAssert(decoded.geometry?.outerRing.coordinates.count == 5)
+        XCTAssert(decoded.geometry?.innerRings!.first?.coordinates.count == 5)
     }
     
     func testMultiPointFeature() {
@@ -50,6 +69,11 @@ class GeoJSONTests: XCTestCase {
         let lastCoordinate = CLLocationCoordinate2D(latitude: 24.926294766395593, longitude: 17.75390625)
         XCTAssert(geojson.geometry?.coordinates.first == firstCoordinate)
         XCTAssert(geojson.geometry?.coordinates.last == lastCoordinate)
+        
+        let encodedData = try! JSONEncoder().encode(geojson)
+        let decoded = try! GeoJSON.parse(MultiPointFeature.self, from: encodedData)
+        XCTAssert(decoded.geometry?.coordinates.first == firstCoordinate)
+        XCTAssert(decoded.geometry?.coordinates.last == lastCoordinate)
     }
     
     func testMultiLineStringFeature() {
@@ -60,6 +84,11 @@ class GeoJSONTests: XCTestCase {
         let lastCoordinate = CLLocationCoordinate2D(latitude: 6, longitude: 6)
         XCTAssert(geojson.geometry?.coordinates.first?.first == firstCoordinate)
         XCTAssert(geojson.geometry?.coordinates.last?.last == lastCoordinate)
+        
+        let encodedData = try! JSONEncoder().encode(geojson)
+        let decoded = try! GeoJSON.parse(MultiLineStringFeature.self, from: encodedData)
+        XCTAssert(decoded.geometry?.coordinates.first?.first == firstCoordinate)
+        XCTAssert(decoded.geometry?.coordinates.last?.last == lastCoordinate)
     }
     
     func testMultiPolygonFeature() {
@@ -70,6 +99,11 @@ class GeoJSONTests: XCTestCase {
         let lastCoordinate = CLLocationCoordinate2D(latitude: 11, longitude: 11)
         XCTAssert(geojson.geometry?.coordinates.first?.first?.first == firstCoordinate)
         XCTAssert(geojson.geometry?.coordinates.last?.last?.last == lastCoordinate)
+        
+        let encodedData = try! JSONEncoder().encode(geojson)
+        let decoded = try! GeoJSON.parse(MultiPolygonFeature.self, from: encodedData)
+        XCTAssert(decoded.geometry?.coordinates.first?.first?.first == firstCoordinate)
+        XCTAssert(decoded.geometry?.coordinates.last?.last?.last == lastCoordinate)
     }
     
     func testFeatureCollection() {
@@ -97,6 +131,31 @@ class GeoJSONTests: XCTestCase {
         XCTAssert(pointFeature.properties!["id"]!.jsonValue as! Int == 4)
         XCTAssert(pointFeature.geometry.coordinates.latitude == -26.152510345365126)
         XCTAssert(pointFeature.geometry.coordinates.longitude == 27.95642852783203)
+        
+        let encodedData = try! JSONEncoder().encode(geojson)
+        let decoded = try! GeoJSON.parse(FeatureCollection.self, from: encodedData)
+        
+        XCTAssert(decoded.features[0].value is LineStringFeature)
+        XCTAssert(decoded.features[1].value is PolygonFeature)
+        XCTAssert(decoded.features[2].value is PolygonFeature)
+        XCTAssert(decoded.features[3].value is PointFeature)
+        
+        let decodedLineStringFeature = decoded.features[0].value as! LineStringFeature
+        XCTAssert(decodedLineStringFeature.geometry.coordinates.count == 19)
+        XCTAssert(decodedLineStringFeature.properties!["id"]!.jsonValue as! Int == 1)
+        XCTAssert(decodedLineStringFeature.geometry.coordinates.first!.latitude == -26.17500493262446)
+        XCTAssert(decodedLineStringFeature.geometry.coordinates.first!.longitude == 27.977542877197266)
+        
+        let decodedPolygonFeature = decoded.features[1].value as! PolygonFeature
+        XCTAssert(decodedPolygonFeature.properties!["id"]!.jsonValue as! Int == 2)
+        XCTAssert(decodedPolygonFeature.geometry.coordinates[0].count == 21)
+        XCTAssert(decodedPolygonFeature.geometry.coordinates[0].first!.latitude == -26.199035448897074)
+        XCTAssert(decodedPolygonFeature.geometry.coordinates[0].first!.longitude == 27.972049713134762)
+        
+        let decodedPointFeature = decoded.features[3].value as! PointFeature
+        XCTAssert(decodedPointFeature.properties!["id"]!.jsonValue as! Int == 4)
+        XCTAssert(decodedPointFeature.geometry.coordinates.latitude == -26.152510345365126)
+        XCTAssert(decodedPointFeature.geometry.coordinates.longitude == 27.95642852783203)
     }
     
     func testUnkownPointFeature() {
