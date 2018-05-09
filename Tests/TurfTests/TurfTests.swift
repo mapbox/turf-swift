@@ -1,5 +1,7 @@
 import XCTest
+#if !os(Linux)
 import CoreLocation
+#endif
 @testable import Turf
 
 let metersPerMile: CLLocationDistance = 1_609.344
