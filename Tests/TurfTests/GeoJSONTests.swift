@@ -76,24 +76,24 @@ class GeoJSONTests: XCTestCase {
         let data = try! Fixture.geojsonData(from: "featurecollection")!
         let geojson = try! GeoJSON.parse(FeatureCollection.self, from: data)
         
-        XCTAssert(geojson.features[0] is LineStringFeature)
-        XCTAssert(geojson.features[1] is PolygonFeature)
-        XCTAssert(geojson.features[2] is PolygonFeature)
-        XCTAssert(geojson.features[3] is PointFeature)
+        XCTAssert(geojson.features[0].value is LineStringFeature)
+        XCTAssert(geojson.features[1].value is PolygonFeature)
+        XCTAssert(geojson.features[2].value is PolygonFeature)
+        XCTAssert(geojson.features[3].value is PointFeature)
         
-        let lineStringFeature = geojson.features[0] as! LineStringFeature
+        let lineStringFeature = geojson.features[0].value as! LineStringFeature
         XCTAssert(lineStringFeature.geometry.coordinates.count == 19)
         XCTAssert(lineStringFeature.properties!["id"]!.jsonValue as! Int == 1)
         XCTAssert(lineStringFeature.geometry.coordinates.first!.latitude == -26.17500493262446)
         XCTAssert(lineStringFeature.geometry.coordinates.first!.longitude == 27.977542877197266)
         
-        let polygonFeature = geojson.features[1] as! PolygonFeature
+        let polygonFeature = geojson.features[1].value as! PolygonFeature
         XCTAssert(polygonFeature.properties!["id"]!.jsonValue as! Int == 2)
         XCTAssert(polygonFeature.geometry.coordinates[0].count == 21)
         XCTAssert(polygonFeature.geometry.coordinates[0].first!.latitude == -26.199035448897074)
         XCTAssert(polygonFeature.geometry.coordinates[0].first!.longitude == 27.972049713134762)
         
-        let pointFeature = geojson.features[3] as! PointFeature
+        let pointFeature = geojson.features[3].value as! PointFeature
         XCTAssert(pointFeature.properties!["id"]!.jsonValue as! Int == 4)
         XCTAssert(pointFeature.geometry.coordinates.latitude == -26.152510345365126)
         XCTAssert(pointFeature.geometry.coordinates.longitude == 27.95642852783203)
