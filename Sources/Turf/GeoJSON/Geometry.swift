@@ -25,7 +25,7 @@ public struct Geometry: Codable {
 // Polyline has been renamed to `LineString`. This alias is for backwards compatibility.
 public typealias Polyline = LineString
 
-public struct Point: Codable {
+public struct Point: Codable, Equatable {
     var type: String = GeometryType.Point.rawValue
     var coordinates: CLLocationCoordinate2D
 }
@@ -34,7 +34,7 @@ public struct Point: Codable {
  A `LineString` struct represents a shape consisting of two or more coordinates,
  specified as `[CLLocationCoordinate2D]`
  */
-public struct LineString: Codable {
+public struct LineString: Codable, Equatable {
     var type: String = GeometryType.LineString.rawValue
     var coordinates: [CLLocationCoordinate2D]
 }
@@ -42,7 +42,7 @@ public struct LineString: Codable {
 /**
  A `Polygon` struct represents a shape constisting of a closed `LineString`.
  */
-public struct Polygon: Codable {
+public struct Polygon: Codable, Equatable {
     var type: String = GeometryType.Polygon.rawValue
     var coordinates: [[CLLocationCoordinate2D]]
     
@@ -59,17 +59,17 @@ public struct Polygon: Codable {
     }
 }
 
-public struct MultiPoint: Codable {
+public struct MultiPoint: Codable, Equatable {
     var type: String = GeometryType.MultiPoint.rawValue
     var coordinates: [CLLocationCoordinate2D]
 }
 
-public struct MultiLineString: Codable {
+public struct MultiLineString: Codable, Equatable {
     var type: String = GeometryType.MultiLineString.rawValue
     var coordinates: [[CLLocationCoordinate2D]]
 }
 
-public struct MultiPolygon: Codable {
+public struct MultiPolygon: Codable, Equatable {
     var type: String = GeometryType.MultiLineString.rawValue
     var coordinates: [[[CLLocationCoordinate2D]]]
 }

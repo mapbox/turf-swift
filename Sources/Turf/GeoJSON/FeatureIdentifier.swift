@@ -1,6 +1,6 @@
 import Foundation
 
-public enum Number {
+public enum Number: Equatable {
     case int(Int)
     case double(Double)
     
