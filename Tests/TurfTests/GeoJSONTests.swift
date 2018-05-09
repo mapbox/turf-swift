@@ -171,5 +171,37 @@ class GeoJSONTests: XCTestCase {
         let geojson = try! GeoJSON.parse(data)
         XCTAssert(geojson.decoded is FeatureCollection)
     }
+    
+    func testPerformanceDecodeFeatureCollection() {
+        let data = try! Fixture.geojsonData(from: "featurecollection")!
+        
+        measure {
+            for _ in 0...100 {
+                _ = try! GeoJSON.parse(FeatureCollection.self, from: data)
+            }
+        }
+    }
+    
+    func testPerformanceEncodeFeatureCollection() {
+        let data = try! Fixture.geojsonData(from: "featurecollection")!
+        let decoded = try! GeoJSON.parse(FeatureCollection.self, from: data)
+        
+        measure {
+            for _ in 0...100 {
+                _ = try! JSONEncoder().encode(decoded)
+            }
+        }
+    }
+    
+    func testPerformanceDecodeEncodeFeatureCollection() {
+        let data = try! Fixture.geojsonData(from: "featurecollection")!
+        
+        measure {
+            for _ in 0...100 {
+                let decoded = try! GeoJSON.parse(FeatureCollection.self, from: data)
+                _ = try! JSONEncoder().encode(decoded)
+            }
+        }
+    }
 }
 
