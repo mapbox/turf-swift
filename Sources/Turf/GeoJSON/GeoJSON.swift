@@ -81,7 +81,6 @@ extension FeatureVariant: Codable {
 public struct Feature: Codable {
     public var type: GeoJSONType
     
-    //public var properties: [String : AnyJSONType]?
     // Used to extract the geometry’s type w/o double decoding its coordinates
     fileprivate var simplifiedGeometry: Geometry?
     
@@ -304,10 +303,28 @@ public class GeoJSON: Codable {
         }
     }
     
+    /**
+     Parse JSON encoded data into a GeoJSON of unknown type.
+     
+     - Parameter data: the JSON encoded GeoJSON data.
+     
+     - Trows: `GeoJSONError` if the type is not compatible.
+     
+     - Returns: decoded GeoJSON of any compatible type.
+     */
     public static func parse(_ data: Data) throws -> GeoJSON {
         return try JSONDecoder().decode(GeoJSON.self, from: data)
     }
     
+    
+    /**
+     Parse JSON encoded data into a GeoJSON of known type.
+     
+     - Parameter type: The known GeoJSON type (T).
+     - Parameter data: the JSON encoded GeoJSON data.
+     
+     - Returns: decoded GeoJSON of type T.
+     */
     public static func parse<T: GeoJSONObject>(_ type: T.Type, from data: Data) throws -> T {
         return try JSONDecoder().decode(T.self, from: data)
     }
