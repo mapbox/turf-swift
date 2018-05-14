@@ -308,7 +308,7 @@ public class GeoJSON: Codable {
      
      - Parameter data: the JSON encoded GeoJSON data.
      
-     - Trows: `GeoJSONError` if the type is not compatible.
+     - Throws: `GeoJSONError` if the type is not compatible.
      
      - Returns: decoded GeoJSON of any compatible type.
      */
@@ -322,6 +322,8 @@ public class GeoJSON: Codable {
      
      - Parameter type: The known GeoJSON type (T).
      - Parameter data: the JSON encoded GeoJSON data.
+     
+     - Throws: `GeoJSONError` if the type is not compatible.
      
      - Returns: decoded GeoJSON of type T.
      */
