@@ -95,6 +95,34 @@ public struct Turf {
         let intersectsWithLine2 = b > 0 && b < 1
         return intersectsWithLine1 && intersectsWithLine2 ? intersection : nil
     }
+
+	/**
+	Returns the geographic bearing between two coordinates. Calculates the final bearing if parameter isFinal is true.
+
+	The returned bearing is measured in degrees from the north line (0 degrees), between -180 and 180 degrees (decimal clockwise)
+	*/
+	public static func bearing(from coordinate1: CLLocationCoordinate2D, to coordinate2: CLLocationCoordinate2D, isFinal: Bool? = false) -> CLLocationDegrees {
+		// Ported from https://github.com/Turfjs/turf/blob/master/packages/turf-bearing/index.ts
+
+		if isFinal == true {
+			return self.calculateFinalBearing(from: coordinate1, to: coordinate2)
+		}
+
+		let lon1 = coordinate1.longitude.toRadians()
+		let lon2 = coordinate2.longitude.toRadians()
+		let lat1 = coordinate1.latitude.toRadians()
+		let lat2 = coordinate2.latitude.toRadians()
+		let a = sin(lon2 - lon1) * cos(lat2)
+		let b = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(lon2 - lon1)
+
+		return atan2(a, b).toDegrees()
+	}
+
+	private static func calculateFinalBearing(from start: CLLocationCoordinate2D, to end: CLLocationCoordinate2D) -> CLLocationDegrees {
+		var bearing = self.bearing(from: end, to: start)
+		bearing = (bearing + 180).truncatingRemainder(dividingBy: 360)
+		return bearing
+	}
 }
 
 extension LineString {
