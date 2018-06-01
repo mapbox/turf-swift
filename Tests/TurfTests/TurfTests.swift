@@ -301,4 +301,17 @@ class TurfTests: XCTestCase {
         
         XCTAssertEqual(polygon.area, 78588446934.43, accuracy: 0.1)
     }
+
+	func testBearing() {
+		// Ported from https://github.com/Turfjs/turf/blob/master/packages/turf-bearing/test.js
+
+		let start = CLLocationCoordinate2D(latitude: 45, longitude: -75)
+		let end = CLLocationCoordinate2D(latitude: 60, longitude: 20)
+
+		let initialBearing = Turf.bearing(from: start, to: end)
+		XCTAssertEqual(initialBearing, 37.75, accuracy: 0.01, "Wrong initial bearing")
+
+		let finalBearing = Turf.bearing(from: start, to: end, isFinal: true)
+		XCTAssertEqual(finalBearing, 120.01, accuracy: 0.01, "Wrong final bearing")
+	}
 }
