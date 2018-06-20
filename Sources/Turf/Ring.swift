@@ -7,7 +7,7 @@ import CoreLocation
  Creates a `Ring` struct that represents a closed figure that is bounded by three or more straight line segments.
  */
 public struct Ring {
-    var coordinates: [CLLocationCoordinate2D]
+    public var coordinates: [CLLocationCoordinate2D]
     
     public init(coordinates: [CLLocationCoordinate2D]) {
         self.coordinates = coordinates
