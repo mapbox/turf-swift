@@ -22,7 +22,7 @@ public enum FeatureVariant {
     case multiLineStringFeature(MultiLineStringFeature)
     case multiPolygonFeature(MultiPolygonFeature)
     
-    var value: Any? {
+    public var value: Any? {
         switch self {
         case .pointFeature(let value):
             return value
@@ -114,7 +114,7 @@ public enum GeoJSONError: Error {
 
 public class GeoJSON: Codable {
     
-    var decoded: Codable?
+    public var decoded: Codable?
     
     public required init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

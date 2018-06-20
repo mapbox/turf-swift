@@ -4,7 +4,7 @@ public enum Number: Equatable {
     case int(Int)
     case double(Double)
     
-    var value: Any? {
+    public var value: Any? {
         switch self {
         case .int(let value):
             return value
@@ -43,7 +43,7 @@ public enum FeatureIdentifier {
     case string(String)
     case number(Number)
     
-    var value: Any? {
+    public var value: Any? {
         switch self {
         case .number(let value):
             return value
