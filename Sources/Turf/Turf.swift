@@ -3,64 +3,11 @@ import Foundation
 import CoreLocation
 #endif
 
-public typealias LocationRadians = Double
-public typealias RadianDistance = Double
-public typealias RadianDirection = Double
-
 
 let metersPerRadian: CLLocationDistance = 6_373_000.0
 // WGS84 equatorial radius as specified by the International Union of Geodesy and Geophysics
 let equatorialRadius: CLLocationDistance = 6_378_137
 
-/**
- A `RadianCoordinate2D` is a coordinate represented in radians as opposed to
- `CLLocationCoordinate2D` which is represented in latitude and longitude.
- */
-public struct RadianCoordinate2D {
-    private(set) var latitude: LocationRadians
-    private(set) var longitude: LocationRadians
-    
-    public init(latitude: LocationRadians, longitude: LocationRadians) {
-        self.latitude = latitude
-        self.longitude = longitude
-    }
-    
-    public init(_ degreeCoordinate: CLLocationCoordinate2D) {
-        latitude = degreeCoordinate.latitude.toRadians()
-        longitude = degreeCoordinate.longitude.toRadians()
-    }
-    
-    /**
-     Returns direction given two coordinates.
-     */
-    public func direction(to coordinate: RadianCoordinate2D) -> RadianDirection {
-        let a = sin(coordinate.longitude - longitude) * cos(coordinate.latitude)
-        let b = cos(latitude) * sin(coordinate.latitude)
-            - sin(latitude) * cos(coordinate.latitude) * cos(coordinate.longitude - longitude)
-        return atan2(a, b)
-    }
-    
-    /**
-     Returns coordinate at a given distance and direction away from coordinate.
-     */
-    public func coordinate(at distance: RadianDistance, facing direction: RadianDirection) -> RadianCoordinate2D {
-        let distance = distance, direction = direction
-        let otherLatitude = asin(sin(latitude) * cos(distance)
-            + cos(latitude) * sin(distance) * cos(direction))
-        let otherLongitude = longitude + atan2(sin(direction) * sin(distance) * cos(latitude),
-                                               cos(distance) - sin(latitude) * sin(otherLatitude))
-        return RadianCoordinate2D(latitude: otherLatitude, longitude: otherLongitude)
-    }
-    
-    /**
-     Returns the Haversine distance between two coordinates measured in radians.
-     */
-    public func distance(to coordinate: RadianCoordinate2D) -> RadianDistance {
-        let a = pow(sin((coordinate.latitude - self.latitude) / 2), 2)
-            + pow(sin((coordinate.longitude - self.longitude) / 2), 2) * cos(self.latitude) * cos(coordinate.latitude)
-        return 2 * atan2(sqrt(a), sqrt(1 - a))
-    }
-}
 
 public typealias LineSegment = (CLLocationCoordinate2D, CLLocationCoordinate2D)
 
@@ -282,57 +229,6 @@ extension LineString {
     }
 }
 
-
-/**
- Creates a `Ring` struct that represents a closed figure that is bounded by three or more straight line segments.
- */
-public struct Ring {
-    var coordinates: [CLLocationCoordinate2D]
-    
-    public init(coordinates: [CLLocationCoordinate2D]) {
-        self.coordinates = coordinates
-    }
-    
-    /**
-     * Calculate the approximate area of the polygon were it projected onto the earth, in square meters.
-     * Note that this area will be positive if ring is oriented clockwise, otherwise it will be negative.
-     *
-     * Reference:
-     * Robert. G. Chamberlain and William H. Duquette, "Some Algorithms for Polygons on a Sphere", JPL Publication 07-03, Jet Propulsion
-     * Laboratory, Pasadena, CA, June 2007 https://trs.jpl.nasa.gov/handle/2014/41271
-     *
-     */
-    public var area: Double {
-        var area: Double = 0
-        let coordinatesCount: Int = coordinates.count
-        
-        if coordinatesCount > 2 {
-            for index in 0..<coordinatesCount {
-                
-                let controlPoints: (CLLocationCoordinate2D, CLLocationCoordinate2D, CLLocationCoordinate2D)
-                
-                if index == coordinatesCount - 2 {
-                    controlPoints = (coordinates[coordinatesCount - 2],
-                                     coordinates[coordinatesCount - 1],
-                                     coordinates[0])
-                } else if index == coordinatesCount - 1 {
-                    controlPoints = (coordinates[coordinatesCount - 1],
-                                     coordinates[0],
-                                     coordinates[1])
-                } else {
-                    controlPoints = (coordinates[index],
-                                     coordinates[index + 1],
-                                     coordinates[index + 2])
-                }
-                
-                area += (controlPoints.2.longitude.toRadians() - controlPoints.0.longitude.toRadians()) * sin(controlPoints.1.latitude.toRadians())
-            }
-            
-            area *= equatorialRadius * equatorialRadius / 2
-        }
-        return area
-    }
-}
 
 /**
  Creates a `Polygon` struct from an outer ring and optional inner rings.
