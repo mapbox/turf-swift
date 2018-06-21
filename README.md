@@ -64,9 +64,6 @@ To install Turf using the [Swift Package Manager](https://swift.org/package-mana
 
 Then `import Turf` in any Swift file in your module.
 
-### Manual installation
-
-For one-off experiments, clone this repository, then drag and drop [Turf.swift and CoreLocation.swift](https://github.com/mapbox/turf-swift/tree/master/Sources/Turf/) into your project in Xcode.
 
 ## Available functionality
 
