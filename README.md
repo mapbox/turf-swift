@@ -1,10 +1,10 @@
 # Turf for Swift 
 
-📱[![](https://www.bitrise.io/app/49f5bcca71bf6c8d/status.svg?token=SzGBTkEtxsbuAnbcF9MTog&branch=master)](https://www.bitrise.io/app/49f5bcca71bf6c8d) &nbsp;&nbsp;&nbsp;
-🖥💻[![](https://www.bitrise.io/app/b72273651db53613/status.svg?token=ODv2UnyAHoOxV8APATEBFw&branch=master)](https://www.bitrise.io/app/b72273651db53613) &nbsp;&nbsp;&nbsp;
-📺[![](https://www.bitrise.io/app/0b037542c2395ffb/status.svg?token=yOtMqbu-5bj8grB1Jmoefg)](https://www.bitrise.io/app/0b037542c2395ffb) &nbsp;&nbsp;&nbsp;
-⌚️[![](https://www.bitrise.io/app/0d4d611f02295183/status.svg?token=NiLB_E_0IvYYqV4Mj973TQ)](https://www.bitrise.io/app/0d4d611f02295183) &nbsp;&nbsp;&nbsp;
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/TuxFlat.svg" width="20" alt="">[![](https://api.travis-ci.org/mapbox/turf-swift.svg?branch=master)](https://travis-ci.org/mapbox/turf-swift)  
+📱[![iOS](https://app.bitrise.io/app/49f5bcca71bf6c8d/status.svg?token=SzGBTkEtxsbuAnbcF9MTog&branch=master)](https://www.bitrise.io/app/49f5bcca71bf6c8d) &nbsp;&nbsp;&nbsp;
+🖥💻[![macOS](https://app.bitrise.io/app/b72273651db53613/status.svg?token=ODv2UnyAHoOxV8APATEBFw&branch=master)](https://www.bitrise.io/app/b72273651db53613) &nbsp;&nbsp;&nbsp;
+📺[![tvOS](https://app.bitrise.io/app/0b037542c2395ffb/status.svg?token=yOtMqbu-5bj8grB1Jmoefg)](https://www.bitrise.io/app/0b037542c2395ffb) &nbsp;&nbsp;&nbsp;
+⌚️[![watchOS](https://app.bitrise.io/app/0d4d611f02295183/status.svg?token=NiLB_E_0IvYYqV4Mj973TQ)](https://www.bitrise.io/app/0d4d611f02295183) &nbsp;&nbsp;&nbsp;
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/TuxFlat.svg" width="20" alt="Linux">[![](https://api.travis-ci.org/mapbox/turf-swift.svg?branch=master)](https://travis-ci.org/mapbox/turf-swift)  
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) &nbsp;&nbsp;&nbsp;
 [![CocoaPods](https://img.shields.io/cocoapods/v/Turf.svg)](http://cocoadocs.org/docsets/Turf/) &nbsp;&nbsp;&nbsp;
 [![SPM compatible](https://img.shields.io/badge/SPM-compatible-4BC51D.svg?style=flat)](https://swift.org/package-manager/) &nbsp;&nbsp;&nbsp;
