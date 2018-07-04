@@ -3,12 +3,32 @@ import Foundation
 import CoreLocation
 #endif
 
+public enum FeatureType: String {
+    case feature = "Feature"
+    case featureCollection = "FeatureCollection"
+}
+
+extension FeatureType: Codable {
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(self.rawValue)
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self = try container.decode(FeatureType.self)
+    }
+}
+
 public protocol GeoJSONObject: Codable {
+    var type: FeatureType { get }
     var identifier: FeatureIdentifier? { get set }
     var properties: [String: AnyJSONType]? { get set }
 }
 
 enum GeoJSONCodingKeys: String, CodingKey {
+    case type
     case properties
     case geometry
     case identifier = "id"

@@ -8,13 +8,14 @@ import CoreLocation
  A `MultiLineString` geometry. The coordinates property represents a `[LineString]`.
  */
 public struct MultiPolygon: Codable, Equatable {
-    var type: String = GeometryType.MultiLineString.rawValue
+    var type: String = GeometryType.MultiPolygon.rawValue
     public var coordinates: [[[CLLocationCoordinate2D]]]
 }
 
 public struct MultiPolygonFeature: GeoJSONObject {
+    public var type: FeatureType = .feature
     public var identifier: FeatureIdentifier?
-    public var geometry: MultiPolygon!
+    public var geometry: MultiPolygon
     public var properties: [String : AnyJSONType]?
     
     public init(from decoder: Decoder) throws {
@@ -26,6 +27,7 @@ public struct MultiPolygonFeature: GeoJSONObject {
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: GeoJSONCodingKeys.self)
+        try container.encode(type, forKey: .type)
         try container.encode(geometry, forKey: .geometry)
         try container.encode(properties, forKey: .properties)
         try container.encodeIfPresent(identifier, forKey: .identifier)

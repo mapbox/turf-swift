@@ -14,18 +14,18 @@ class PolygonTests: XCTestCase {
         let lastCoordinate = CLLocationCoordinate2D(latitude: 40.6306300839918, longitude: -108.56689453125)
         
         XCTAssert((geojson.identifier!.value as! Number).value! as! Double == 1.01)
-        XCTAssert(geojson.geometry?.outerRing.coordinates.first == firstCoordinate)
-        XCTAssert(geojson.geometry?.innerRings!.last?.coordinates.last == lastCoordinate)
-        XCTAssert(geojson.geometry?.outerRing.coordinates.count == 5)
-        XCTAssert(geojson.geometry?.innerRings!.first?.coordinates.count == 5)
+        XCTAssert(geojson.geometry.outerRing.coordinates.first == firstCoordinate)
+        XCTAssert(geojson.geometry.innerRings!.last?.coordinates.last == lastCoordinate)
+        XCTAssert(geojson.geometry.outerRing.coordinates.count == 5)
+        XCTAssert(geojson.geometry.innerRings!.first?.coordinates.count == 5)
         
         let encodedData = try! JSONEncoder().encode(geojson)
         let decoded = try! GeoJSON.parse(PolygonFeature.self, from: encodedData)
         XCTAssertEqual(geojson.geometry, decoded.geometry)
         XCTAssertEqual(geojson.identifier!.value as! Number, decoded.identifier!.value! as! Number)
-        XCTAssert(decoded.geometry?.outerRing.coordinates.first == firstCoordinate)
-        XCTAssert(decoded.geometry?.innerRings!.last?.coordinates.last == lastCoordinate)
-        XCTAssert(decoded.geometry?.outerRing.coordinates.count == 5)
-        XCTAssert(decoded.geometry?.innerRings!.first?.coordinates.count == 5)
+        XCTAssert(decoded.geometry.outerRing.coordinates.first == firstCoordinate)
+        XCTAssert(decoded.geometry.innerRings!.last?.coordinates.last == lastCoordinate)
+        XCTAssert(decoded.geometry.outerRing.coordinates.count == 5)
+        XCTAssert(decoded.geometry.innerRings!.first?.coordinates.count == 5)
     }
 }
