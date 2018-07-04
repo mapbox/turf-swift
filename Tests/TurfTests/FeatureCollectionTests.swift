@@ -68,7 +68,7 @@ class FeatureCollectionTests: XCTestCase {
         let data = try! Fixture.geojsonData(from: "featurecollection")!
         
         measure {
-            for _ in 0...1000 {
+            for _ in 0...100 {
                 _ = try! GeoJSON.parse(FeatureCollection.self, from: data)
             }
         }
@@ -79,7 +79,7 @@ class FeatureCollectionTests: XCTestCase {
         let decoded = try! GeoJSON.parse(FeatureCollection.self, from: data)
         
         measure {
-            for _ in 0...1000 {
+            for _ in 0...100 {
                 _ = try! JSONEncoder().encode(decoded)
             }
         }
@@ -89,7 +89,7 @@ class FeatureCollectionTests: XCTestCase {
         let data = try! Fixture.geojsonData(from: "featurecollection")!
         
         measure {
-            for _ in 0...1000 {
+            for _ in 0...100 {
                 let decoded = try! GeoJSON.parse(FeatureCollection.self, from: data)
                 _ = try! JSONEncoder().encode(decoded)
             }
