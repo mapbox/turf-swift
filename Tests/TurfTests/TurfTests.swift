@@ -297,7 +297,7 @@ class TurfTests: XCTestCase {
            $0.map { CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0]) }
         }
         
-        let polygon = Polygon(coordinates: coordinates)
+        let polygon = Polygon(coordinates)
         
         XCTAssertEqual(polygon.area, 78588446934.43, accuracy: 0.1)
     }

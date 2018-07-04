@@ -2,11 +2,13 @@ import Foundation
 
 
 public struct FeatureCollection: GeoJSONObject {
+    public var type: FeatureType = .featureCollection
     public var identifier: FeatureIdentifier?
     public var features: Array<FeatureVariant> = []
     public var properties: [String : AnyJSONType]?
     
     private enum CodingKeys: String, CodingKey {
+        case type
         case properties
         case features
     }
@@ -23,6 +25,7 @@ public struct FeatureCollection: GeoJSONObject {
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(type, forKey: .type)
         try container.encode(features, forKey: .features)
         try container.encode(properties, forKey: .properties)
     }

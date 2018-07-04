@@ -25,8 +25,9 @@ public struct Polygon: Codable, Equatable {
 }
 
 public struct PolygonFeature: GeoJSONObject {
+    public var type: FeatureType = .feature
     public var identifier: FeatureIdentifier?
-    public var geometry: Polygon!
+    public var geometry: Polygon
     public var properties: [String : AnyJSONType]?
     
     public init(from decoder: Decoder) throws {
@@ -38,6 +39,7 @@ public struct PolygonFeature: GeoJSONObject {
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: GeoJSONCodingKeys.self)
+        try container.encode(type, forKey: .type)
         try container.encode(geometry, forKey: .geometry)
         try container.encode(properties, forKey: .properties)
         try container.encodeIfPresent(identifier, forKey: .identifier)

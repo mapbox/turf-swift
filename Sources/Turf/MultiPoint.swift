@@ -13,6 +13,7 @@ public struct MultiPoint: Codable, Equatable {
 }
 
 public struct MultiPointFeature: GeoJSONObject {
+    public var type: FeatureType = .feature
     public var identifier: FeatureIdentifier?
     public var geometry: MultiPoint!
     public var properties: [String : AnyJSONType]?
@@ -26,6 +27,7 @@ public struct MultiPointFeature: GeoJSONObject {
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: GeoJSONCodingKeys.self)
+        try container.encode(type, forKey: .type)
         try container.encode(geometry, forKey: .geometry)
         try container.encode(properties, forKey: .properties)
         try container.encodeIfPresent(identifier, forKey: .identifier)
