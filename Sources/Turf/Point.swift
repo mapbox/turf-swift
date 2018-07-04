@@ -10,6 +10,10 @@ import CoreLocation
 public struct Point: Codable, Equatable {
     var type: String = GeometryType.Point.rawValue
     public var coordinates: CLLocationCoordinate2D
+    
+    public init(_ coordinates: CLLocationCoordinate2D) {
+        self.coordinates = coordinates
+    }
 }
 
 public struct PointFeature: GeoJSONObject {
@@ -17,6 +21,10 @@ public struct PointFeature: GeoJSONObject {
     public var identifier: FeatureIdentifier?
     public var geometry: Point
     public var properties: [String : AnyJSONType]?
+    
+    public init(_ geometry: Point) {
+        self.geometry = geometry
+    }
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)

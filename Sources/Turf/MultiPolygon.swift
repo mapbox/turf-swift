@@ -10,6 +10,10 @@ import CoreLocation
 public struct MultiPolygon: Codable, Equatable {
     var type: String = GeometryType.MultiPolygon.rawValue
     public var coordinates: [[[CLLocationCoordinate2D]]]
+    
+    public init(_ coordinates: [[[CLLocationCoordinate2D]]]) {
+        self.coordinates = coordinates
+    }
 }
 
 public struct MultiPolygonFeature: GeoJSONObject {
@@ -17,6 +21,10 @@ public struct MultiPolygonFeature: GeoJSONObject {
     public var identifier: FeatureIdentifier?
     public var geometry: MultiPolygon
     public var properties: [String : AnyJSONType]?
+    
+    public init(_ geometry: MultiPolygon) {
+        self.geometry = geometry
+    }
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
