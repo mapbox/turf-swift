@@ -23,6 +23,10 @@ extension Bool: JSONType {
 public struct AnyJSONType: JSONType {
     public let jsonValue: Any
     
+    public init(_ value: Any) {
+        self.jsonValue = value
+    }
+    
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         
