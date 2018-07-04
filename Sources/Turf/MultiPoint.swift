@@ -10,13 +10,21 @@ import CoreLocation
 public struct MultiPoint: Codable, Equatable {
     var type: String = GeometryType.MultiPoint.rawValue
     public var coordinates: [CLLocationCoordinate2D]
+    
+    public init(_ coordinates: [CLLocationCoordinate2D]) {
+        self.coordinates = coordinates
+    }
 }
 
 public struct MultiPointFeature: GeoJSONObject {
     public var type: FeatureType = .feature
     public var identifier: FeatureIdentifier?
-    public var geometry: MultiPoint!
+    public var geometry: MultiPoint
     public var properties: [String : AnyJSONType]?
+    
+    public init(_ geometry: MultiPoint) {
+        self.geometry = geometry
+    }
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
