@@ -40,7 +40,6 @@
 		3547ECF4200C3C78009DA062 /* Turf.h in Headers */ = {isa = PBXBuildFile; fileRef = 3547ECEF200C3C78009DA062 /* Turf.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3547ECF5200C3C78009DA062 /* CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3547ECF0200C3C78009DA062 /* CoreLocation.swift */; };
 		3547ECF6200C3C78009DA062 /* Turf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3547ECF1200C3C78009DA062 /* Turf.swift */; };
-		3547ED08200C3C83009DA062 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3547ECFE200C3C82009DA062 /* Info.plist */; };
 		3547ED0E200C3E00009DA062 /* TurfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3547ECF9200C3C82009DA062 /* TurfTests.swift */; };
 		3547ED0F200C3E01009DA062 /* TurfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3547ECF9200C3C82009DA062 /* TurfTests.swift */; };
 		3547ED10200C3E0B009DA062 /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3547ECFD200C3C82009DA062 /* Fixture.swift */; };
@@ -583,7 +582,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3547ED08200C3C83009DA062 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
