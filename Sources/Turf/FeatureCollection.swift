@@ -20,13 +20,13 @@ public struct FeatureCollection: GeoJSONObject {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.features = try container.decode([FeatureVariant].self, forKey: .features)
-        self.properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
+        self.properties = try container.decodeIfPresent([String: AnyJSONType].self, forKey: .properties)
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(type, forKey: .type)
         try container.encode(features, forKey: .features)
-        try container.encode(properties, forKey: .properties)
+        try container.encodeIfPresent(properties, forKey: .properties)
     }
 }
