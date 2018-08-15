@@ -58,6 +58,12 @@ class FeatureCollectionTests: XCTestCase {
         XCTAssert(decodedPointFeature.geometry.coordinates.longitude == 27.95642852783203)
     }
     
+    func testFeatureCollectionDecodeWithoutProperties() {
+        let data = try! Fixture.geojsonData(from: "featurecollection-no-properties")!
+        let geojson = try! GeoJSON.parse(data)
+        XCTAssert(geojson.decoded is FeatureCollection)
+    }
+    
     func testUnkownFeatureCollection() {
         let data = try! Fixture.geojsonData(from: "featurecollection")!
         let geojson = try! GeoJSON.parse(data)
