@@ -30,7 +30,9 @@ public struct AnyJSONType: JSONType {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         
-        if let intValue = try? container.decode(Int.self) {
+        if container.decodeNil() {
+            jsonValue = NSNull()
+        } else if let intValue = try? container.decode(Int.self) {
             jsonValue = intValue
         } else if let stringValue = try? container.decode(String.self) {
             jsonValue = stringValue
@@ -49,7 +51,9 @@ public struct AnyJSONType: JSONType {
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
-        if let intValue = jsonValue as? Int {
+        if jsonValue is NSNull {
+            try container.encodeNil()
+        } else if let intValue = jsonValue as? Int {
             try container.encode(intValue)
         } else if let stringValue = jsonValue as? String {
             try container.encode(stringValue)
