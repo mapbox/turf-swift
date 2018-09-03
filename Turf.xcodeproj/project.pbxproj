@@ -46,6 +46,9 @@
 		3547ED11200C3E0C009DA062 /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3547ECFD200C3C82009DA062 /* Fixture.swift */; };
 		3547ED12200C3E49009DA062 /* Turf.h in Headers */ = {isa = PBXBuildFile; fileRef = 3547ECEF200C3C78009DA062 /* Turf.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		35650AFA1F150DC500B5C158 /* Turf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35650AF01F150DC500B5C158 /* Turf.framework */; };
+		3573EA6D215A393F009899D7 /* GeoJSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573EA6C215A393F009899D7 /* GeoJSONTests.swift */; };
+		3573EA6E215A393F009899D7 /* GeoJSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573EA6C215A393F009899D7 /* GeoJSONTests.swift */; };
+		3573EA6F215A393F009899D7 /* GeoJSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573EA6C215A393F009899D7 /* GeoJSONTests.swift */; };
 		357495BE208E3432007D7477 /* featurecollection.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 357495BD208E3432007D7477 /* featurecollection.geojson */; };
 		357495BF208E3432007D7477 /* featurecollection.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 357495BD208E3432007D7477 /* featurecollection.geojson */; };
 		357495C0208E3432007D7477 /* featurecollection.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 357495BD208E3432007D7477 /* featurecollection.geojson */; };
@@ -184,6 +187,7 @@
 		3547ED09200C3C8A009DA062 /* LinuxMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinuxMain.swift; sourceTree = "<group>"; };
 		35650AF01F150DC500B5C158 /* Turf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Turf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		35650AF91F150DC500B5C158 /* TurfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3573EA6C215A393F009899D7 /* GeoJSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJSONTests.swift; sourceTree = "<group>"; };
 		357495BD208E3432007D7477 /* featurecollection.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = featurecollection.geojson; sourceTree = "<group>"; };
 		35B56E6920DAF3C500C4923D /* RadianCoordinate2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadianCoordinate2D.swift; sourceTree = "<group>"; };
 		35B56E6E20DAF41F00C4923D /* Ring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ring.swift; sourceTree = "<group>"; };
@@ -299,6 +303,7 @@
 				CE7F8163215182FF00A9D221 /* BoundingBoxTests.swift */,
 				35B56EAE20DAF8DE00C4923D /* FeatureCollectionTests.swift */,
 				3547ECFD200C3C82009DA062 /* Fixture.swift */,
+				3573EA6C215A393F009899D7 /* GeoJSONTests.swift */,
 				35B56E9A20DAF86000C4923D /* LineStringTests.swift */,
 				35B56EA620DAF8BB00C4923D /* MultiLineStringTests.swift */,
 				35B56EA220DAF89F00C4923D /* MultiPointTests.swift */,
@@ -712,6 +717,7 @@
 				35B56E9C20DAF86000C4923D /* LineStringTests.swift in Sources */,
 				3547ED11200C3E0C009DA062 /* Fixture.swift in Sources */,
 				35B56EA420DAF89F00C4923D /* MultiPointTests.swift in Sources */,
+				3573EA6E215A393F009899D7 /* GeoJSONTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -752,6 +758,7 @@
 				35B56E9B20DAF86000C4923D /* LineStringTests.swift in Sources */,
 				3547ED10200C3E0B009DA062 /* Fixture.swift in Sources */,
 				35B56EA320DAF89F00C4923D /* MultiPointTests.swift in Sources */,
+				3573EA6D215A393F009899D7 /* GeoJSONTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -792,6 +799,7 @@
 				35B56E9D20DAF86000C4923D /* LineStringTests.swift in Sources */,
 				DA39EB80201023E4004D87F7 /* Fixture.swift in Sources */,
 				35B56EA520DAF89F00C4923D /* MultiPointTests.swift in Sources */,
+				3573EA6F215A393F009899D7 /* GeoJSONTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

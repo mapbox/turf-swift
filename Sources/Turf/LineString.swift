@@ -22,6 +22,10 @@ public struct LineStringFeature: GeoJSONObject {
     public var geometry: LineString!
     public var properties: [String : AnyJSONType]?
     
+    public init(_ geometry: LineString) {
+        self.geometry = geometry
+    }
+    
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
         geometry = try container.decode(LineString.self, forKey: .geometry)
