@@ -10,6 +10,10 @@ import CoreLocation
 public struct MultiLineString: Codable, Equatable {
     var type: String = GeometryType.MultiLineString.rawValue
     public var coordinates: [[CLLocationCoordinate2D]]
+    
+    public init(_ coordinates: [[CLLocationCoordinate2D]]) {
+        self.coordinates = coordinates
+    }
 }
 
 public struct MultiLineStringFeature: GeoJSONObject {
@@ -17,6 +21,10 @@ public struct MultiLineStringFeature: GeoJSONObject {
     public var identifier: FeatureIdentifier?
     public var geometry: MultiLineString!
     public var properties: [String : AnyJSONType]?
+    
+    public init(_ geometry: MultiLineString) {
+        self.geometry = geometry
+    }
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)

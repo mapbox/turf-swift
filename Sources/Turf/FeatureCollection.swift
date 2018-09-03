@@ -17,6 +17,10 @@ public struct FeatureCollection: GeoJSONObject {
         case type
     }
     
+    public init(_ features: [FeatureVariant]) {
+        self.features = features
+    }
+    
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.features = try container.decode([FeatureVariant].self, forKey: .features)
