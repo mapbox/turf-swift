@@ -28,4 +28,49 @@ class PolygonTests: XCTestCase {
         XCTAssert(decoded.geometry.outerRing.coordinates.count == 5)
         XCTAssert(decoded.geometry.innerRings!.first?.coordinates.count == 5)
     }
+    
+    func testPolygonContains() {
+        let coordinate = CLLocationCoordinate2D(latitude: 44, longitude: -77)
+        let polygon = Polygon([[
+            CLLocationCoordinate2D(latitude: 41, longitude: -81),
+            CLLocationCoordinate2D(latitude: 47, longitude: -81),
+            CLLocationCoordinate2D(latitude: 47, longitude: -72),
+            CLLocationCoordinate2D(latitude: 41, longitude: -72),
+            CLLocationCoordinate2D(latitude: 41, longitude: -81),
+            ]])
+        XCTAssertTrue(polygon.contains(point: coordinate))
+    }
+    
+    func testPolygonDoesNotContain() {
+        let coordinate = CLLocationCoordinate2D(latitude: 44, longitude: -77)
+        let polygon = Polygon([[
+            CLLocationCoordinate2D(latitude: 41, longitude: -51),
+            CLLocationCoordinate2D(latitude: 47, longitude: -51),
+            CLLocationCoordinate2D(latitude: 47, longitude: -42),
+            CLLocationCoordinate2D(latitude: 41, longitude: -42),
+            CLLocationCoordinate2D(latitude: 41, longitude: -51),
+            ]])
+        XCTAssertFalse(polygon.contains(point: coordinate))
+    }
+    
+    func testPolygonDoesNotContainWithHole() {
+        let coordinate = CLLocationCoordinate2D(latitude: 44, longitude: -77)
+        let polygon = Polygon([
+            [
+                CLLocationCoordinate2D(latitude: 41, longitude: -81),
+                CLLocationCoordinate2D(latitude: 47, longitude: -81),
+                CLLocationCoordinate2D(latitude: 47, longitude: -72),
+                CLLocationCoordinate2D(latitude: 41, longitude: -72),
+                CLLocationCoordinate2D(latitude: 41, longitude: -81),
+            ],
+            [
+                CLLocationCoordinate2D(latitude: 43, longitude: -76),
+                CLLocationCoordinate2D(latitude: 43, longitude: -78),
+                CLLocationCoordinate2D(latitude: 45, longitude: -78),
+                CLLocationCoordinate2D(latitude: 45, longitude: -76),
+                CLLocationCoordinate2D(latitude: 43, longitude: -76),
+            ],
+        ])
+        XCTAssertFalse(polygon.contains(point: coordinate))
+    }
 }
