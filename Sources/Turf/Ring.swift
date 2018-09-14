@@ -53,3 +53,44 @@ public struct Ring {
         return area
     }
 }
+
+extension Ring {
+    /**
+     * Determines if the given point falls within the ring.
+     * The optional parameter `ignoreBoundary` will result in the method returning true if the given point
+     * lies on the boundary line of the ring.
+     *
+     * Ported from: https://github.com/Turfjs/turf/blob/e53677b0931da9e38bb947da448ee7404adc369d/packages/turf-boolean-point-in-polygon/index.ts#L77-L108
+     */
+    public func contains(point: CLLocationCoordinate2D, ignoreBoundary: Bool = false) -> Bool {
+        var ring: ArraySlice<CLLocationCoordinate2D>!
+        var isInside = false
+        if coordinates.first == coordinates.last {
+            ring = coordinates.prefix(coordinates.count - 1)
+        }
+        else {
+             ring = coordinates.prefix(coordinates.count)
+        }
+        var i = 0
+        var j = ring.count - 1
+        while i < ring.count {
+            let xi = ring[i].longitude
+            let yi = ring[i].latitude
+            let xj = ring[j].longitude
+            let yj = ring[j].latitude
+            let onBoundary = (point.latitude * (xi - xj) + yi * (xj - point.longitude) + yj * (point.longitude - xi) == 0) &&
+                ((xi - point.longitude) * (xj - point.longitude) <= 0) && ((yi - point.latitude) * (yj - point.latitude) <= 0)
+            if onBoundary {
+                return !ignoreBoundary
+            }
+            let intersect = ((yi > point.latitude) != (yj > point.latitude)) &&
+                (point.longitude < (xj - xi) * (point.latitude - yi) / (yj - yi) + xi);
+            if (intersect) {
+                isInside = !isInside;
+            }
+            j = i
+            i = i + 1
+        }
+        return isInside
+    }
+}
