@@ -38,7 +38,7 @@ class PolygonTests: XCTestCase {
             CLLocationCoordinate2D(latitude: 41, longitude: -72),
             CLLocationCoordinate2D(latitude: 41, longitude: -81),
             ]])
-        XCTAssertTrue(polygon.contains(point: coordinate))
+        XCTAssertTrue(polygon.contains(coordinate))
     }
     
     func testPolygonDoesNotContain() {
@@ -50,7 +50,7 @@ class PolygonTests: XCTestCase {
             CLLocationCoordinate2D(latitude: 41, longitude: -42),
             CLLocationCoordinate2D(latitude: 41, longitude: -51),
             ]])
-        XCTAssertFalse(polygon.contains(point: coordinate))
+        XCTAssertFalse(polygon.contains(coordinate))
     }
     
     func testPolygonDoesNotContainWithHole() {
@@ -71,6 +71,6 @@ class PolygonTests: XCTestCase {
                 CLLocationCoordinate2D(latitude: 43, longitude: -76),
             ],
         ])
-        XCTAssertFalse(polygon.contains(point: coordinate))
+        XCTAssertFalse(polygon.contains(coordinate))
     }
 }

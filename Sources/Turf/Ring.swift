@@ -62,7 +62,7 @@ extension Ring {
      *
      * Ported from: https://github.com/Turfjs/turf/blob/e53677b0931da9e38bb947da448ee7404adc369d/packages/turf-boolean-point-in-polygon/index.ts#L77-L108
      */
-    public func contains(point: CLLocationCoordinate2D, ignoreBoundary: Bool = false) -> Bool {
+    public func contains(_ coordinate: CLLocationCoordinate2D, ignoreBoundary: Bool = false) -> Bool {
         var ring: ArraySlice<CLLocationCoordinate2D>!
         var isInside = false
         if coordinates.first == coordinates.last {
@@ -78,13 +78,13 @@ extension Ring {
             let yi = ring[i].latitude
             let xj = ring[j].longitude
             let yj = ring[j].latitude
-            let onBoundary = (point.latitude * (xi - xj) + yi * (xj - point.longitude) + yj * (point.longitude - xi) == 0) &&
-                ((xi - point.longitude) * (xj - point.longitude) <= 0) && ((yi - point.latitude) * (yj - point.latitude) <= 0)
+            let onBoundary = (coordinate.latitude * (xi - xj) + yi * (xj - coordinate.longitude) + yj * (coordinate.longitude - xi) == 0) &&
+                ((xi - coordinate.longitude) * (xj - coordinate.longitude) <= 0) && ((yi - coordinate.latitude) * (yj - coordinate.latitude) <= 0)
             if onBoundary {
                 return !ignoreBoundary
             }
-            let intersect = ((yi > point.latitude) != (yj > point.latitude)) &&
-                (point.longitude < (xj - xi) * (point.latitude - yi) / (yj - yi) + xi);
+            let intersect = ((yi > coordinate.latitude) != (yj > coordinate.latitude)) &&
+                (coordinate.longitude < (xj - xi) * (coordinate.latitude - yi) / (yj - yi) + xi);
             if (intersect) {
                 isInside = !isInside;
             }
