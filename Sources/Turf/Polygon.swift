@@ -63,23 +63,23 @@ extension Polygon {
 extension Polygon {
     
     /**
-     * Determines if the given point falls within the polygon and outside of its interior rings.
-     * The optional parameter `ignoreBoundary` will result in the method returning true if the given point
+     * Determines if the given coordinate falls within the polygon and outside of its interior rings.
+     * The optional parameter `ignoreBoundary` will result in the method returning true if the given coordinate
      * lies on the boundary line of the polygon or its interior rings.
      *
      * Ported from: https://github.com/Turfjs/turf/blob/e53677b0931da9e38bb947da448ee7404adc369d/packages/turf-boolean-point-in-polygon/index.ts#L31-L75
      */
-    public func contains(point: CLLocationCoordinate2D, ignoreBoundary: Bool = false) -> Bool {
-        let bbox = BoundingBox(points: self.coordinates.first)
-        guard bbox?.contains(point: point) ?? false else {
+    public func contains(_ coordinate: CLLocationCoordinate2D, ignoreBoundary: Bool = false) -> Bool {
+        let bbox = BoundingBox(from: coordinates.first)
+        guard bbox?.contains(coordinate) ?? false else {
             return false
         }
-        guard self.outerRing.contains(point: point, ignoreBoundary: ignoreBoundary) else {
+        guard outerRing.contains(coordinate, ignoreBoundary: ignoreBoundary) else {
             return false
         }
         if let innerRings = innerRings {
             for ring in innerRings {
-                if ring.contains(point: point, ignoreBoundary: ignoreBoundary) {
+                if ring.contains(coordinate, ignoreBoundary: ignoreBoundary) {
                     return false
                 }
             }
