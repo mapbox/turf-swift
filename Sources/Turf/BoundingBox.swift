@@ -9,8 +9,9 @@ public struct BoundingBox: Codable {
         guard coordinates?.count ?? 0 > 0 else {
             return nil
         }
+        let startValue = (minLat: coordinates!.first!.latitude, maxLat: coordinates!.first!.latitude, minLon: coordinates!.first!.longitude, maxLon: coordinates!.first!.longitude)
         let (minLat, maxLat, minLon, maxLon) = coordinates!
-            .reduce((minLat: 0, maxLat: 0, minLon: 0, maxLon: 0)) { (result, coordinate) -> (minLat: Double, maxLat: Double, minLon: Double, maxLon: Double) in
+            .reduce(startValue) { (result, coordinate) -> (minLat: Double, maxLat: Double, minLon: Double, maxLon: Double) in
                 let minLat = min(coordinate.latitude, result.0)
                 let maxLat = max(coordinate.latitude, result.1)
                 let minLon = min(coordinate.longitude, result.2)
