@@ -36,6 +36,6 @@ public struct BoundingBox: Codable {
     
     // MARK: - Private
     
-    let northWest: CLLocationCoordinate2D
-    let southEast: CLLocationCoordinate2D
+    public var northWest: CLLocationCoordinate2D
+    public var southEast: CLLocationCoordinate2D
 }
