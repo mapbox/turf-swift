@@ -110,11 +110,21 @@ extension LineString {
      Returns a coordinate along a LineString at a certain distance from the start of the polyline.
      */
     public func coordinateFromStart(distance: CLLocationDistance) -> CLLocationCoordinate2D? {
+        return indexedCoordinateFromStart(distance: distance)?.coordinate
+    }
+    
+    /**
+     Returns an indexed coordinate along a LineString at a certain distance from the start of the polyline.
+     */
+    public func indexedCoordinateFromStart(distance: CLLocationDistance) -> IndexedCoordinate? {
         // Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-along/index.js
         var traveled: CLLocationDistance = 0
         
+        guard let firstCoordinate = coordinates.first else {
+            return nil
+        }
         guard distance >= 0  else {
-            return coordinates.first
+            return IndexedCoordinate(coordinate: firstCoordinate, index: 0, distance: 0)
         }
         
         for i in 0..<coordinates.count {
@@ -125,17 +135,18 @@ extension LineString {
             if traveled >= distance {
                 let overshoot = distance - traveled
                 if overshoot == 0 {
-                    return coordinates[i]
+                    return IndexedCoordinate(coordinate: coordinates[i], index: i, distance: traveled)
                 }
                 
                 let direction = coordinates[i].direction(to: coordinates[i - 1]) - 180
-                return coordinates[i].coordinate(at: overshoot, facing: direction)
+                let coordinate = coordinates[i].coordinate(at: overshoot, facing: direction)
+                return IndexedCoordinate(coordinate: coordinate, index: i - 1, distance: distance)
             }
             
             traveled += coordinates[i].distance(to: coordinates[i + 1])
         }
         
-        return coordinates.last
+        return IndexedCoordinate(coordinate: coordinates.last!, index: coordinates.endIndex - 1, distance: traveled)
     }
     
     
