@@ -59,7 +59,7 @@ To install Turf using [Carthage](https://github.com/Carthage/Carthage/):
 To install Turf using the [Swift Package Manager](https://swift.org/package-manager/), add the following package to the `dependencies` in your Package.swift file:
 
 ```swift
-.Package(url: "https://github.com/mapbox/turf-swift.git", .upToNextMinor(from: "0.1"))
+.Package(url: "https://github.com/mapbox/turf-swift.git", .upToNextMinor(from: "0.2"))
 ```
 
 Then `import Turf` in any Swift file in your module.
