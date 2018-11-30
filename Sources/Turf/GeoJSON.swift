@@ -21,10 +21,13 @@ extension FeatureType: Codable {
     }
 }
 
+public protocol GeoJSONProperties: Codable {
+    var properties: [String: AnyJSONType]? { get set }
+}
+
 public protocol GeoJSONObject: Codable {
     var type: FeatureType { get }
     var identifier: FeatureIdentifier? { get set }
-    var properties: [String: AnyJSONType]? { get set }
 }
 
 enum GeoJSONCodingKeys: String, CodingKey {

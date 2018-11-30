@@ -16,7 +16,7 @@ public struct MultiPoint: Codable, Equatable {
     }
 }
 
-public struct MultiPointFeature: GeoJSONObject {
+public struct MultiPointFeature: GeoJSONObject, GeoJSONProperties {
     public var type: FeatureType = .feature
     public var identifier: FeatureIdentifier?
     public var geometry: MultiPoint

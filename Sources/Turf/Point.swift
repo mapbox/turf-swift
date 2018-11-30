@@ -16,7 +16,7 @@ public struct Point: Codable, Equatable {
     }
 }
 
-public struct PointFeature: GeoJSONObject {
+public struct PointFeature: GeoJSONObject, GeoJSONProperties {
     public var type: FeatureType = .feature
     public var identifier: FeatureIdentifier?
     public var geometry: Point

@@ -16,7 +16,7 @@ public struct MultiPolygon: Codable, Equatable {
     }
 }
 
-public struct MultiPolygonFeature: GeoJSONObject {
+public struct MultiPolygonFeature: GeoJSONObject, GeoJSONProperties {
     public var type: FeatureType = .feature
     public var identifier: FeatureIdentifier?
     public var geometry: MultiPolygon

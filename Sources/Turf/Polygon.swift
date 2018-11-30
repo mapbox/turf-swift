@@ -24,7 +24,7 @@ public struct Polygon: Codable, Equatable {
     }
 }
 
-public struct PolygonFeature: GeoJSONObject {
+public struct PolygonFeature: GeoJSONObject, GeoJSONProperties {
     public var type: FeatureType = .feature
     public var identifier: FeatureIdentifier?
     public var geometry: Polygon

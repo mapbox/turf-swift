@@ -16,7 +16,7 @@ public struct LineString: Codable, Equatable {
     public var coordinates: [CLLocationCoordinate2D]
 }
 
-public struct LineStringFeature: GeoJSONObject {
+public struct LineStringFeature: GeoJSONObject, GeoJSONProperties {
     public var type: FeatureType = .feature
     public var identifier: FeatureIdentifier?
     public var geometry: LineString!

@@ -16,7 +16,7 @@ public struct MultiLineString: Codable, Equatable {
     }
 }
 
-public struct MultiLineStringFeature: GeoJSONObject {
+public struct MultiLineStringFeature: GeoJSONObject, GeoJSONProperties {
     public var type: FeatureType = .feature
     public var identifier: FeatureIdentifier?
     public var geometry: MultiLineString!
