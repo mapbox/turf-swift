@@ -301,4 +301,24 @@ class TurfTests: XCTestCase {
         
         XCTAssertEqual(polygon.area, 78588446934.43, accuracy: 0.1)
     }
+    
+    func testBezierSpline() {
+        let point1 = CLLocationCoordinate2D(latitude: 37.7749, longitude: 237.581)
+        let point2 = CLLocationCoordinate2D(latitude: 35.6669502038, longitude: 139.7731286197)
+        let line = [point1, point2]
+        let lineString = LineString(line)
+        guard let bezierLineString = Turf.bezier(lineString) else {
+            XCTFail("bezier line must be created with 2 points line")
+            return
+        }
+        guard let bezierPoint1 = bezierLineString.coordinates.first,
+            let bezierPoint2 = bezierLineString.coordinates.last else {
+                XCTFail("bezier line must constains 2 points")
+                return
+        }
+        XCTAssertEqual(bezierPoint1.latitude, point1.latitude, accuracy: 0.001)
+        XCTAssertEqual(bezierPoint1.longitude, point1.longitude, accuracy: 0.001)
+        XCTAssertEqual(bezierPoint2.latitude, point2.latitude, accuracy: 0.001)
+        XCTAssertEqual(bezierPoint2.longitude, point2.longitude, accuracy: 0.001)
+    }
 }
