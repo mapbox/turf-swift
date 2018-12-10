@@ -50,8 +50,8 @@ struct Spline {
         
         self.length = points.count
         
-        for (index, point) in points.enumerated() {
-            guard index < points.count - 2 else { continue }
+        for index in stride(from: 0, to: points.count - 1, by: 1) {
+            let point = points[index]
             let nextPoint = points[index + 1]
             let center = SplinePoint(x: (point.x + nextPoint.x)/2, y: (point.y + nextPoint.y)/2, z: (point.z + nextPoint.z)/2)
             self.centers.append(center)
@@ -59,8 +59,8 @@ struct Spline {
         
         self.controls.append((points[0], points[0]))
         
-        for (index, center) in self.centers.enumerated() {
-            guard index < points.count - 2 else { continue }
+        for index in stride(from: 0, to: centers.count - 1, by: 1) {
+            let center = self.centers[index]
             let nextCenter = self.centers[index + 1]
             let nextPoint = self.points[index + 1]
             let dx = nextPoint.x - (center.x + nextCenter.x)/2
@@ -104,7 +104,7 @@ struct Spline {
             return self.points.last!
         }
         let n = floor(Double(self.points.count - 1) * t2)
-        let t1 = Double(self.points.count) * t2 - n
+        let t1 = Double(self.points.count - 1) * t2 - n
         let index = Int(n)
         return self.bezier(t: t1, p1: self.points[index], c1: self.controls[index].1, c2: self.controls[index + 1].0, p2: self.points[index + 1])
     }
