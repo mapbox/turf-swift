@@ -240,20 +240,6 @@ class TurfTests: XCTestCase {
         XCTAssertNotEqual(sliced.coordinates.first, sliced.coordinates.last, "vertical slice should not collapse to first coordinate")
     }
     
-    func testDistanceAlong() {
-        let point1 = CLLocationCoordinate2D(latitude: 20, longitude: 20)
-        let point2 = CLLocationCoordinate2D(latitude: 40, longitude: 40)
-        let line = [point1, point2]
-        
-        let a = LineString(line).distance()
-        XCTAssertEqual(a, 2_928_304, accuracy: 1)
-        
-        
-        // Adapted from: https://gist.github.com/bsudekum/2604b72ae42b6f88aa55398b2ff0dc22
-        let b = LineString(line).distance(from: CLLocationCoordinate2D(latitude: 30, longitude: 30), to: CLLocationCoordinate2D(latitude: 40, longitude: 40))
-        XCTAssertEqual(b, 1_546_971, accuracy: 1)
-    }
-    
     func testWrap() {
         let a = (380 as CLLocationDirection).wrap(min: 0, max: 360)
         XCTAssertEqual(a, 20)
