@@ -93,12 +93,5 @@ extension CLLocationCoordinate2D: Equatable {
     public func distance(to coordinate: CLLocationCoordinate2D) -> CLLocationDistance {
         return RadianCoordinate2D(self).distance(to: RadianCoordinate2D(coordinate)) * metersPerRadian
     }
-    
-    /// Returns the point midway between two coordinates measured in degrees
-    public func midpoint(to coordinate: CLLocationCoordinate2D) -> CLLocationCoordinate2D{
-        let dist = self.distance(to: coordinate)
-        let heading = self.direction(to: coordinate)
-        return self.coordinate(at: dist / 2, facing: heading)
-    }
 }
 

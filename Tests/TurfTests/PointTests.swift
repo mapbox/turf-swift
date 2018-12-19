@@ -24,4 +24,13 @@ class PointTests: XCTestCase {
         let geojson = try! GeoJSON.parse(data)
         XCTAssert(geojson.decoded is PointFeature)
     }
+    
+    func testMidPointHorizEquator()
+    {
+        let point1 = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+        let point2 = CLLocationCoordinate2D(latitude: 0.0, longitude: 10.0)
+        
+        let mid = midpoint(point1: point1, point2: point2)
+        XCTAssertEqual(point1.distance(to: mid), point2.distance(to: mid))
+    }
 }

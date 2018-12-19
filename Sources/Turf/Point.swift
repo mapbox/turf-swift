@@ -41,3 +41,11 @@ public struct PointFeature: GeoJSONObject {
         try container.encodeIfPresent(identifier, forKey: .identifier)
     }
 }
+
+
+/// Returns the point midway between two coordinates measured in degrees
+public func midpoint(point1: CLLocationCoordinate2D, point2: CLLocationCoordinate2D) -> CLLocationCoordinate2D{
+    let dist = point1.distance(to: point2)
+    let heading = point1.direction(to: point2)
+    return CLLocationCoordinate2D().coordinate(at: dist / 2, facing: heading)
+}
