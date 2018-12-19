@@ -31,6 +31,15 @@ class PointTests: XCTestCase {
         let point2 = CLLocationCoordinate2D(latitude: 0.0, longitude: 10.0)
         
         let mid = midpoint(point1: point1, point2: point2)
-        XCTAssertEqual(point1.distance(to: mid), point2.distance(to: mid))
+        XCTAssertEqual(point1.distance(to: mid), point2.distance(to: mid), accuracy: 1)
+    }
+    
+    func testMidPointVertEquator()
+    {
+        let point1 = CLLocationCoordinate2D(latitude: 10.0, longitude: 0.0)
+        let point2 = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+        
+        let mid = midpoint(point1: point1, point2: point2)
+        XCTAssertEqual(point1.distance(to: mid), point2.distance(to: mid), accuracy: 1)
     }
 }
