@@ -41,25 +41,4 @@ public struct Turf {
         let intersectsWithLine2 = b > 0 && b < 1
         return intersectsWithLine1 && intersectsWithLine2 ? intersection : nil
     }
-    
-    /**
-     Returns a new LineString based on bezier transformation of the input line
-     */
-    public static func bezier(_ line: LineString, resolution: Int = 10000, sharpness: Double = 0.85) -> LineString? {
-        // ported from https://github.com/Turfjs/turf/blob/master/packages/turf-bezier-spline/index.ts
-        let points = line.coordinates.map {
-            SplinePoint(coordinate: $0)
-        }
-        guard let spline = Spline(points: points, duration: resolution, sharpness: sharpness) else { return nil }
-        var coords = [CLLocationCoordinate2D]()
-        for i in stride(from: 0, to: resolution, by: 10) {
-            let pos = spline.pos(time: i)
-            let index = Int(floor(Double(i)/100))
-            if index % 2 == 0 {
-                coords.append(pos.coordinate)
-            }
-        }
-        let result = LineString(coords)
-        return result
-    }
 }

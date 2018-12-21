@@ -307,7 +307,7 @@ class TurfTests: XCTestCase {
         let point2 = CLLocationCoordinate2D(latitude: 35.6669502038, longitude: 139.7731286197)
         let line = [point1, point2]
         let lineString = LineString(line)
-        guard let bezierLineString = Turf.bezier(lineString) else {
+        guard let bezierLineString = lineString.bezier() else {
             XCTFail("bezier line must be created with 2 points line")
             return
         }
@@ -329,7 +329,7 @@ class TurfTests: XCTestCase {
         let point4 = CLLocationCoordinate2D(latitude: -32.026706293336126, longitude: 138.3837890625)
         let line = [point1, point2, point3, point4]
         let lineString = LineString(line)
-        guard let bezierLineString = Turf.bezier(lineString) else {
+        guard let bezierLineString = lineString.bezier() else {
             XCTFail("bezier line must be created")
             return
         }
