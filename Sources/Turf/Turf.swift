@@ -42,3 +42,12 @@ public struct Turf {
         return intersectsWithLine1 && intersectsWithLine2 ? intersection : nil
     }
 }
+
+/**
+ Returns the point midway between two coordinates measured in degrees
+ */
+public func mid(_ coord1: CLLocationCoordinate2D, _ coord2: CLLocationCoordinate2D) -> CLLocationCoordinate2D{
+    let dist = coord1.distance(to: coord2)
+    let heading = coord1.direction(to: coord2)
+    return coord1.coordinate(at: dist / 2, facing: heading)
+}

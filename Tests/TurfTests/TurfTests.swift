@@ -24,20 +24,20 @@ class TurfTests: XCTestCase {
     }
     
     func testCLLocationCoordinate2() {
-        let point1 = CLLocationCoordinate2D(latitude: 35, longitude: 35)
-        let point2 = CLLocationCoordinate2D(latitude: -10, longitude: -10)
-        let a = point1.direction(to: point2)
+        let coord1 = CLLocationCoordinate2D(latitude: 35, longitude: 35)
+        let coord2 = CLLocationCoordinate2D(latitude: -10, longitude: -10)
+        let a = coord1.direction(to: coord2)
         XCTAssertEqual(a, -128, accuracy: 1)
         
-        let b = point1.coordinate(at: 20, facing: 20)
+        let b = coord1.coordinate(at: 20, facing: 20)
         XCTAssertEqual(b.latitude, 35, accuracy: 0.1)
         XCTAssertEqual(b.longitude, 35, accuracy: 0.1)
     }
     
     func testIntersection() {
-        let point1 = CLLocationCoordinate2D(latitude: 30, longitude: 30)
+        let coord1 = CLLocationCoordinate2D(latitude: 30, longitude: 30)
         let a = Turf.intersection((CLLocationCoordinate2D(latitude: 20, longitude: 20), CLLocationCoordinate2D(latitude: 40, longitude: 40)), (CLLocationCoordinate2D(latitude: 20, longitude: 40), CLLocationCoordinate2D(latitude: 40, longitude: 20)))
-        XCTAssertEqual(a, point1)
+        XCTAssertEqual(a, coord1)
     }
     
     func testCLLocationDegrees() {
@@ -62,4 +62,61 @@ class TurfTests: XCTestCase {
         
         XCTAssertEqual(polygon.area, 78588446934.43, accuracy: 0.1)
     }
+    
+    /// Note: All of the midpoint tests use an accuracy of 1 (equal to 1 meter)
+    
+    func testMidHorizEquator()
+    {
+        let coord1 = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+        let coord2 = CLLocationCoordinate2D(latitude: 0.0, longitude: 10.0)
+        
+        let midCoord = mid(coord1, coord2)
+        XCTAssertEqual(coord1.distance(to: midCoord), coord2.distance(to: midCoord), accuracy: 1)
+    }
+    
+    func testMidVertFromEquator()
+    {
+        let coord1 = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+        let coord2 = CLLocationCoordinate2D(latitude: 10.0, longitude: 0.0)
+        
+        let midCoord = mid(coord1, coord2)
+        XCTAssertEqual(coord1.distance(to: midCoord), coord2.distance(to: midCoord), accuracy: 1)
+    }
+    
+    func testMidVertToEquator()
+    {
+        let coord1 = CLLocationCoordinate2D(latitude: 10.0, longitude: 0.0)
+        let coord2 = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+        
+        let midCoord = mid(coord1, coord2)
+        XCTAssertEqual(coord1.distance(to: midCoord), coord2.distance(to: midCoord), accuracy: 1)
+    }
+    
+    func testMidDiagonalBackOverEquator()
+    {
+        let coord1 = CLLocationCoordinate2D(latitude: 10.0, longitude: -1.0)
+        let coord2 = CLLocationCoordinate2D(latitude: -1.0, longitude: 1.0)
+        
+        let midCoord = mid(coord1, coord2)
+        XCTAssertEqual(coord1.distance(to: midCoord), coord2.distance(to: midCoord), accuracy: 1)
+    }
+    
+    func testMidDiagonalForwardOverEquator()
+    {
+        let coord1 = CLLocationCoordinate2D(latitude: -1.0, longitude: -5.0)
+        let coord2 = CLLocationCoordinate2D(latitude: 10.0, longitude: 5.0)
+        
+        let midCoord = mid(coord1, coord2)
+        XCTAssertEqual(coord1.distance(to: midCoord), coord2.distance(to: midCoord), accuracy: 1)
+    }
+    
+    func testMidLongDistance()
+    {
+        let coord1 = CLLocationCoordinate2D(latitude: 21.94304553343818, longitude: 22.5)
+        let coord2 = CLLocationCoordinate2D(latitude: 46.800059446787316, longitude: 92.10937499999999)
+        
+        let midCoord = mid(coord1, coord2)
+        XCTAssertEqual(coord1.distance(to: midCoord), coord2.distance(to: midCoord), accuracy: 1)
+    }
+    
 }
