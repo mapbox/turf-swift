@@ -46,16 +46,14 @@ struct Spline {
         
         length = points.count
         
-        for index in stride(from: 0, to: points.count - 1, by: 1) {
+        centers = (0..<(points.count - 1)).map { (index) in
             let point = points[index]
             let nextPoint = points[index + 1]
             let center = SplinePoint(x: (point.x + nextPoint.x) / 2, y: (point.y + nextPoint.y) / 2, z: (point.z + nextPoint.z) / 2)
-            centers.append(center)
+            return center
         }
         
-        controls.append((points[0], points[0]))
-        
-        for index in stride(from: 0, to: centers.count - 1, by: 1) {
+        controls = (0..<(centers.count - 1)).map { (index) in
             let center = centers[index]
             let nextCenter = centers[index + 1]
             let nextPoint = points[index + 1]
@@ -68,15 +66,17 @@ struct Spline {
             let control2 = SplinePoint(x: (1 - sharpness) * nextPoint.x + sharpness * (nextCenter.x + dx),
                                        y: (1 - sharpness) * nextPoint.y + sharpness * (nextCenter.y + dy),
                                        z: (1 - sharpness) * nextPoint.z + sharpness * (nextCenter.z + dz))
-            controls.append((control1, control2))
+            return (control1, control2)
         }
+        let firstPoint = points.first!
+        controls.insert((firstPoint, firstPoint), at: 0)
         let lastPoint = points.last!
         controls.append((lastPoint, lastPoint))
         
-        var lastStep = pos(time: 0)
+        var lastStep = position(at: 0)
         steps.append(0)
         for t in stride(from: 0, to: duration, by: 10) {
-            let step = pos(time: t)
+            let step = position(at: t)
             let dist = sqrt((step.x - lastStep.x) * (step.x - lastStep.x) +
                 (step.y - lastStep.y) * (step.y - lastStep.y) +
                 (step.z - lastStep.z) * (step.z - lastStep.z))
@@ -87,11 +87,8 @@ struct Spline {
         }
     }
     
-    func pos(time: Int) -> SplinePoint {
-        var t = time - delay
-        if t < 0 {
-            t = 0
-        }
+    func position(at time: Int) -> SplinePoint {
+        var t = max(0, time - delay)
         if t > duration {
             t = duration - 1
         }
@@ -124,24 +121,19 @@ struct Spline {
 
 public extension LineString {
 	
-	/**
-	Returns a new LineString based on bezier transformation of the input line
-	*/
-	public func bezier(resolution: Int = 10000, sharpness: Double = 0.85) -> LineString? {
-		// ported from https://github.com/Turfjs/turf/blob/master/packages/turf-bezier-spline/index.ts
-		let points = coordinates.map {
-			SplinePoint(coordinate: $0)
-		}
-		guard let spline = Spline(points: points, duration: resolution, sharpness: sharpness) else { return nil }
-		var coords = [CLLocationCoordinate2D]()
-		for i in stride(from: 0, to: resolution, by: 10) {
-			let pos = spline.pos(time: i)
-			let index = Int(floor(Double(i) / 100))
-			if index % 2 == 0 {
-				coords.append(pos.coordinate)
-			}
-		}
-		let result = LineString(coords)
-		return result
-	}
+    /**
+     Returns a new LineString based on bezier transformation of the input line
+     */
+    public func bezier(resolution: Int = 10000, sharpness: Double = 0.85) -> LineString? {
+        // ported from https://github.com/Turfjs/turf/blob/1ea264853e1be7469c8b7d2795651c9114a069aa/packages/turf-bezier-spline/index.ts
+        let points = coordinates.map {
+            SplinePoint(coordinate: $0)
+        }
+        guard let spline = Spline(points: points, duration: resolution, sharpness: sharpness) else { return nil }
+        let coords = stride(from: 0, to: resolution, by: 10)
+            .filter { Int(floor(Double($0) / 100)) % 2 == 0 }
+            .map { spline.position(at: $0).coordinate }
+        let result = LineString(coords)
+        return result
+    }
 }
