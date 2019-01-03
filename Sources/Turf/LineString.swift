@@ -229,7 +229,7 @@ extension LineString {
                 closestCoordinate = IndexedCoordinate(coordinate: segment.1, index: index+1, distance: distances.1)
             }
             if intersectionDistance != nil && intersectionDistance! < closestCoordinate?.distance ?? .greatestFiniteMagnitude {
-                closestCoordinate = IndexedCoordinate(coordinate: intersectionPoint!, index: (distances.0 < distances.1 ? index : index+1), distance: intersectionDistance!)
+                closestCoordinate = IndexedCoordinate(coordinate: intersectionPoint!, index: index, distance: intersectionDistance!)
             }
         }
         
