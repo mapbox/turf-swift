@@ -189,7 +189,9 @@ extension LineString {
         
         var coords = ends.0.index == ends.1.index ? [] : Array(coordinates[ends.0.index + 1...ends.1.index])
         coords.insert(ends.0.coordinate, at: 0)
-        coords.append(ends.1.coordinate)
+        if coords.last != ends.1.coordinate {
+            coords.append(ends.1.coordinate)
+        }
         
         return LineString(coords)
     }

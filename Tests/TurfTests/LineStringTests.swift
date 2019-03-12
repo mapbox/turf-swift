@@ -295,5 +295,13 @@ class LineStringTests: XCTestCase {
         sliced = LineString(vertical).sliced(from: start, to: stop)
         XCTAssertEqual(sliced.coordinates.count, 2, "no duplicated coords")
         XCTAssertNotEqual(sliced.coordinates.first, sliced.coordinates.last, "vertical slice should not collapse to first coordinate")
+        
+        sliced = LineString(vertical).sliced(from: vertical[0], to: vertical[1])
+        XCTAssertEqual(sliced.coordinates.count, 2, "no duplicated coords")
+        XCTAssertNotEqual(sliced.coordinates.first, sliced.coordinates.last, "vertical slice should not collapse to first coordinate")
+        
+        sliced = LineString(vertical).sliced()
+        XCTAssertEqual(sliced.coordinates.count, 2, "no duplicated coords")
+        XCTAssertNotEqual(sliced.coordinates.first, sliced.coordinates.last, "vertical slice should not collapse to first coordinate")
     }
 }
