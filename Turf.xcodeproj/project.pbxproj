@@ -121,7 +121,6 @@
 		7AA969AD21B98F8F009C57FE /* Spline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA969AB21B98F8F009C57FE /* Spline.swift */; };
 		7AA969AE21B98F8F009C57FE /* Spline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA969AB21B98F8F009C57FE /* Spline.swift */; };
 		7AA969AF21B98F8F009C57FE /* Spline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA969AB21B98F8F009C57FE /* Spline.swift */; };
-		C46809D62124199500BAD5E1 /* featurecollection-no-properties.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C46809D52124199500BAD5E1 /* featurecollection-no-properties.geojson */; };
 		C46809D721241B5100BAD5E1 /* featurecollection-no-properties.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C46809D52124199500BAD5E1 /* featurecollection-no-properties.geojson */; };
 		C46809D821249E8F00BAD5E1 /* featurecollection-no-properties.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C46809D52124199500BAD5E1 /* featurecollection-no-properties.geojson */; };
 		C46809D921249E9700BAD5E1 /* featurecollection-no-properties.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C46809D52124199500BAD5E1 /* featurecollection-no-properties.geojson */; };
@@ -633,7 +632,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C46809D62124199500BAD5E1 /* featurecollection-no-properties.geojson in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
