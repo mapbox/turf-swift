@@ -15,7 +15,7 @@ Turf for Swift is **experimental** and its public API is subject to change. Plea
 
 ## Requirements
 
-Turf is written in Swift 4. It requires Xcode 9.x and supports the following minimum deployment targets:
+Turf requires Xcode 9.x and supports the following minimum deployment targets:
 
 * iOS 8.0 and above
 * macOS 10.10.0 (Yosemite) and above
