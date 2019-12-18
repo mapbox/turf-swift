@@ -111,6 +111,13 @@ extension LineString {
     }
     
     /**
+     Initializes a LineString from the given ring.
+     */
+    public init(_ ring: Ring) {
+        self.coordinates = ring.coordinates
+    }
+    
+    /**
      Returns a coordinate along a LineString at a certain distance from the start of the polyline.
      */
     public func coordinateFromStart(distance: CLLocationDistance) -> CLLocationCoordinate2D? {

@@ -14,6 +14,10 @@ public struct MultiLineString: Codable, Equatable {
     public init(_ coordinates: [[CLLocationCoordinate2D]]) {
         self.coordinates = coordinates
     }
+    
+    public init(_ polygon: Polygon) {
+        self.coordinates = polygon.coordinates
+    }
 }
 
 public struct MultiLineStringFeature: GeoJSONObject {
