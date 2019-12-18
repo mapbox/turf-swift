@@ -21,6 +21,14 @@ public struct FeatureCollection: GeoJSONObject {
         self.features = features
     }
     
+    public init(_ multiPolygon: MultiPolygon) {
+        self.features = multiPolygon.coordinates.map {
+            $0.count > 1 ?
+                .multiLineStringFeature(.init(.init($0))) :
+                .lineStringFeature(LineStringFeature(LineString($0[0])))
+        }
+    }
+    
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.features = try container.decode([FeatureVariant].self, forKey: .features)
