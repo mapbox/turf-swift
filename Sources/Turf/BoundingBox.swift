@@ -27,11 +27,18 @@ public struct BoundingBox: Codable {
         self.southEast = southEast
     }
     
-    public func contains(_ coordinate: CLLocationCoordinate2D) -> Bool {
-        return southEast.latitude < coordinate.latitude
-            && northWest.latitude > coordinate.latitude
-            && northWest.longitude < coordinate.longitude
-            && southEast.longitude > coordinate.longitude
+    public func contains(_ coordinate: CLLocationCoordinate2D, ignoreBoundary: Bool = true) -> Bool {
+        if ignoreBoundary {
+            return southEast.latitude < coordinate.latitude
+                && northWest.latitude > coordinate.latitude
+                && northWest.longitude < coordinate.longitude
+                && southEast.longitude > coordinate.longitude
+        } else {
+            return southEast.latitude <= coordinate.latitude
+                && northWest.latitude >= coordinate.latitude
+                && northWest.longitude <= coordinate.longitude
+                && southEast.longitude >= coordinate.longitude
+        }
     }
     
     // MARK: - Codable
