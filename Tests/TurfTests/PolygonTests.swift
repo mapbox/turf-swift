@@ -98,4 +98,28 @@ class PolygonTests: XCTestCase {
         XCTAssertTrue(polygon.contains(coordinate, ignoreBoundary: false))
         XCTAssertTrue(polygon.contains(coordinate))
     }
+
+    func testPolygonWithHoleContainsAtBoundary() {
+        let coordinate = CLLocationCoordinate2D(latitude: 43, longitude: -78)
+        let polygon = Geometry.PolygonRepresentation([
+            [
+                CLLocationCoordinate2D(latitude: 41, longitude: -81),
+                CLLocationCoordinate2D(latitude: 47, longitude: -81),
+                CLLocationCoordinate2D(latitude: 47, longitude: -72),
+                CLLocationCoordinate2D(latitude: 41, longitude: -72),
+                CLLocationCoordinate2D(latitude: 41, longitude: -81),
+            ],
+            [
+                CLLocationCoordinate2D(latitude: 43, longitude: -76),
+                CLLocationCoordinate2D(latitude: 43, longitude: -78),
+                CLLocationCoordinate2D(latitude: 45, longitude: -78),
+                CLLocationCoordinate2D(latitude: 45, longitude: -76),
+                CLLocationCoordinate2D(latitude: 43, longitude: -76),
+            ],
+        ])
+
+        XCTAssertFalse(polygon.contains(coordinate, ignoreBoundary: true))
+        XCTAssertTrue(polygon.contains(coordinate, ignoreBoundary: false))
+        XCTAssertTrue(polygon.contains(coordinate))
+    }
 }

@@ -36,7 +36,7 @@ extension Geometry.PolygonRepresentation {
             return false
         }
         for ring in innerRings {
-            if ring.contains(coordinate, ignoreBoundary: ignoreBoundary) {
+            if ring.contains(coordinate, ignoreBoundary: !ignoreBoundary) {
                 return false
             }
         }
