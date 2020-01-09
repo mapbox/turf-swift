@@ -63,6 +63,11 @@ extension Ring {
      * Ported from: https://github.com/Turfjs/turf/blob/e53677b0931da9e38bb947da448ee7404adc369d/packages/turf-boolean-point-in-polygon/index.ts#L77-L108
      */
     public func contains(_ coordinate: CLLocationCoordinate2D, ignoreBoundary: Bool = false) -> Bool {
+        let bbox = BoundingBox(from: coordinates)
+        guard bbox?.contains(coordinate, ignoreBoundary: ignoreBoundary) ?? false else {
+            return false
+        }
+
         var ring: ArraySlice<CLLocationCoordinate2D>!
         var isInside = false
         if coordinates.first == coordinates.last {
