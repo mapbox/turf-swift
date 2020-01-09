@@ -32,10 +32,6 @@ extension Geometry.PolygonRepresentation {
     ///
     ///Ported from: https://github.com/Turfjs/turf/blob/e53677b0931da9e38bb947da448ee7404adc369d/packages/turf-boolean-point-in-polygon/index.ts#L31-L75
     public func contains(_ coordinate: CLLocationCoordinate2D, ignoreBoundary: Bool = false) -> Bool {
-        let bbox = BoundingBox(from: coordinates.first)
-        guard bbox?.contains(coordinate, ignoreBoundary: ignoreBoundary) ?? false else {
-            return false
-        }
         guard outerRing.contains(coordinate, ignoreBoundary: ignoreBoundary) else {
             return false
         }
