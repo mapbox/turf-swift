@@ -46,4 +46,39 @@ class BoundingBoxTests: XCTestCase {
         XCTAssertEqual(bbox!.northWest, CLLocationCoordinate2D(latitude: -1, longitude: 1))
         XCTAssertEqual(bbox!.southEast, CLLocationCoordinate2D(latitude: -2, longitude: 2))
     }
+
+    func testContains() {
+        let coordinate = CLLocationCoordinate2D(latitude: 1, longitude: 1)
+        let coordinates = [
+            CLLocationCoordinate2D(latitude: 0, longitude: 0),
+            CLLocationCoordinate2D(latitude: 2, longitude: 2)
+        ]
+        let bbox = BoundingBox(from: coordinates)
+
+        XCTAssertTrue(bbox!.contains(coordinate))
+    }
+
+    func testDoesNotContain() {
+        let coordinate = CLLocationCoordinate2D(latitude: 2, longitude: 3)
+        let coordinates = [
+            CLLocationCoordinate2D(latitude: 0, longitude: 0),
+            CLLocationCoordinate2D(latitude: 2, longitude: 2)
+        ]
+        let bbox = BoundingBox(from: coordinates)
+
+        XCTAssertFalse(bbox!.contains(coordinate))
+    }
+
+    func testContainsAtBoundary() {
+        let coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 2)
+        let coordinates = [
+            CLLocationCoordinate2D(latitude: 0, longitude: 0),
+            CLLocationCoordinate2D(latitude: 2, longitude: 2)
+        ]
+        let bbox = BoundingBox(from: coordinates)
+
+        XCTAssertFalse(bbox!.contains(coordinate, ignoreBoundary: true))
+        XCTAssertTrue(bbox!.contains(coordinate, ignoreBoundary: false))
+        XCTAssertFalse(bbox!.contains(coordinate))
+    }
 }

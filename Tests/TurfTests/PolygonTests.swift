@@ -83,4 +83,19 @@ class PolygonTests: XCTestCase {
         ])
         XCTAssertFalse(polygon.contains(coordinate))
     }
+
+    func testPolygonContainsAtBoundary() {
+        let coordinate = CLLocationCoordinate2D(latitude: 1, longitude: 1)
+        let polygon = Geometry.PolygonRepresentation([[
+            CLLocationCoordinate2D(latitude: 0, longitude: 0),
+            CLLocationCoordinate2D(latitude: 1, longitude: 0),
+            CLLocationCoordinate2D(latitude: 1, longitude: 1),
+            CLLocationCoordinate2D(latitude: 0, longitude: 1),
+            CLLocationCoordinate2D(latitude: 0, longitude: 0),
+            ]])
+
+        XCTAssertFalse(polygon.contains(coordinate, ignoreBoundary: true))
+        XCTAssertTrue(polygon.contains(coordinate, ignoreBoundary: false))
+        XCTAssertTrue(polygon.contains(coordinate))
+    }
 }
