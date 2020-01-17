@@ -15,6 +15,13 @@ public struct Polygon: Codable, Equatable {
         self.coordinates = coordinates
     }
     
+    public init(outerRing: Ring, innerRings: [Ring]=[]) {
+        self.coordinates = [outerRing.coordinates]
+        for innerRing in innerRings {
+            self.coordinates.append(innerRing.coordinates)
+        }
+    }
+    
     public var innerRings: [Ring]? {
         get { return Array(coordinates.suffix(from: 1)).map { Ring(coordinates: $0) } }
     }
