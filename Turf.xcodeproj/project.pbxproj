@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B5FABFD24066EB7008A285F /* geometry-collection.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 2B5FABFB24066EA5008A285F /* geometry-collection.geojson */; };
+		2B5FABFE24066EB8008A285F /* geometry-collection.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 2B5FABFB24066EA5008A285F /* geometry-collection.geojson */; };
+		2B5FABFF24066EB9008A285F /* geometry-collection.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 2B5FABFB24066EA5008A285F /* geometry-collection.geojson */; };
+		2B5FAC0124067051008A285F /* GeometryCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5FAC0024067051008A285F /* GeometryCollectionTests.swift */; };
+		2B5FAC0224067051008A285F /* GeometryCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5FAC0024067051008A285F /* GeometryCollectionTests.swift */; };
+		2B5FAC0324067051008A285F /* GeometryCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5FAC0024067051008A285F /* GeometryCollectionTests.swift */; };
 		3502F791201F507500399EFE /* GeoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502F790201F507500399EFE /* GeoJSON.swift */; };
 		3502F792201F507500399EFE /* GeoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502F790201F507500399EFE /* GeoJSON.swift */; };
 		3502F793201F507500399EFE /* GeoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502F790201F507500399EFE /* GeoJSON.swift */; };
@@ -169,6 +175,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B5FABFB24066EA5008A285F /* geometry-collection.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = "geometry-collection.geojson"; sourceTree = "<group>"; };
+		2B5FAC0024067051008A285F /* GeometryCollectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryCollectionTests.swift; sourceTree = "<group>"; };
 		3502F790201F507500399EFE /* GeoJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJSON.swift; sourceTree = "<group>"; };
 		3502F795201F53FC00399EFE /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
 		3502F7A2201F568000399EFE /* point.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = point.geojson; sourceTree = "<group>"; };
@@ -315,6 +323,7 @@
 				35B56EAA20DAF8CB00C4923D /* MultiPolygonTests.swift */,
 				35B56E9620DAF82F00C4923D /* PointTests.swift */,
 				35B56E9E20DAF88C00C4923D /* PolygonTests.swift */,
+				2B5FAC0024067051008A285F /* GeometryCollectionTests.swift */,
 				3547ECF9200C3C82009DA062 /* TurfTests.swift */,
 				3547ECFA200C3C82009DA062 /* Fixtures */,
 			);
@@ -331,6 +340,7 @@
 				3547ECFB200C3C82009DA062 /* dc-line.geojson */,
 				3547ECFC200C3C82009DA062 /* polygon.geojson */,
 				35166855202E6CEE0032A97E /* multipoint.geojson */,
+				2B5FABFB24066EA5008A285F /* geometry-collection.geojson */,
 				357495BD208E3432007D7477 /* featurecollection.geojson */,
 				C46809D52124199500BAD5E1 /* featurecollection-no-properties.geojson */,
 			);
@@ -624,6 +634,7 @@
 				35166857202E6CEE0032A97E /* multipoint.geojson in Resources */,
 				357495BF208E3432007D7477 /* featurecollection.geojson in Resources */,
 				3502F7A4201F568000399EFE /* point.geojson in Resources */,
+				2B5FABFE24066EB8008A285F /* geometry-collection.geojson in Resources */,
 				3516685F202EFF130032A97E /* multipolygon.geojson in Resources */,
 				3534C3BA200C419200F93581 /* dc-line.geojson in Resources */,
 			);
@@ -647,6 +658,7 @@
 				35166856202E6CEE0032A97E /* multipoint.geojson in Resources */,
 				357495BE208E3432007D7477 /* featurecollection.geojson in Resources */,
 				3502F7A3201F568000399EFE /* point.geojson in Resources */,
+				2B5FABFD24066EB7008A285F /* geometry-collection.geojson in Resources */,
 				3516685E202EFF130032A97E /* multipolygon.geojson in Resources */,
 				3534C3B8200C419100F93581 /* dc-line.geojson in Resources */,
 			);
@@ -670,6 +682,7 @@
 				35166858202E6CEE0032A97E /* multipoint.geojson in Resources */,
 				357495C0208E3432007D7477 /* featurecollection.geojson in Resources */,
 				3502F7A5201F568000399EFE /* point.geojson in Resources */,
+				2B5FABFF24066EB9008A285F /* geometry-collection.geojson in Resources */,
 				35166860202EFF130032A97E /* multipolygon.geojson in Resources */,
 				DA39EB81201024A3004D87F7 /* dc-line.geojson in Resources */,
 			);
@@ -716,6 +729,7 @@
 				35B56EA020DAF88C00C4923D /* PolygonTests.swift in Sources */,
 				35B56EAC20DAF8CB00C4923D /* MultiPolygonTests.swift in Sources */,
 				35B56E9820DAF82F00C4923D /* PointTests.swift in Sources */,
+				2B5FAC0224067051008A285F /* GeometryCollectionTests.swift in Sources */,
 				CE7F8165215182FF00A9D221 /* BoundingBoxTests.swift in Sources */,
 				35B56EA820DAF8BB00C4923D /* MultiLineStringTests.swift in Sources */,
 				35B56EB020DAF8DE00C4923D /* FeatureCollectionTests.swift in Sources */,
@@ -758,6 +772,7 @@
 				35B56E9F20DAF88C00C4923D /* PolygonTests.swift in Sources */,
 				35B56EAB20DAF8CB00C4923D /* MultiPolygonTests.swift in Sources */,
 				35B56E9720DAF82F00C4923D /* PointTests.swift in Sources */,
+				2B5FAC0124067051008A285F /* GeometryCollectionTests.swift in Sources */,
 				CE7F8164215182FF00A9D221 /* BoundingBoxTests.swift in Sources */,
 				35B56EA720DAF8BB00C4923D /* MultiLineStringTests.swift in Sources */,
 				35B56EAF20DAF8DE00C4923D /* FeatureCollectionTests.swift in Sources */,
@@ -800,6 +815,7 @@
 				35B56EA120DAF88C00C4923D /* PolygonTests.swift in Sources */,
 				35B56EAD20DAF8CB00C4923D /* MultiPolygonTests.swift in Sources */,
 				35B56E9920DAF82F00C4923D /* PointTests.swift in Sources */,
+				2B5FAC0324067051008A285F /* GeometryCollectionTests.swift in Sources */,
 				CE7F8166215182FF00A9D221 /* BoundingBoxTests.swift in Sources */,
 				35B56EA920DAF8BB00C4923D /* MultiLineStringTests.swift in Sources */,
 				35B56EB120DAF8DE00C4923D /* FeatureCollectionTests.swift in Sources */,
