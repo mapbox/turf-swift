@@ -98,43 +98,25 @@ enum GeoJSONCodingKeys: String, CodingKey {
 //    }
 //}
 
-public struct Feature: Codable {
+struct FeatureProxy: Codable {
     public var type: FeatureType
-    
-//    public let type = GeoJSONType.Feature
-    
-    // Used to extract the geometry’s type w/o double decoding its coordinates
-//    fileprivate var simplifiedGeometry: Geometry?
-    public var geometry: _Geometry?
-    public var identifier: FeatureIdentifier?
-    public var properties: [String : AnyJSONType]?
-    
+        
     private enum CodingKeys: String, CodingKey {
         case type
-        case geometry
-        case properties
-        case identifier = "id"
     }
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        geometry = try container.decodeIfPresent(_Geometry.self, forKey: .geometry)
         do {
             type = try FeatureType(rawValue: container.decode(String.self, forKey: .type))!
         } catch {
             throw GeoJSONError.noTypeFound
         }
-//        type = try GeoJSONType(rawValue: container.decode(String.self, forKey: .type))!
-        properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
-        identifier = try container.decodeIfPresent(FeatureIdentifier.self, forKey: .identifier)
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(type.rawValue, forKey: .type)
-        try container.encodeIfPresent(geometry, forKey: .geometry)
-        try container.encodeIfPresent(properties, forKey: .properties)
-        try container.encodeIfPresent(identifier, forKey: .identifier)
     }
 }
 
@@ -157,45 +139,14 @@ public class GeoJSON: Codable {
     
     public required init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        let feature = try container.decode(Feature.self)
+        let featureProxy = try container.decode(FeatureProxy.self)
         
-//        let feature = try container.decode(Feature.self)
-        
-//        let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
-//        let featureType = try GeoJSONType(rawValue: container.decode(String.self, forKey: GeoJSONCodingKeys.type)) ?? .unknown
-        
-        switch feature.type {
+        switch featureProxy.type {
         case .feature:
-            self.decoded = feature
+            self.decoded = try container.decode(_Feature.self)
         case .featureCollection:
             self.decoded = try container.decode(FeatureCollection.self)
         }
-//        self.decoded = feature
-        
-//        if feature.type == .Feature {
-//            guard let geometryType = feature.simplifiedGeometry?.type else { throw GeoJSONError.unknownType }
-//
-//            switch geometryType {
-//            case .Point:
-//                self.decoded = try container.decode(PointFeature.self)
-//            case .LineString:
-//                self.decoded = try container.decode(LineStringFeature.self)
-//            case .Polygon:
-//                self.decoded = try container.decode(PolygonFeature.self)
-//            case .MultiLineString:
-//                self.decoded = try container.decode(MultiLineStringFeature.self)
-//            case .MultiPoint:
-//                self.decoded = try container.decode(MultiPointFeature.self)
-//            case .MultiPolygon:
-//                self.decoded = try container.decode(MultiPolygonFeature.self)
-//            case .GeometryCollection:
-//                break
-//            }
-//        } else if feature.type == .FeatureCollection {
-//            self.decoded = try container.decode(FeatureCollection.self)
-//        } else {
-//            throw GeoJSONError.noTypeFound
-//        }
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -203,7 +154,7 @@ public class GeoJSON: Codable {
         
         if let value = decoded as? FeatureCollection {
             try container.encode(value)
-        } else if let value = decoded as? Feature {
+        } else if let value = decoded as? _Feature {
             try container.encode(value)
         } else {
             throw GeoJSONError.unknownType

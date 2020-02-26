@@ -23,48 +23,48 @@ public enum _Geometry {
         case geometries
     }
     
-    case Point(type: GeometryType, coordinates: CLLocationCoordinate2D)
-    case LineString(type: GeometryType, coordinates: [CLLocationCoordinate2D])
-    case Polygon(type: GeometryType, coordinates: [[CLLocationCoordinate2D]])
-    case MultiPoint(type: GeometryType, coordinates: [CLLocationCoordinate2D])
-    case MultiLineString(type: GeometryType, coordinates: [[CLLocationCoordinate2D]])
-    case MultiPolygon(type: GeometryType, coordinates: [[[CLLocationCoordinate2D]]])
-    case GeometryCollection(type: GeometryType, geometries: [_Geometry])
+    case Point(coordinates: CLLocationCoordinate2D)
+    case LineString(coordinates: [CLLocationCoordinate2D])
+    case Polygon(coordinates: [[CLLocationCoordinate2D]])
+    case MultiPoint(coordinates: [CLLocationCoordinate2D])
+    case MultiLineString(coordinates: [[CLLocationCoordinate2D]])
+    case MultiPolygon(coordinates: [[[CLLocationCoordinate2D]]])
+    case GeometryCollection(geometries: [_Geometry])
     
     public var type: GeometryType {
         switch self {
-        case .Point(let type, _):
-            return type
-        case .LineString(let type, _):
-            return type
-        case .Polygon(let type, _):
-            return type
-        case .MultiPoint(let type, _):
-            return type
-        case .MultiLineString(let type, _):
-            return type
-        case .MultiPolygon(let type, _):
-            return type
-        case .GeometryCollection(let type, _):
-            return type
+        case .Point(_):
+            return .Point
+        case .LineString(_):
+            return .LineString
+        case .Polygon(_):
+            return .Polygon
+        case .MultiPoint(_):
+            return .MultiPoint
+        case .MultiLineString(_):
+            return .MultiLineString
+        case .MultiPolygon(_):
+            return .MultiPolygon
+        case .GeometryCollection(_):
+            return .GeometryCollection
         }
     }
     
     public var value: Any? {
         switch self {
-        case .Point(_, let value):
+        case .Point(let value):
             return value
-        case .LineString(_, let value):
+        case .LineString(let value):
             return value
-        case .Polygon(_, let value):
+        case .Polygon(let value):
             return value
-        case .MultiPoint(_, let value):
+        case .MultiPoint(let value):
             return value
-        case .MultiLineString(_, let value):
+        case .MultiLineString(let value):
             return value
-        case .MultiPolygon(_, let value):
+        case .MultiPolygon(let value):
             return value
-        case .GeometryCollection(_, let value):
+        case .GeometryCollection(let value):
             return value
         }
     }
@@ -78,25 +78,25 @@ extension _Geometry: Codable {
             switch type {
             case .Point:
                 let coordinates = try container.decode(CLLocationCoordinate2D.self, forKey: .coordinates)
-                self = .Point(type: type, coordinates: coordinates)
+                self = .Point(coordinates: coordinates)
             case .LineString:
                 let coordinates = try container.decode([CLLocationCoordinate2D].self, forKey: .coordinates)
-                self = .LineString(type: type, coordinates: coordinates)
+                self = .LineString(coordinates: coordinates)
             case .Polygon:
                 let coordinates = try container.decode([[CLLocationCoordinate2D]].self, forKey: .coordinates)
-                self = .Polygon(type: type, coordinates: coordinates)
+                self = .Polygon(coordinates: coordinates)
             case .MultiPoint:
                 let coordinates = try container.decode([CLLocationCoordinate2D].self, forKey: .coordinates)
-                self = .MultiPoint(type: type, coordinates: coordinates)
+                self = .MultiPoint(coordinates: coordinates)
             case .MultiLineString:
                 let coordinates = try container.decode([[CLLocationCoordinate2D]].self, forKey: .coordinates)
-                self = .MultiLineString(type: type, coordinates: coordinates)
+                self = .MultiLineString(coordinates: coordinates)
             case .MultiPolygon:
                 let coordinates = try container.decode([[[CLLocationCoordinate2D]]].self, forKey: .coordinates)
-                self = .MultiPolygon(type: type, coordinates: coordinates)
+                self = .MultiPolygon(coordinates: coordinates)
             case .GeometryCollection:
                 let geometries = try container.decode([_Geometry].self, forKey: .geometries)
-                self = .GeometryCollection(type: type, geometries: geometries)
+                self = .GeometryCollection(geometries: geometries)
             }
         }
         
@@ -105,28 +105,28 @@ extension _Geometry: Codable {
             try container.encode(type.rawValue, forKey: .type)
             
             switch self {
-            case .Point(_, let coordinates):
+            case .Point(let coordinates):
                 try container.encode(coordinates, forKey: .coordinates)
-            case .LineString(_, let coordinates):
+            case .LineString(let coordinates):
                 try container.encode(coordinates, forKey: .coordinates)
-            case .Polygon(_, let coordinates):
+            case .Polygon(let coordinates):
                 try container.encode(coordinates, forKey: .coordinates)
-            case .MultiPoint(_, let coordinates):
+            case .MultiPoint(let coordinates):
                 try container.encode(coordinates, forKey: .coordinates)
-            case .MultiLineString(_, let coordinates):
+            case .MultiLineString(let coordinates):
                 try container.encode(coordinates, forKey: .coordinates)
-            case .MultiPolygon(_, let coordinates):
+            case .MultiPolygon(let coordinates):
                 try container.encode(coordinates, forKey: .coordinates)
-            case .GeometryCollection(_, let geometries):
+            case .GeometryCollection(let geometries):
                 try container.encode(geometries, forKey: .geometries)
             }
         }
 }
 
-public struct Geometry: Codable {
-    public var type: String
-    
-    public var geometryType: GeometryType? {
-        return GeometryType(rawValue: type)
-    }
-}
+//public struct Geometry: Codable {
+//    public var type: String
+//    
+//    public var geometryType: GeometryType? {
+//        return GeometryType(rawValue: type)
+//    }
+//}

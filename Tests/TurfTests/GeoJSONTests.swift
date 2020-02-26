@@ -6,9 +6,11 @@ class GeoJSONTests: XCTestCase {
     
     func testPoint() {
         let coordinate = CLLocationCoordinate2D(latitude: 10, longitude: 30)
-        let point = Point(coordinate)
-        let pointFeature = PointFeature(point)
-        XCTAssertEqual(pointFeature.geometry.coordinates, coordinate)
+        let geometry = _Geometry.Point(coordinates: coordinate)
+        let pointFeature = _Feature(geometry)
+        
+//        XCTAssertEqual(pointFeature.geometry.coordinates, coordinate)
+        XCTAssertEqual(pointFeature.geometry.value as! CLLocationCoordinate2D, coordinate)
     }
     
     func testLineString() {
