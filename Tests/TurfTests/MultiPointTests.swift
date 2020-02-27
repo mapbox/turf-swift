@@ -14,13 +14,13 @@ class MultiPointTests: XCTestCase {
         let geojson = try! GeoJSON.parse(Feature.self, from: data)
                 
         XCTAssert(geojson.geometry.type == .MultiPoint)
-        let multipointCoordinates = geojson.geometry.value as? [CLLocationCoordinate2D]
+        let multipointCoordinates = geojson.geometry.multiPoint
         XCTAssert(multipointCoordinates?.first == firstCoordinate)
         XCTAssert(multipointCoordinates?.last == lastCoordinate)
         
         let encodedData = try! JSONEncoder().encode(geojson)
         let decoded = try! GeoJSON.parse(Feature.self, from: encodedData)
-        let decodedMultipointCoordinates = decoded.geometry.value as? [CLLocationCoordinate2D]
+        let decodedMultipointCoordinates = decoded.geometry.multiPoint
         XCTAssert(decodedMultipointCoordinates?.first == firstCoordinate)
         XCTAssert(decodedMultipointCoordinates?.last == lastCoordinate)
     }

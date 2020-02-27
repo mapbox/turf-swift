@@ -276,7 +276,7 @@ class LineStringTests: XCTestCase {
         var start = CLLocationCoordinate2D(latitude: 22.254624939561698, longitude: -97.79617309570312)
         var stop = CLLocationCoordinate2D(latitude: 22.057641623615734, longitude: -97.72750854492188)
         var sliced = Geometry.LineString(coordinates: line1).sliced(from: start, to: stop)
-        var slicedCoordinates = sliced?.value as? [CLLocationCoordinate2D]
+        var slicedCoordinates = sliced?.lineString
         let line1Out = [
             CLLocationCoordinate2D(latitude: 22.247393614241204, longitude: -97.83572934173804),
             CLLocationCoordinate2D(latitude: 22.175960091218524, longitude: -97.82089233398438),
@@ -299,17 +299,17 @@ class LineStringTests: XCTestCase {
         start = CLLocationCoordinate2D(latitude: 38.70582415504791, longitude: -121.25447809696198)
         stop = CLLocationCoordinate2D(latitude: 38.70634324369764, longitude: -121.25447809696198)
         sliced = Geometry.LineString(coordinates: vertical).sliced(from: start, to: stop)
-        slicedCoordinates = sliced?.value as? [CLLocationCoordinate2D]
+        slicedCoordinates = sliced?.lineString
         XCTAssertEqual(slicedCoordinates?.count, 2, "no duplicated coords")
         XCTAssertNotEqual(slicedCoordinates?.first, slicedCoordinates?.last, "vertical slice should not collapse to first coordinate")
         
         sliced = Geometry.LineString(coordinates: vertical).sliced(from: vertical[0], to: vertical[1])
-        slicedCoordinates = sliced?.value as? [CLLocationCoordinate2D]
+        slicedCoordinates = sliced?.lineString
         XCTAssertEqual(slicedCoordinates?.count, 2, "no duplicated coords")
         XCTAssertNotEqual(slicedCoordinates?.first, slicedCoordinates?.last, "vertical slice should not collapse to first coordinate")
         
         sliced = Geometry.LineString(coordinates: vertical).sliced()
-        slicedCoordinates = sliced?.value as? [CLLocationCoordinate2D]
+        slicedCoordinates = sliced?.lineString
         XCTAssertEqual(slicedCoordinates?.count, 2, "no duplicated coords")
         XCTAssertNotEqual(slicedCoordinates?.first, slicedCoordinates?.last, "vertical slice should not collapse to first coordinate")
     }

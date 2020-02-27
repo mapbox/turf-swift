@@ -14,13 +14,13 @@ class MultiLineStringTests: XCTestCase {
         let geojson = try! GeoJSON.parse(Feature.self, from: data)
         
         XCTAssert(geojson.geometry.type == .MultiLineString)
-        let multiLineStringCoordinates = geojson.geometry.value as? [[CLLocationCoordinate2D]]
+        let multiLineStringCoordinates = geojson.geometry.multiLineString
         XCTAssert(multiLineStringCoordinates?.first?.first == firstCoordinate)
         XCTAssert(multiLineStringCoordinates?.last?.last == lastCoordinate)
         
         let encodedData = try! JSONEncoder().encode(geojson)
         let decoded = try! GeoJSON.parse(Feature.self, from: encodedData)
-        let decodedMultiLineStringCoordinates = decoded.geometry.value as? [[CLLocationCoordinate2D]]
+        let decodedMultiLineStringCoordinates = decoded.geometry.multiLineString
         
         XCTAssert(decodedMultiLineStringCoordinates?.first?.first == firstCoordinate)
         XCTAssert(decodedMultiLineStringCoordinates?.last?.last == lastCoordinate)

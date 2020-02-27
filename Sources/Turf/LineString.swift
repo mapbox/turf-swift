@@ -138,7 +138,7 @@ extension Geometry {
     public func distance(from start: CLLocationCoordinate2D? = nil, to end: CLLocationCoordinate2D? = nil) -> CLLocationDistance? {
         guard let coordinates = lineString, !coordinates.isEmpty else { return nil }
         
-        guard let slicedCoordinates = sliced(from: start, to: end)?.value as? [CLLocationCoordinate2D] else {
+        guard let slicedCoordinates = sliced(from: start, to: end)?.lineString else {
             return nil
         }
         
