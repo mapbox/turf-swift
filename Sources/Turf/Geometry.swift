@@ -12,8 +12,6 @@ public enum GeometryType: String, Codable, CaseIterable {
     case MultiLineString
     case MultiPolygon
     case GeometryCollection
-    
-//    static let allValues: [GeometryType] = [.Point, .LineString, .Polygon, .MultiPoint, .MultiLineString, .MultiPolygon]
 }
 
 public enum _Geometry {
@@ -122,11 +120,3 @@ extension _Geometry: Codable {
             }
         }
 }
-
-//public struct Geometry: Codable {
-//    public var type: String
-//    
-//    public var geometryType: GeometryType? {
-//        return GeometryType(rawValue: type)
-//    }
-//}

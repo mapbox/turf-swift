@@ -7,6 +7,7 @@ import CoreLocation
 /**
  A `MultiPint` geometry. The coordinates property represents a `[CLLocationCoordinate2D]`.
  */
+@available(*, deprecated, message: "Use `Geometry.MultiPoint` instead.")
 public struct MultiPoint: Codable, Equatable {
     var type: String = GeometryType.MultiPoint.rawValue
     public var coordinates: [CLLocationCoordinate2D]
@@ -16,6 +17,7 @@ public struct MultiPoint: Codable, Equatable {
     }
 }
 
+@available(*, deprecated, message: "Use `Feature` instead.")
 public struct MultiPointFeature: GeoJSONObject {
     public var type: FeatureType = .feature
     public var identifier: FeatureIdentifier?

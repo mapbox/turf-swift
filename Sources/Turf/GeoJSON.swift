@@ -124,8 +124,6 @@ public enum GeoJSONType: String, CaseIterable {
     case Feature
     case FeatureCollection
     case Unknown
-    
-//    static let allValues: [GeoJSONType] = [.Feature, .FeatureCollection]
 }
 
 public enum GeoJSONError: Error {
@@ -136,6 +134,12 @@ public enum GeoJSONError: Error {
 public class GeoJSON: Codable {
     
     public var decoded: Codable?
+    public var decodedFeature: _Feature? {
+        decoded as? _Feature
+    }
+    public var decodedFeatueCollection: FeatureCollection? {
+        decoded as? FeatureCollection
+    }
     
     public required init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()

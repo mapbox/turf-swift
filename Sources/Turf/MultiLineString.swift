@@ -7,6 +7,7 @@ import CoreLocation
 /**
  A `MultiLineString` geometry. The coordinates property represent a `[CLLocationCoordinate2D]` of two or more coordinates.
  */
+@available(*, deprecated, message: "Use `Geometry.MultiLineString` instead.")
 public struct MultiLineString: Codable, Equatable {
     var type: String = GeometryType.MultiLineString.rawValue
     public var coordinates: [[CLLocationCoordinate2D]]
@@ -20,6 +21,7 @@ public struct MultiLineString: Codable, Equatable {
     }
 }
 
+@available(*, deprecated, message: "Use `Feature` instead.")
 public struct MultiLineStringFeature: GeoJSONObject {
     public var type: FeatureType = .feature
     public var identifier: FeatureIdentifier?

@@ -7,6 +7,7 @@ import CoreLocation
 /**
  A `Point` geometry. The `coordinates` property represents a single position.
  */
+@available(*, deprecated, message: "Use `Geometry.Point` instead.")
 public struct Point: Codable, Equatable {
     var type: String = GeometryType.Point.rawValue
     public var coordinates: CLLocationCoordinate2D
@@ -16,6 +17,7 @@ public struct Point: Codable, Equatable {
     }
 }
 
+@available(*, deprecated, message: "Use `Feature` instead.")
 public struct PointFeature: GeoJSONObject {
     public var type: FeatureType = .feature
     public var identifier: FeatureIdentifier?

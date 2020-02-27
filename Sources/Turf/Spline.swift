@@ -120,7 +120,7 @@ struct Spline {
 }
 
 public extension LineString {
-	
+
     /**
      Returns a new LineString based on bezier transformation of the input line
      */
