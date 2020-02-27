@@ -34,70 +34,6 @@ enum GeoJSONCodingKeys: String, CodingKey {
     case identifier = "id"
 }
 
-//public enum FeatureVariant {
-//    case pointFeature(PointFeature)
-//    case lineStringFeature(LineStringFeature)
-//    case polygonFeature(PolygonFeature)
-//    case multiPointFeature(MultiPointFeature)
-//    case multiLineStringFeature(MultiLineStringFeature)
-//    case multiPolygonFeature(MultiPolygonFeature)
-//
-//    public var value: Any? {
-//        switch self {
-//        case .pointFeature(let value):
-//            return value
-//        case .lineStringFeature(let value):
-//            return value
-//        case .polygonFeature(let value):
-//            return value
-//        case .multiPointFeature(let value):
-//            return value
-//        case .multiLineStringFeature(let value):
-//            return value
-//        case .multiPolygonFeature(let value):
-//            return value
-//        }
-//    }
-//}
-//
-//extension FeatureVariant: Codable {
-//
-//    public func encode(to encoder: Encoder) throws {
-//        var container = encoder.singleValueContainer()
-//        switch self {
-//        case .pointFeature(let value):
-//            try container.encode(value)
-//        case .lineStringFeature(let value):
-//            try container.encode(value)
-//        case .polygonFeature(let value):
-//            try container.encode(value)
-//        case .multiPointFeature(let value):
-//            try container.encode(value)
-//        case .multiLineStringFeature(let value):
-//            try container.encode(value)
-//        case .multiPolygonFeature(let value):
-//            try container.encode(value)
-//        }
-//    }
-//
-//    public init(from decoder: Decoder) throws {
-//        let container = try decoder.singleValueContainer()
-//        if let value = try? container.decode(PointFeature.self) {
-//            self = .pointFeature(value)
-//        } else if let value = try? container.decode(LineStringFeature.self) {
-//            self = .lineStringFeature(value)
-//        } else if let value = try? container.decode(PolygonFeature.self) {
-//            self = .polygonFeature(value)
-//        } else if let value = try? container.decode(MultiPointFeature.self) {
-//            self = .multiPointFeature(value)
-//        } else if let value = try? container.decode(MultiLineStringFeature.self) {
-//            self = .multiLineStringFeature(value)
-//        } else {
-//            self = .multiPolygonFeature(try container.decode(MultiPolygonFeature.self))
-//        }
-//    }
-//}
-
 struct FeatureProxy: Codable {
     public var type: FeatureType
         
@@ -118,12 +54,6 @@ struct FeatureProxy: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(type.rawValue, forKey: .type)
     }
-}
-
-public enum GeoJSONType: String, CaseIterable {
-    case Feature
-    case FeatureCollection
-    case Unknown
 }
 
 public enum GeoJSONError: Error {
