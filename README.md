@@ -71,27 +71,27 @@ This work-in-progress port of [Turf.js](https://github.com/Turfjs/turf/) contain
 
 Turf.js | Turf-swift
 ----|----
-[turf-along](https://github.com/Turfjs/turf/tree/master/packages/turf-along/) | `LineString.coordinateFromStart(distance:)`
-[turf-area](https://github.com/Turfjs/turf/blob/master/packages/turf-area/) | `Polygon.area`
-[turf-bezier-spline](https://github.com/Turfjs/turf/tree/master/packages/turf-bezier-spline/) | `LineString.bezier(resolution:sharpness:)`
-[turf-boolean-point-in-polygon](https://github.com/Turfjs/turf/tree/master/packages/turf-boolean-point-in-polygon) | `Polygon.contains(point:ignoreBoundary:)`
+[turf-along](https://github.com/Turfjs/turf/tree/master/packages/turf-along/) | `Geometry.LineString.coordinateFromStart(distance:)`
+[turf-area](https://github.com/Turfjs/turf/blob/master/packages/turf-area/) | `Geometry.Polygon.area`
+[turf-bezier-spline](https://github.com/Turfjs/turf/tree/master/packages/turf-bezier-spline/) | `Geometry.LineString.bezier(resolution:sharpness:)`
+[turf-boolean-point-in-polygon](https://github.com/Turfjs/turf/tree/master/packages/turf-boolean-point-in-polygon) | `Geometry.Polygon.contains(point:ignoreBoundary:)`
 [turf-destination](https://github.com/Turfjs/turf/tree/master/packages/turf-destination/) | `CLLocationCoordinate2D.coordinate(at:facing:)`<br>`RadianCoordinate2D.coordinate(at:facing:)`
 [turf-distance](https://github.com/Turfjs/turf/tree/master/packages/turf-distance/) | `CLLocationCoordinate2D.distance(to:)`<br>`RadianCoordinate2D.distance(to:)`
-[turf-helpers#polygon](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/#polygon) | `Polygon(outerRing:innerRings:)`
-[turf-helpers#lineString](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/#linestring) | `LineString(_:)`
+[turf-helpers#polygon](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/#polygon) | `Geometry.Polygon(outerRing:innerRings:)`
+[turf-helpers#lineString](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/#linestring) | `Geometry.LineString(_:)`
 [turf-helpers#degreesToRadians](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/#degreesToRadians) | `CLLocationDegrees.toRadians()`
 [turf-helpers#radiansToDegrees](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/#radiansToDegrees) | `CLLocationDegrees.toDegrees()`
 [turf-helpers#convertLength](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers#convertlength)<br>[turf-helpers#convertArea](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers#convertarea) | `Measurement.converted(to:)`
-[turf-length](https://github.com/Turfjs/turf/tree/master/packages/turf-length/) | `LineString.distance(from:to:)`
+[turf-length](https://github.com/Turfjs/turf/tree/master/packages/turf-length/) | `Geometry.LineString.distance(from:to:)`
 [turf-line-intersect](https://github.com/Turfjs/turf/tree/master/packages/turf-line-intersect/) | `Turf.intersection(_:_:)`
-[turf-line-slice](https://github.com/Turfjs/turf/tree/master/packages/turf-line-slice/) | `LineString.sliced(from:to:)`
-[turf-line-slice-along](https://github.com/Turfjs/turf/tree/master/packages/turf-line-slice-along/) | `LineString.trimmed(from:distance:)`
+[turf-line-slice](https://github.com/Turfjs/turf/tree/master/packages/turf-line-slice/) | `Geometry.LineString.sliced(from:to:)`
+[turf-line-slice-along](https://github.com/Turfjs/turf/tree/master/packages/turf-line-slice-along/) | `Geometry.LineString.trimmed(from:distance:)`
 [turf-midpoint](https://github.com/Turfjs/turf/blob/master/packages/turf-midpoint/index.js) | `mid(_:_:)`
-[turf-nearest-point-on-line](https://github.com/Turfjs/turf/tree/master/packages/turf-nearest-point-on-line/) | `LineString.closestCoordinate(to:)`
+[turf-nearest-point-on-line](https://github.com/Turfjs/turf/tree/master/packages/turf-nearest-point-on-line/) | `Geometry.LineString.closestCoordinate(to:)`
 — | `CLLocationCoordinate2D.direction(to:)`<br>`RadianCoordinate2D.direction(to:)`
 — | `CLLocationDirection.difference(from:)`
 — | `CLLocationDirection.wrap(min:max:)`
-[turf-polygon-to-line](https://github.com/Turfjs/turf/tree/master/packages/turf-polygon-to-line/) | `LineString(_:)`<br>`MultiLineString(_:)`<br>`FeatureCollection(_:)`
+[turf-polygon-to-line](https://github.com/Turfjs/turf/tree/master/packages/turf-polygon-to-line/) | `Geometry.LineString(_:)`<br>`Geometry.MultiLineString(_:)`<br>`FeatureCollection(_:)`
 
 
 ## GeoJSON
@@ -107,8 +107,8 @@ let geojson = try! GeoJSON.parse(data: data, as: FeatureCollection.self)
 
 // Initialize a PointFeature and encode as GeoJSON
 let coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 1)
-let point = Point(coordinate)
-let pointFeature = PointFeature(point)
+let point = Geometry.Point(coordinates: coordinate)
+let pointFeature = Feature(point)
 let data = try! JSONEncoder().encode(pointFeature)
 let json = String(data: data, encoding: .utf8)
 print(json)
