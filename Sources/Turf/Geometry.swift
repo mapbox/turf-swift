@@ -68,6 +68,44 @@ public enum Geometry {
     }
 }
 
+extension Geometry {
+    /// Returns coordinates if current enum case is `.Point`
+    public var point: CLLocationCoordinate2D? {
+        guard case let .Point(coordinates: coordinates) = self else { return nil }
+        return coordinates
+    }
+    /// Returns coordinates if current enum case is `.LineString`
+    public var lineString: [CLLocationCoordinate2D]? {
+        guard case let .LineString(coordinates: coordinates) = self else { return nil }
+        return coordinates
+    }
+    /// Returns coordinates if current enum case is `.Polygon`
+    public var polygon: [[CLLocationCoordinate2D]]? {
+        guard case let .Polygon(coordinates: coordinates) = self else { return nil }
+        return coordinates
+    }
+    /// Returns coordinates if current enum case is `.MultiPoint`
+    public var multiPoint: [CLLocationCoordinate2D]? {
+        guard case let .MultiPoint(coordinates: coordinates) = self else { return nil }
+        return coordinates
+    }
+    /// Returns coordinates if current enum case is `.MultiLineString`
+    public var multiLineString: [[CLLocationCoordinate2D]]? {
+        guard case let .MultiLineString(coordinates: coordinates) = self else { return nil }
+        return coordinates
+    }
+    /// Returns coordinates if current enum case is `.MultiPolygon`
+    public var multiPolygon: [[[CLLocationCoordinate2D]]]? {
+        guard case let .MultiPolygon(coordinates: coordinates) = self else { return nil }
+        return coordinates
+    }
+    /// Returns geometries collection if current enum case is `.GeometryCollection`
+    public var geometryCollection: [Geometry]? {
+        guard case let .GeometryCollection(geometries: geometries) = self else { return nil }
+        return geometries
+    }
+}
+
 extension Geometry: Codable {
     public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)

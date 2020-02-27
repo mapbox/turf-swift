@@ -25,10 +25,10 @@ class GeometryCollectionTests: XCTestCase {
         XCTAssert(geometryCollectionFeature.geometry.type == .GeometryCollection)
         XCTAssert(geometryCollectionFeature.geometry.value is [Geometry])
         
-        let geometries = geometryCollectionFeature.geometry.value as! [Geometry]
+        let geometries = geometryCollectionFeature.geometry.geometryCollection!
         
         XCTAssert(geometries[2].type == .MultiPolygon)
-        XCTAssertEqual((geometries[2].value as! [[[CLLocationCoordinate2D]]])[0][1][2], multiPolygonCoordinate)
+        XCTAssertEqual(geometries[2].multiPolygon![0][1][2], multiPolygonCoordinate)
     }
     
     func testGeometryCollectionFeatureSerialization() {
@@ -52,9 +52,9 @@ class GeometryCollectionTests: XCTestCase {
         XCTAssert(geometryCollectionFeature.geometry.type == .GeometryCollection)
         XCTAssert(geometryCollectionFeature.geometry.value is [Geometry])
         
-        let geometries = geometryCollectionFeature.geometry.value as! [Geometry]
+        let geometries = geometryCollectionFeature.geometry.geometryCollection!
         
         XCTAssert(geometries[2].type == .MultiPolygon)
-        XCTAssertEqual((geometries[2].value as! [[[CLLocationCoordinate2D]]])[0][1][2], multiPolygonCoordinate)
+        XCTAssertEqual(geometries[2].multiPolygon![0][1][2], multiPolygonCoordinate)
     }
 }

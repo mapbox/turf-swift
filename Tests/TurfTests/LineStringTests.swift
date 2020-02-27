@@ -28,7 +28,7 @@ class LineStringTests: XCTestCase {
         let geojson = try! GeoJSON.parse(Feature.self, from: data)
         
         XCTAssert(geojson.geometry.type == .LineString)
-        let lineStringCoordinates = geojson.geometry.value as! [CLLocationCoordinate2D]
+        let lineStringCoordinates = geojson.geometry.lineString!
         
         XCTAssert(lineStringCoordinates.count == 6)
         let first = CLLocationCoordinate2D(latitude: 0, longitude: 0)
@@ -39,7 +39,7 @@ class LineStringTests: XCTestCase {
         
         let encodedData = try! JSONEncoder().encode(geojson)
         let decoded = try! GeoJSON.parse(Feature.self, from: encodedData)
-        let decodedLineStringCoordinates = decoded.geometry.value as! [CLLocationCoordinate2D]
+        let decodedLineStringCoordinates = decoded.geometry.lineString!
         
         XCTAssertEqual(lineStringCoordinates, decodedLineStringCoordinates)
         XCTAssertEqual(geojson.identifier!.value as! String, decoded.identifier!.value! as! String)

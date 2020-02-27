@@ -95,9 +95,7 @@ extension Geometry {
     /// If current enum case is not `.Polygon` - always equals `nil`
     public var innerRings: [Ring]? {
         get {
-            guard case let .Polygon(coordinates: coordinates) = self else {
-                return nil
-            }
+            guard let coordinates = polygon else { return nil }
             return Array(coordinates.suffix(from: 1)).map { Ring(coordinates: $0) }
         }
     }
@@ -106,9 +104,7 @@ extension Geometry {
     /// If current enum case is not `.Polygon` - always equals `nil`
     public var outerRing: Ring? {
         get {
-            guard case let .Polygon(coordinates: coordinates) = self else {
-                return nil
-            }
+            guard let coordinates = polygon else { return nil }
             return Ring(coordinates: coordinates.first! )
         }
     }
@@ -118,9 +114,7 @@ extension Geometry {
     ///
     /// Ported from https://github.com/Turfjs/turf/blob/a94151418cb969868fdb42955a19a133512da0fd/packages/turf-area/index.js
     public var area: Double? {
-        guard case .Polygon(coordinates: _) = self else {
-            return nil
-        }
+        guard polygon != nil else { return nil }
         return abs(outerRing!.area) - innerRings!
             .map { abs($0.area) }
             .reduce(0, +)
@@ -133,9 +127,7 @@ extension Geometry {
     ///
     ///Ported from: https://github.com/Turfjs/turf/blob/e53677b0931da9e38bb947da448ee7404adc369d/packages/turf-boolean-point-in-polygon/index.ts#L31-L75
     public func contains(_ coordinate: CLLocationCoordinate2D, ignoreBoundary: Bool = false) -> Bool? {
-        guard case let .Polygon(coordinates: coordinates) = self else {
-            return nil
-        }
+        guard let coordinates = polygon else { return nil }
         
         let bbox = BoundingBox(from: coordinates.first)
         guard bbox?.contains(coordinate) ?? false else {

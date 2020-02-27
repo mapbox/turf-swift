@@ -254,9 +254,8 @@ extension Geometry {
     ///
     /// ported from https://github.com/Turfjs/turf/blob/1ea264853e1be7469c8b7d2795651c9114a069aa/packages/turf-bezier-spline/index.ts
     func bezier(resolution: Int = 10000, sharpness: Double = 0.85) -> Geometry? {
-        guard case let .LineString(coordinates: coordinates) = self else {
-            return nil
-        }
+        guard let coordinates = lineString else { return nil }
+        
         let points = coordinates.map {
             SplinePoint(coordinate: $0)
         }
@@ -272,9 +271,8 @@ extension Geometry {
     /// Returns a `.LineString` along a `.LineString` within a distance from a coordinate.
     /// If current enum case is not `.LineString` - always returns `nil` instead
     public func trimmed(from coordinate: CLLocationCoordinate2D, distance: CLLocationDistance) -> Geometry? {
-        guard case let .LineString(coordinates: coordinates) = self else {
-            return nil
-        }
+        guard let coordinates = lineString else { return nil }
+        
         let startVertex = closestCoordinate(to: coordinate)
         guard startVertex != nil && distance != 0 else {
             return nil
@@ -343,9 +341,8 @@ extension Geometry {
     ///
     /// Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-along/index.js
     public func indexedCoordinateFromStart(distance: CLLocationDistance) -> IndexedCoordinate? {
-        guard case let .LineString(coordinates: coordinates) = self else {
-            return nil
-        }
+        guard let coordinates = lineString else { return nil }
+        
         var traveled: CLLocationDistance = 0
         
         guard let firstCoordinate = coordinates.first else {
@@ -383,9 +380,8 @@ extension Geometry {
     ///
     /// Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-line-slice/index.js
     public func distance(from start: CLLocationCoordinate2D? = nil, to end: CLLocationCoordinate2D? = nil) -> CLLocationDistance? {
-        guard case let .LineString(coordinates: coordinates) = self, !coordinates.isEmpty else {
-            return nil
-        }
+        guard let coordinates = lineString, !coordinates.isEmpty else { return nil }
+        
         guard let slicedCoordinates = sliced(from: start, to: end)?.value as? [CLLocationCoordinate2D] else {
             return nil
         }
@@ -399,13 +395,8 @@ extension Geometry {
     ///
     /// Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-line-slice/index.js
     public func sliced(from start: CLLocationCoordinate2D? = nil, to end: CLLocationCoordinate2D? = nil) -> Geometry? {
-        guard case let .LineString(coordinates: coordinates) = self else {
-            return nil
-        }
-        guard !coordinates.isEmpty else {
-            return .LineString(coordinates: [])
-        }
-        
+        guard let coordinates = lineString, !coordinates.isEmpty else { return nil }
+                
         let startVertex = (start != nil ? closestCoordinate(to: start!) : nil) ?? IndexedCoordinate(coordinate: coordinates.first!, index: 0, distance: 0)
         let endVertex = (end != nil ? closestCoordinate(to: end!) : nil) ?? IndexedCoordinate(coordinate: coordinates.last!, index: coordinates.indices.last!, distance: 0)
         let ends: (IndexedCoordinate, IndexedCoordinate)
@@ -431,9 +422,8 @@ extension Geometry {
     /// Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-point-on-line/index.js
     
     public func closestCoordinate(to coordinate: CLLocationCoordinate2D) -> IndexedCoordinate? {
-        guard case let .LineString(coordinates: coordinates) = self, !coordinates.isEmpty else {
-            return nil
-        }
+        guard let coordinates = lineString, !coordinates.isEmpty else { return nil }
+        
         guard coordinates.count > 1 else {
             return IndexedCoordinate(coordinate: coordinates.first!, index: 0, distance: coordinate.distance(to: coordinates.first!))
         }

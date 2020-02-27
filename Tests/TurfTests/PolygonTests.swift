@@ -45,8 +45,7 @@ class PolygonTests: XCTestCase {
         let encodedData = try! JSONEncoder().encode(geojson)
         let decoded = try! GeoJSON.parse(Feature.self, from: encodedData)
         
-        XCTAssertEqual(geojson.geometry.value as? [[CLLocationCoordinate2D]],
-                       decoded.geometry.value as? [[CLLocationCoordinate2D]])
+        XCTAssertEqual(geojson.geometry.polygon!, decoded.geometry.polygon!)
         XCTAssertEqual(geojson.identifier!.value as! Number, decoded.identifier!.value! as! Number)
         XCTAssert(decoded.geometry.outerRing!.coordinates.first == firstCoordinate)
         XCTAssert(decoded.geometry.innerRings!.last?.coordinates.last == lastCoordinate)
