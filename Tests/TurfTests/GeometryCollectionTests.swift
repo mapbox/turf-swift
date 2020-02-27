@@ -15,17 +15,17 @@ class GeometryCollectionTests: XCTestCase {
         let geoJSON = try! GeoJSON.parse(data)
         
         // Assert
-        XCTAssert(geoJSON.decoded is _Feature)
+        XCTAssert(geoJSON.decoded is Feature)
         
-        guard let geometryCollectionFeature = geoJSON.decoded as? _Feature else {
+        guard let geometryCollectionFeature = geoJSON.decoded as? Feature else {
             XCTFail()
             return
         }
         
         XCTAssert(geometryCollectionFeature.geometry.type == .GeometryCollection)
-        XCTAssert(geometryCollectionFeature.geometry.value is [_Geometry])
+        XCTAssert(geometryCollectionFeature.geometry.value is [Geometry])
         
-        let geometries = geometryCollectionFeature.geometry.value as! [_Geometry]
+        let geometries = geometryCollectionFeature.geometry.value as! [Geometry]
         
         XCTAssert(geometries[2].type == .MultiPolygon)
         XCTAssertEqual((geometries[2].value as! [[[CLLocationCoordinate2D]]])[0][1][2], multiPolygonCoordinate)
@@ -42,17 +42,17 @@ class GeometryCollectionTests: XCTestCase {
         let encodedJSON = try! GeoJSON.parse(encodedData)
         
         // Assert
-        XCTAssert(encodedJSON.decoded is _Feature)
+        XCTAssert(encodedJSON.decoded is Feature)
         
-        guard let geometryCollectionFeature = encodedJSON.decoded as? _Feature else {
+        guard let geometryCollectionFeature = encodedJSON.decoded as? Feature else {
             XCTFail()
             return
         }
         
         XCTAssert(geometryCollectionFeature.geometry.type == .GeometryCollection)
-        XCTAssert(geometryCollectionFeature.geometry.value is [_Geometry])
+        XCTAssert(geometryCollectionFeature.geometry.value is [Geometry])
         
-        let geometries = geometryCollectionFeature.geometry.value as! [_Geometry]
+        let geometries = geometryCollectionFeature.geometry.value as! [Geometry]
         
         XCTAssert(geometries[2].type == .MultiPolygon)
         XCTAssertEqual((geometries[2].value as! [[[CLLocationCoordinate2D]]])[0][1][2], multiPolygonCoordinate)

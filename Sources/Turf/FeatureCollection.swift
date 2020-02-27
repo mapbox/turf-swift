@@ -5,7 +5,7 @@ public struct FeatureCollection: GeoJSONObject {
     public var type: FeatureType = .featureCollection
     public var identifier: FeatureIdentifier?
 //    public var features: Array<FeatureVariant> = []
-    public var features: Array<_Feature> = []
+    public var features: Array<Feature> = []
     public var properties: [String : AnyJSONType]?
     
     private enum CodingKeys: String, CodingKey {
@@ -19,7 +19,7 @@ public struct FeatureCollection: GeoJSONObject {
     }
     
 //    public init(_ features: [FeatureVariant]) {
-    public init(_ features: [_Feature]) {
+    public init(_ features: [Feature]) {
         self.features = features
     }
     
@@ -34,7 +34,7 @@ public struct FeatureCollection: GeoJSONObject {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 //        self.features = try container.decode([FeatureVariant].self, forKey: .features)
-        self.features = try container.decode([_Feature].self, forKey: .features)
+        self.features = try container.decode([Feature].self, forKey: .features)
         self.properties = try container.decodeIfPresent([String: AnyJSONType].self, forKey: .properties)
     }
     

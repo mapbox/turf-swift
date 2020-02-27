@@ -248,12 +248,12 @@ extension LineString {
     }
 }
 
-extension _Geometry {
+extension Geometry {
     /// Returns a new `.LineString` based on bezier transformation of the input line.
     /// If current enum case is not `.LineString` - always returns `nil` instead
     ///
     /// ported from https://github.com/Turfjs/turf/blob/1ea264853e1be7469c8b7d2795651c9114a069aa/packages/turf-bezier-spline/index.ts
-    func bezier(resolution: Int = 10000, sharpness: Double = 0.85) -> _Geometry? {
+    func bezier(resolution: Int = 10000, sharpness: Double = 0.85) -> Geometry? {
         guard case let .LineString(coordinates: coordinates) = self else {
             return nil
         }
@@ -271,7 +271,7 @@ extension _Geometry {
     
     /// Returns a `.LineString` along a `.LineString` within a distance from a coordinate.
     /// If current enum case is not `.LineString` - always returns `nil` instead
-    public func trimmed(from coordinate: CLLocationCoordinate2D, distance: CLLocationDistance) -> _Geometry? {
+    public func trimmed(from coordinate: CLLocationCoordinate2D, distance: CLLocationDistance) -> Geometry? {
         guard case let .LineString(coordinates: coordinates) = self else {
             return nil
         }
@@ -398,7 +398,7 @@ extension _Geometry {
     /// If current enum case is not `.LineString` - always returns `nil` instead
     ///
     /// Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-line-slice/index.js
-    public func sliced(from start: CLLocationCoordinate2D? = nil, to end: CLLocationCoordinate2D? = nil) -> _Geometry? {
+    public func sliced(from start: CLLocationCoordinate2D? = nil, to end: CLLocationCoordinate2D? = nil) -> Geometry? {
         guard case let .LineString(coordinates: coordinates) = self else {
             return nil
         }

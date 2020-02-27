@@ -8,14 +8,14 @@ class PointTests: XCTestCase {
 
     func testPointFeature() {
         let data = try! Fixture.geojsonData(from: "point")!
-        let geojson = try! GeoJSON.parse(_Feature.self, from: data)
+        let geojson = try! GeoJSON.parse(Feature.self, from: data)
         let coordinate = CLLocationCoordinate2D(latitude: 26.194876675795218, longitude: 14.765625)
 
         XCTAssertEqual(geojson.geometry.value as! CLLocationCoordinate2D, coordinate)
         XCTAssert((geojson.identifier!.value as! Number).value! as! Int == 1)
 
         let encodedData = try! JSONEncoder().encode(geojson)
-        let decoded = try! GeoJSON.parse(_Feature.self, from: encodedData)
+        let decoded = try! GeoJSON.parse(Feature.self, from: encodedData)
 
         XCTAssertEqual(geojson.geometry.value as! CLLocationCoordinate2D,
                        decoded.geometry.value as! CLLocationCoordinate2D)
@@ -27,7 +27,7 @@ class PointTests: XCTestCase {
         let data = try! Fixture.geojsonData(from: "point")!
         let geojson = try! GeoJSON.parse(data)
         
-        XCTAssert(geojson.decoded is _Feature)
+        XCTAssert(geojson.decoded is Feature)
         XCTAssert(geojson.decodedFeature?.geometry.type == .Point)
     }
     

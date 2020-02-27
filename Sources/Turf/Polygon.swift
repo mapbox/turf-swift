@@ -90,7 +90,7 @@ extension Polygon {
     }
 }
 
-extension _Geometry {
+extension Geometry {
     /// Representation of `.Polygon`s coordinates of inner rings
     /// If current enum case is not `.Polygon` - always equals `nil`
     public var innerRings: [Ring]? {

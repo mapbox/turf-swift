@@ -14,7 +14,7 @@ public enum GeometryType: String, Codable, CaseIterable {
     case GeometryCollection
 }
 
-public enum _Geometry {
+public enum Geometry {
     private enum CodingKeys: String, CodingKey {
         case type
         case coordinates
@@ -27,7 +27,7 @@ public enum _Geometry {
     case MultiPoint(coordinates: [CLLocationCoordinate2D])
     case MultiLineString(coordinates: [[CLLocationCoordinate2D]])
     case MultiPolygon(coordinates: [[[CLLocationCoordinate2D]]])
-    case GeometryCollection(geometries: [_Geometry])
+    case GeometryCollection(geometries: [Geometry])
     
     public var type: GeometryType {
         switch self {
@@ -68,7 +68,7 @@ public enum _Geometry {
     }
 }
 
-extension _Geometry: Codable {
+extension Geometry: Codable {
     public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             let type = try container.decode(GeometryType.self, forKey: .type)
@@ -93,7 +93,7 @@ extension _Geometry: Codable {
                 let coordinates = try container.decode([[[CLLocationCoordinate2D]]].self, forKey: .coordinates)
                 self = .MultiPolygon(coordinates: coordinates)
             case .GeometryCollection:
-                let geometries = try container.decode([_Geometry].self, forKey: .geometries)
+                let geometries = try container.decode([Geometry].self, forKey: .geometries)
                 self = .GeometryCollection(geometries: geometries)
             }
         }

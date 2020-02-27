@@ -4,16 +4,23 @@ import CoreLocation
 
 class GeoJSONTests: XCTestCase {
     
+    func testDeprecatedPoint() {
+        let coordinate = CLLocationCoordinate2D(latitude: 10, longitude: 30)
+        let geometry = Point(coordinate)
+        let pointFeature = PointFeature(geometry)
+        
+        XCTAssertEqual(pointFeature.geometry.coordinates, coordinate)
+    }
+    
     func testPoint() {
         let coordinate = CLLocationCoordinate2D(latitude: 10, longitude: 30)
-        let geometry = _Geometry.Point(coordinates: coordinate)
-        let pointFeature = _Feature(geometry)
+        let geometry = Geometry.Point(coordinates: coordinate)
+        let pointFeature = Feature(geometry)
         
-//        XCTAssertEqual(pointFeature.geometry.coordinates, coordinate)
         XCTAssertEqual(pointFeature.geometry.value as! CLLocationCoordinate2D, coordinate)
     }
     
-    func testLineString() {
+    func testDeprecatedLineString() {
         let coordinates = [CLLocationCoordinate2D(latitude: 10, longitude: 30),
                            CLLocationCoordinate2D(latitude: 30, longitude: 10),
                            CLLocationCoordinate2D(latitude: 40, longitude: 40)]
@@ -23,7 +30,17 @@ class GeoJSONTests: XCTestCase {
         XCTAssertEqual(lineStringFeature.geometry.coordinates, coordinates)
     }
     
-    func testPolygon() {
+    func testLineString() {
+        let coordinates = [CLLocationCoordinate2D(latitude: 10, longitude: 30),
+                           CLLocationCoordinate2D(latitude: 30, longitude: 10),
+                           CLLocationCoordinate2D(latitude: 40, longitude: 40)]
+        
+        let lineString = Geometry.LineString(coordinates: coordinates)
+        let lineStringFeature = Feature(lineString)
+        XCTAssertEqual(lineStringFeature.geometry.value as! [CLLocationCoordinate2D], coordinates)
+    }
+    
+    func testDeprecatedPolygon() {
         let coordinates = [
             [
                 CLLocationCoordinate2D(latitude: 10, longitude: 30),
@@ -45,6 +62,28 @@ class GeoJSONTests: XCTestCase {
         XCTAssertEqual(polygonFeature.geometry.coordinates, coordinates)
     }
     
+    func testPolygon() {
+        let coordinates = [
+            [
+                CLLocationCoordinate2D(latitude: 10, longitude: 30),
+                CLLocationCoordinate2D(latitude: 40, longitude: 40),
+                CLLocationCoordinate2D(latitude: 40, longitude: 20),
+                CLLocationCoordinate2D(latitude: 20, longitude: 10),
+                CLLocationCoordinate2D(latitude: 10, longitude: 30)
+            ],
+            [
+                CLLocationCoordinate2D(latitude: 30, longitude: 20),
+                CLLocationCoordinate2D(latitude: 35, longitude: 35),
+                CLLocationCoordinate2D(latitude: 20, longitude: 30),
+                CLLocationCoordinate2D(latitude: 30, longitude: 20)
+            ]
+        ]
+        
+        let polygon = Geometry.Polygon(coordinates: coordinates)
+        let polygonFeature = Feature(polygon)
+        XCTAssertEqual(polygonFeature.geometry.value as! [[CLLocationCoordinate2D]], coordinates)
+    }
+    
     func testMultiPoint() {
         let coordinates = [CLLocationCoordinate2D(latitude: 40, longitude: 10),
                            CLLocationCoordinate2D(latitude: 30, longitude: 40),
@@ -56,7 +95,7 @@ class GeoJSONTests: XCTestCase {
         XCTAssertEqual(multiPointFeature.geometry.coordinates, coordinates)
     }
     
-    func testMultiLineString() {
+    func testDeprecatedMultiLineString() {
         let coordinates = [
             [
                 CLLocationCoordinate2D(latitude: 10, longitude: 10),
@@ -76,7 +115,27 @@ class GeoJSONTests: XCTestCase {
         XCTAssertEqual(multiLineStringFeature.geometry.coordinates, coordinates)
     }
     
-    func testMultiPolygon() {
+    func testMultiLineString() {
+        let coordinates = [
+            [
+                CLLocationCoordinate2D(latitude: 10, longitude: 10),
+                CLLocationCoordinate2D(latitude: 20, longitude: 20),
+                CLLocationCoordinate2D(latitude: 40, longitude: 10)
+            ],
+            [
+                CLLocationCoordinate2D(latitude: 40, longitude: 40),
+                CLLocationCoordinate2D(latitude: 30, longitude: 30),
+                CLLocationCoordinate2D(latitude: 20, longitude: 40),
+                CLLocationCoordinate2D(latitude: 10, longitude: 30)
+            ]
+        ]
+        
+        let multiLineString = Geometry.MultiLineString(coordinates: coordinates)
+        let multiLineStringFeature = Feature(multiLineString)
+        XCTAssertEqual(multiLineStringFeature.geometry.value as! [[CLLocationCoordinate2D]], coordinates)
+    }
+    
+    func testDeprecatedMultiPolygon() {
         let coordinates = [
             [
                 [
@@ -107,5 +166,38 @@ class GeoJSONTests: XCTestCase {
         let multiPolygon = MultiPolygon(coordinates)
         let multiPolygonFeature = MultiPolygonFeature(multiPolygon)
         XCTAssertEqual(multiPolygonFeature.geometry.coordinates, coordinates)
+    }
+    
+    func testMultiPolygon() {
+        let coordinates = [
+            [
+                [
+                    CLLocationCoordinate2D(latitude: 40, longitude: 40),
+                    CLLocationCoordinate2D(latitude: 45, longitude: 20),
+                    CLLocationCoordinate2D(latitude: 45, longitude: 30),
+                    CLLocationCoordinate2D(latitude: 40, longitude: 40)
+                ]
+            ],
+            [
+                [
+                    CLLocationCoordinate2D(latitude: 35, longitude: 20),
+                    CLLocationCoordinate2D(latitude: 30, longitude: 10),
+                    CLLocationCoordinate2D(latitude: 10, longitude: 10),
+                    CLLocationCoordinate2D(latitude: 5, longitude: 30),
+                    CLLocationCoordinate2D(latitude: 20, longitude: 45),
+                    CLLocationCoordinate2D(latitude: 35, longitude: 20)
+                ],
+                [
+                    CLLocationCoordinate2D(latitude: 20, longitude: 30),
+                    CLLocationCoordinate2D(latitude: 15, longitude: 20),
+                    CLLocationCoordinate2D(latitude: 25, longitude: 25),
+                    CLLocationCoordinate2D(latitude: 20, longitude: 30)
+                ]
+            ]
+        ]
+        
+        let multiPolygon = Geometry.MultiPolygon(coordinates: coordinates)
+        let multiPolygonFeature = Feature(multiPolygon)
+        XCTAssertEqual(multiPolygonFeature.geometry.value as! [[[CLLocationCoordinate2D]]], coordinates)
     }
 }

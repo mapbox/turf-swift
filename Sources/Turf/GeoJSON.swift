@@ -134,8 +134,8 @@ public enum GeoJSONError: Error {
 public class GeoJSON: Codable {
     
     public var decoded: Codable?
-    public var decodedFeature: _Feature? {
-        decoded as? _Feature
+    public var decodedFeature: Feature? {
+        decoded as? Feature
     }
     public var decodedFeatueCollection: FeatureCollection? {
         decoded as? FeatureCollection
@@ -147,7 +147,7 @@ public class GeoJSON: Codable {
         
         switch featureProxy.type {
         case .feature:
-            self.decoded = try container.decode(_Feature.self)
+            self.decoded = try container.decode(Feature.self)
         case .featureCollection:
             self.decoded = try container.decode(FeatureCollection.self)
         }
@@ -158,7 +158,7 @@ public class GeoJSON: Codable {
         
         if let value = decoded as? FeatureCollection {
             try container.encode(value)
-        } else if let value = decoded as? _Feature {
+        } else if let value = decoded as? Feature {
             try container.encode(value)
         } else {
             throw GeoJSONError.unknownType
