@@ -58,10 +58,10 @@ public class GeoJSON: Codable {
     
     public var decoded: Codable?
     public var decodedFeature: Feature? {
-        decoded as? Feature
+        return decoded as? Feature
     }
     public var decodedFeatueCollection: FeatureCollection? {
-        decoded as? FeatureCollection
+        return decoded as? FeatureCollection
     }
     
     public required init(from decoder: Decoder) throws {
