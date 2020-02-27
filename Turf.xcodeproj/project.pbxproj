@@ -18,10 +18,6 @@
 		2B5FAC0C2406B8B7008A285F /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5FAC092406B8B7008A285F /* Feature.swift */; };
 		2B5FAC0D2406B8B7008A285F /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5FAC092406B8B7008A285F /* Feature.swift */; };
 		2B5FAC122406BADF008A285F /* GeoJSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573EA6C215A393F009899D7 /* GeoJSONTests.swift */; };
-		2B64F7A82407C6BB00C2559B /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E7820DAF4BF00C4923D /* Point.swift */; };
-		2B64F7A92407C6BC00C2559B /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E7820DAF4BF00C4923D /* Point.swift */; };
-		2B64F7AA2407C6BD00C2559B /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E7820DAF4BF00C4923D /* Point.swift */; };
-		2B64F7AB2407C6BE00C2559B /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E7820DAF4BF00C4923D /* Point.swift */; };
 		2B64F7AC2407ECD300C2559B /* LineString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E7D20DAF4E700C4923D /* LineString.swift */; };
 		2B64F7AD2407ECD400C2559B /* LineString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E7D20DAF4E700C4923D /* LineString.swift */; };
 		2B64F7AE2407ECD500C2559B /* LineString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E7D20DAF4E700C4923D /* LineString.swift */; };
@@ -82,18 +78,6 @@
 		35B56E7520DAF47D00C4923D /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E7320DAF47D00C4923D /* Polygon.swift */; };
 		35B56E7620DAF47D00C4923D /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E7320DAF47D00C4923D /* Polygon.swift */; };
 		35B56E7720DAF47D00C4923D /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E7320DAF47D00C4923D /* Polygon.swift */; };
-		35B56E8320DAF54F00C4923D /* MultiPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E8220DAF54F00C4923D /* MultiPoint.swift */; };
-		35B56E8420DAF54F00C4923D /* MultiPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E8220DAF54F00C4923D /* MultiPoint.swift */; };
-		35B56E8520DAF54F00C4923D /* MultiPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E8220DAF54F00C4923D /* MultiPoint.swift */; };
-		35B56E8620DAF54F00C4923D /* MultiPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E8220DAF54F00C4923D /* MultiPoint.swift */; };
-		35B56E8820DAF57500C4923D /* MultiLineString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E8720DAF57500C4923D /* MultiLineString.swift */; };
-		35B56E8920DAF57500C4923D /* MultiLineString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E8720DAF57500C4923D /* MultiLineString.swift */; };
-		35B56E8A20DAF57500C4923D /* MultiLineString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E8720DAF57500C4923D /* MultiLineString.swift */; };
-		35B56E8B20DAF57500C4923D /* MultiLineString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E8720DAF57500C4923D /* MultiLineString.swift */; };
-		35B56E8D20DAF59700C4923D /* MultiPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E8C20DAF59700C4923D /* MultiPolygon.swift */; };
-		35B56E8E20DAF59700C4923D /* MultiPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E8C20DAF59700C4923D /* MultiPolygon.swift */; };
-		35B56E8F20DAF59700C4923D /* MultiPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E8C20DAF59700C4923D /* MultiPolygon.swift */; };
-		35B56E9020DAF59700C4923D /* MultiPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E8C20DAF59700C4923D /* MultiPolygon.swift */; };
 		35B56E9220DAF66A00C4923D /* FeatureCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E9120DAF66A00C4923D /* FeatureCollection.swift */; };
 		35B56E9320DAF66A00C4923D /* FeatureCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E9120DAF66A00C4923D /* FeatureCollection.swift */; };
 		35B56E9420DAF66A00C4923D /* FeatureCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E9120DAF66A00C4923D /* FeatureCollection.swift */; };
@@ -208,11 +192,7 @@
 		35B56E6920DAF3C500C4923D /* RadianCoordinate2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadianCoordinate2D.swift; sourceTree = "<group>"; };
 		35B56E6E20DAF41F00C4923D /* Ring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ring.swift; sourceTree = "<group>"; };
 		35B56E7320DAF47D00C4923D /* Polygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polygon.swift; sourceTree = "<group>"; };
-		35B56E7820DAF4BF00C4923D /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		35B56E7D20DAF4E700C4923D /* LineString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineString.swift; sourceTree = "<group>"; };
-		35B56E8220DAF54F00C4923D /* MultiPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPoint.swift; sourceTree = "<group>"; };
-		35B56E8720DAF57500C4923D /* MultiLineString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiLineString.swift; sourceTree = "<group>"; };
-		35B56E8C20DAF59700C4923D /* MultiPolygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPolygon.swift; sourceTree = "<group>"; };
 		35B56E9120DAF66A00C4923D /* FeatureCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureCollection.swift; sourceTree = "<group>"; };
 		35B56E9620DAF82F00C4923D /* PointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointTests.swift; sourceTree = "<group>"; };
 		35B56E9A20DAF86000C4923D /* LineStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineStringTests.swift; sourceTree = "<group>"; };
@@ -302,10 +282,6 @@
 				3502F790201F507500399EFE /* GeoJSON.swift */,
 				35ECAF2E20974A1800DC3BC3 /* Geometry.swift */,
 				35B56E7D20DAF4E700C4923D /* LineString.swift */,
-				35B56E8720DAF57500C4923D /* MultiLineString.swift */,
-				35B56E8220DAF54F00C4923D /* MultiPoint.swift */,
-				35B56E8C20DAF59700C4923D /* MultiPolygon.swift */,
-				35B56E7820DAF4BF00C4923D /* Point.swift */,
 				35B56E7320DAF47D00C4923D /* Polygon.swift */,
 				35B56E6920DAF3C500C4923D /* RadianCoordinate2D.swift */,
 				35B56E6E20DAF41F00C4923D /* Ring.swift */,
@@ -710,10 +686,8 @@
 			files = (
 				3534C3BD200C442A00F93581 /* Turf.swift in Sources */,
 				35ECAF372099EC0700DC3BC3 /* FeatureIdentifier.swift in Sources */,
-				35B56E8920DAF57500C4923D /* MultiLineString.swift in Sources */,
 				3534C3BC200C442700F93581 /* CoreLocation.swift in Sources */,
 				35B56E6B20DAF3C500C4923D /* RadianCoordinate2D.swift in Sources */,
-				35B56E8420DAF54F00C4923D /* MultiPoint.swift in Sources */,
 				2B5FAC0B2406B8B7008A285F /* Feature.swift in Sources */,
 				35B56E9320DAF66A00C4923D /* FeatureCollection.swift in Sources */,
 				2B64F7AD2407ECD400C2559B /* LineString.swift in Sources */,
@@ -722,9 +696,7 @@
 				7AA969AD21B98F8F009C57FE /* Spline.swift in Sources */,
 				CE2EB999214C247100915A30 /* BoundingBox.swift in Sources */,
 				35B56E7020DAF41F00C4923D /* Ring.swift in Sources */,
-				2B64F7A92407C6BC00C2559B /* Point.swift in Sources */,
 				3502F797201F53FC00399EFE /* Codable.swift in Sources */,
-				35B56E8E20DAF59700C4923D /* MultiPolygon.swift in Sources */,
 				3502F792201F507500399EFE /* GeoJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -754,10 +726,8 @@
 			files = (
 				3547ECF6200C3C78009DA062 /* Turf.swift in Sources */,
 				35ECAF362099EC0700DC3BC3 /* FeatureIdentifier.swift in Sources */,
-				35B56E8820DAF57500C4923D /* MultiLineString.swift in Sources */,
 				3547ECF5200C3C78009DA062 /* CoreLocation.swift in Sources */,
 				35B56E6A20DAF3C500C4923D /* RadianCoordinate2D.swift in Sources */,
-				35B56E8320DAF54F00C4923D /* MultiPoint.swift in Sources */,
 				2B5FAC0A2406B8B7008A285F /* Feature.swift in Sources */,
 				35B56E9220DAF66A00C4923D /* FeatureCollection.swift in Sources */,
 				2B64F7AC2407ECD300C2559B /* LineString.swift in Sources */,
@@ -766,9 +736,7 @@
 				7AA969AC21B98F8F009C57FE /* Spline.swift in Sources */,
 				CE2EB998214C246A00915A30 /* BoundingBox.swift in Sources */,
 				35B56E6F20DAF41F00C4923D /* Ring.swift in Sources */,
-				2B64F7A82407C6BB00C2559B /* Point.swift in Sources */,
 				3502F796201F53FC00399EFE /* Codable.swift in Sources */,
-				35B56E8D20DAF59700C4923D /* MultiPolygon.swift in Sources */,
 				3502F791201F507500399EFE /* GeoJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -798,10 +766,8 @@
 			files = (
 				DA39EB7E20101FCD004D87F7 /* Turf.swift in Sources */,
 				35ECAF382099EC0700DC3BC3 /* FeatureIdentifier.swift in Sources */,
-				35B56E8A20DAF57500C4923D /* MultiLineString.swift in Sources */,
 				DA39EB7D20101FCD004D87F7 /* CoreLocation.swift in Sources */,
 				35B56E6C20DAF3C500C4923D /* RadianCoordinate2D.swift in Sources */,
-				35B56E8520DAF54F00C4923D /* MultiPoint.swift in Sources */,
 				2B5FAC0C2406B8B7008A285F /* Feature.swift in Sources */,
 				35B56E9420DAF66A00C4923D /* FeatureCollection.swift in Sources */,
 				2B64F7AE2407ECD500C2559B /* LineString.swift in Sources */,
@@ -810,9 +776,7 @@
 				7AA969AE21B98F8F009C57FE /* Spline.swift in Sources */,
 				CE2EB99A214C247100915A30 /* BoundingBox.swift in Sources */,
 				35B56E7120DAF41F00C4923D /* Ring.swift in Sources */,
-				2B64F7AA2407C6BD00C2559B /* Point.swift in Sources */,
 				3502F798201F53FC00399EFE /* Codable.swift in Sources */,
-				35B56E8F20DAF59700C4923D /* MultiPolygon.swift in Sources */,
 				3502F793201F507500399EFE /* GeoJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -842,10 +806,8 @@
 			files = (
 				DA9424A52010298300CDB4E6 /* Turf.swift in Sources */,
 				35ECAF392099EC0700DC3BC3 /* FeatureIdentifier.swift in Sources */,
-				35B56E8B20DAF57500C4923D /* MultiLineString.swift in Sources */,
 				DA9424A42010298300CDB4E6 /* CoreLocation.swift in Sources */,
 				35B56E6D20DAF3C500C4923D /* RadianCoordinate2D.swift in Sources */,
-				35B56E8620DAF54F00C4923D /* MultiPoint.swift in Sources */,
 				2B5FAC0D2406B8B7008A285F /* Feature.swift in Sources */,
 				35B56E9520DAF66A00C4923D /* FeatureCollection.swift in Sources */,
 				2B64F7AF2407ECD600C2559B /* LineString.swift in Sources */,
@@ -854,9 +816,7 @@
 				7AA969AF21B98F8F009C57FE /* Spline.swift in Sources */,
 				CE2EB99B214C247200915A30 /* BoundingBox.swift in Sources */,
 				35B56E7220DAF41F00C4923D /* Ring.swift in Sources */,
-				2B64F7AB2407C6BE00C2559B /* Point.swift in Sources */,
 				3502F799201F53FC00399EFE /* Codable.swift in Sources */,
-				35B56E9020DAF59700C4923D /* MultiPolygon.swift in Sources */,
 				3502F794201F507500399EFE /* GeoJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

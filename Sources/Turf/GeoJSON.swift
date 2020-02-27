@@ -21,19 +21,6 @@ extension FeatureType: Codable {
     }
 }
 
-public protocol GeoJSONObject: Codable {
-    var type: FeatureType { get }
-    var identifier: FeatureIdentifier? { get set }
-    var properties: [String: AnyJSONType]? { get set }
-}
-
-enum GeoJSONCodingKeys: String, CodingKey {
-    case type
-    case properties
-    case geometry
-    case identifier = "id"
-}
-
 struct FeatureProxy: Codable {
     public var type: FeatureType
         
@@ -54,6 +41,12 @@ struct FeatureProxy: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(type.rawValue, forKey: .type)
     }
+}
+
+public protocol GeoJSONObject: Codable {
+    var type: FeatureType { get }
+    var identifier: FeatureIdentifier? { get set }
+    var properties: [String: AnyJSONType]? { get set }
 }
 
 public enum GeoJSONError: Error {
