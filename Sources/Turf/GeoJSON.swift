@@ -3,22 +3,9 @@ import Foundation
 import CoreLocation
 #endif
 
-public enum FeatureType: String {
+public enum FeatureType: String, Codable {
     case feature = "Feature"
     case featureCollection = "FeatureCollection"
-}
-
-extension FeatureType: Codable {
-    
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(self.rawValue)
-    }
-    
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self = try container.decode(FeatureType.self)
-    }
 }
 
 struct FeatureProxy: Codable {
@@ -31,7 +18,7 @@ struct FeatureProxy: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         do {
-            type = try FeatureType(rawValue: container.decode(String.self, forKey: .type))!
+            type = try container.decode(FeatureType.self, forKey: .type)
         } catch {
             throw GeoJSONError.noTypeFound
         }
@@ -39,7 +26,7 @@ struct FeatureProxy: Codable {
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(type.rawValue, forKey: .type)
+        try container.encode(type, forKey: .type)
     }
 }
 
