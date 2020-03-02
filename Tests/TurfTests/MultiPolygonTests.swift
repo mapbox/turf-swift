@@ -17,15 +17,22 @@ class MultiPolygonTests: XCTestCase {
         let geojson = try! GeoJSON.parse(Feature.self, from: data)
         
         XCTAssert(geojson.geometry.type == .MultiPolygon)
-        let multipolygonCoordinates = geojson.geometry.multiPolygon
-        XCTAssert(multipolygonCoordinates?.first?.first?.first == firstCoordinate)
-        XCTAssert(multipolygonCoordinates?.last?.last?.last == lastCoordinate)
+        guard case let .MultiPolygon(multipolygonCoordinates) = geojson.geometry else {
+            XCTFail()
+            return
+        }
+        
+        XCTAssert(multipolygonCoordinates.coordinates.first?.first?.first == firstCoordinate)
+        XCTAssert(multipolygonCoordinates.coordinates.last?.last?.last == lastCoordinate)
         
         let encodedData = try! JSONEncoder().encode(geojson)
         let decoded = try! GeoJSON.parse(Feature.self, from: encodedData)
-        let decodedMultipolygonCoordinates = decoded.geometry.multiPolygon
-        XCTAssert(decodedMultipolygonCoordinates?.first?.first?.first == firstCoordinate)
-        XCTAssert(decodedMultipolygonCoordinates?.last?.last?.last == lastCoordinate)
+        guard case let .MultiPolygon(decodedMultipolygonCoordinates) = decoded.geometry else {
+            XCTFail()
+            return
+        }
+        XCTAssert(decodedMultipolygonCoordinates.coordinates.first?.first?.first == firstCoordinate)
+        XCTAssert(decodedMultipolygonCoordinates.coordinates.last?.last?.last == lastCoordinate)
     }
     
     func testBuildMultiPolygonFeature() {
@@ -63,7 +70,7 @@ class MultiPolygonTests: XCTestCase {
             ]
         ]
         
-        let multiPolygon = Geometry.MultiPolygon(coordinates: coordinates)
+        let multiPolygon = Geometry.MultiPolygon(coordinates: .init(coordinates))
         var multiPolygonFeature = Feature(multiPolygon)
         multiPolygonFeature.identifier = FeatureIdentifier.string("uniqueIdentifier")
         multiPolygonFeature.properties = ["some": AnyJSONType("var")]
@@ -73,10 +80,16 @@ class MultiPolygonTests: XCTestCase {
         
         let data = try! Fixture.geojsonData(from: "multipolygon")!
         let bundledMultiPolygon = try! GeoJSON.parse(Feature.self, from: data)
-        let bundledMultipolygonCoordinates = bundledMultiPolygon.geometry.multiPolygon
+        guard case let .MultiPolygon(bundledMultipolygonCoordinates) = bundledMultiPolygon.geometry else {
+            XCTFail()
+            return
+        }
         
         XCTAssert(decodedCustomMultiPolygon.geometry.type == .MultiPolygon)
-        let decodedMultipolygonCoordinates = decodedCustomMultiPolygon.geometry.multiPolygon
+        guard case let .MultiPolygon(decodedMultipolygonCoordinates) = decodedCustomMultiPolygon.geometry else {
+            XCTFail()
+            return
+        }
         XCTAssertEqual(decodedMultipolygonCoordinates, bundledMultipolygonCoordinates)
     }
 }

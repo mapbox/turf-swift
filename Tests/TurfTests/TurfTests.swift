@@ -58,22 +58,22 @@ class TurfTests: XCTestCase {
            $0.map { CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0]) }
         }
         
-        let polygon = Geometry.Polygon(coordinates: coordinates)
+        let polygon = Geometry.PolygonRepresentation(coordinates)
         
-        XCTAssertEqual(polygon.area!, 78588446934.43, accuracy: 0.1)
+        XCTAssertEqual(polygon.area, 78588446934.43, accuracy: 0.1)
     }
     
     func testBezierSplineTwoPoints() {
         let point1 = CLLocationCoordinate2D(latitude: 37.7749, longitude: 237.581)
         let point2 = CLLocationCoordinate2D(latitude: 35.6669502038, longitude: 139.7731286197)
         let line = [point1, point2]
-        let lineString = Geometry.LineString(coordinates: line)
+        let lineString = Geometry.LineStringRepresentation(line)
         guard let bezierLineString = lineString.bezier() else {
             XCTFail("bezier line must be created with 2 points line")
             return
         }
-        guard let bezierPoint1 = bezierLineString.lineString?.first,
-            let bezierPoint2 = bezierLineString.lineString?.last else {
+        guard let bezierPoint1 = bezierLineString.coordinates.first,
+            let bezierPoint2 = bezierLineString.coordinates.last else {
                 XCTFail("bezier line must constains 2 points")
                 return
         }
@@ -89,13 +89,13 @@ class TurfTests: XCTestCase {
         let point3 = CLLocationCoordinate2D(latitude: -25.681137335685307, longitude: 138.33984375)
         let point4 = CLLocationCoordinate2D(latitude: -32.026706293336126, longitude: 138.3837890625)
         let line = [point1, point2, point3, point4]
-        let lineString = Geometry.LineString(coordinates: line)
+        let lineString = Geometry.LineStringRepresentation(line)
         guard let bezierLineString = lineString.bezier() else {
             XCTFail("bezier line must be created")
             return
         }
         for point in line {
-            let controlPoint = bezierLineString.lineString?.first { (bezierPoint) -> Bool in
+            let controlPoint = bezierLineString.coordinates.first { (bezierPoint) -> Bool in
                 return fabs(bezierPoint.latitude - point.latitude) < 0.2
                         && fabs(bezierPoint.longitude - point.longitude) < 0.2
             }

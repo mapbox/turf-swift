@@ -23,12 +23,19 @@ class GeometryCollectionTests: XCTestCase {
         }
         
         XCTAssert(geometryCollectionFeature.geometry.type == .GeometryCollection)
-        XCTAssert(geometryCollectionFeature.geometry.value is [Geometry])
+        XCTAssert(geometryCollectionFeature.geometry.value is Geometry.GeometryCollectionRepresentation)
         
-        let geometries = geometryCollectionFeature.geometry.geometryCollection!
+        guard case let .GeometryCollection(geometries) = geometryCollectionFeature.geometry else {
+            XCTFail()
+            return
+        }
         
-        XCTAssert(geometries[2].type == .MultiPolygon)
-        XCTAssertEqual(geometries[2].multiPolygon![0][1][2], multiPolygonCoordinate)
+        XCTAssert(geometries.geometries[2].type == .MultiPolygon)
+        guard case let .MultiPolygon(decodedMultiPolygonCoordinate) = geometries.geometries[2] else {
+            XCTFail()
+            return
+        }
+        XCTAssertEqual(decodedMultiPolygonCoordinate.coordinates[0][1][2], multiPolygonCoordinate)
     }
     
     func testGeometryCollectionFeatureSerialization() {
@@ -50,11 +57,18 @@ class GeometryCollectionTests: XCTestCase {
         }
         
         XCTAssert(geometryCollectionFeature.geometry.type == .GeometryCollection)
-        XCTAssert(geometryCollectionFeature.geometry.value is [Geometry])
+        XCTAssert(geometryCollectionFeature.geometry.value is Geometry.GeometryCollectionRepresentation)
         
-        let geometries = geometryCollectionFeature.geometry.geometryCollection!
+        guard case let .GeometryCollection(geometries) = geometryCollectionFeature.geometry else {
+            XCTFail()
+            return
+        }
         
-        XCTAssert(geometries[2].type == .MultiPolygon)
-        XCTAssertEqual(geometries[2].multiPolygon![0][1][2], multiPolygonCoordinate)
+        XCTAssert(geometries.geometries[2].type == .MultiPolygon)
+        guard case let .MultiPolygon(decodedMultiPolygonCoordinate) = geometries.geometries[2] else {
+            XCTFail()
+            return
+        }
+        XCTAssertEqual(decodedMultiPolygonCoordinate.coordinates[0][1][2], multiPolygonCoordinate)
     }
 }
