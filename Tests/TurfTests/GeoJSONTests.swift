@@ -6,9 +6,10 @@ class GeoJSONTests: XCTestCase {
     
     func testPoint() {
         let coordinate = CLLocationCoordinate2D(latitude: 10, longitude: 30)
-        let point = Point(coordinate)
-        let pointFeature = PointFeature(point)
-        XCTAssertEqual(pointFeature.geometry.coordinates, coordinate)
+        let geometry = Geometry.Point(coordinates: Geometry.PointRepresentation(coordinate))
+        let pointFeature = Feature(geometry)
+        
+        XCTAssertEqual((pointFeature.geometry.value as! Geometry.PointRepresentation).coordinates, coordinate)
     }
     
     func testLineString() {
@@ -16,9 +17,9 @@ class GeoJSONTests: XCTestCase {
                            CLLocationCoordinate2D(latitude: 30, longitude: 10),
                            CLLocationCoordinate2D(latitude: 40, longitude: 40)]
         
-        let lineString = LineString(coordinates)
-        let lineStringFeature = LineStringFeature(lineString)
-        XCTAssertEqual(lineStringFeature.geometry.coordinates, coordinates)
+        let lineString = Geometry.LineString(coordinates: Geometry.LineStringRepresentation(coordinates))
+        let lineStringFeature = Feature(lineString)
+        XCTAssertEqual((lineStringFeature.geometry.value as! Geometry.LineStringRepresentation).coordinates, coordinates)
     }
     
     func testPolygon() {
@@ -38,9 +39,9 @@ class GeoJSONTests: XCTestCase {
             ]
         ]
         
-        let polygon = Polygon(coordinates)
-        let polygonFeature = PolygonFeature(polygon)
-        XCTAssertEqual(polygonFeature.geometry.coordinates, coordinates)
+        let polygon = Geometry.Polygon(coordinates: Geometry.PolygonRepresentation(coordinates))
+        let polygonFeature = Feature(polygon)
+        XCTAssertEqual((polygonFeature.geometry.value as! Geometry.PolygonRepresentation).coordinates, coordinates)
     }
     
     func testMultiPoint() {
@@ -49,9 +50,9 @@ class GeoJSONTests: XCTestCase {
                            CLLocationCoordinate2D(latitude: 20, longitude: 20),
                            CLLocationCoordinate2D(latitude: 10, longitude: 30)]
         
-        let multiPoint = MultiPoint(coordinates)
-        let multiPointFeature = MultiPointFeature(multiPoint)
-        XCTAssertEqual(multiPointFeature.geometry.coordinates, coordinates)
+        let multiPoint = Geometry.MultiPoint(coordinates: Geometry.MultiPointRepresentation(coordinates))
+        let multiPointFeature = Feature(multiPoint)
+        XCTAssertEqual((multiPointFeature.geometry.value as! Geometry.MultiPointRepresentation).coordinates, coordinates)
     }
     
     func testMultiLineString() {
@@ -69,9 +70,9 @@ class GeoJSONTests: XCTestCase {
             ]
         ]
         
-        let multiLineString = MultiLineString(coordinates)
-        let multiLineStringFeature = MultiLineStringFeature(multiLineString)
-        XCTAssertEqual(multiLineStringFeature.geometry.coordinates, coordinates)
+        let multiLineString = Geometry.MultiLineString(coordinates: Geometry.MultiLineStringRepresentation(coordinates))
+        let multiLineStringFeature = Feature(multiLineString)
+        XCTAssertEqual((multiLineStringFeature.geometry.value as! Geometry.MultiLineStringRepresentation).coordinates, coordinates)
     }
     
     func testMultiPolygon() {
@@ -102,8 +103,8 @@ class GeoJSONTests: XCTestCase {
             ]
         ]
         
-        let multiPolygon = MultiPolygon(coordinates)
-        let multiPolygonFeature = MultiPolygonFeature(multiPolygon)
-        XCTAssertEqual(multiPolygonFeature.geometry.coordinates, coordinates)
+        let multiPolygon = Geometry.MultiPolygon(coordinates: Geometry.MultiPolygonRepresentation(coordinates))
+        let multiPolygonFeature = Feature(multiPolygon)
+        XCTAssertEqual((multiPolygonFeature.geometry.value as! Geometry.MultiPolygonRepresentation).coordinates, coordinates)
     }
 }

@@ -4,53 +4,28 @@ import CoreLocation
 #endif
 
 
-// `Polyline` has been renamed to `LineString`. This alias is for backwards compatibility.
-public typealias Polyline = LineString
-
-
-/**
- `LineString` geometry represents a shape consisting of two or more coordinates.
- */
-public struct LineString: Codable, Equatable {
-    var type: String = GeometryType.LineString.rawValue
-    public var coordinates: [CLLocationCoordinate2D]
-}
-
-public struct LineStringFeature: GeoJSONObject {
-    public var type: FeatureType = .feature
-    public var identifier: FeatureIdentifier?
-    public var geometry: LineString!
-    public var properties: [String : AnyJSONType]?
-    
-    public init(_ geometry: LineString) {
-        self.geometry = geometry
+extension Geometry.LineStringRepresentation {
+    /// Returns a new `.LineString` based on bezier transformation of the input line.
+    ///
+    /// ported from https://github.com/Turfjs/turf/blob/1ea264853e1be7469c8b7d2795651c9114a069aa/packages/turf-bezier-spline/index.ts
+    func bezier(resolution: Int = 10000, sharpness: Double = 0.85) -> Geometry.LineStringRepresentation? {
+        let points = coordinates.map {
+            SplinePoint(coordinate: $0)
+        }
+        guard let spline = Spline(points: points, duration: resolution, sharpness: sharpness) else {
+            return nil
+        }
+        let coords = stride(from: 0, to: resolution, by: 10)
+            .filter { Int(floor(Double($0) / 100)) % 2 == 0 }
+            .map { spline.position(at: $0).coordinate }
+        return Geometry.LineStringRepresentation(coords)
     }
     
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: GeoJSONCodingKeys.self)
-        geometry = try container.decode(LineString.self, forKey: .geometry)
-        properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
-        identifier = try container.decodeIfPresent(FeatureIdentifier.self, forKey: .identifier)
-    }
-    
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: GeoJSONCodingKeys.self)
-        try container.encode(type, forKey: .type)
-        try container.encode(geometry, forKey: .geometry)
-        try container.encode(properties, forKey: .properties)
-        try container.encodeIfPresent(identifier, forKey: .identifier)
-    }
-}
-
-extension LineString {
-    
-    /**
-     Returns a polyline along a polyline within a distance from a coordinate.
-     */
-    public func trimmed(from coordinate: CLLocationCoordinate2D, distance: CLLocationDistance) -> LineString {
+    /// Returns a `.LineString` along a `.LineString` within a distance from a coordinate.
+    public func trimmed(from coordinate: CLLocationCoordinate2D, distance: CLLocationDistance) -> Geometry.LineStringRepresentation? {
         let startVertex = closestCoordinate(to: coordinate)
         guard startVertex != nil && distance != 0 else {
-            return LineString([])
+            return nil
         }
         
         var vertices: [CLLocationCoordinate2D] = [startVertex!.coordinate]
@@ -86,14 +61,12 @@ extension LineString {
             }
         }
         assert(round(cumulativeDistance) <= round(abs(distance)))
-        return LineString(vertices)
+        return Geometry.LineStringRepresentation(vertices)
     }
     
-    /**
-     `IndexedCoordinate` is a coordinate with additional information such as
-     the index from its position in the polyline and distance from the start
-     of the polyline.
-     */
+    /// `IndexedCoordinate` is a coordinate with additional information such as
+    /// the index from its position in the polyline and distance from the start
+    /// of the polyline.
     public struct IndexedCoordinate {
         /// The coordinate
         public let coordinate: Array<CLLocationCoordinate2D>.Element
@@ -103,32 +76,15 @@ extension LineString {
         public let distance: CLLocationDistance
     }
     
-    /**
-     Initializes a Polyline from the given coordinates.
-     */
-    public init(_ coordinates: [CLLocationCoordinate2D]) {
-        self.coordinates = coordinates
-    }
-    
-    /**
-     Initializes a LineString from the given ring.
-     */
-    public init(_ ring: Ring) {
-        self.coordinates = ring.coordinates
-    }
-    
-    /**
-     Returns a coordinate along a LineString at a certain distance from the start of the polyline.
-     */
+    /// Returns a coordinate along a `.LineString` at a certain distance from the start of the polyline.
     public func coordinateFromStart(distance: CLLocationDistance) -> CLLocationCoordinate2D? {
         return indexedCoordinateFromStart(distance: distance)?.coordinate
     }
     
-    /**
-     Returns an indexed coordinate along a LineString at a certain distance from the start of the polyline.
-     */
+    /// Returns an indexed coordinate along a `.LineString` at a certain distance from the start of the polyline.
+    ///
+    /// Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-along/index.js
     public func indexedCoordinateFromStart(distance: CLLocationDistance) -> IndexedCoordinate? {
-        // Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-along/index.js
         var traveled: CLLocationDistance = 0
         
         guard let firstCoordinate = coordinates.first else {
@@ -161,30 +117,26 @@ extension LineString {
     }
     
     
-    /**
-     Returns the distance along a slice of a LineString with the given endpoints.
-     */
-    public func distance(from start: CLLocationCoordinate2D? = nil, to end: CLLocationCoordinate2D? = nil) -> CLLocationDistance {
-        // Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-line-slice/index.js
-        guard !coordinates.isEmpty else {
-            return 0
+    /// Returns the distance along a slice of a `.LineString` with the given endpoints.
+    ///
+    /// Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-line-slice/index.js
+    public func distance(from start: CLLocationCoordinate2D? = nil, to end: CLLocationCoordinate2D? = nil) -> CLLocationDistance? {
+        guard !coordinates.isEmpty else { return nil }
+        
+        guard let slicedCoordinates = sliced(from: start, to: end)?.coordinates else {
+            return nil
         }
         
-        let slicedCoordinates = sliced(from: start, to: end).coordinates
         let zippedCoordinates = zip(slicedCoordinates.prefix(upTo: slicedCoordinates.count - 1), slicedCoordinates.suffix(from: 1))
         return zippedCoordinates.map { $0.distance(to: $1) }.reduce(0, +)
     }
     
-    
-    /**
-     Returns a subset of the LineString between given coordinates.
-     */
-    public func sliced(from start: CLLocationCoordinate2D? = nil, to end: CLLocationCoordinate2D? = nil) -> LineString {
-        // Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-line-slice/index.js
-        guard !coordinates.isEmpty else {
-            return LineString([])
-        }
-        
+    /// Returns a subset of the `.LineString` between given coordinates.
+    ///
+    /// Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-line-slice/index.js
+    public func sliced(from start: CLLocationCoordinate2D? = nil, to end: CLLocationCoordinate2D? = nil) -> Geometry.LineStringRepresentation? {
+        guard !coordinates.isEmpty else { return nil }
+                
         let startVertex = (start != nil ? closestCoordinate(to: start!) : nil) ?? IndexedCoordinate(coordinate: coordinates.first!, index: 0, distance: 0)
         let endVertex = (end != nil ? closestCoordinate(to: end!) : nil) ?? IndexedCoordinate(coordinate: coordinates.last!, index: coordinates.indices.last!, distance: 0)
         let ends: (IndexedCoordinate, IndexedCoordinate)
@@ -200,20 +152,17 @@ extension LineString {
             coords.append(ends.1.coordinate)
         }
         
-        return LineString(coords)
+        return Geometry.LineStringRepresentation(coords)
     }
     
-    /**
-     Returns the geographic coordinate along the polyline that is closest to the given coordinate as the crow flies.
-     
-     The returned coordinate may not correspond to one of the polyline’s vertices, but it always lies along the polyline.
-     */
+    /// Returns the geographic coordinate along the `.LineString` that is closest to the given coordinate as the crow flies.
+    /// The returned coordinate may not correspond to one of the polyline’s vertices, but it always lies along the polyline.
+    ///
+    /// Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-point-on-line/index.js
+    
     public func closestCoordinate(to coordinate: CLLocationCoordinate2D) -> IndexedCoordinate? {
-        // Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-point-on-line/index.js
+        guard !coordinates.isEmpty else { return nil }
         
-        guard !coordinates.isEmpty else {
-            return nil
-        }
         guard coordinates.count > 1 else {
             return IndexedCoordinate(coordinate: coordinates.first!, index: 0, distance: coordinate.distance(to: coordinates.first!))
         }

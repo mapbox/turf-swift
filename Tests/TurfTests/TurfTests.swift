@@ -58,7 +58,7 @@ class TurfTests: XCTestCase {
            $0.map { CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0]) }
         }
         
-        let polygon = Polygon(coordinates)
+        let polygon = Geometry.PolygonRepresentation(coordinates)
         
         XCTAssertEqual(polygon.area, 78588446934.43, accuracy: 0.1)
     }
@@ -67,7 +67,7 @@ class TurfTests: XCTestCase {
         let point1 = CLLocationCoordinate2D(latitude: 37.7749, longitude: 237.581)
         let point2 = CLLocationCoordinate2D(latitude: 35.6669502038, longitude: 139.7731286197)
         let line = [point1, point2]
-        let lineString = LineString(line)
+        let lineString = Geometry.LineStringRepresentation(line)
         guard let bezierLineString = lineString.bezier() else {
             XCTFail("bezier line must be created with 2 points line")
             return
@@ -89,7 +89,7 @@ class TurfTests: XCTestCase {
         let point3 = CLLocationCoordinate2D(latitude: -25.681137335685307, longitude: 138.33984375)
         let point4 = CLLocationCoordinate2D(latitude: -32.026706293336126, longitude: 138.3837890625)
         let line = [point1, point2, point3, point4]
-        let lineString = LineString(line)
+        let lineString = Geometry.LineStringRepresentation(line)
         guard let bezierLineString = lineString.bezier() else {
             XCTFail("bezier line must be created")
             return

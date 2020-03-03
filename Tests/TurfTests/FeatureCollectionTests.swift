@@ -10,52 +10,76 @@ class FeatureCollectionTests: XCTestCase {
         let data = try! Fixture.geojsonData(from: "featurecollection")!
         let geojson = try! GeoJSON.parse(FeatureCollection.self, from: data)
         
-        XCTAssert(geojson.features[0].value is LineStringFeature)
-        XCTAssert(geojson.features[1].value is PolygonFeature)
-        XCTAssert(geojson.features[2].value is PolygonFeature)
-        XCTAssert(geojson.features[3].value is PointFeature)
+        XCTAssert(geojson.features[0].geometry.type == .LineString)
+        XCTAssert(geojson.features[1].geometry.type == .Polygon)
+        XCTAssert(geojson.features[2].geometry.type == .Polygon)
+        XCTAssert(geojson.features[3].geometry.type == .Point)
         
-        let lineStringFeature = geojson.features[0].value as! LineStringFeature
-        XCTAssert(lineStringFeature.geometry.coordinates.count == 19)
+        let lineStringFeature = geojson.features[0]
+        guard case let .LineString(lineStringCoordinates) = lineStringFeature.geometry else {
+            XCTFail()
+            return
+        }
+        XCTAssert(lineStringCoordinates.coordinates.count == 19)
         XCTAssert(lineStringFeature.properties!["id"]!.jsonValue as! Int == 1)
-        XCTAssert(lineStringFeature.geometry.coordinates.first!.latitude == -26.17500493262446)
-        XCTAssert(lineStringFeature.geometry.coordinates.first!.longitude == 27.977542877197266)
+        XCTAssert(lineStringCoordinates.coordinates.first!.latitude == -26.17500493262446)
+        XCTAssert(lineStringCoordinates.coordinates.first!.longitude == 27.977542877197266)
         
-        let polygonFeature = geojson.features[1].value as! PolygonFeature
+        let polygonFeature = geojson.features[1]
+        guard case let .Polygon(polygonCoordinates) = polygonFeature.geometry else {
+            XCTFail()
+            return
+        }
         XCTAssert(polygonFeature.properties!["id"]!.jsonValue as! Int == 2)
-        XCTAssert(polygonFeature.geometry.coordinates[0].count == 21)
-        XCTAssert(polygonFeature.geometry.coordinates[0].first!.latitude == -26.199035448897074)
-        XCTAssert(polygonFeature.geometry.coordinates[0].first!.longitude == 27.972049713134762)
+        XCTAssert(polygonCoordinates.coordinates[0].count == 21)
+        XCTAssert(polygonCoordinates.coordinates[0].first!.latitude == -26.199035448897074)
+        XCTAssert(polygonCoordinates.coordinates[0].first!.longitude == 27.972049713134762)
         
-        let pointFeature = geojson.features[3].value as! PointFeature
+        let pointFeature = geojson.features[3]
+        guard case let .Point(pointCoordinates) = pointFeature.geometry else {
+            XCTFail()
+            return
+        }
         XCTAssert(pointFeature.properties!["id"]!.jsonValue as! Int == 4)
-        XCTAssert(pointFeature.geometry.coordinates.latitude == -26.152510345365126)
-        XCTAssert(pointFeature.geometry.coordinates.longitude == 27.95642852783203)
+        XCTAssert(pointCoordinates.coordinates.latitude == -26.152510345365126)
+        XCTAssert(pointCoordinates.coordinates.longitude == 27.95642852783203)
         
         let encodedData = try! JSONEncoder().encode(geojson)
         let decoded = try! GeoJSON.parse(FeatureCollection.self, from: encodedData)
         
-        XCTAssert(decoded.features[0].value is LineStringFeature)
-        XCTAssert(decoded.features[1].value is PolygonFeature)
-        XCTAssert(decoded.features[2].value is PolygonFeature)
-        XCTAssert(decoded.features[3].value is PointFeature)
+        XCTAssert(decoded.features[0].geometry.type == .LineString)
+        XCTAssert(decoded.features[1].geometry.type == .Polygon)
+        XCTAssert(decoded.features[2].geometry.type == .Polygon)
+        XCTAssert(decoded.features[3].geometry.type == .Point)
         
-        let decodedLineStringFeature = decoded.features[0].value as! LineStringFeature
-        XCTAssert(decodedLineStringFeature.geometry.coordinates.count == 19)
+        let decodedLineStringFeature = decoded.features[0]
+        guard case let .LineString(decodedLineStringCoordinates) = decodedLineStringFeature.geometry else {
+                   XCTFail()
+                   return
+               }
+        XCTAssert(decodedLineStringCoordinates.coordinates.count == 19)
         XCTAssert(decodedLineStringFeature.properties!["id"]!.jsonValue as! Int == 1)
-        XCTAssert(decodedLineStringFeature.geometry.coordinates.first!.latitude == -26.17500493262446)
-        XCTAssert(decodedLineStringFeature.geometry.coordinates.first!.longitude == 27.977542877197266)
+        XCTAssert(decodedLineStringCoordinates.coordinates.first!.latitude == -26.17500493262446)
+        XCTAssert(decodedLineStringCoordinates.coordinates.first!.longitude == 27.977542877197266)
         
-        let decodedPolygonFeature = decoded.features[1].value as! PolygonFeature
+        let decodedPolygonFeature = decoded.features[1]
+        guard case let .Polygon(decodedPolygonCoordinates) = decodedPolygonFeature.geometry else {
+            XCTFail()
+            return
+        }
         XCTAssert(decodedPolygonFeature.properties!["id"]!.jsonValue as! Int == 2)
-        XCTAssert(decodedPolygonFeature.geometry.coordinates[0].count == 21)
-        XCTAssert(decodedPolygonFeature.geometry.coordinates[0].first!.latitude == -26.199035448897074)
-        XCTAssert(decodedPolygonFeature.geometry.coordinates[0].first!.longitude == 27.972049713134762)
+        XCTAssert(decodedPolygonCoordinates.coordinates[0].count == 21)
+        XCTAssert(decodedPolygonCoordinates.coordinates[0].first!.latitude == -26.199035448897074)
+        XCTAssert(decodedPolygonCoordinates.coordinates[0].first!.longitude == 27.972049713134762)
         
-        let decodedPointFeature = decoded.features[3].value as! PointFeature
+        let decodedPointFeature = decoded.features[3]
+        guard case let .Point(decodedPointCoordinates) = decodedPointFeature.geometry else {
+            XCTFail()
+            return
+        }
         XCTAssert(decodedPointFeature.properties!["id"]!.jsonValue as! Int == 4)
-        XCTAssert(decodedPointFeature.geometry.coordinates.latitude == -26.152510345365126)
-        XCTAssert(decodedPointFeature.geometry.coordinates.longitude == 27.95642852783203)
+        XCTAssert(decodedPointCoordinates.coordinates.latitude == -26.152510345365126)
+        XCTAssert(decodedPointCoordinates.coordinates.longitude == 27.95642852783203)
     }
     
     func testFeatureCollectionDecodeWithoutProperties() {
