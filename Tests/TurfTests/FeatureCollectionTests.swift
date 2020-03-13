@@ -21,7 +21,7 @@ class FeatureCollectionTests: XCTestCase {
             return
         }
         XCTAssert(lineStringCoordinates.coordinates.count == 19)
-        XCTAssert(lineStringFeature.properties!["id"]!.jsonValue as! Int == 1)
+        XCTAssert(lineStringFeature.properties!["id"] as! Int == 1)
         XCTAssert(lineStringCoordinates.coordinates.first!.latitude == -26.17500493262446)
         XCTAssert(lineStringCoordinates.coordinates.first!.longitude == 27.977542877197266)
         
@@ -30,7 +30,7 @@ class FeatureCollectionTests: XCTestCase {
             XCTFail()
             return
         }
-        XCTAssert(polygonFeature.properties!["id"]!.jsonValue as! Int == 2)
+        XCTAssert(polygonFeature.properties!["id"] as! Int == 2)
         XCTAssert(polygonCoordinates.coordinates[0].count == 21)
         XCTAssert(polygonCoordinates.coordinates[0].first!.latitude == -26.199035448897074)
         XCTAssert(polygonCoordinates.coordinates[0].first!.longitude == 27.972049713134762)
@@ -40,7 +40,7 @@ class FeatureCollectionTests: XCTestCase {
             XCTFail()
             return
         }
-        XCTAssert(pointFeature.properties!["id"]!.jsonValue as! Int == 4)
+        XCTAssert(pointFeature.properties!["id"] as! Int == 4)
         XCTAssert(pointCoordinates.coordinates.latitude == -26.152510345365126)
         XCTAssert(pointCoordinates.coordinates.longitude == 27.95642852783203)
         
@@ -58,7 +58,7 @@ class FeatureCollectionTests: XCTestCase {
                    return
                }
         XCTAssert(decodedLineStringCoordinates.coordinates.count == 19)
-        XCTAssert(decodedLineStringFeature.properties!["id"]!.jsonValue as! Int == 1)
+        XCTAssert(decodedLineStringFeature.properties!["id"] as! Int == 1)
         XCTAssert(decodedLineStringCoordinates.coordinates.first!.latitude == -26.17500493262446)
         XCTAssert(decodedLineStringCoordinates.coordinates.first!.longitude == 27.977542877197266)
         
@@ -67,7 +67,7 @@ class FeatureCollectionTests: XCTestCase {
             XCTFail()
             return
         }
-        XCTAssert(decodedPolygonFeature.properties!["id"]!.jsonValue as! Int == 2)
+        XCTAssert(decodedPolygonFeature.properties!["id"] as! Int == 2)
         XCTAssert(decodedPolygonCoordinates.coordinates[0].count == 21)
         XCTAssert(decodedPolygonCoordinates.coordinates[0].first!.latitude == -26.199035448897074)
         XCTAssert(decodedPolygonCoordinates.coordinates[0].first!.longitude == 27.972049713134762)
@@ -77,7 +77,7 @@ class FeatureCollectionTests: XCTestCase {
             XCTFail()
             return
         }
-        XCTAssert(decodedPointFeature.properties!["id"]!.jsonValue as! Int == 4)
+        XCTAssert(decodedPointFeature.properties!["id"] as! Int == 4)
         XCTAssert(decodedPointCoordinates.coordinates.latitude == -26.152510345365126)
         XCTAssert(decodedPointCoordinates.coordinates.longitude == 27.95642852783203)
     }
