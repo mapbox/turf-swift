@@ -5,7 +5,7 @@ public struct FeatureCollection: GeoJSONObject {
     public let type: FeatureType = .featureCollection
     public var identifier: FeatureIdentifier?
     public var features: Array<Feature> = []
-    public var properties: [String : AnyJSONType]?
+    public var properties: [String : Any?]?
     
     private enum CodingKeys: String, CodingKey {
         case type
@@ -20,7 +20,7 @@ public struct FeatureCollection: GeoJSONObject {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.features = try container.decode([Feature].self, forKey: .features)
-        self.properties = try container.decodeIfPresent([String: AnyJSONType].self, forKey: .properties)
+        self.properties = try container.decodeIfPresent([String: Any?].self, forKey: .properties)
     }
     
     public func encode(to encoder: Encoder) throws {

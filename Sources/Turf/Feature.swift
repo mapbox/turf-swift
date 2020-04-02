@@ -7,7 +7,7 @@ import CoreLocation
 public struct Feature: GeoJSONObject {
     public var type: FeatureType = .feature
     public var identifier: FeatureIdentifier?
-    public var properties: [String : AnyJSONType]?
+    public var properties: [String : Any?]?
     public var geometry: Geometry
     
     private enum CodingKeys: String, CodingKey {
@@ -24,7 +24,7 @@ public struct Feature: GeoJSONObject {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         geometry = try container.decode(Geometry.self, forKey: .geometry)
-        properties = try container.decode([String: AnyJSONType]?.self, forKey: .properties)
+        properties = try container.decodeIfPresent([String: Any?].self, forKey: .properties)
         identifier = try container.decodeIfPresent(FeatureIdentifier.self, forKey: .identifier)
     }
     

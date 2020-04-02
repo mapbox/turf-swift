@@ -33,7 +33,7 @@ struct FeatureProxy: Codable {
 public protocol GeoJSONObject: Codable {
     var type: FeatureType { get }
     var identifier: FeatureIdentifier? { get set }
-    var properties: [String: AnyJSONType]? { get set }
+    var properties: [String: Any?]? { get set }
 }
 
 public enum GeoJSONError: Error {
