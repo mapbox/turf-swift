@@ -133,22 +133,22 @@ extension Geometry: Codable {
             
             switch type {
             case .Point:
-                let coordinates = try container.decode(CLLocationCoordinate2D.self, forKey: .coordinates)
+                let coordinates = try container.decode(CLLocationCoordinate2DCodable.self, forKey: .coordinates).decodedCoordinates
                 self = .Point(coordinates: PointRepresentation(coordinates))
             case .LineString:
-                let coordinates = try container.decode([CLLocationCoordinate2D].self, forKey: .coordinates)
+                let coordinates = try container.decode([CLLocationCoordinate2DCodable].self, forKey: .coordinates).decodedCoordinates
                 self = .LineString(coordinates: LineStringRepresentation(coordinates))
             case .Polygon:
-                let coordinates = try container.decode([[CLLocationCoordinate2D]].self, forKey: .coordinates)
+                let coordinates = try container.decode([[CLLocationCoordinate2DCodable]].self, forKey: .coordinates).decodedCoordinates
                 self = .Polygon(coordinates: PolygonRepresentation(coordinates))
             case .MultiPoint:
-                let coordinates = try container.decode([CLLocationCoordinate2D].self, forKey: .coordinates)
+                let coordinates = try container.decode([CLLocationCoordinate2DCodable].self, forKey: .coordinates).decodedCoordinates
                 self = .MultiPoint(coordinates: MultiPointRepresentation(coordinates))
             case .MultiLineString:
-                let coordinates = try container.decode([[CLLocationCoordinate2D]].self, forKey: .coordinates)
+                let coordinates = try container.decode([[CLLocationCoordinate2DCodable]].self, forKey: .coordinates).decodedCoordinates
                 self = .MultiLineString(coordinates: MultiLineStringRepresentation(coordinates))
             case .MultiPolygon:
-                let coordinates = try container.decode([[[CLLocationCoordinate2D]]].self, forKey: .coordinates)
+                let coordinates = try container.decode([[[CLLocationCoordinate2DCodable]]].self, forKey: .coordinates).decodedCoordinates
                 self = .MultiPolygon(coordinates: MultiPolygonRepresentation(coordinates))
             case .GeometryCollection:
                 let geometries = try container.decode([Geometry].self, forKey: .geometries)
@@ -162,17 +162,17 @@ extension Geometry: Codable {
             
             switch self {
             case .Point(let representation):
-                try container.encode(representation.coordinates, forKey: .coordinates)
+                try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
             case .LineString(let representation):
-                try container.encode(representation.coordinates, forKey: .coordinates)
+                try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
             case .Polygon(let representation):
-                try container.encode(representation.coordinates, forKey: .coordinates)
+                try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
             case .MultiPoint(let representation):
-                try container.encode(representation.coordinates, forKey: .coordinates)
+                try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
             case .MultiLineString(let representation):
-                try container.encode(representation.coordinates, forKey: .coordinates)
+                try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
             case .MultiPolygon(let representation):
-                try container.encode(representation.coordinates, forKey: .coordinates)
+                try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
             case .GeometryCollection(let representation):
                 try container.encode(representation.geometries, forKey: .geometries)
             }

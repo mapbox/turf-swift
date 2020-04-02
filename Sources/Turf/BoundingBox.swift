@@ -34,6 +34,20 @@ public struct BoundingBox: Codable {
             && southEast.longitude > coordinate.longitude
     }
     
+    // MARK: - Codable
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        try container.encode(northWest.codableCoordinates)
+        try container.encode(southEast.codableCoordinates)
+    }
+    
+    public init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+        northWest = try container.decode(CLLocationCoordinate2DCodable.self).decodedCoordinates
+        southEast = try container.decode(CLLocationCoordinate2DCodable.self).decodedCoordinates
+    }
+    
     // MARK: - Private
     
     public var northWest: CLLocationCoordinate2D
