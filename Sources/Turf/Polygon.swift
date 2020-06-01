@@ -4,7 +4,7 @@ import CoreLocation
 #endif
 
 
-extension Geometry.PolygonRepresentation {
+extension Polygon {
     /// Representation of `.Polygon`s coordinates of inner rings
     public var innerRings: [Ring] {
         return Array(coordinates.suffix(from: 1)).map { Ring(coordinates: $0) }

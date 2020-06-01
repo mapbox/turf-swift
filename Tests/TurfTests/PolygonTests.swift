@@ -41,7 +41,7 @@ class PolygonTests: XCTestCase {
     
     func testPolygonContains() {
         let coordinate = CLLocationCoordinate2D(latitude: 44, longitude: -77)
-        let polygon = Geometry.PolygonRepresentation([[
+        let polygon = Polygon([[
             CLLocationCoordinate2D(latitude: 41, longitude: -81),
             CLLocationCoordinate2D(latitude: 47, longitude: -81),
             CLLocationCoordinate2D(latitude: 47, longitude: -72),
@@ -53,7 +53,7 @@ class PolygonTests: XCTestCase {
     
     func testPolygonDoesNotContain() {
         let coordinate = CLLocationCoordinate2D(latitude: 44, longitude: -77)
-        let polygon = Geometry.PolygonRepresentation([[
+        let polygon = Polygon([[
             CLLocationCoordinate2D(latitude: 41, longitude: -51),
             CLLocationCoordinate2D(latitude: 47, longitude: -51),
             CLLocationCoordinate2D(latitude: 47, longitude: -42),
@@ -65,7 +65,7 @@ class PolygonTests: XCTestCase {
     
     func testPolygonDoesNotContainWithHole() {
         let coordinate = CLLocationCoordinate2D(latitude: 44, longitude: -77)
-        let polygon = Geometry.PolygonRepresentation([
+        let polygon = Polygon([
             [
                 CLLocationCoordinate2D(latitude: 41, longitude: -81),
                 CLLocationCoordinate2D(latitude: 47, longitude: -81),
@@ -86,7 +86,7 @@ class PolygonTests: XCTestCase {
 
     func testPolygonContainsAtBoundary() {
         let coordinate = CLLocationCoordinate2D(latitude: 1, longitude: 1)
-        let polygon = Geometry.PolygonRepresentation([[
+        let polygon = Polygon([[
             CLLocationCoordinate2D(latitude: 0, longitude: 0),
             CLLocationCoordinate2D(latitude: 1, longitude: 0),
             CLLocationCoordinate2D(latitude: 1, longitude: 1),
@@ -101,7 +101,7 @@ class PolygonTests: XCTestCase {
 
     func testPolygonWithHoleContainsAtBoundary() {
         let coordinate = CLLocationCoordinate2D(latitude: 43, longitude: -78)
-        let polygon = Geometry.PolygonRepresentation([
+        let polygon = Polygon([
             [
                 CLLocationCoordinate2D(latitude: 41, longitude: -81),
                 CLLocationCoordinate2D(latitude: 47, longitude: -81),

@@ -21,8 +21,8 @@ class PointTests: XCTestCase {
         let encodedData = try! JSONEncoder().encode(geojson)
         let decoded = try! GeoJSON.parse(Feature.self, from: encodedData)
 
-        XCTAssertEqual(geojson.geometry.value as! Geometry.PointRepresentation,
-                       decoded.geometry.value as! Geometry.PointRepresentation)
+        XCTAssertEqual(geojson.geometry.value as! Point,
+                       decoded.geometry.value as! Point)
         XCTAssertEqual(geojson.identifier!.value as! Number,
                        decoded.identifier!.value as! Number)
     }
