@@ -1,5 +1,8 @@
 import XCTest
 import Turf
+#if os(macOS)
+import struct Turf.Polygon
+#endif
 import CoreLocation
 
 class GeoJSONTests: XCTestCase {
