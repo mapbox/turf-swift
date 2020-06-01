@@ -69,62 +69,6 @@ public enum Geometry {
 }
 
 
-public struct Point: Equatable {
-    public let coordinates: CLLocationCoordinate2D
-    
-    public init(_ coordinates: CLLocationCoordinate2D) {
-        self.coordinates = coordinates
-    }
-}
-
-public struct LineString: Equatable {
-    public let coordinates: [CLLocationCoordinate2D]
-    
-    public init(_ coordinates: [CLLocationCoordinate2D]) {
-        self.coordinates = coordinates
-    }
-}
-
-public struct Polygon: Equatable {
-    public let coordinates: [[CLLocationCoordinate2D]]
-    
-    public init(_ coordinates: [[CLLocationCoordinate2D]]) {
-        self.coordinates = coordinates
-    }
-}
-
-public struct MultiPoint: Equatable {
-    public let coordinates: [CLLocationCoordinate2D]
-    
-    public init(_ coordinates: [CLLocationCoordinate2D]) {
-        self.coordinates = coordinates
-    }
-}
-
-public struct MultiLineString: Equatable {
-    public let coordinates: [[CLLocationCoordinate2D]]
-    
-    public init(_ coordinates: [[CLLocationCoordinate2D]]) {
-        self.coordinates = coordinates
-    }
-}
-
-public struct MultiPolygon: Equatable {
-    public let coordinates: [[[CLLocationCoordinate2D]]]
-    
-    public init(_ coordinates: [[[CLLocationCoordinate2D]]]) {
-        self.coordinates = coordinates
-    }
-}
-
-public struct GeometryCollection {
-    public let geometries: [Geometry]
-    
-    public init(_ geometries: [Geometry]) {
-        self.geometries = geometries
-    }
-}
-
 extension Geometry: Codable {
     public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)

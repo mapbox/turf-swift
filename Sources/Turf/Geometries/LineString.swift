@@ -4,6 +4,14 @@ import CoreLocation
 #endif
 
 
+public struct LineString: Equatable {
+    public let coordinates: [CLLocationCoordinate2D]
+    
+    public init(_ coordinates: [CLLocationCoordinate2D]) {
+        self.coordinates = coordinates
+    }
+}
+
 extension LineString {
     /// Returns a new `.LineString` based on bezier transformation of the input line.
     ///
