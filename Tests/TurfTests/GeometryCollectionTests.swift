@@ -23,7 +23,7 @@ class GeometryCollectionTests: XCTestCase {
         }
         
         XCTAssert(geometryCollectionFeature.geometry.type == .GeometryCollection)
-        XCTAssert(geometryCollectionFeature.geometry.value is Geometry.GeometryCollectionRepresentation)
+        XCTAssert(geometryCollectionFeature.geometry.value is GeometryCollection)
         
         guard case let .GeometryCollection(geometries) = geometryCollectionFeature.geometry else {
             XCTFail()
@@ -57,7 +57,7 @@ class GeometryCollectionTests: XCTestCase {
         }
         
         XCTAssert(geometryCollectionFeature.geometry.type == .GeometryCollection)
-        XCTAssert(geometryCollectionFeature.geometry.value is Geometry.GeometryCollectionRepresentation)
+        XCTAssert(geometryCollectionFeature.geometry.value is GeometryCollection)
         
         guard case let .GeometryCollection(geometries) = geometryCollectionFeature.geometry else {
             XCTFail()

@@ -4,11 +4,19 @@ import CoreLocation
 #endif
 
 
-extension Geometry.LineStringRepresentation {
+public struct LineString: Equatable {
+    public let coordinates: [CLLocationCoordinate2D]
+    
+    public init(_ coordinates: [CLLocationCoordinate2D]) {
+        self.coordinates = coordinates
+    }
+}
+
+extension LineString {
     /// Returns a new `.LineString` based on bezier transformation of the input line.
     ///
     /// ported from https://github.com/Turfjs/turf/blob/1ea264853e1be7469c8b7d2795651c9114a069aa/packages/turf-bezier-spline/index.ts
-    func bezier(resolution: Int = 10000, sharpness: Double = 0.85) -> Geometry.LineStringRepresentation? {
+    func bezier(resolution: Int = 10000, sharpness: Double = 0.85) -> LineString? {
         let points = coordinates.map {
             SplinePoint(coordinate: $0)
         }
@@ -18,11 +26,11 @@ extension Geometry.LineStringRepresentation {
         let coords = stride(from: 0, to: resolution, by: 10)
             .filter { Int(floor(Double($0) / 100)) % 2 == 0 }
             .map { spline.position(at: $0).coordinate }
-        return Geometry.LineStringRepresentation(coords)
+        return LineString(coords)
     }
     
     /// Returns a `.LineString` along a `.LineString` within a distance from a coordinate.
-    public func trimmed(from coordinate: CLLocationCoordinate2D, distance: CLLocationDistance) -> Geometry.LineStringRepresentation? {
+    public func trimmed(from coordinate: CLLocationCoordinate2D, distance: CLLocationDistance) -> LineString? {
         let startVertex = closestCoordinate(to: coordinate)
         guard startVertex != nil && distance != 0 else {
             return nil
@@ -61,7 +69,7 @@ extension Geometry.LineStringRepresentation {
             }
         }
         assert(round(cumulativeDistance) <= round(abs(distance)))
-        return Geometry.LineStringRepresentation(vertices)
+        return LineString(vertices)
     }
     
     /// `IndexedCoordinate` is a coordinate with additional information such as
@@ -134,7 +142,7 @@ extension Geometry.LineStringRepresentation {
     /// Returns a subset of the `.LineString` between given coordinates.
     ///
     /// Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-line-slice/index.js
-    public func sliced(from start: CLLocationCoordinate2D? = nil, to end: CLLocationCoordinate2D? = nil) -> Geometry.LineStringRepresentation? {
+    public func sliced(from start: CLLocationCoordinate2D? = nil, to end: CLLocationCoordinate2D? = nil) -> LineString? {
         guard !coordinates.isEmpty else { return nil }
                 
         let startVertex = (start != nil ? closestCoordinate(to: start!) : nil) ?? IndexedCoordinate(coordinate: coordinates.first!, index: 0, distance: 0)
@@ -152,7 +160,7 @@ extension Geometry.LineStringRepresentation {
             coords.append(ends.1.coordinate)
         }
         
-        return Geometry.LineStringRepresentation(coords)
+        return LineString(coords)
     }
     
     /// Returns the geographic coordinate along the `.LineString` that is closest to the given coordinate as the crow flies.

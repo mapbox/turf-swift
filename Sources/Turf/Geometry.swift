@@ -21,13 +21,13 @@ public enum Geometry {
         case geometries
     }
     
-    case Point(coordinates: PointRepresentation)
-    case LineString(coordinates: LineStringRepresentation)
-    case Polygon(coordinates: PolygonRepresentation)
-    case MultiPoint(coordinates: MultiPointRepresentation)
-    case MultiLineString(coordinates: MultiLineStringRepresentation)
-    case MultiPolygon(coordinates: MultiPolygonRepresentation)
-    case GeometryCollection(geometries: GeometryCollectionRepresentation)
+    case Point(coordinates: Point)
+    case LineString(coordinates: LineString)
+    case Polygon(coordinates: Polygon)
+    case MultiPoint(coordinates: MultiPoint)
+    case MultiLineString(coordinates: MultiLineString)
+    case MultiPolygon(coordinates: MultiPolygon)
+    case GeometryCollection(geometries: GeometryCollection)
     
     public var type: GeometryType {
         switch self {
@@ -68,63 +68,6 @@ public enum Geometry {
     }
 }
 
-public extension Geometry {
-    struct PointRepresentation: Equatable {
-        public let coordinates: CLLocationCoordinate2D
-        
-        public init(_ coordinates: CLLocationCoordinate2D) {
-            self.coordinates = coordinates
-        }
-    }
-    
-    struct LineStringRepresentation: Equatable {
-        public let coordinates: [CLLocationCoordinate2D]
-        
-        public init(_ coordinates: [CLLocationCoordinate2D]) {
-            self.coordinates = coordinates
-        }
-    }
-    
-    struct PolygonRepresentation: Equatable {
-        public let coordinates: [[CLLocationCoordinate2D]]
-        
-        public init(_ coordinates: [[CLLocationCoordinate2D]]) {
-            self.coordinates = coordinates
-        }
-    }
-    
-    struct MultiPointRepresentation: Equatable {
-        public let coordinates: [CLLocationCoordinate2D]
-        
-        public init(_ coordinates: [CLLocationCoordinate2D]) {
-            self.coordinates = coordinates
-        }
-    }
-    
-    struct MultiLineStringRepresentation: Equatable {
-        public let coordinates: [[CLLocationCoordinate2D]]
-        
-        public init(_ coordinates: [[CLLocationCoordinate2D]]) {
-            self.coordinates = coordinates
-        }
-    }
-    
-    struct MultiPolygonRepresentation: Equatable {
-        public let coordinates: [[[CLLocationCoordinate2D]]]
-        
-        public init(_ coordinates: [[[CLLocationCoordinate2D]]]) {
-            self.coordinates = coordinates
-        }
-    }
-    
-    struct GeometryCollectionRepresentation {        
-        public let geometries: [Geometry]
-        
-        public init(_ geometries: [Geometry]) {
-            self.geometries = geometries
-        }
-    }
-}
 
 extension Geometry: Codable {
     public init(from decoder: Decoder) throws {
@@ -134,25 +77,25 @@ extension Geometry: Codable {
             switch type {
             case .Point:
                 let coordinates = try container.decode(CLLocationCoordinate2DCodable.self, forKey: .coordinates).decodedCoordinates
-                self = .Point(coordinates: PointRepresentation(coordinates))
+                self = .Point(coordinates: .init(coordinates))
             case .LineString:
                 let coordinates = try container.decode([CLLocationCoordinate2DCodable].self, forKey: .coordinates).decodedCoordinates
-                self = .LineString(coordinates: LineStringRepresentation(coordinates))
+                self = .LineString(coordinates: .init(coordinates))
             case .Polygon:
                 let coordinates = try container.decode([[CLLocationCoordinate2DCodable]].self, forKey: .coordinates).decodedCoordinates
-                self = .Polygon(coordinates: PolygonRepresentation(coordinates))
+                self = .Polygon(coordinates: .init(coordinates))
             case .MultiPoint:
                 let coordinates = try container.decode([CLLocationCoordinate2DCodable].self, forKey: .coordinates).decodedCoordinates
-                self = .MultiPoint(coordinates: MultiPointRepresentation(coordinates))
+                self = .MultiPoint(coordinates: .init(coordinates))
             case .MultiLineString:
                 let coordinates = try container.decode([[CLLocationCoordinate2DCodable]].self, forKey: .coordinates).decodedCoordinates
-                self = .MultiLineString(coordinates: MultiLineStringRepresentation(coordinates))
+                self = .MultiLineString(coordinates: .init(coordinates))
             case .MultiPolygon:
                 let coordinates = try container.decode([[[CLLocationCoordinate2DCodable]]].self, forKey: .coordinates).decodedCoordinates
-                self = .MultiPolygon(coordinates: MultiPolygonRepresentation(coordinates))
+                self = .MultiPolygon(coordinates: .init(coordinates))
             case .GeometryCollection:
                 let geometries = try container.decode([Geometry].self, forKey: .geometries)
-                self = .GeometryCollection(geometries: GeometryCollectionRepresentation(geometries))
+                self = .GeometryCollection(geometries: .init(geometries))
             }
         }
         

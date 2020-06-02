@@ -4,7 +4,15 @@ import CoreLocation
 #endif
 
 
-extension Geometry.PolygonRepresentation {
+public struct Polygon: Equatable {
+    public let coordinates: [[CLLocationCoordinate2D]]
+    
+    public init(_ coordinates: [[CLLocationCoordinate2D]]) {
+        self.coordinates = coordinates
+    }
+}
+
+extension Polygon {
     /// Representation of `.Polygon`s coordinates of inner rings
     public var innerRings: [Ring] {
         return Array(coordinates.suffix(from: 1)).map { Ring(coordinates: $0) }
