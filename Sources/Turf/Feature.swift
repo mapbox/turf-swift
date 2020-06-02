@@ -17,7 +17,7 @@ public struct Feature: GeoJSONObject {
             case identifier = "id"
     }
     
-    public init(_ geometry: Geometry) {
+    public init(geometry: Geometry) {
         self.geometry = geometry
     }
     

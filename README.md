@@ -107,8 +107,8 @@ let geojson = try! GeoJSON.parse(FeatureCollection.self, from: data)
 
 // Initialize a PointFeature and encode as GeoJSON
 let coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 1)
-let point = Geometry.Point(coordinates: .init(coordinate))
-let pointFeature = Feature(point)
+let point = Point(coordinate)
+let pointFeature = Feature(geometry: .Point(point))
 let data = try! JSONEncoder().encode(pointFeature)
 let json = String(data: data, encoding: .utf8)
 print(json)

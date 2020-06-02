@@ -13,7 +13,7 @@ public struct FeatureCollection: GeoJSONObject {
         case features
     }
     
-    public init(_ features: [Feature]) {
+    public init(features: [Feature]) {
         self.features = features
     }
     
