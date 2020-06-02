@@ -17,7 +17,7 @@ class MultiPolygonTests: XCTestCase {
         let geojson = try! GeoJSON.parse(Feature.self, from: data)
         
         XCTAssert(geojson.geometry.type == .MultiPolygon)
-        guard case let .MultiPolygon(multipolygonCoordinates) = geojson.geometry else {
+        guard case let .multiPolygon(multipolygonCoordinates) = geojson.geometry else {
             XCTFail()
             return
         }
@@ -27,7 +27,7 @@ class MultiPolygonTests: XCTestCase {
         
         let encodedData = try! JSONEncoder().encode(geojson)
         let decoded = try! GeoJSON.parse(Feature.self, from: encodedData)
-        guard case let .MultiPolygon(decodedMultipolygonCoordinates) = decoded.geometry else {
+        guard case let .multiPolygon(decodedMultipolygonCoordinates) = decoded.geometry else {
             XCTFail()
             return
         }
@@ -70,7 +70,7 @@ class MultiPolygonTests: XCTestCase {
             ]
         ]
         
-        let multiPolygon = Geometry.MultiPolygon(.init(coordinates))
+        let multiPolygon = Geometry.multiPolygon(.init(coordinates))
         var multiPolygonFeature = Feature(geometry: multiPolygon)
         multiPolygonFeature.identifier = FeatureIdentifier.string("uniqueIdentifier")
         multiPolygonFeature.properties = ["some": "var"]
@@ -80,13 +80,13 @@ class MultiPolygonTests: XCTestCase {
         
         let data = try! Fixture.geojsonData(from: "multipolygon")!
         let bundledMultiPolygon = try! GeoJSON.parse(Feature.self, from: data)
-        guard case let .MultiPolygon(bundledMultipolygonCoordinates) = bundledMultiPolygon.geometry else {
+        guard case let .multiPolygon(bundledMultipolygonCoordinates) = bundledMultiPolygon.geometry else {
             XCTFail()
             return
         }
         
         XCTAssert(decodedCustomMultiPolygon.geometry.type == .MultiPolygon)
-        guard case let .MultiPolygon(decodedMultipolygonCoordinates) = decodedCustomMultiPolygon.geometry else {
+        guard case let .multiPolygon(decodedMultipolygonCoordinates) = decodedCustomMultiPolygon.geometry else {
             XCTFail()
             return
         }

@@ -15,7 +15,7 @@ class PolygonTests: XCTestCase {
         
         XCTAssert((geojson.identifier!.value as! Number).value! as! Double == 1.01)
         
-        guard case let .Polygon(polygon) = geojson.geometry else {
+        guard case let .polygon(polygon) = geojson.geometry else {
             XCTFail()
             return
         }
@@ -26,7 +26,7 @@ class PolygonTests: XCTestCase {
         
         let encodedData = try! JSONEncoder().encode(geojson)
         let decoded = try! GeoJSON.parse(Feature.self, from: encodedData)
-        guard case let .Polygon(decodedPolygon) = decoded.geometry else {
+        guard case let .polygon(decodedPolygon) = decoded.geometry else {
                    XCTFail()
                    return
                }

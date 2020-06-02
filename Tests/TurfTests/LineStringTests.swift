@@ -11,7 +11,7 @@ class LineStringTests: XCTestCase {
         let geojson = try! GeoJSON.parse(Feature.self, from: data)
         
         XCTAssert(geojson.geometry.type == .LineString)
-        guard case let .LineString(lineStringCoordinates) = geojson.geometry else {
+        guard case let .lineString(lineStringCoordinates) = geojson.geometry else {
             XCTFail()
             return
         }
@@ -25,7 +25,7 @@ class LineStringTests: XCTestCase {
         
         let encodedData = try! JSONEncoder().encode(geojson)
         let decoded = try! GeoJSON.parse(Feature.self, from: encodedData)
-        guard case let .LineString(decodedLineStringCoordinates) = decoded.geometry else {
+        guard case let .lineString(decodedLineStringCoordinates) = decoded.geometry else {
             XCTFail()
             return
         }
