@@ -10,6 +10,10 @@ public struct LineString: Equatable {
     public init(_ coordinates: [CLLocationCoordinate2D]) {
         self.coordinates = coordinates
     }
+    
+    public init(_ ring: Ring) {
+        self.coordinates = ring.coordinates
+    }
 }
 
 extension LineString {

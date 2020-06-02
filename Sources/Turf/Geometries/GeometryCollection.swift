@@ -10,4 +10,12 @@ public struct GeometryCollection {
     public init(_ geometries: [Geometry]) {
         self.geometries = geometries
     }
+    
+    public init(_ multiPolygon: MultiPolygon) {
+        self.geometries = multiPolygon.coordinates.map {
+            $0.count > 1 ?
+                .MultiLineString(coordinates: .init($0)) :
+                .LineString(coordinates:  .init($0[0]))
+        }
+    }
 }
