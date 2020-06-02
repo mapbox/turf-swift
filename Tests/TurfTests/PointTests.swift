@@ -11,7 +11,7 @@ class PointTests: XCTestCase {
         let geojson = try! GeoJSON.parse(Feature.self, from: data)
         let coordinate = CLLocationCoordinate2D(latitude: 26.194876675795218, longitude: 14.765625)
 
-        guard case let .Point(point) = geojson.geometry else {
+        guard case let .point(point) = geojson.geometry else {
             XCTFail()
             return
         }

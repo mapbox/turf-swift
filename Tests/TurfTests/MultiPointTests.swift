@@ -14,7 +14,7 @@ class MultiPointTests: XCTestCase {
         let geojson = try! GeoJSON.parse(Feature.self, from: data)
                 
         XCTAssert(geojson.geometry.type == .MultiPoint)
-        guard case let .MultiPoint(multipointCoordinates) = geojson.geometry else {
+        guard case let .multiPoint(multipointCoordinates) = geojson.geometry else {
             XCTFail()
             return
         }
@@ -23,7 +23,7 @@ class MultiPointTests: XCTestCase {
         
         let encodedData = try! JSONEncoder().encode(geojson)
         let decoded = try! GeoJSON.parse(Feature.self, from: encodedData)
-        guard case let .MultiPoint(decodedMultipointCoordinates) = decoded.geometry else {
+        guard case let .multiPoint(decodedMultipointCoordinates) = decoded.geometry else {
             XCTFail()
             return
         }

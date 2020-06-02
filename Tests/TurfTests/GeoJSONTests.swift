@@ -9,7 +9,7 @@ class GeoJSONTests: XCTestCase {
     
     func testPoint() {
         let coordinate = CLLocationCoordinate2D(latitude: 10, longitude: 30)
-        let geometry = Geometry.Point(Point(coordinate))
+        let geometry = Geometry.point(Point(coordinate))
         let pointFeature = Feature(geometry: geometry)
         
         XCTAssertEqual((pointFeature.geometry.value as! Point).coordinates, coordinate)
@@ -20,7 +20,7 @@ class GeoJSONTests: XCTestCase {
                            CLLocationCoordinate2D(latitude: 30, longitude: 10),
                            CLLocationCoordinate2D(latitude: 40, longitude: 40)]
         
-        let lineString = Geometry.LineString(.init(coordinates))
+        let lineString = Geometry.lineString(.init(coordinates))
         let lineStringFeature = Feature(geometry: lineString)
         XCTAssertEqual((lineStringFeature.geometry.value as! LineString).coordinates, coordinates)
     }
@@ -42,7 +42,7 @@ class GeoJSONTests: XCTestCase {
             ]
         ]
         
-        let polygon = Geometry.Polygon(.init(coordinates))
+        let polygon = Geometry.polygon(.init(coordinates))
         let polygonFeature = Feature(geometry: polygon)
         XCTAssertEqual((polygonFeature.geometry.value as! Polygon).coordinates, coordinates)
     }
@@ -53,7 +53,7 @@ class GeoJSONTests: XCTestCase {
                            CLLocationCoordinate2D(latitude: 20, longitude: 20),
                            CLLocationCoordinate2D(latitude: 10, longitude: 30)]
         
-        let multiPoint = Geometry.MultiPoint(.init(coordinates))
+        let multiPoint = Geometry.multiPoint(.init(coordinates))
         let multiPointFeature = Feature(geometry: multiPoint)
         XCTAssertEqual((multiPointFeature.geometry.value as! MultiPoint).coordinates, coordinates)
     }
@@ -73,7 +73,7 @@ class GeoJSONTests: XCTestCase {
             ]
         ]
         
-        let multiLineString = Geometry.MultiLineString(.init(coordinates))
+        let multiLineString = Geometry.multiLineString(.init(coordinates))
         let multiLineStringFeature = Feature(geometry: multiLineString)
         XCTAssertEqual((multiLineStringFeature.geometry.value as! MultiLineString).coordinates, coordinates)
     }
@@ -106,7 +106,7 @@ class GeoJSONTests: XCTestCase {
             ]
         ]
         
-        let multiPolygon = Geometry.MultiPolygon(.init(coordinates))
+        let multiPolygon = Geometry.multiPolygon(.init(coordinates))
         let multiPolygonFeature = Feature(geometry: multiPolygon)
         XCTAssertEqual((multiPolygonFeature.geometry.value as! MultiPolygon).coordinates, coordinates)
     }
