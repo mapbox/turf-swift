@@ -173,13 +173,14 @@ extension LineString {
     /// Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-point-on-line/index.js
     
     public func closestCoordinate(to coordinate: CLLocationCoordinate2D) -> IndexedCoordinate? {
-        guard !coordinates.isEmpty else { return nil }
+        guard let startCoordinate = coordinates.first else { return nil }
         
         guard coordinates.count > 1 else {
-            return IndexedCoordinate(coordinate: coordinates.first!, index: 0, distance: coordinate.distance(to: coordinates.first!))
+            return IndexedCoordinate(coordinate: startCoordinate, index: 0, distance: coordinate.distance(to: startCoordinate))
         }
         
         var closestCoordinate: IndexedCoordinate?
+        var closestDistance: CLLocationDistance?
         
         for index in 0..<coordinates.count - 1 {
             let segment = (coordinates[index], coordinates[index + 1])
@@ -192,14 +193,23 @@ extension LineString {
             let intersectionPoint = Turf.intersection((perpendicularPoint1, perpendicularPoint2), segment)
             let intersectionDistance: CLLocationDistance? = intersectionPoint != nil ? coordinate.distance(to: intersectionPoint!) : nil
             
-            if distances.0 < closestCoordinate?.distance ?? .greatestFiniteMagnitude {
-                closestCoordinate = IndexedCoordinate(coordinate: segment.0, index: index, distance: distances.0)
+            if distances.0 < closestDistance ?? .greatestFiniteMagnitude {
+                closestCoordinate = IndexedCoordinate(coordinate: segment.0,
+                                                      index: index,
+                                                      distance: startCoordinate.distance(to: segment.0))
+                closestDistance = distances.0
             }
-            if distances.1 < closestCoordinate?.distance ?? .greatestFiniteMagnitude {
-                closestCoordinate = IndexedCoordinate(coordinate: segment.1, index: index+1, distance: distances.1)
+            if distances.1 < closestDistance ?? .greatestFiniteMagnitude {
+                closestCoordinate = IndexedCoordinate(coordinate: segment.1,
+                                                      index: index+1,
+                                                      distance: startCoordinate.distance(to: segment.1))
+                closestDistance = distances.1
             }
-            if intersectionDistance != nil && intersectionDistance! < closestCoordinate?.distance ?? .greatestFiniteMagnitude {
-                closestCoordinate = IndexedCoordinate(coordinate: intersectionPoint!, index: index, distance: intersectionDistance!)
+            if intersectionDistance != nil && intersectionDistance! < closestDistance ?? .greatestFiniteMagnitude {
+                closestCoordinate = IndexedCoordinate(coordinate: intersectionPoint!,
+                                                      index: index,
+                                                      distance: startCoordinate.distance(to: intersectionPoint!))
+                closestDistance = intersectionDistance!
             }
         }
         
