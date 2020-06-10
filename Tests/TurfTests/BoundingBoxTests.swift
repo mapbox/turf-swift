@@ -13,8 +13,8 @@ class BoundingBoxTests: XCTestCase {
             CLLocationCoordinate2D(latitude: 2, longitude: 1)
         ]
         let bbox = BoundingBox(from: coordinates)
-        XCTAssertEqual(bbox!.northWest, CLLocationCoordinate2D(latitude: 2, longitude: 1))
-        XCTAssertEqual(bbox!.southEast, CLLocationCoordinate2D(latitude: 1, longitude: 2))
+        XCTAssertEqual(bbox!.southWest, CLLocationCoordinate2D(latitude: 1, longitude: 1))
+        XCTAssertEqual(bbox!.northEast, CLLocationCoordinate2D(latitude: 2, longitude: 2))
     }
     
     func testAllNegative() {
@@ -23,8 +23,8 @@ class BoundingBoxTests: XCTestCase {
             CLLocationCoordinate2D(latitude: -2, longitude: -1)
         ]
         let bbox = BoundingBox(from: coordinates)
-        XCTAssertEqual(bbox!.northWest, CLLocationCoordinate2D(latitude: -1, longitude: -2))
-        XCTAssertEqual(bbox!.southEast, CLLocationCoordinate2D(latitude: -2, longitude: -1))
+        XCTAssertEqual(bbox!.southWest, CLLocationCoordinate2D(latitude: -2, longitude: -2))
+        XCTAssertEqual(bbox!.northEast, CLLocationCoordinate2D(latitude: -1, longitude: -1))
     }
     
     func testPositiveLatNegativeLon() {
@@ -33,8 +33,8 @@ class BoundingBoxTests: XCTestCase {
             CLLocationCoordinate2D(latitude: 2, longitude: -1)
         ]
         let bbox = BoundingBox(from: coordinates)
-        XCTAssertEqual(bbox!.northWest, CLLocationCoordinate2D(latitude: 2, longitude: -2))
-        XCTAssertEqual(bbox!.southEast, CLLocationCoordinate2D(latitude: 1, longitude: -1))
+        XCTAssertEqual(bbox!.southWest, CLLocationCoordinate2D(latitude: 1, longitude: -2))
+        XCTAssertEqual(bbox!.northEast, CLLocationCoordinate2D(latitude: 2, longitude: -1))
     }
     
     func testNegativeLatPositiveLon() {
@@ -43,8 +43,8 @@ class BoundingBoxTests: XCTestCase {
             CLLocationCoordinate2D(latitude: -2, longitude: 1)
         ]
         let bbox = BoundingBox(from: coordinates)
-        XCTAssertEqual(bbox!.northWest, CLLocationCoordinate2D(latitude: -1, longitude: 1))
-        XCTAssertEqual(bbox!.southEast, CLLocationCoordinate2D(latitude: -2, longitude: 2))
+        XCTAssertEqual(bbox!.southWest, CLLocationCoordinate2D(latitude: -2, longitude: 1))
+        XCTAssertEqual(bbox!.northEast, CLLocationCoordinate2D(latitude: -1, longitude: 2))
     }
 
     func testContains() {
