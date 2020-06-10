@@ -5,7 +5,7 @@ import CoreLocation
 
 
 public struct GeometryCollection {
-    public let geometries: [Geometry]
+    public var geometries: [Geometry]
     
     public init(geometries: [Geometry]) {
         self.geometries = geometries
