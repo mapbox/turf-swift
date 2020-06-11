@@ -10,6 +10,10 @@ public struct Polygon: Equatable {
     public init(_ coordinates: [[CLLocationCoordinate2D]]) {
         self.coordinates = coordinates
     }
+    
+    public init(outerRing: Ring, innerRings: [Ring] = []) {
+        self.coordinates = ([outerRing] + innerRings).map { $0.coordinates }
+    }
 }
 
 extension Polygon {
