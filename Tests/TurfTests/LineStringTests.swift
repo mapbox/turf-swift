@@ -209,6 +209,29 @@ class LineStringTests: XCTestCase {
         XCTAssertEqual(closestToLong?.coordinate.latitude ?? 0, long.latitude, accuracy: 1e-5)
         XCTAssertEqual(closestToLong?.coordinate.longitude ?? 0, long.longitude, accuracy: 1e-5)
         XCTAssertEqual(closestToLong?.index, 1, "Coordinate closer to later vertex is indexed with earlier vertex")
+        
+        // turf-point-on-line - check dist and index
+        let indexLineString = LineString([
+            [0.0, 0.0],
+            [1.0, 1.0],
+            [2.0, 2.0],
+            [3.0, 3.0],
+            [4.0, 4.0],
+            [5.0, 5.0]
+            ].map {
+                CLLocationCoordinate2D(latitude: $0.first!, longitude: $0.last!)
+        })
+
+        let pointToSnap = CLLocationCoordinate2D(latitude: 2.0, longitude: 3.0)
+        let snappedIndex = indexLineString.closestCoordinate(to: pointToSnap)
+
+        XCTAssertEqual(snappedIndex?.index, 2)
+        XCTAssertEqual(snappedIndex!.coordinate.latitude, 2.50, accuracy: 1e-3)
+        XCTAssertEqual(snappedIndex!.coordinate.longitude, 2.50, accuracy: 1e-3)
+        XCTAssertGreaterThan(Double(snappedIndex!.distance),
+                             indexLineString.coordinates[2].distance(to: indexLineString.coordinates.first!))
+        XCTAssertLessThan(Double(snappedIndex!.distance),
+                          indexLineString.coordinates[3].distance(to: indexLineString.coordinates.first!))
     }
     
     func testCoordinateFromStart() {
