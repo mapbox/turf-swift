@@ -36,7 +36,7 @@ To install Turf using [CocoaPods](https://cocoapods.org/):
 
 1. Specify the following dependency in your Podfile:
    ```rb
-   pod 'Turf', '~> 0.4'
+   pod 'Turf', '~> 0.5'
    ```
 1. Run `pod repo update` if you haven’t lately.
 1. Run `pod install` and open the resulting Xcode workspace.
@@ -48,7 +48,7 @@ To install Turf using [Carthage](https://github.com/Carthage/Carthage/):
 
 1. Add the following dependency to your Cartfile:
    ```
-   github "mapbox/turf-swift" ~> 0.4
+   github "mapbox/turf-swift" ~> 0.5
    ```
 1. Run `carthage bootstrap`.
 1. Follow the rest of [Carthage’s integration instructions](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application). Your application target’s Embedded Frameworks should include Turf.framework.
@@ -59,7 +59,7 @@ To install Turf using [Carthage](https://github.com/Carthage/Carthage/):
 To install Turf using the [Swift Package Manager](https://swift.org/package-manager/), add the following package to the `dependencies` in your Package.swift file:
 
 ```swift
-.package(url: "https://github.com/mapbox/turf-swift.git", from: "0.4")
+.package(url: "https://github.com/mapbox/turf-swift.git", from: "0.5")
 ```
 
 Then `import Turf` in any Swift file in your module.
