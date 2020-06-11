@@ -31,11 +31,11 @@ extension MultiPolygon {
      * The optional parameter `ignoreBoundary` will result in the method returning true if the given coordinate
      * lies on the boundary line of the polygon or its interior rings.
      *
-     * Calls contains funcion for each contained polygon
+     * Calls contains function for each contained polygon
      */
     public func contains(_ coordinate: CLLocationCoordinate2D, ignoreBoundary: Bool = false) -> Bool {
-        return polygons.first(where: {
+        return polygons.contains {
             $0.contains(coordinate, ignoreBoundary: ignoreBoundary)
-        }) != nil
+        }
     }
 }

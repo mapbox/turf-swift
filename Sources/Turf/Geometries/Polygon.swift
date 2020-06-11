@@ -12,12 +12,7 @@ public struct Polygon: Equatable {
     }
     
     public init(outerRing: Ring, innerRings: [Ring] = []) {
-        var ringCoordinates = [outerRing.coordinates]
-        for innerRing in innerRings {
-            ringCoordinates.append(innerRing.coordinates)
-        }
-        
-        self.coordinates = ringCoordinates
+        self.coordinates = ([outerRing] + innerRings).map { $0.coordinates }
     }
 }
 
