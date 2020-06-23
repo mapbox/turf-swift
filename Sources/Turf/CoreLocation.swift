@@ -1,7 +1,7 @@
 import Foundation
 public struct CLLocationCoordinate2D {
-    public let latitude: Double
-    public let longitude: Double
+    public var latitude: Double
+    public var longitude: Double
     
     public init(latitude: Double, longitude: Double) {
         self.latitude = latitude
