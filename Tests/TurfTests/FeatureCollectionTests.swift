@@ -54,9 +54,9 @@ class FeatureCollectionTests: XCTestCase {
         
         let decodedLineStringFeature = decoded.features[0]
         guard case let .lineString(decodedLineStringCoordinates) = decodedLineStringFeature.geometry else {
-                   XCTFail()
-                   return
-               }
+            XCTFail()
+            return
+        }
         XCTAssert(decodedLineStringCoordinates.coordinates.count == 19)
         XCTAssert(decodedLineStringFeature.properties!["id"] as! Int == 1)
         XCTAssert(decodedLineStringCoordinates.coordinates.first!.latitude == -26.17500493262446)
@@ -124,5 +124,15 @@ class FeatureCollectionTests: XCTestCase {
                 _ = try! JSONEncoder().encode(decoded)
             }
         }
+    }
+    
+    func testDecodedFeatureCollection() {
+        let data = try! Fixture.geojsonData(from: "featurecollection")!
+        let geojson = try! GeoJSON.parse(data)
+        
+        XCTAssert(geojson.decoded is FeatureCollection)
+        XCTAssertEqual(geojson.decodedFeatureCollection?.type, .featureCollection)
+        XCTAssertEqual(geojson.decodedFeatureCollection?.features.count, 4)
+        XCTAssertEqual(geojson.decodedFeatureCollection?.properties?["tolerance"] as? Double, 0.01)
     }
 }
