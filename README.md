@@ -17,10 +17,10 @@ Turf for Swift is **experimental** and its public API is subject to change. Plea
 
 Turf requires Xcode 9.x and supports the following minimum deployment targets:
 
-* iOS 8.0 and above
-* macOS 10.10.0 (Yosemite) and above
-* tvOS 9.0 and above
-* watchOS 2.0 and above
+* iOS 10.0 and above
+* macOS 10.12 (Sierra) and above
+* tvOS 10.0 and above
+* watchOS 3.0 and above
 
 Alternatively, you can incorporate Turf into a command line tool without Xcode on any platform that [Swift](https://swift.org/download/) supports, including Linux.
 
