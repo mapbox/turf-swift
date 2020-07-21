@@ -47,7 +47,7 @@ public class GeoJSON: Codable {
     public var decodedFeature: Feature? {
         return decoded as? Feature
     }
-    public var decodedFeatueCollection: FeatureCollection? {
+    public var decodedFeatureCollection: FeatureCollection? {
         return decoded as? FeatureCollection
     }
     
