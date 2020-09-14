@@ -190,7 +190,7 @@ extension LineString {
             let direction = segment.0.direction(to: segment.1)
             let perpendicularPoint1 = coordinate.coordinate(at: maxDistance, facing: direction + 90)
             let perpendicularPoint2 = coordinate.coordinate(at: maxDistance, facing: direction - 90)
-            let intersectionPoint = Turf.intersection((perpendicularPoint1, perpendicularPoint2), segment)
+            let intersectionPoint = intersection((perpendicularPoint1, perpendicularPoint2), segment)
             let intersectionDistance: CLLocationDistance? = intersectionPoint != nil ? coordinate.distance(to: intersectionPoint!) : nil
             
             if distances.0 < closestDistance ?? .greatestFiniteMagnitude {
