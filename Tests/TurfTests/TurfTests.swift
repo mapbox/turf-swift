@@ -36,7 +36,7 @@ class TurfTests: XCTestCase {
     
     func testIntersection() {
         let coord1 = CLLocationCoordinate2D(latitude: 30, longitude: 30)
-        let a = Turf.intersection((CLLocationCoordinate2D(latitude: 20, longitude: 20), CLLocationCoordinate2D(latitude: 40, longitude: 40)), (CLLocationCoordinate2D(latitude: 20, longitude: 40), CLLocationCoordinate2D(latitude: 40, longitude: 20)))
+        let a = intersection((CLLocationCoordinate2D(latitude: 20, longitude: 20), CLLocationCoordinate2D(latitude: 40, longitude: 40)), (CLLocationCoordinate2D(latitude: 20, longitude: 40), CLLocationCoordinate2D(latitude: 40, longitude: 20)))
         XCTAssertEqual(a, coord1)
     }
     
