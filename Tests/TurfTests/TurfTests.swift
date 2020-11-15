@@ -158,4 +158,24 @@ class TurfTests: XCTestCase {
         let midCoord = mid(coord1, coord2)
         XCTAssertEqual(coord1.distance(to: midCoord), coord2.distance(to: midCoord), accuracy: 1)
     }
+
+    func testCircle()
+    {
+        let coord = CLLocationCoordinate2D(latitude: 10.0, longitude: 5.0)
+        let radius = 500
+        let circleShape = circle(coord, radius: CLLocationDistance(radius))
+
+        // Test default number of steps is 64.
+        let expctedNumberOfSteps = circleShape.coordinates[0].count - 1
+        XCTAssertEqual(expctedNumberOfSteps, 64)
+
+        // Test the diameter of the circle is 2x its radius.
+        let startingCoord = circleShape.coordinates[0][0]
+        let oppositeCoord = circleShape.coordinates[0][circleShape.coordinates[0].count / 2]
+
+        let expectedDiameter = CLLocationDistance(radius * 2)
+        let diameter = startingCoord.distance(to: oppositeCoord)
+
+        XCTAssertEqual(expectedDiameter, diameter, accuracy: 0.25)
+    }
 }
