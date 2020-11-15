@@ -55,7 +55,7 @@ public func mid(_ coord1: CLLocationCoordinate2D, _ coord2: CLLocationCoordinate
  - Parameter radius: The radius of the circle, measured in meters.
  - Parameter steps: The number of vertices the circle will have. Defaults to 64.
  */
-public func circle(_ center: CLLocationCoordinate2D, radius: CLLocationDistance, steps: Int = 64) -> Polygon {
+public func circle(from center: CLLocationCoordinate2D, radius: CLLocationDistance, steps: Int = 64) -> Polygon {
 
     let coordinates = (0...steps).map { ( step ) -> CLLocationCoordinate2D in
         let bearing = CLLocationDirection(step * -360 / steps)

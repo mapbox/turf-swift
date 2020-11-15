@@ -163,7 +163,7 @@ class TurfTests: XCTestCase {
     {
         let coord = CLLocationCoordinate2D(latitude: 10.0, longitude: 5.0)
         let radius = 500
-        let circleShape = circle(coord, radius: CLLocationDistance(radius))
+        let circleShape = circle(from: coord, radius: CLLocationDistance(radius))
 
         // Test default number of steps is 64.
         let expctedNumberOfSteps = circleShape.coordinates[0].count - 1
