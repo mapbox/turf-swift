@@ -46,3 +46,21 @@ public func mid(_ coord1: CLLocationCoordinate2D, _ coord2: CLLocationCoordinate
     let heading = coord1.direction(to: coord2)
     return coord1.coordinate(at: dist / 2, facing: heading)
 }
+
+/**
+ Takes a coordinate and calculates the circular polygon given a radius in meters,
+ using a defined number of steps for precision.
+
+ - Parameter center: The center coordinate for the circle.
+ - Parameter radius: The radius of the circle, measured in meters.
+ - Parameter steps: The number of vertices the circle will have. Defaults to 64.
+ */
+public func circle(_ center: CLLocationCoordinate2D, radius: CLLocationDistance, steps: Int = 64) -> Polygon {
+
+    let coordinates = (0...steps).map { ( step ) -> CLLocationCoordinate2D in
+        let bearing = CLLocationDirection(step * -360 / steps)
+        return center.coordinate(at: radius, facing: bearing)
+    }
+
+    return Polygon([coordinates])
+}
