@@ -263,7 +263,7 @@ extension LineString {
         return dx * dx + dy * dy;
     }
 
-    private func simplifyDouglasPeuckerStep(_ coordinates: [CLLocationCoordinate2D], first: Int, last: Int, tolerance: Double) -> [CLLocationCoordinate2D] {
+    private func simplifyDouglasPeuckerStep(_ coordinates: [CLLocationCoordinate2D], first: Int, last: Int, tolerance: Double, simplified: inout [CLLocationCoordinate2D]) {
 
         var maxSquareDistance = tolerance
         var index = 0
@@ -277,29 +277,27 @@ extension LineString {
             }
         }
 
-        var simplifiedCoordinates = coordinates
-
         if maxSquareDistance > tolerance {
             if index - first > 1 {
-                simplifiedCoordinates = simplifyDouglasPeuckerStep(coordinates, first: first, last: index, tolerance: tolerance)
+                simplifyDouglasPeuckerStep(coordinates, first: first, last: index, tolerance: tolerance, simplified: &simplified)
             }
-            simplifiedCoordinates.append(coordinates[index])
+            simplified.append(coordinates[index])
             if last - index > 1 {
-                simplifiedCoordinates = simplifyDouglasPeuckerStep(simplifiedCoordinates, first: index, last: last, tolerance: tolerance)
+                simplifyDouglasPeuckerStep(coordinates, first: index, last: last, tolerance: tolerance, simplified: &simplified)
             }
         }
-
-        return simplifiedCoordinates
     }
 
-    private func simplifyDouglasPeucker(_ coordinates: [CLLocationCoordinate2D], first: Int, last: Int, tolerance: Double) -> [CLLocationCoordinate2D] {
-        guard coordinates.count > 2, first < coordinates.count - 1, last > first, last < coordinates.count else { return coordinates }
+    private func simplifyDouglasPeucker(_ coordinates: [CLLocationCoordinate2D], tolerance: Double!) -> [CLLocationCoordinate2D] {
+        if coordinates.count <= 2 {
+            return coordinates
+        }
 
-        var simplified = simplifyDouglasPeuckerStep(coordinates, first: 0, last: last, tolerance: tolerance)
-        simplified.insert(coordinates[0], at: 0)
-        simplified.append(coordinates[last])
-
-        return simplified
+        let lastPoint = coordinates.count - 1
+        var result = [coordinates[0]]
+        simplifyDouglasPeuckerStep(coordinates, first: 0, last: lastPoint, tolerance: tolerance, simplified: &result)
+        result.append(coordinates[lastPoint])
+        return result
     }
 
     /// Returns a simplified version of the LineString using the Ramer–Douglas–Peucker algorithm.
@@ -317,7 +315,7 @@ extension LineString {
 
         var simplifiedCoordinates = highestQuality ? coordinates : simplifyRadialDistance(coordinates, tolerance: squareTolerance)
         
-        simplifiedCoordinates = simplifyDouglasPeucker(simplifiedCoordinates, first: 0, last: simplifiedCoordinates.count - 1, tolerance: squareTolerance)
+        simplifiedCoordinates = simplifyDouglasPeucker(simplifiedCoordinates, tolerance: squareTolerance)
 
         return LineString(simplifiedCoordinates)
     }
