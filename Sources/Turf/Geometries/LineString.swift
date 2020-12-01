@@ -216,6 +216,12 @@ extension LineString {
         return closestCoordinate
     }
 
+    private func getSquareDistance(coordinate1: CLLocationCoordinate2D, coordinate2: CLLocationCoordinate2D) -> Double {
+        let dx = coordinate1.longitude - coordinate2.longitude
+        let dy = coordinate1.latitude - coordinate2.latitude
+        return dx * dx + dy * dy
+  }
+
     private func simplifyRadialDistance(_ coordinates: [CLLocationCoordinate2D], tolerance: Double) -> [CLLocationCoordinate2D] {
         guard coordinates.count > 2 else { return coordinates }
 
@@ -226,7 +232,7 @@ extension LineString {
         for index in 1 ..< coordinates.count {
             coordinate = coordinates[index]
 
-            if coordinate.distance(to: prevCoordinate) > tolerance {
+            if getSquareDistance(coordinate1: coordinate, coordinate2: prevCoordinate) > tolerance {
                 newCoordinates.append(coordinate)
                 prevCoordinate = coordinate
             }
@@ -257,10 +263,10 @@ extension LineString {
             }
         }
 
-        dx = segmentStart.latitude - x;
-        dy = coordinate.longitude - y;
+        dx = coordinate.latitude - x
+        dy = coordinate.longitude - y
 
-        return dx * dx + dy * dy;
+        return dx * dx + dy * dy
     }
 
     private func simplifyDouglasPeuckerStep(_ coordinates: [CLLocationCoordinate2D], first: Int, last: Int, tolerance: Double, simplified: inout [CLLocationCoordinate2D]) {
