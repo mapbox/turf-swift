@@ -122,4 +122,24 @@ class PolygonTests: XCTestCase {
         XCTAssertTrue(polygon.contains(coordinate, ignoreBoundary: false))
         XCTAssertTrue(polygon.contains(coordinate))
     }
+
+    func testCirclePolygon()
+    {
+        let coord = CLLocationCoordinate2D(latitude: 10.0, longitude: 5.0)
+        let radius = 500
+        let circleShape = Polygon(center: coord, radius: CLLocationDistance(radius))
+
+        // Test default number of steps is 64.
+        let expctedNumberOfSteps = circleShape.coordinates[0].count - 1
+        XCTAssertEqual(expctedNumberOfSteps, 64)
+
+        // Test the diameter of the circle is 2x its radius.
+        let startingCoord = circleShape.coordinates[0][0]
+        let oppositeCoord = circleShape.coordinates[0][circleShape.coordinates[0].count / 2]
+
+        let expectedDiameter = CLLocationDistance(radius * 2)
+        let diameter = startingCoord.distance(to: oppositeCoord)
+
+        XCTAssertEqual(expectedDiameter, diameter, accuracy: 0.25)
+    }
 }

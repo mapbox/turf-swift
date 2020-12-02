@@ -92,7 +92,7 @@ Turf.js | Turf-swift
 — | `CLLocationDirection.difference(from:)`
 — | `CLLocationDirection.wrap(min:max:)`
 [turf-polygon-to-line](https://github.com/Turfjs/turf/tree/master/packages/turf-polygon-to-line/) | `LineString(_:)`<br>`MultiLineString(_:)`<br>`FeatureCollection(_:)` |
-[turf-circle](https://turfjs.org/docs/#circle) | `circle(center:radius:steps:)` |
+[turf-circle](https://turfjs.org/docs/#circle) | `Polygon(center:radius:vertices:)` |
 
 
 ## GeoJSON
