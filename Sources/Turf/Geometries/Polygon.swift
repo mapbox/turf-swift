@@ -14,6 +14,28 @@ public struct Polygon: Equatable {
     public init(outerRing: Ring, innerRings: [Ring] = []) {
         self.coordinates = ([outerRing] + innerRings).map { $0.coordinates }
     }
+
+    /**
+     Initializes a polygon as a given center coordinate with a given number of
+     vertices, as a means to approximate a circle.
+
+     - Parameter center: The center coordinate for the polygon.
+     - Parameter radius: The radius of the polygon, measured in meters.
+     - Parameter vertices: The number of vertices the polygon will have.
+                           The recommended amount is 64.
+     - Returns: A polygon shape which approximates a circle.
+     */
+    public init(center: CLLocationCoordinate2D, radius: CLLocationDistance, vertices: Int) {
+        // The first and last coordinates in a polygon must be identical,
+        // which is why we're using the inclusive range operator in this case.
+        // Ported from https://github.com/Turfjs/turf/blob/17002ccd57e04e84ddb38d7e3ac8ede35b019c58/packages/turf-circle/index.ts
+        let coordinates = (0...vertices).map { ( step ) -> CLLocationCoordinate2D in
+            let bearing = fabs(CLLocationDirection(step * -360 / vertices))
+            return center.coordinate(at: radius, facing: bearing)
+        }
+
+        self.coordinates = [coordinates]
+    }
 }
 
 extension Polygon {

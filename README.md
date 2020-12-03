@@ -91,7 +91,8 @@ Turf.js | Turf-swift
 [turf-bearing](https://turfjs.org/docs/#bearing) | `CLLocationCoordinate2D.direction(to:)`<br>`RadianCoordinate2D.direction(to:)`
 — | `CLLocationDirection.difference(from:)`
 — | `CLLocationDirection.wrap(min:max:)`
-[turf-polygon-to-line](https://github.com/Turfjs/turf/tree/master/packages/turf-polygon-to-line/) | `LineString(_:)`<br>`MultiLineString(_:)`<br>`FeatureCollection(_:)`
+[turf-polygon-to-line](https://github.com/Turfjs/turf/tree/master/packages/turf-polygon-to-line/) | `LineString(_:)`<br>`MultiLineString(_:)`<br>`FeatureCollection(_:)` |
+[turf-circle](https://turfjs.org/docs/#circle) | `Polygon(center:radius:vertices:)` |
 
 
 ## GeoJSON
