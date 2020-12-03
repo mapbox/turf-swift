@@ -127,9 +127,9 @@ class PolygonTests: XCTestCase {
     {
         let coord = CLLocationCoordinate2D(latitude: 10.0, longitude: 5.0)
         let radius = 500
-        let circleShape = Polygon(center: coord, radius: CLLocationDistance(radius))
+        let circleShape = Polygon(center: coord, radius: CLLocationDistance(radius), vertices: 64)
 
-        // Test default number of steps is 64.
+        // Test number of vertices is 64.
         let expctedNumberOfSteps = circleShape.coordinates[0].count - 1
         XCTAssertEqual(expctedNumberOfSteps, 64)
 
