@@ -216,14 +216,14 @@ extension LineString {
         return closestCoordinate
     }
 
-    private func getSquareDistance(coordinate1: CLLocationCoordinate2D, coordinate2: CLLocationCoordinate2D) -> Double {
-        let dx = coordinate1.longitude - coordinate2.longitude
-        let dy = coordinate1.latitude - coordinate2.latitude
+    private func squareDistance(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D) -> Double {
+        let dx = from.longitude - to.longitude
+        let dy = from.latitude - to.latitude
         return dx * dx + dy * dy
-  }
+    }
 
-    private func simplifyRadialDistance(_ coordinates: [CLLocationCoordinate2D], tolerance: Double) -> [CLLocationCoordinate2D] {
-        guard coordinates.count > 2 else { return coordinates }
+    public func simplified(radialTolerance: Double) -> LineString {
+        guard coordinates.count > 2 else { return LineString(coordinates) }
 
         var prevCoordinate = coordinates[0]
         var newCoordinates = [prevCoordinate]
@@ -232,7 +232,7 @@ extension LineString {
         for index in 1 ..< coordinates.count {
             coordinate = coordinates[index]
 
-            if getSquareDistance(coordinate1: coordinate, coordinate2: prevCoordinate) > tolerance {
+            if squareDistance(from: coordinate, to: prevCoordinate) > radialTolerance {
                 newCoordinates.append(coordinate)
                 prevCoordinate = coordinate
             }
@@ -242,10 +242,10 @@ extension LineString {
             newCoordinates.append(coordinate)
         }
 
-        return newCoordinates
+        return LineString(newCoordinates)
     }
 
-    private func getSquareSegmentDistance(_ coordinate: CLLocationCoordinate2D, segmentStart: CLLocationCoordinate2D, segmentEnd: CLLocationCoordinate2D) -> CLLocationDistance {
+    private func squareSegmentDistance(_ coordinate: CLLocationCoordinate2D, segmentStart: CLLocationCoordinate2D, segmentEnd: CLLocationCoordinate2D) -> CLLocationDistance {
 
         var x = segmentStart.latitude
         var y = segmentStart.longitude
@@ -275,7 +275,7 @@ extension LineString {
         var index = 0
 
         for i in first + 1 ..< last {
-            let squareDistance = getSquareSegmentDistance(coordinates[i], segmentStart: coordinates[first], segmentEnd: coordinates[last])
+            let squareDistance = squareSegmentDistance(coordinates[i], segmentStart: coordinates[first], segmentEnd: coordinates[last])
 
             if squareDistance > maxSquareDistance {
                 index = i
@@ -294,7 +294,7 @@ extension LineString {
         }
     }
 
-    private func simplifyDouglasPeucker(_ coordinates: [CLLocationCoordinate2D], tolerance: Double!) -> [CLLocationCoordinate2D] {
+    private func simplifyDouglasPeucker(_ coordinates: [CLLocationCoordinate2D], tolerance: Double) -> [CLLocationCoordinate2D] {
         if coordinates.count <= 2 {
             return coordinates
         }
@@ -319,10 +319,28 @@ extension LineString {
 
         let squareTolerance = tolerance * tolerance
 
-        var simplifiedCoordinates = highestQuality ? coordinates : simplifyRadialDistance(coordinates, tolerance: squareTolerance)
+        var simplifiedCoordinates = highestQuality ? coordinates : self.simplified(radialTolerance: squareTolerance).coordinates
         
         simplifiedCoordinates = simplifyDouglasPeucker(simplifiedCoordinates, tolerance: squareTolerance)
 
         return LineString(simplifiedCoordinates)
+    }
+
+    /// Mutates the LineString into a simplified version using the Ramer–Douglas–Peucker algorithm.
+    ///
+    /// tolerance:  Controls the level of simplification by specifying the maximum allowed distance between the original line point
+    /// and the simplified point. Higher tolerance values results in higher simplification.
+    ///
+    /// highestQuality: Excludes distance-based preprocessing step which leads to highest quality simplification. High quality simplification runs considerably slower so consider how much precision is needed in your application.
+    ///
+    /// Ported from https://github.com/Turfjs/turf/blob/master/packages/turf-simplify/lib/simplify.js
+    public mutating func simplified(tolerance: Double = 1.0, highestQuality: Bool = false) {
+        guard coordinates.count > 2 else { return }
+
+        let squareTolerance = tolerance * tolerance
+
+        let simplifiedCoordinates = highestQuality ? coordinates : self.simplified(radialTolerance: squareTolerance).coordinates
+
+        coordinates = simplifyDouglasPeucker(simplifiedCoordinates, tolerance: squareTolerance)
     }
 }
