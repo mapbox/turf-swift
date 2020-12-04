@@ -463,5 +463,7 @@ class LineStringTests: XCTestCase {
         let original = LineString(coordinates)
         let simplified = original.simplify(tolerance: 0.01, highestQuality: false).coordinates
         XCTAssertEqual(simplified, simplifiedCoordinates)
+        XCTAssertEqual(simplified.first, coordinates.first)
+        XCTAssertEqual(simplified.last, coordinates.last)
     }
 }
