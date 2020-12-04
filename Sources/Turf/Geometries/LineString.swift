@@ -216,14 +216,14 @@ extension LineString {
         return closestCoordinate
     }
 
-    private func squareDistance(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D) -> Double {
-        let dx = from.longitude - to.longitude
-        let dy = from.latitude - to.latitude
+    private func squareDistance(from origin: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D) -> Double {
+        let dx = origin.longitude - destination.longitude
+        let dy = origin.latitude - destination.latitude
         return dx * dx + dy * dy
     }
 
-    public func simplified(radialTolerance: Double) -> LineString {
-        guard coordinates.count > 2 else { return LineString(coordinates) }
+    private mutating func simplified(radialTolerance: Double) {
+        guard coordinates.count > 2 else { return }
 
         var prevCoordinate = coordinates[0]
         var newCoordinates = [prevCoordinate]
@@ -242,7 +242,13 @@ extension LineString {
             newCoordinates.append(coordinate)
         }
 
-        return LineString(newCoordinates)
+        coordinates = newCoordinates
+    }
+
+    private func simplify(radialTolerance: Double) -> LineString {
+        var simplifiedCopy = LineString(coordinates)
+        simplifiedCopy.simplified(radialTolerance: radialTolerance)
+        return simplifiedCopy
     }
 
     private func squareSegmentDistance(_ coordinate: CLLocationCoordinate2D, segmentStart: CLLocationCoordinate2D, segmentEnd: CLLocationCoordinate2D) -> CLLocationDistance {
@@ -306,7 +312,7 @@ extension LineString {
         return result
     }
 
-    /// Returns a simplified version of the LineString using the Ramer–Douglas–Peucker algorithm.
+    /// Returns a copy of the LineString with the Ramer–Douglas–Peucker algorithm applied to it.
     ///
     /// tolerance:  Controls the level of simplification by specifying the maximum allowed distance between the original line point
     /// and the simplified point. Higher tolerance values results in higher simplification.
@@ -314,16 +320,10 @@ extension LineString {
     /// highestQuality: Excludes distance-based preprocessing step which leads to highest quality simplification. High quality simplification runs considerably slower so consider how much precision is needed in your application.
     ///
     /// Ported from https://github.com/Turfjs/turf/blob/master/packages/turf-simplify/lib/simplify.js
-    public func simplified(tolerance: Double = 1.0, highestQuality: Bool = false) -> LineString {
+    public func simplify(tolerance: Double = 1.0, highestQuality: Bool = false) -> LineString {
         guard coordinates.count > 2 else { return LineString(coordinates) }
 
-        let squareTolerance = tolerance * tolerance
-
-        var simplifiedCoordinates = highestQuality ? coordinates : self.simplified(radialTolerance: squareTolerance).coordinates
-        
-        simplifiedCoordinates = simplifyDouglasPeucker(simplifiedCoordinates, tolerance: squareTolerance)
-
-        return LineString(simplifiedCoordinates)
+        return LineString(coordinates).simplify(tolerance: tolerance, highestQuality: highestQuality)
     }
 
     /// Mutates the LineString into a simplified version using the Ramer–Douglas–Peucker algorithm.
@@ -339,8 +339,10 @@ extension LineString {
 
         let squareTolerance = tolerance * tolerance
 
-        let simplifiedCoordinates = highestQuality ? coordinates : self.simplified(radialTolerance: squareTolerance).coordinates
+        if !highestQuality {
+            simplified(radialTolerance: tolerance)
+        }
 
-        coordinates = simplifyDouglasPeucker(simplifiedCoordinates, tolerance: squareTolerance)
+        coordinates = simplifyDouglasPeucker(coordinates, tolerance: squareTolerance)
     }
 }
