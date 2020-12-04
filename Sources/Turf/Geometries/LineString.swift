@@ -323,7 +323,9 @@ extension LineString {
     public func simplify(tolerance: Double = 1.0, highestQuality: Bool = false) -> LineString {
         guard coordinates.count > 2 else { return LineString(coordinates) }
 
-        return LineString(coordinates).simplify(tolerance: tolerance, highestQuality: highestQuality)
+        var copy = LineString(coordinates)
+        copy.simplified(tolerance: tolerance, highestQuality: highestQuality)
+        return copy
     }
 
     /// Mutates the LineString into a simplified version using the Ramer–Douglas–Peucker algorithm.
@@ -340,7 +342,7 @@ extension LineString {
         let squareTolerance = tolerance * tolerance
 
         if !highestQuality {
-            simplified(radialTolerance: tolerance)
+            simplified(radialTolerance: squareTolerance)
         }
 
         coordinates = simplifyDouglasPeucker(coordinates, tolerance: squareTolerance)

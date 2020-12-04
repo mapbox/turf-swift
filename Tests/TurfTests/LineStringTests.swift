@@ -461,7 +461,7 @@ class LineStringTests: XCTestCase {
                                      CLLocationCoordinate2D(latitude : -80.33499240875244, longitude : 27.810079615315917),
                                      CLLocationCoordinate2D(latitude : -80.32872676849365, longitude : 27.80848534345178)]
         let original = LineString(coordinates)
-        let simplified = original.simplified(tolerance: 0.01, highestQuality: false).coordinates
+        let simplified = original.simplify(tolerance: 0.01, highestQuality: false).coordinates
         XCTAssertEqual(simplified, simplifiedCoordinates)
     }
 }
