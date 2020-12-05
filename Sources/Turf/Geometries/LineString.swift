@@ -245,12 +245,6 @@ extension LineString {
         coordinates = newCoordinates
     }
 
-    private func simplify(radialTolerance: Double) -> LineString {
-        var simplifiedCopy = LineString(coordinates)
-        simplifiedCopy.simplified(radialTolerance: radialTolerance)
-        return simplifiedCopy
-    }
-
     private func squareSegmentDistance(_ coordinate: CLLocationCoordinate2D, segmentStart: CLLocationCoordinate2D, segmentEnd: CLLocationCoordinate2D) -> CLLocationDistance {
 
         var x = segmentStart.latitude
