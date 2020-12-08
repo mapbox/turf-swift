@@ -73,8 +73,10 @@ Turf.js | Turf-swift
 ----|----
 [turf-along](https://github.com/Turfjs/turf/tree/master/packages/turf-along/) | `LineString.coordinateFromStart(distance:)`
 [turf-area](https://github.com/Turfjs/turf/blob/master/packages/turf-area/) | `Polygon.area`
+[turf-bearing](https://turfjs.org/docs/#bearing) | `CLLocationCoordinate2D.direction(to:)`<br>`RadianCoordinate2D.direction(to:)`
 [turf-bezier-spline](https://github.com/Turfjs/turf/tree/master/packages/turf-bezier-spline/) | `LineString.bezier(resolution:sharpness:)`
 [turf-boolean-point-in-polygon](https://github.com/Turfjs/turf/tree/master/packages/turf-boolean-point-in-polygon) | `Polygon.contains(_:ignoreBoundary:)`
+[turf-circle](https://turfjs.org/docs/#circle) | `Polygon(center:radius:vertices:)` |
 [turf-destination](https://github.com/Turfjs/turf/tree/master/packages/turf-destination/) | `CLLocationCoordinate2D.coordinate(at:facing:)`<br>`RadianCoordinate2D.coordinate(at:facing:)`
 [turf-distance](https://github.com/Turfjs/turf/tree/master/packages/turf-distance/) | `CLLocationCoordinate2D.distance(to:)`<br>`RadianCoordinate2D.distance(to:)`
 [turf-helpers#polygon](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/#polygon) | `Polygon(_:)`
@@ -88,13 +90,10 @@ Turf.js | Turf-swift
 [turf-line-slice-along](https://github.com/Turfjs/turf/tree/master/packages/turf-line-slice-along/) | `LineString.trimmed(from:distance:)`
 [turf-midpoint](https://github.com/Turfjs/turf/blob/master/packages/turf-midpoint/index.js) | `mid(_:_:)`
 [turf-nearest-point-on-line](https://github.com/Turfjs/turf/tree/master/packages/turf-nearest-point-on-line/) | `LineString.closestCoordinate(to:)`
-[turf-bearing](https://turfjs.org/docs/#bearing) | `CLLocationCoordinate2D.direction(to:)`<br>`RadianCoordinate2D.direction(to:)`
+[turf-polygon-to-line](https://github.com/Turfjs/turf/tree/master/packages/turf-polygon-to-line/) | `LineString(_:)`<br>`MultiLineString(_:)`<br>`FeatureCollection(_:)`
+[turf-simplify](https://github.com/Turfjs/turf/tree/master/packages/turf-simplify) | `LineString.simplified(tolerance:highestQuality:)`
 — | `CLLocationDirection.difference(from:)`
 — | `CLLocationDirection.wrap(min:max:)`
-[turf-polygon-to-line](https://github.com/Turfjs/turf/tree/master/packages/turf-polygon-to-line/) | `LineString(_:)`<br>`MultiLineString(_:)`<br>`FeatureCollection(_:)` |
-[turf-circle](https://turfjs.org/docs/#circle) | `Polygon(center:radius:vertices:)` |
-[turf-simplify](https://github.com/Turfjs/turf/tree/master/packages/turf-simplify) | `LineString.simplified(tolerance:highestQuality:)`
-
 
 ## GeoJSON
 
