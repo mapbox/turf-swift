@@ -36,7 +36,7 @@ class TurfTests: XCTestCase {
     
     func testIntersection() {
         let coord1 = CLLocationCoordinate2D(latitude: 30, longitude: 30)
-        let a = Turf.intersection((CLLocationCoordinate2D(latitude: 20, longitude: 20), CLLocationCoordinate2D(latitude: 40, longitude: 40)), (CLLocationCoordinate2D(latitude: 20, longitude: 40), CLLocationCoordinate2D(latitude: 40, longitude: 20)))
+        let a = intersection((CLLocationCoordinate2D(latitude: 20, longitude: 20), CLLocationCoordinate2D(latitude: 40, longitude: 40)), (CLLocationCoordinate2D(latitude: 20, longitude: 40), CLLocationCoordinate2D(latitude: 40, longitude: 20)))
         XCTAssertEqual(a, coord1)
     }
     
@@ -58,7 +58,7 @@ class TurfTests: XCTestCase {
            $0.map { CLLocationCoordinate2D(latitude: $0[1], longitude: $0[0]) }
         }
         
-        let polygon = Geometry.PolygonRepresentation(coordinates)
+        let polygon = Polygon(coordinates)
         
         XCTAssertEqual(polygon.area, 78588446934.43, accuracy: 0.1)
     }
@@ -67,7 +67,7 @@ class TurfTests: XCTestCase {
         let point1 = CLLocationCoordinate2D(latitude: 37.7749, longitude: 237.581)
         let point2 = CLLocationCoordinate2D(latitude: 35.6669502038, longitude: 139.7731286197)
         let line = [point1, point2]
-        let lineString = Geometry.LineStringRepresentation(line)
+        let lineString = LineString(line)
         guard let bezierLineString = lineString.bezier() else {
             XCTFail("bezier line must be created with 2 points line")
             return
@@ -89,7 +89,7 @@ class TurfTests: XCTestCase {
         let point3 = CLLocationCoordinate2D(latitude: -25.681137335685307, longitude: 138.33984375)
         let point4 = CLLocationCoordinate2D(latitude: -32.026706293336126, longitude: 138.3837890625)
         let line = [point1, point2, point3, point4]
-        let lineString = Geometry.LineStringRepresentation(line)
+        let lineString = LineString(line)
         guard let bezierLineString = lineString.bezier() else {
             XCTFail("bezier line must be created")
             return

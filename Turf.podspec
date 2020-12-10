@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   s.name = "Turf"
-  s.version = "0.3.0"
+  s.version = "1.1.0"
   s.summary = "Simple spatial analysis."
   s.description = "A spatial analysis library written in Swift for native iOS, macOS, tvOS, watchOS, and Linux applications, ported from Turf.js."
 
@@ -20,10 +20,10 @@ Pod::Spec.new do |s|
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
-  s.ios.deployment_target = "8.0"
-  s.osx.deployment_target = "10.10"
-  s.tvos.deployment_target = "9.0"
-  s.watchos.deployment_target = "2.0"
+  s.ios.deployment_target = "10.0"
+  s.osx.deployment_target = "10.12"
+  s.tvos.deployment_target = "10.0"
+  s.watchos.deployment_target = "3.0"
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
@@ -39,5 +39,7 @@ Pod::Spec.new do |s|
   s.module_name = "Turf"
 
   s.frameworks = 'CoreLocation'
+
+  s.swift_version = "5.0"
 
 end

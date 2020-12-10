@@ -16,7 +16,7 @@ class FeatureCollectionTests: XCTestCase {
         XCTAssert(geojson.features[3].geometry.type == .Point)
         
         let lineStringFeature = geojson.features[0]
-        guard case let .LineString(lineStringCoordinates) = lineStringFeature.geometry else {
+        guard case let .lineString(lineStringCoordinates) = lineStringFeature.geometry else {
             XCTFail()
             return
         }
@@ -26,7 +26,7 @@ class FeatureCollectionTests: XCTestCase {
         XCTAssert(lineStringCoordinates.coordinates.first!.longitude == 27.977542877197266)
         
         let polygonFeature = geojson.features[1]
-        guard case let .Polygon(polygonCoordinates) = polygonFeature.geometry else {
+        guard case let .polygon(polygonCoordinates) = polygonFeature.geometry else {
             XCTFail()
             return
         }
@@ -36,7 +36,7 @@ class FeatureCollectionTests: XCTestCase {
         XCTAssert(polygonCoordinates.coordinates[0].first!.longitude == 27.972049713134762)
         
         let pointFeature = geojson.features[3]
-        guard case let .Point(pointCoordinates) = pointFeature.geometry else {
+        guard case let .point(pointCoordinates) = pointFeature.geometry else {
             XCTFail()
             return
         }
@@ -53,17 +53,17 @@ class FeatureCollectionTests: XCTestCase {
         XCTAssert(decoded.features[3].geometry.type == .Point)
         
         let decodedLineStringFeature = decoded.features[0]
-        guard case let .LineString(decodedLineStringCoordinates) = decodedLineStringFeature.geometry else {
-                   XCTFail()
-                   return
-               }
+        guard case let .lineString(decodedLineStringCoordinates) = decodedLineStringFeature.geometry else {
+            XCTFail()
+            return
+        }
         XCTAssert(decodedLineStringCoordinates.coordinates.count == 19)
         XCTAssert(decodedLineStringFeature.properties!["id"] as! Int == 1)
         XCTAssert(decodedLineStringCoordinates.coordinates.first!.latitude == -26.17500493262446)
         XCTAssert(decodedLineStringCoordinates.coordinates.first!.longitude == 27.977542877197266)
         
         let decodedPolygonFeature = decoded.features[1]
-        guard case let .Polygon(decodedPolygonCoordinates) = decodedPolygonFeature.geometry else {
+        guard case let .polygon(decodedPolygonCoordinates) = decodedPolygonFeature.geometry else {
             XCTFail()
             return
         }
@@ -73,7 +73,7 @@ class FeatureCollectionTests: XCTestCase {
         XCTAssert(decodedPolygonCoordinates.coordinates[0].first!.longitude == 27.972049713134762)
         
         let decodedPointFeature = decoded.features[3]
-        guard case let .Point(decodedPointCoordinates) = decodedPointFeature.geometry else {
+        guard case let .point(decodedPointCoordinates) = decodedPointFeature.geometry else {
             XCTFail()
             return
         }
@@ -124,5 +124,15 @@ class FeatureCollectionTests: XCTestCase {
                 _ = try! JSONEncoder().encode(decoded)
             }
         }
+    }
+    
+    func testDecodedFeatureCollection() {
+        let data = try! Fixture.geojsonData(from: "featurecollection")!
+        let geojson = try! GeoJSON.parse(data)
+        
+        XCTAssert(geojson.decoded is FeatureCollection)
+        XCTAssertEqual(geojson.decodedFeatureCollection?.type, .featureCollection)
+        XCTAssertEqual(geojson.decodedFeatureCollection?.features.count, 4)
+        XCTAssertEqual(geojson.decodedFeatureCollection?.properties?["tolerance"] as? Double, 0.01)
     }
 }

@@ -18,38 +18,45 @@ public struct BoundingBox: Codable {
                 let maxLon = max(coordinate.longitude, result.3)
                 return (minLat: minLat, maxLat: maxLat, minLon: minLon, maxLon: maxLon)
         }
-        northWest = CLLocationCoordinate2D(latitude: maxLat, longitude: minLon)
-        southEast = CLLocationCoordinate2D(latitude: minLat, longitude: maxLon)
+        southWest = CLLocationCoordinate2D(latitude: minLat, longitude: minLon)
+        northEast = CLLocationCoordinate2D(latitude: maxLat, longitude: maxLon)
     }
     
-    public init(_ northWest: CLLocationCoordinate2D, _ southEast: CLLocationCoordinate2D) {
-        self.northWest = northWest
-        self.southEast = southEast
+    public init(_ southWest: CLLocationCoordinate2D, _ northEast: CLLocationCoordinate2D) {
+        self.southWest = southWest
+        self.northEast = northEast
     }
     
-    public func contains(_ coordinate: CLLocationCoordinate2D) -> Bool {
-        return southEast.latitude < coordinate.latitude
-            && northWest.latitude > coordinate.latitude
-            && northWest.longitude < coordinate.longitude
-            && southEast.longitude > coordinate.longitude
+    public func contains(_ coordinate: CLLocationCoordinate2D, ignoreBoundary: Bool = true) -> Bool {
+        if ignoreBoundary {
+            return southWest.latitude < coordinate.latitude
+                && northEast.latitude > coordinate.latitude
+                && southWest.longitude < coordinate.longitude
+                && northEast.longitude > coordinate.longitude
+        } else {
+            return southWest.latitude <= coordinate.latitude
+                && northEast.latitude >= coordinate.latitude
+                && southWest.longitude <= coordinate.longitude
+                && northEast.longitude >= coordinate.longitude
+        }
     }
     
     // MARK: - Codable
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
-        try container.encode(northWest.codableCoordinates)
-        try container.encode(southEast.codableCoordinates)
+        try container.encode(southWest.codableCoordinates)
+        try container.encode(northEast.codableCoordinates)
     }
     
     public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
-        northWest = try container.decode(CLLocationCoordinate2DCodable.self).decodedCoordinates
-        southEast = try container.decode(CLLocationCoordinate2DCodable.self).decodedCoordinates
+        southWest = try container.decode(CLLocationCoordinate2DCodable.self).decodedCoordinates
+        northEast = try container.decode(CLLocationCoordinate2DCodable.self).decodedCoordinates
     }
     
-    // MARK: - Private
+    // MARK: - Properties
     
-    public var northWest: CLLocationCoordinate2D
-    public var southEast: CLLocationCoordinate2D
+    public var southWest: CLLocationCoordinate2D
+    public var northEast: CLLocationCoordinate2D
 }

@@ -15,7 +15,7 @@ class PolygonTests: XCTestCase {
         
         XCTAssert((geojson.identifier!.value as! Number).value! as! Double == 1.01)
         
-        guard case let .Polygon(polygon) = geojson.geometry else {
+        guard case let .polygon(polygon) = geojson.geometry else {
             XCTFail()
             return
         }
@@ -26,7 +26,7 @@ class PolygonTests: XCTestCase {
         
         let encodedData = try! JSONEncoder().encode(geojson)
         let decoded = try! GeoJSON.parse(Feature.self, from: encodedData)
-        guard case let .Polygon(decodedPolygon) = decoded.geometry else {
+        guard case let .polygon(decodedPolygon) = decoded.geometry else {
                    XCTFail()
                    return
                }
@@ -41,7 +41,7 @@ class PolygonTests: XCTestCase {
     
     func testPolygonContains() {
         let coordinate = CLLocationCoordinate2D(latitude: 44, longitude: -77)
-        let polygon = Geometry.PolygonRepresentation([[
+        let polygon = Polygon([[
             CLLocationCoordinate2D(latitude: 41, longitude: -81),
             CLLocationCoordinate2D(latitude: 47, longitude: -81),
             CLLocationCoordinate2D(latitude: 47, longitude: -72),
@@ -53,7 +53,7 @@ class PolygonTests: XCTestCase {
     
     func testPolygonDoesNotContain() {
         let coordinate = CLLocationCoordinate2D(latitude: 44, longitude: -77)
-        let polygon = Geometry.PolygonRepresentation([[
+        let polygon = Polygon([[
             CLLocationCoordinate2D(latitude: 41, longitude: -51),
             CLLocationCoordinate2D(latitude: 47, longitude: -51),
             CLLocationCoordinate2D(latitude: 47, longitude: -42),
@@ -65,7 +65,7 @@ class PolygonTests: XCTestCase {
     
     func testPolygonDoesNotContainWithHole() {
         let coordinate = CLLocationCoordinate2D(latitude: 44, longitude: -77)
-        let polygon = Geometry.PolygonRepresentation([
+        let polygon = Polygon([
             [
                 CLLocationCoordinate2D(latitude: 41, longitude: -81),
                 CLLocationCoordinate2D(latitude: 47, longitude: -81),
@@ -82,5 +82,64 @@ class PolygonTests: XCTestCase {
             ],
         ])
         XCTAssertFalse(polygon.contains(coordinate))
+    }
+
+    func testPolygonContainsAtBoundary() {
+        let coordinate = CLLocationCoordinate2D(latitude: 1, longitude: 1)
+        let polygon = Polygon([[
+            CLLocationCoordinate2D(latitude: 0, longitude: 0),
+            CLLocationCoordinate2D(latitude: 1, longitude: 0),
+            CLLocationCoordinate2D(latitude: 1, longitude: 1),
+            CLLocationCoordinate2D(latitude: 0, longitude: 1),
+            CLLocationCoordinate2D(latitude: 0, longitude: 0),
+            ]])
+
+        XCTAssertFalse(polygon.contains(coordinate, ignoreBoundary: true))
+        XCTAssertTrue(polygon.contains(coordinate, ignoreBoundary: false))
+        XCTAssertTrue(polygon.contains(coordinate))
+    }
+
+    func testPolygonWithHoleContainsAtBoundary() {
+        let coordinate = CLLocationCoordinate2D(latitude: 43, longitude: -78)
+        let polygon = Polygon([
+            [
+                CLLocationCoordinate2D(latitude: 41, longitude: -81),
+                CLLocationCoordinate2D(latitude: 47, longitude: -81),
+                CLLocationCoordinate2D(latitude: 47, longitude: -72),
+                CLLocationCoordinate2D(latitude: 41, longitude: -72),
+                CLLocationCoordinate2D(latitude: 41, longitude: -81),
+            ],
+            [
+                CLLocationCoordinate2D(latitude: 43, longitude: -76),
+                CLLocationCoordinate2D(latitude: 43, longitude: -78),
+                CLLocationCoordinate2D(latitude: 45, longitude: -78),
+                CLLocationCoordinate2D(latitude: 45, longitude: -76),
+                CLLocationCoordinate2D(latitude: 43, longitude: -76),
+            ],
+        ])
+
+        XCTAssertFalse(polygon.contains(coordinate, ignoreBoundary: true))
+        XCTAssertTrue(polygon.contains(coordinate, ignoreBoundary: false))
+        XCTAssertTrue(polygon.contains(coordinate))
+    }
+
+    func testCirclePolygon()
+    {
+        let coord = CLLocationCoordinate2D(latitude: 10.0, longitude: 5.0)
+        let radius = 500
+        let circleShape = Polygon(center: coord, radius: CLLocationDistance(radius), vertices: 64)
+
+        // Test number of vertices is 64.
+        let expctedNumberOfSteps = circleShape.coordinates[0].count - 1
+        XCTAssertEqual(expctedNumberOfSteps, 64)
+
+        // Test the diameter of the circle is 2x its radius.
+        let startingCoord = circleShape.coordinates[0][0]
+        let oppositeCoord = circleShape.coordinates[0][circleShape.coordinates[0].count / 2]
+
+        let expectedDiameter = CLLocationDistance(radius * 2)
+        let diameter = startingCoord.distance(to: oppositeCoord)
+
+        XCTAssertEqual(expectedDiameter, diameter, accuracy: 0.25)
     }
 }

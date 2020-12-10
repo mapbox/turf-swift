@@ -17,7 +17,7 @@ class MultiPolygonTests: XCTestCase {
         let geojson = try! GeoJSON.parse(Feature.self, from: data)
         
         XCTAssert(geojson.geometry.type == .MultiPolygon)
-        guard case let .MultiPolygon(multipolygonCoordinates) = geojson.geometry else {
+        guard case let .multiPolygon(multipolygonCoordinates) = geojson.geometry else {
             XCTFail()
             return
         }
@@ -27,7 +27,7 @@ class MultiPolygonTests: XCTestCase {
         
         let encodedData = try! JSONEncoder().encode(geojson)
         let decoded = try! GeoJSON.parse(Feature.self, from: encodedData)
-        guard case let .MultiPolygon(decodedMultipolygonCoordinates) = decoded.geometry else {
+        guard case let .multiPolygon(decodedMultipolygonCoordinates) = decoded.geometry else {
             XCTFail()
             return
         }
@@ -70,8 +70,8 @@ class MultiPolygonTests: XCTestCase {
             ]
         ]
         
-        let multiPolygon = Geometry.MultiPolygon(coordinates: .init(coordinates))
-        var multiPolygonFeature = Feature(multiPolygon)
+        let multiPolygon = Geometry.multiPolygon(.init(coordinates))
+        var multiPolygonFeature = Feature(geometry: multiPolygon)
         multiPolygonFeature.identifier = FeatureIdentifier.string("uniqueIdentifier")
         multiPolygonFeature.properties = ["some": "var"]
 
@@ -80,16 +80,151 @@ class MultiPolygonTests: XCTestCase {
         
         let data = try! Fixture.geojsonData(from: "multipolygon")!
         let bundledMultiPolygon = try! GeoJSON.parse(Feature.self, from: data)
-        guard case let .MultiPolygon(bundledMultipolygonCoordinates) = bundledMultiPolygon.geometry else {
+        guard case let .multiPolygon(bundledMultipolygonCoordinates) = bundledMultiPolygon.geometry else {
             XCTFail()
             return
         }
         
         XCTAssert(decodedCustomMultiPolygon.geometry.type == .MultiPolygon)
-        guard case let .MultiPolygon(decodedMultipolygonCoordinates) = decodedCustomMultiPolygon.geometry else {
+        guard case let .multiPolygon(decodedMultipolygonCoordinates) = decodedCustomMultiPolygon.geometry else {
             XCTFail()
             return
         }
         XCTAssertEqual(decodedMultipolygonCoordinates, bundledMultipolygonCoordinates)
+    }
+    
+    func testMultiPolygonContains() {
+        let coordinate = CLLocationCoordinate2D(latitude: 44, longitude: -77)
+        let multiPolygon = MultiPolygon( [
+            Polygon([[
+                CLLocationCoordinate2D(latitude: 0, longitude: 0),
+                CLLocationCoordinate2D(latitude: 1, longitude: 0),
+                CLLocationCoordinate2D(latitude: 1, longitude: 1),
+                CLLocationCoordinate2D(latitude: 0, longitude: 1),
+                CLLocationCoordinate2D(latitude: 0, longitude: 0),
+                ]]),
+            Polygon([[
+                CLLocationCoordinate2D(latitude: 41, longitude: -81),
+                CLLocationCoordinate2D(latitude: 47, longitude: -81),
+                CLLocationCoordinate2D(latitude: 47, longitude: -72),
+                CLLocationCoordinate2D(latitude: 41, longitude: -72),
+                CLLocationCoordinate2D(latitude: 41, longitude: -81),
+                ]])
+            ]
+        )
+        XCTAssertTrue(multiPolygon.contains(coordinate))
+    }
+    
+    func testMultiPolygonDoesNotContain() {
+        let coordinate = CLLocationCoordinate2D(latitude: 44, longitude: -87)
+        let multiPolygon = MultiPolygon( [
+            Polygon([[
+                CLLocationCoordinate2D(latitude: 0, longitude: 0),
+                CLLocationCoordinate2D(latitude: 1, longitude: 0),
+                CLLocationCoordinate2D(latitude: 1, longitude: 1),
+                CLLocationCoordinate2D(latitude: 0, longitude: 1),
+                CLLocationCoordinate2D(latitude: 0, longitude: 0),
+                ]]),
+            Polygon([[
+                CLLocationCoordinate2D(latitude: 41, longitude: -81),
+                CLLocationCoordinate2D(latitude: 47, longitude: -81),
+                CLLocationCoordinate2D(latitude: 47, longitude: -72),
+                CLLocationCoordinate2D(latitude: 41, longitude: -72),
+                CLLocationCoordinate2D(latitude: 41, longitude: -81),
+                ]])
+            ]
+        )
+        XCTAssertFalse(multiPolygon.contains(coordinate))
+    }
+    
+    func testMultiPolygonDoesNotContainWithHole() {
+        let coordinate = CLLocationCoordinate2D(latitude: 44, longitude: -77)
+        let polygon = Polygon([
+            [
+                CLLocationCoordinate2D(latitude: 41, longitude: -81),
+                CLLocationCoordinate2D(latitude: 47, longitude: -81),
+                CLLocationCoordinate2D(latitude: 47, longitude: -72),
+                CLLocationCoordinate2D(latitude: 41, longitude: -72),
+                CLLocationCoordinate2D(latitude: 41, longitude: -81),
+            ],
+            [
+                CLLocationCoordinate2D(latitude: 43, longitude: -76),
+                CLLocationCoordinate2D(latitude: 43, longitude: -78),
+                CLLocationCoordinate2D(latitude: 45, longitude: -78),
+                CLLocationCoordinate2D(latitude: 45, longitude: -76),
+                CLLocationCoordinate2D(latitude: 43, longitude: -76),
+            ],
+        ])
+        let multiPolygon = MultiPolygon( [
+            polygon,
+            Polygon([[
+                CLLocationCoordinate2D(latitude: 0, longitude: 0),
+                CLLocationCoordinate2D(latitude: 1, longitude: 0),
+                CLLocationCoordinate2D(latitude: 1, longitude: 1),
+                CLLocationCoordinate2D(latitude: 0, longitude: 1),
+                CLLocationCoordinate2D(latitude: 0, longitude: 0),
+                ]])
+            ]
+        )
+        XCTAssertFalse(multiPolygon.contains(coordinate))
+    }
+
+    func testMultiPolygonContainsAtBoundary() {
+        let coordinate = CLLocationCoordinate2D(latitude: 1, longitude: 1)
+        let multiPolygon = MultiPolygon( [
+            [[
+                CLLocationCoordinate2D(latitude: 0, longitude: 0),
+                CLLocationCoordinate2D(latitude: 1, longitude: 0),
+                CLLocationCoordinate2D(latitude: 1, longitude: 1),
+                CLLocationCoordinate2D(latitude: 0, longitude: 1),
+                CLLocationCoordinate2D(latitude: 0, longitude: 0),
+                ]],
+            [[
+                CLLocationCoordinate2D(latitude: 41, longitude: -81),
+                CLLocationCoordinate2D(latitude: 47, longitude: -81),
+                CLLocationCoordinate2D(latitude: 47, longitude: -72),
+                CLLocationCoordinate2D(latitude: 41, longitude: -72),
+                CLLocationCoordinate2D(latitude: 41, longitude: -81),
+                ]]
+            ]
+        )
+
+        XCTAssertFalse(multiPolygon.contains(coordinate, ignoreBoundary: true))
+        XCTAssertTrue(multiPolygon.contains(coordinate, ignoreBoundary: false))
+        XCTAssertTrue(multiPolygon.contains(coordinate))
+    }
+
+    func testMultiPolygonWithHoleContainsAtBoundary() {
+        let coordinate = CLLocationCoordinate2D(latitude: 43, longitude: -78)
+        let multiPolygon = MultiPolygon( [
+            [
+                [
+                    CLLocationCoordinate2D(latitude: 41, longitude: -81),
+                    CLLocationCoordinate2D(latitude: 47, longitude: -81),
+                    CLLocationCoordinate2D(latitude: 47, longitude: -72),
+                    CLLocationCoordinate2D(latitude: 41, longitude: -72),
+                    CLLocationCoordinate2D(latitude: 41, longitude: -81),
+                ],
+                [
+                    CLLocationCoordinate2D(latitude: 43, longitude: -76),
+                    CLLocationCoordinate2D(latitude: 43, longitude: -78),
+                    CLLocationCoordinate2D(latitude: 45, longitude: -78),
+                    CLLocationCoordinate2D(latitude: 45, longitude: -76),
+                    CLLocationCoordinate2D(latitude: 43, longitude: -76),
+                ]
+            ],
+            [[
+                CLLocationCoordinate2D(latitude: 0, longitude: 0),
+                CLLocationCoordinate2D(latitude: 1, longitude: 0),
+                CLLocationCoordinate2D(latitude: 1, longitude: 1),
+                CLLocationCoordinate2D(latitude: 0, longitude: 1),
+                CLLocationCoordinate2D(latitude: 0, longitude: 0),
+                ]]
+            ]
+        )
+
+        XCTAssertFalse(multiPolygon.contains(coordinate, ignoreBoundary: true))
+        XCTAssertTrue(multiPolygon.contains(coordinate, ignoreBoundary: false))
+        XCTAssertTrue(multiPolygon.contains(coordinate))
     }
 }

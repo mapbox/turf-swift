@@ -1,15 +1,18 @@
 import XCTest
 import Turf
+#if os(macOS)
+import struct Turf.Polygon
+#endif
 import CoreLocation
 
 class GeoJSONTests: XCTestCase {
     
     func testPoint() {
         let coordinate = CLLocationCoordinate2D(latitude: 10, longitude: 30)
-        let geometry = Geometry.Point(coordinates: Geometry.PointRepresentation(coordinate))
-        let pointFeature = Feature(geometry)
+        let geometry = Geometry.point(Point(coordinate))
+        let pointFeature = Feature(geometry: geometry)
         
-        XCTAssertEqual((pointFeature.geometry.value as! Geometry.PointRepresentation).coordinates, coordinate)
+        XCTAssertEqual((pointFeature.geometry.value as! Point).coordinates, coordinate)
     }
     
     func testLineString() {
@@ -17,9 +20,9 @@ class GeoJSONTests: XCTestCase {
                            CLLocationCoordinate2D(latitude: 30, longitude: 10),
                            CLLocationCoordinate2D(latitude: 40, longitude: 40)]
         
-        let lineString = Geometry.LineString(coordinates: Geometry.LineStringRepresentation(coordinates))
-        let lineStringFeature = Feature(lineString)
-        XCTAssertEqual((lineStringFeature.geometry.value as! Geometry.LineStringRepresentation).coordinates, coordinates)
+        let lineString = Geometry.lineString(.init(coordinates))
+        let lineStringFeature = Feature(geometry: lineString)
+        XCTAssertEqual((lineStringFeature.geometry.value as! LineString).coordinates, coordinates)
     }
     
     func testPolygon() {
@@ -39,9 +42,9 @@ class GeoJSONTests: XCTestCase {
             ]
         ]
         
-        let polygon = Geometry.Polygon(coordinates: Geometry.PolygonRepresentation(coordinates))
-        let polygonFeature = Feature(polygon)
-        XCTAssertEqual((polygonFeature.geometry.value as! Geometry.PolygonRepresentation).coordinates, coordinates)
+        let polygon = Geometry.polygon(.init(coordinates))
+        let polygonFeature = Feature(geometry: polygon)
+        XCTAssertEqual((polygonFeature.geometry.value as! Polygon).coordinates, coordinates)
     }
     
     func testMultiPoint() {
@@ -50,9 +53,9 @@ class GeoJSONTests: XCTestCase {
                            CLLocationCoordinate2D(latitude: 20, longitude: 20),
                            CLLocationCoordinate2D(latitude: 10, longitude: 30)]
         
-        let multiPoint = Geometry.MultiPoint(coordinates: Geometry.MultiPointRepresentation(coordinates))
-        let multiPointFeature = Feature(multiPoint)
-        XCTAssertEqual((multiPointFeature.geometry.value as! Geometry.MultiPointRepresentation).coordinates, coordinates)
+        let multiPoint = Geometry.multiPoint(.init(coordinates))
+        let multiPointFeature = Feature(geometry: multiPoint)
+        XCTAssertEqual((multiPointFeature.geometry.value as! MultiPoint).coordinates, coordinates)
     }
     
     func testMultiLineString() {
@@ -70,9 +73,9 @@ class GeoJSONTests: XCTestCase {
             ]
         ]
         
-        let multiLineString = Geometry.MultiLineString(coordinates: Geometry.MultiLineStringRepresentation(coordinates))
-        let multiLineStringFeature = Feature(multiLineString)
-        XCTAssertEqual((multiLineStringFeature.geometry.value as! Geometry.MultiLineStringRepresentation).coordinates, coordinates)
+        let multiLineString = Geometry.multiLineString(.init(coordinates))
+        let multiLineStringFeature = Feature(geometry: multiLineString)
+        XCTAssertEqual((multiLineStringFeature.geometry.value as! MultiLineString).coordinates, coordinates)
     }
     
     func testMultiPolygon() {
@@ -103,8 +106,8 @@ class GeoJSONTests: XCTestCase {
             ]
         ]
         
-        let multiPolygon = Geometry.MultiPolygon(coordinates: Geometry.MultiPolygonRepresentation(coordinates))
-        let multiPolygonFeature = Feature(multiPolygon)
-        XCTAssertEqual((multiPolygonFeature.geometry.value as! Geometry.MultiPolygonRepresentation).coordinates, coordinates)
+        let multiPolygon = Geometry.multiPolygon(.init(coordinates))
+        let multiPolygonFeature = Feature(geometry: multiPolygon)
+        XCTAssertEqual((multiPolygonFeature.geometry.value as! MultiPolygon).coordinates, coordinates)
     }
 }
