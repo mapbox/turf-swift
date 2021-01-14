@@ -8,8 +8,14 @@ let package = Package(
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
-            name: "Turf",
+            name: "Turf-static",
+            type: .static,
             targets: ["Turf"]),
+
+        .library(
+            name: "Turf-dynamic",
+            type: .dynamic,
+            targets: ["Turf"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
