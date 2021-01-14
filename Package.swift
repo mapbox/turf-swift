@@ -26,7 +26,11 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "Turf",
-            dependencies: []),
+            dependencies: [],
+            swiftSettings: [
+                .unsafeFlags(["-enable-library-evolution"])
+            ])
+]
         .testTarget(
             name: "TurfTests",
             dependencies: ["Turf"]),
