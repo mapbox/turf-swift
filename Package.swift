@@ -27,9 +27,10 @@ let package = Package(
         .target(
             name: "Turf",
             dependencies: [],
-            swiftSettings: [
-                .unsafeFlags(["-enable-library-evolution"])
-            ]),
+            // swiftSettings: [
+            //     .unsafeFlags(["-enable-library-evolution"])
+            // ]
+            ),
         .testTarget(
             name: "TurfTests",
             dependencies: ["Turf"]),
