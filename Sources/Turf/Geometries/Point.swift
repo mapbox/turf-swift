@@ -4,7 +4,7 @@ import CoreLocation
 #endif
 
 
-public struct Point: Equatable {
+@frozen public struct Point: Equatable {
     /** Note: The pluralization of `coordinates` is defined
      in the GeoJSON RFC, so we've kept it for consistency.
      https://tools.ietf.org/html/rfc7946#section-1.5 */

@@ -4,7 +4,7 @@ import CoreLocation
 #endif
 
 
-public struct MultiLineString: Equatable {
+@frozen public struct MultiLineString: Equatable {
     public var coordinates: [[CLLocationCoordinate2D]]
     
     public init(_ coordinates: [[CLLocationCoordinate2D]]) {

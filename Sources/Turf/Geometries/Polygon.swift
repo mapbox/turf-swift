@@ -4,7 +4,7 @@ import CoreLocation
 #endif
 
 
-public struct Polygon: Equatable {
+@frozen public struct Polygon: Equatable {
     public var coordinates: [[CLLocationCoordinate2D]]
     
     public init(_ coordinates: [[CLLocationCoordinate2D]]) {

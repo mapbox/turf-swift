@@ -4,7 +4,7 @@ import CoreLocation
 #endif
 
 
-public struct MultiPolygon: Equatable {
+@frozen public struct MultiPolygon: Equatable {
     public var coordinates: [[[CLLocationCoordinate2D]]]
     
     public init(_ coordinates: [[[CLLocationCoordinate2D]]]) {

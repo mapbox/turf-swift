@@ -4,7 +4,7 @@ import CoreLocation
 #endif
 
 
-public struct GeometryCollection {
+@frozen public struct GeometryCollection {
     public var geometries: [Geometry]
     
     public init(geometries: [Geometry]) {
