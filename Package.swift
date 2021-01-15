@@ -7,11 +7,11 @@ let package = Package(
     name: "Turf",
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
+        // .library(
+        //     name: "Turf-static",
+        //     targets: ["Turf"]),
         .library(
             name: "Turf",
-            targets: ["Turf"]),
-        .library(
-            name: "Turf-dynamic",
             type: .dynamic,
             targets: ["Turf"])
     ],
