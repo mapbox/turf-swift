@@ -10,6 +10,10 @@ let package = Package(
         .library(
             name: "Turf",
             targets: ["Turf"]),
+        .library(
+            name: "Turf-dynamic",
+            type: .dynamic,
+            targets: ["Turf"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
