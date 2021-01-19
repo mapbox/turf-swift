@@ -27,7 +27,7 @@ struct SDKRegistry {
     let host = "api.mapbox.com"
 
     func binaryTarget(name: String, version: String, path: String, filename: String, checksum: String) -> Target {
-        var url = "https://\(host)/downloads/v2/\(path)/releases/ios/packages/\(version)/\(filename)"
+        var url = "https://github.com/mapbox/turf-swift/releases/download/2.0.0-alpha.1/Turf.xcframework.zip"
 
         if let token = netrcToken {
             url += "?access_token=\(token)"
