@@ -74,16 +74,16 @@ Turf.js | Turf-swift
 ----|----
 [turf-along](https://github.com/Turfjs/turf/tree/master/packages/turf-along/) | `LineString.coordinateFromStart(distance:)`
 [turf-area](https://github.com/Turfjs/turf/blob/master/packages/turf-area/) | `Polygon.area`
-[turf-bearing](https://turfjs.org/docs/#bearing) | `CLLocationCoordinate2D.direction(to:)`<br>`RadianCoordinate2D.direction(to:)`
+[turf-bearing](https://turfjs.org/docs/#bearing) | `CLLocationCoordinate2D.direction(to:)`<br>`LocationCoordinate2D.direction(to:)` on Linux<br>`RadianCoordinate2D.direction(to:)`
 [turf-bezier-spline](https://github.com/Turfjs/turf/tree/master/packages/turf-bezier-spline/) | `LineString.bezier(resolution:sharpness:)`
 [turf-boolean-point-in-polygon](https://github.com/Turfjs/turf/tree/master/packages/turf-boolean-point-in-polygon) | `Polygon.contains(_:ignoreBoundary:)`
 [turf-circle](https://turfjs.org/docs/#circle) | `Polygon(center:radius:vertices:)` |
-[turf-destination](https://github.com/Turfjs/turf/tree/master/packages/turf-destination/) | `CLLocationCoordinate2D.coordinate(at:facing:)`<br>`RadianCoordinate2D.coordinate(at:facing:)`
-[turf-distance](https://github.com/Turfjs/turf/tree/master/packages/turf-distance/) | `CLLocationCoordinate2D.distance(to:)`<br>`RadianCoordinate2D.distance(to:)`
+[turf-destination](https://github.com/Turfjs/turf/tree/master/packages/turf-destination/) | `CLLocationCoordinate2D.coordinate(at:facing:)`<br>`LocationCoordinate2D.coordinate(at:facing:)` on Linux<br>`RadianCoordinate2D.coordinate(at:facing:)`
+[turf-distance](https://github.com/Turfjs/turf/tree/master/packages/turf-distance/) | `CLLocationCoordinate2D.distance(to:)`<br>`LocationCoordinate2D.distance(to:)` on Linux<br>`RadianCoordinate2D.distance(to:)`
 [turf-helpers#polygon](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/#polygon) | `Polygon(_:)`
 [turf-helpers#lineString](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/#linestring) | `LineString(_:)`
-[turf-helpers#degreesToRadians](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/#degreesToRadians) | `CLLocationDegrees.toRadians()`
-[turf-helpers#radiansToDegrees](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/#radiansToDegrees) | `CLLocationDegrees.toDegrees()`
+[turf-helpers#degreesToRadians](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/#degreesToRadians) | `CLLocationDegrees.toRadians()`<br>`LocationDegrees.toRadians()` on Linux
+[turf-helpers#radiansToDegrees](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/#radiansToDegrees) | `CLLocationDegrees.toDegrees()`<br>`LocationDegrees.toDegrees()` on Linux
 [turf-helpers#convertLength](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers#convertlength)<br>[turf-helpers#convertArea](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers#convertarea) | `Measurement.converted(to:)`
 [turf-length](https://github.com/Turfjs/turf/tree/master/packages/turf-length/) | `LineString.distance(from:to:)`
 [turf-line-intersect](https://github.com/Turfjs/turf/tree/master/packages/turf-line-intersect/) | `intersection(_:_:)`
@@ -93,8 +93,8 @@ Turf.js | Turf-swift
 [turf-nearest-point-on-line](https://github.com/Turfjs/turf/tree/master/packages/turf-nearest-point-on-line/) | `LineString.closestCoordinate(to:)`
 [turf-polygon-to-line](https://github.com/Turfjs/turf/tree/master/packages/turf-polygon-to-line/) | `LineString(_:)`<br>`MultiLineString(_:)`<br>`FeatureCollection(_:)`
 [turf-simplify](https://github.com/Turfjs/turf/tree/master/packages/turf-simplify) | `LineString.simplified(tolerance:highestQuality:)`
-— | `CLLocationDirection.difference(from:)`
-— | `CLLocationDirection.wrap(min:max:)`
+— | `CLLocationDirection.difference(from:)`<br>`LocationDirection.difference(from:)` on Linux
+— | `CLLocationDirection.wrap(min:max:)`<br>`LocationDirection.wrap(min:max:)` on Linux
 
 ## GeoJSON
 
