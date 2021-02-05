@@ -9,7 +9,7 @@ class GeometryCollectionTests: XCTestCase {
     func testGeometryCollectionFeatureDeserialization() {
         // Arrange
         let data = try! Fixture.geojsonData(from: "geometry-collection")!
-        let multiPolygonCoordinate = CLLocationCoordinate2D(latitude: 8.5, longitude: 1)
+        let multiPolygonCoordinate = LocationCoordinate2D(latitude: 8.5, longitude: 1)
         
         // Act
         let geoJSON = try! GeoJSON.parse(data)
@@ -40,7 +40,7 @@ class GeometryCollectionTests: XCTestCase {
     
     func testGeometryCollectionFeatureSerialization() {
         // Arrange
-        let multiPolygonCoordinate = CLLocationCoordinate2D(latitude: 8.5, longitude: 1)
+        let multiPolygonCoordinate = LocationCoordinate2D(latitude: 8.5, longitude: 1)
         let data = try! Fixture.geojsonData(from: "geometry-collection")!
         let geoJSON = try! GeoJSON.parse(data)
         

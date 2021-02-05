@@ -180,7 +180,7 @@ extension UnkeyedEncodingContainer {
 extension Ring: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self = Ring(coordinates: try container.decode([CLLocationCoordinate2DCodable].self).decodedCoordinates)
+        self = Ring(coordinates: try container.decode([LocationCoordinate2DCodable].self).decodedCoordinates)
     }
     
     public func encode(to encoder: Encoder) throws {

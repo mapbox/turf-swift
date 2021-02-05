@@ -5,9 +5,9 @@ import CoreLocation
 
 
 public struct LineString: Equatable {
-    public var coordinates: [CLLocationCoordinate2D]
+    public var coordinates: [LocationCoordinate2D]
     
-    public init(_ coordinates: [CLLocationCoordinate2D]) {
+    public init(_ coordinates: [LocationCoordinate2D]) {
         self.coordinates = coordinates
     }
     
@@ -34,15 +34,15 @@ extension LineString {
     }
     
     /// Returns a `.LineString` along a `.LineString` within a distance from a coordinate.
-    public func trimmed(from coordinate: CLLocationCoordinate2D, distance: CLLocationDistance) -> LineString? {
+    public func trimmed(from coordinate: LocationCoordinate2D, distance: LocationDistance) -> LineString? {
         let startVertex = closestCoordinate(to: coordinate)
         guard startVertex != nil && distance != 0 else {
             return nil
         }
         
-        var vertices: [CLLocationCoordinate2D] = [startVertex!.coordinate]
-        var cumulativeDistance: CLLocationDistance = 0
-        let addVertex = { (vertex: CLLocationCoordinate2D) -> Bool in
+        var vertices: [LocationCoordinate2D] = [startVertex!.coordinate]
+        var cumulativeDistance: LocationDistance = 0
+        let addVertex = { (vertex: LocationCoordinate2D) -> Bool in
             let lastVertex = vertices.last!
             let incrementalDistance = lastVertex.distance(to: vertex)
             if cumulativeDistance + incrementalDistance <= abs(distance) {
@@ -81,23 +81,23 @@ extension LineString {
     /// of the polyline.
     public struct IndexedCoordinate {
         /// The coordinate
-        public let coordinate: Array<CLLocationCoordinate2D>.Element
+        public let coordinate: Array<LocationCoordinate2D>.Element
         /// The index of the coordinate
-        public let index: Array<CLLocationCoordinate2D>.Index
+        public let index: Array<LocationCoordinate2D>.Index
         /// The coordinate’s distance from the start of the polyline
-        public let distance: CLLocationDistance
+        public let distance: LocationDistance
     }
     
     /// Returns a coordinate along a `.LineString` at a certain distance from the start of the polyline.
-    public func coordinateFromStart(distance: CLLocationDistance) -> CLLocationCoordinate2D? {
+    public func coordinateFromStart(distance: LocationDistance) -> LocationCoordinate2D? {
         return indexedCoordinateFromStart(distance: distance)?.coordinate
     }
     
     /// Returns an indexed coordinate along a `.LineString` at a certain distance from the start of the polyline.
     ///
     /// Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-along/index.js
-    public func indexedCoordinateFromStart(distance: CLLocationDistance) -> IndexedCoordinate? {
-        var traveled: CLLocationDistance = 0
+    public func indexedCoordinateFromStart(distance: LocationDistance) -> IndexedCoordinate? {
+        var traveled: LocationDistance = 0
         
         guard let firstCoordinate = coordinates.first else {
             return nil
@@ -132,7 +132,7 @@ extension LineString {
     /// Returns the distance along a slice of a `.LineString` with the given endpoints.
     ///
     /// Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-line-slice/index.js
-    public func distance(from start: CLLocationCoordinate2D? = nil, to end: CLLocationCoordinate2D? = nil) -> CLLocationDistance? {
+    public func distance(from start: LocationCoordinate2D? = nil, to end: LocationCoordinate2D? = nil) -> LocationDistance? {
         guard !coordinates.isEmpty else { return nil }
         
         guard let slicedCoordinates = sliced(from: start, to: end)?.coordinates else {
@@ -146,7 +146,7 @@ extension LineString {
     /// Returns a subset of the `.LineString` between given coordinates.
     ///
     /// Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-line-slice/index.js
-    public func sliced(from start: CLLocationCoordinate2D? = nil, to end: CLLocationCoordinate2D? = nil) -> LineString? {
+    public func sliced(from start: LocationCoordinate2D? = nil, to end: LocationCoordinate2D? = nil) -> LineString? {
         guard !coordinates.isEmpty else { return nil }
                 
         let startVertex = (start != nil ? closestCoordinate(to: start!) : nil) ?? IndexedCoordinate(coordinate: coordinates.first!, index: 0, distance: 0)
@@ -172,7 +172,7 @@ extension LineString {
     ///
     /// Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-point-on-line/index.js
     
-    public func closestCoordinate(to coordinate: CLLocationCoordinate2D) -> IndexedCoordinate? {
+    public func closestCoordinate(to coordinate: LocationCoordinate2D) -> IndexedCoordinate? {
         guard let startCoordinate = coordinates.first else { return nil }
         
         guard coordinates.count > 1 else {
@@ -180,7 +180,7 @@ extension LineString {
         }
         
         var closestCoordinate: IndexedCoordinate?
-        var closestDistance: CLLocationDistance?
+        var closestDistance: LocationDistance?
         
         for index in 0..<coordinates.count - 1 {
             let segment = (coordinates[index], coordinates[index + 1])
@@ -191,7 +191,7 @@ extension LineString {
             let perpendicularPoint1 = coordinate.coordinate(at: maxDistance, facing: direction + 90)
             let perpendicularPoint2 = coordinate.coordinate(at: maxDistance, facing: direction - 90)
             let intersectionPoint = intersection((perpendicularPoint1, perpendicularPoint2), segment)
-            let intersectionDistance: CLLocationDistance? = intersectionPoint != nil ? coordinate.distance(to: intersectionPoint!) : nil
+            let intersectionDistance: LocationDistance? = intersectionPoint != nil ? coordinate.distance(to: intersectionPoint!) : nil
             
             if distances.0 < closestDistance ?? .greatestFiniteMagnitude {
                 closestCoordinate = IndexedCoordinate(coordinate: segment.0,
@@ -216,7 +216,7 @@ extension LineString {
         return closestCoordinate
     }
 
-    private func squareDistance(from origin: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D) -> Double {
+    private func squareDistance(from origin: LocationCoordinate2D, to destination: LocationCoordinate2D) -> Double {
         let dx = origin.longitude - destination.longitude
         let dy = origin.latitude - destination.latitude
         return dx * dx + dy * dy
@@ -245,7 +245,7 @@ extension LineString {
         coordinates = newCoordinates
     }
 
-    private func squareSegmentDistance(_ coordinate: CLLocationCoordinate2D, segmentStart: CLLocationCoordinate2D, segmentEnd: CLLocationCoordinate2D) -> CLLocationDistance {
+    private func squareSegmentDistance(_ coordinate: LocationCoordinate2D, segmentStart: LocationCoordinate2D, segmentEnd: LocationCoordinate2D) -> LocationDistance {
 
         var x = segmentStart.latitude
         var y = segmentStart.longitude
@@ -269,7 +269,7 @@ extension LineString {
         return dx * dx + dy * dy
     }
 
-    private func simplifyDouglasPeuckerStep(_ coordinates: [CLLocationCoordinate2D], first: Int, last: Int, tolerance: Double, simplified: inout [CLLocationCoordinate2D]) {
+    private func simplifyDouglasPeuckerStep(_ coordinates: [LocationCoordinate2D], first: Int, last: Int, tolerance: Double, simplified: inout [LocationCoordinate2D]) {
 
         var maxSquareDistance = tolerance
         var index = 0
@@ -294,7 +294,7 @@ extension LineString {
         }
     }
 
-    private func simplifyDouglasPeucker(_ coordinates: [CLLocationCoordinate2D], tolerance: Double) -> [CLLocationCoordinate2D] {
+    private func simplifyDouglasPeucker(_ coordinates: [LocationCoordinate2D], tolerance: Double) -> [LocationCoordinate2D] {
         if coordinates.count <= 2 {
             return coordinates
         }

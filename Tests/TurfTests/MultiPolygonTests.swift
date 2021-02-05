@@ -11,8 +11,8 @@ class MultiPolygonTests: XCTestCase {
     
     func testMultiPolygonFeature() {
         let data = try! Fixture.geojsonData(from: "multipolygon")!
-        let firstCoordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
-        let lastCoordinate = CLLocationCoordinate2D(latitude: 11, longitude: 11)
+        let firstCoordinate = LocationCoordinate2D(latitude: 0, longitude: 0)
+        let lastCoordinate = LocationCoordinate2D(latitude: 11, longitude: 11)
         
         let geojson = try! GeoJSON.parse(Feature.self, from: data)
         
@@ -40,32 +40,34 @@ class MultiPolygonTests: XCTestCase {
         [
             [
                 [
-                    CLLocationCoordinate2D(latitude: 0, longitude: 0),
-                    CLLocationCoordinate2D(latitude: 0, longitude: 5),
-                    CLLocationCoordinate2D(latitude: 0, longitude: 5),
-                    CLLocationCoordinate2D(latitude: 0, longitude: 10),
-                    CLLocationCoordinate2D(latitude: 10, longitude: 10),
-                    CLLocationCoordinate2D(latitude: 10, longitude: 0),
-                    CLLocationCoordinate2D(latitude: 5, longitude: 0),
-                    CLLocationCoordinate2D(latitude: 0, longitude: 0),
-                ],[
-                    CLLocationCoordinate2D(latitude: 5, longitude: 1),
-                    CLLocationCoordinate2D(latitude: 7, longitude: 1),
-                    CLLocationCoordinate2D(latitude: 8.5, longitude: 1),
-                    CLLocationCoordinate2D(latitude: 8.5, longitude: 4.5),
-                    CLLocationCoordinate2D(latitude: 7, longitude: 4.5),
-                    CLLocationCoordinate2D(latitude: 5, longitude: 4.5),
-                    CLLocationCoordinate2D(latitude: 5, longitude: 1)
-                ]
-            ],[
+                    LocationCoordinate2D(latitude: 0, longitude: 0),
+                    LocationCoordinate2D(latitude: 0, longitude: 5),
+                    LocationCoordinate2D(latitude: 0, longitude: 5),
+                    LocationCoordinate2D(latitude: 0, longitude: 10),
+                    LocationCoordinate2D(latitude: 10, longitude: 10),
+                    LocationCoordinate2D(latitude: 10, longitude: 0),
+                    LocationCoordinate2D(latitude: 5, longitude: 0),
+                    LocationCoordinate2D(latitude: 0, longitude: 0),
+                ],
                 [
-                    CLLocationCoordinate2D(latitude: 11, longitude: 11),
-                    CLLocationCoordinate2D(latitude: 11.5, longitude: 11.5),
-                    CLLocationCoordinate2D(latitude: 12, longitude: 12),
-                    CLLocationCoordinate2D(latitude: 11, longitude: 12),
-                    CLLocationCoordinate2D(latitude: 11, longitude: 11.5),
-                    CLLocationCoordinate2D(latitude: 11, longitude: 11),
-                    CLLocationCoordinate2D(latitude: 11, longitude: 11)
+                    LocationCoordinate2D(latitude: 5, longitude: 1),
+                    LocationCoordinate2D(latitude: 7, longitude: 1),
+                    LocationCoordinate2D(latitude: 8.5, longitude: 1),
+                    LocationCoordinate2D(latitude: 8.5, longitude: 4.5),
+                    LocationCoordinate2D(latitude: 7, longitude: 4.5),
+                    LocationCoordinate2D(latitude: 5, longitude: 4.5),
+                    LocationCoordinate2D(latitude: 5, longitude: 1),
+                ]
+            ],
+            [
+                [
+                    LocationCoordinate2D(latitude: 11, longitude: 11),
+                    LocationCoordinate2D(latitude: 11.5, longitude: 11.5),
+                    LocationCoordinate2D(latitude: 12, longitude: 12),
+                    LocationCoordinate2D(latitude: 11, longitude: 12),
+                    LocationCoordinate2D(latitude: 11, longitude: 11.5),
+                    LocationCoordinate2D(latitude: 11, longitude: 11),
+                    LocationCoordinate2D(latitude: 11, longitude: 11),
                 ]
             ]
         ]
@@ -94,100 +96,96 @@ class MultiPolygonTests: XCTestCase {
     }
     
     func testMultiPolygonContains() {
-        let coordinate = CLLocationCoordinate2D(latitude: 44, longitude: -77)
-        let multiPolygon = MultiPolygon( [
+        let coordinate = LocationCoordinate2D(latitude: 44, longitude: -77)
+        let multiPolygon = MultiPolygon([
             Polygon([[
-                CLLocationCoordinate2D(latitude: 0, longitude: 0),
-                CLLocationCoordinate2D(latitude: 1, longitude: 0),
-                CLLocationCoordinate2D(latitude: 1, longitude: 1),
-                CLLocationCoordinate2D(latitude: 0, longitude: 1),
-                CLLocationCoordinate2D(latitude: 0, longitude: 0),
-                ]]),
+                LocationCoordinate2D(latitude: 0, longitude: 0),
+                LocationCoordinate2D(latitude: 1, longitude: 0),
+                LocationCoordinate2D(latitude: 1, longitude: 1),
+                LocationCoordinate2D(latitude: 0, longitude: 1),
+                LocationCoordinate2D(latitude: 0, longitude: 0),
+            ]]),
             Polygon([[
-                CLLocationCoordinate2D(latitude: 41, longitude: -81),
-                CLLocationCoordinate2D(latitude: 47, longitude: -81),
-                CLLocationCoordinate2D(latitude: 47, longitude: -72),
-                CLLocationCoordinate2D(latitude: 41, longitude: -72),
-                CLLocationCoordinate2D(latitude: 41, longitude: -81),
-                ]])
-            ]
-        )
+                LocationCoordinate2D(latitude: 41, longitude: -81),
+                LocationCoordinate2D(latitude: 47, longitude: -81),
+                LocationCoordinate2D(latitude: 47, longitude: -72),
+                LocationCoordinate2D(latitude: 41, longitude: -72),
+                LocationCoordinate2D(latitude: 41, longitude: -81),
+            ]])
+        ])
         XCTAssertTrue(multiPolygon.contains(coordinate))
     }
     
     func testMultiPolygonDoesNotContain() {
-        let coordinate = CLLocationCoordinate2D(latitude: 44, longitude: -87)
-        let multiPolygon = MultiPolygon( [
+        let coordinate = LocationCoordinate2D(latitude: 44, longitude: -87)
+        let multiPolygon = MultiPolygon([
             Polygon([[
-                CLLocationCoordinate2D(latitude: 0, longitude: 0),
-                CLLocationCoordinate2D(latitude: 1, longitude: 0),
-                CLLocationCoordinate2D(latitude: 1, longitude: 1),
-                CLLocationCoordinate2D(latitude: 0, longitude: 1),
-                CLLocationCoordinate2D(latitude: 0, longitude: 0),
-                ]]),
+                LocationCoordinate2D(latitude: 0, longitude: 0),
+                LocationCoordinate2D(latitude: 1, longitude: 0),
+                LocationCoordinate2D(latitude: 1, longitude: 1),
+                LocationCoordinate2D(latitude: 0, longitude: 1),
+                LocationCoordinate2D(latitude: 0, longitude: 0),
+            ]]),
             Polygon([[
-                CLLocationCoordinate2D(latitude: 41, longitude: -81),
-                CLLocationCoordinate2D(latitude: 47, longitude: -81),
-                CLLocationCoordinate2D(latitude: 47, longitude: -72),
-                CLLocationCoordinate2D(latitude: 41, longitude: -72),
-                CLLocationCoordinate2D(latitude: 41, longitude: -81),
-                ]])
-            ]
-        )
+                LocationCoordinate2D(latitude: 41, longitude: -81),
+                LocationCoordinate2D(latitude: 47, longitude: -81),
+                LocationCoordinate2D(latitude: 47, longitude: -72),
+                LocationCoordinate2D(latitude: 41, longitude: -72),
+                LocationCoordinate2D(latitude: 41, longitude: -81),
+            ]])
+        ])
         XCTAssertFalse(multiPolygon.contains(coordinate))
     }
     
     func testMultiPolygonDoesNotContainWithHole() {
-        let coordinate = CLLocationCoordinate2D(latitude: 44, longitude: -77)
+        let coordinate = LocationCoordinate2D(latitude: 44, longitude: -77)
         let polygon = Polygon([
             [
-                CLLocationCoordinate2D(latitude: 41, longitude: -81),
-                CLLocationCoordinate2D(latitude: 47, longitude: -81),
-                CLLocationCoordinate2D(latitude: 47, longitude: -72),
-                CLLocationCoordinate2D(latitude: 41, longitude: -72),
-                CLLocationCoordinate2D(latitude: 41, longitude: -81),
+                LocationCoordinate2D(latitude: 41, longitude: -81),
+                LocationCoordinate2D(latitude: 47, longitude: -81),
+                LocationCoordinate2D(latitude: 47, longitude: -72),
+                LocationCoordinate2D(latitude: 41, longitude: -72),
+                LocationCoordinate2D(latitude: 41, longitude: -81),
             ],
             [
-                CLLocationCoordinate2D(latitude: 43, longitude: -76),
-                CLLocationCoordinate2D(latitude: 43, longitude: -78),
-                CLLocationCoordinate2D(latitude: 45, longitude: -78),
-                CLLocationCoordinate2D(latitude: 45, longitude: -76),
-                CLLocationCoordinate2D(latitude: 43, longitude: -76),
+                LocationCoordinate2D(latitude: 43, longitude: -76),
+                LocationCoordinate2D(latitude: 43, longitude: -78),
+                LocationCoordinate2D(latitude: 45, longitude: -78),
+                LocationCoordinate2D(latitude: 45, longitude: -76),
+                LocationCoordinate2D(latitude: 43, longitude: -76),
             ],
         ])
-        let multiPolygon = MultiPolygon( [
+        let multiPolygon = MultiPolygon([
             polygon,
             Polygon([[
-                CLLocationCoordinate2D(latitude: 0, longitude: 0),
-                CLLocationCoordinate2D(latitude: 1, longitude: 0),
-                CLLocationCoordinate2D(latitude: 1, longitude: 1),
-                CLLocationCoordinate2D(latitude: 0, longitude: 1),
-                CLLocationCoordinate2D(latitude: 0, longitude: 0),
-                ]])
-            ]
-        )
+                LocationCoordinate2D(latitude: 0, longitude: 0),
+                LocationCoordinate2D(latitude: 1, longitude: 0),
+                LocationCoordinate2D(latitude: 1, longitude: 1),
+                LocationCoordinate2D(latitude: 0, longitude: 1),
+                LocationCoordinate2D(latitude: 0, longitude: 0),
+            ]])
+        ])
         XCTAssertFalse(multiPolygon.contains(coordinate))
     }
 
     func testMultiPolygonContainsAtBoundary() {
-        let coordinate = CLLocationCoordinate2D(latitude: 1, longitude: 1)
-        let multiPolygon = MultiPolygon( [
+        let coordinate = LocationCoordinate2D(latitude: 1, longitude: 1)
+        let multiPolygon = MultiPolygon([
             [[
-                CLLocationCoordinate2D(latitude: 0, longitude: 0),
-                CLLocationCoordinate2D(latitude: 1, longitude: 0),
-                CLLocationCoordinate2D(latitude: 1, longitude: 1),
-                CLLocationCoordinate2D(latitude: 0, longitude: 1),
-                CLLocationCoordinate2D(latitude: 0, longitude: 0),
-                ]],
+                LocationCoordinate2D(latitude: 0, longitude: 0),
+                LocationCoordinate2D(latitude: 1, longitude: 0),
+                LocationCoordinate2D(latitude: 1, longitude: 1),
+                LocationCoordinate2D(latitude: 0, longitude: 1),
+                LocationCoordinate2D(latitude: 0, longitude: 0),
+            ]],
             [[
-                CLLocationCoordinate2D(latitude: 41, longitude: -81),
-                CLLocationCoordinate2D(latitude: 47, longitude: -81),
-                CLLocationCoordinate2D(latitude: 47, longitude: -72),
-                CLLocationCoordinate2D(latitude: 41, longitude: -72),
-                CLLocationCoordinate2D(latitude: 41, longitude: -81),
-                ]]
-            ]
-        )
+                LocationCoordinate2D(latitude: 41, longitude: -81),
+                LocationCoordinate2D(latitude: 47, longitude: -81),
+                LocationCoordinate2D(latitude: 47, longitude: -72),
+                LocationCoordinate2D(latitude: 41, longitude: -72),
+                LocationCoordinate2D(latitude: 41, longitude: -81),
+            ]]
+        ])
 
         XCTAssertFalse(multiPolygon.contains(coordinate, ignoreBoundary: true))
         XCTAssertTrue(multiPolygon.contains(coordinate, ignoreBoundary: false))
@@ -195,33 +193,32 @@ class MultiPolygonTests: XCTestCase {
     }
 
     func testMultiPolygonWithHoleContainsAtBoundary() {
-        let coordinate = CLLocationCoordinate2D(latitude: 43, longitude: -78)
+        let coordinate = LocationCoordinate2D(latitude: 43, longitude: -78)
         let multiPolygon = MultiPolygon( [
             [
                 [
-                    CLLocationCoordinate2D(latitude: 41, longitude: -81),
-                    CLLocationCoordinate2D(latitude: 47, longitude: -81),
-                    CLLocationCoordinate2D(latitude: 47, longitude: -72),
-                    CLLocationCoordinate2D(latitude: 41, longitude: -72),
-                    CLLocationCoordinate2D(latitude: 41, longitude: -81),
+                    LocationCoordinate2D(latitude: 41, longitude: -81),
+                    LocationCoordinate2D(latitude: 47, longitude: -81),
+                    LocationCoordinate2D(latitude: 47, longitude: -72),
+                    LocationCoordinate2D(latitude: 41, longitude: -72),
+                    LocationCoordinate2D(latitude: 41, longitude: -81),
                 ],
                 [
-                    CLLocationCoordinate2D(latitude: 43, longitude: -76),
-                    CLLocationCoordinate2D(latitude: 43, longitude: -78),
-                    CLLocationCoordinate2D(latitude: 45, longitude: -78),
-                    CLLocationCoordinate2D(latitude: 45, longitude: -76),
-                    CLLocationCoordinate2D(latitude: 43, longitude: -76),
+                    LocationCoordinate2D(latitude: 43, longitude: -76),
+                    LocationCoordinate2D(latitude: 43, longitude: -78),
+                    LocationCoordinate2D(latitude: 45, longitude: -78),
+                    LocationCoordinate2D(latitude: 45, longitude: -76),
+                    LocationCoordinate2D(latitude: 43, longitude: -76),
                 ]
             ],
             [[
-                CLLocationCoordinate2D(latitude: 0, longitude: 0),
-                CLLocationCoordinate2D(latitude: 1, longitude: 0),
-                CLLocationCoordinate2D(latitude: 1, longitude: 1),
-                CLLocationCoordinate2D(latitude: 0, longitude: 1),
-                CLLocationCoordinate2D(latitude: 0, longitude: 0),
-                ]]
-            ]
-        )
+                LocationCoordinate2D(latitude: 0, longitude: 0),
+                LocationCoordinate2D(latitude: 1, longitude: 0),
+                LocationCoordinate2D(latitude: 1, longitude: 1),
+                LocationCoordinate2D(latitude: 0, longitude: 1),
+                LocationCoordinate2D(latitude: 0, longitude: 0),
+            ]]
+        ])
 
         XCTAssertFalse(multiPolygon.contains(coordinate, ignoreBoundary: true))
         XCTAssertTrue(multiPolygon.contains(coordinate, ignoreBoundary: false))

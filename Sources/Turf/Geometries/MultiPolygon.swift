@@ -5,14 +5,14 @@ import CoreLocation
 
 
 public struct MultiPolygon: Equatable {
-    public var coordinates: [[[CLLocationCoordinate2D]]]
+    public var coordinates: [[[LocationCoordinate2D]]]
     
-    public init(_ coordinates: [[[CLLocationCoordinate2D]]]) {
+    public init(_ coordinates: [[[LocationCoordinate2D]]]) {
         self.coordinates = coordinates
     }
     
     public init(_ polygons: [Polygon]) {
-        self.coordinates = polygons.map { (polygon) -> [[CLLocationCoordinate2D]] in
+        self.coordinates = polygons.map { (polygon) -> [[LocationCoordinate2D]] in
             return polygon.coordinates
         }
     }
@@ -33,7 +33,7 @@ extension MultiPolygon {
      *
      * Calls contains function for each contained polygon
      */
-    public func contains(_ coordinate: CLLocationCoordinate2D, ignoreBoundary: Bool = false) -> Bool {
+    public func contains(_ coordinate: LocationCoordinate2D, ignoreBoundary: Bool = false) -> Bool {
         return polygons.contains {
             $0.contains(coordinate, ignoreBoundary: ignoreBoundary)
         }

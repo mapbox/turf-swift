@@ -5,9 +5,9 @@ import CoreLocation
 
 
 public struct Polygon: Equatable {
-    public var coordinates: [[CLLocationCoordinate2D]]
+    public var coordinates: [[LocationCoordinate2D]]
     
-    public init(_ coordinates: [[CLLocationCoordinate2D]]) {
+    public init(_ coordinates: [[LocationCoordinate2D]]) {
         self.coordinates = coordinates
     }
     
@@ -25,12 +25,12 @@ public struct Polygon: Equatable {
                            The recommended amount is 64.
      - Returns: A polygon shape which approximates a circle.
      */
-    public init(center: CLLocationCoordinate2D, radius: CLLocationDistance, vertices: Int) {
+    public init(center: LocationCoordinate2D, radius: LocationDistance, vertices: Int) {
         // The first and last coordinates in a polygon must be identical,
         // which is why we're using the inclusive range operator in this case.
         // Ported from https://github.com/Turfjs/turf/blob/17002ccd57e04e84ddb38d7e3ac8ede35b019c58/packages/turf-circle/index.ts
-        let coordinates = (0...vertices).map { ( step ) -> CLLocationCoordinate2D in
-            let bearing = fabs(CLLocationDirection(step * -360 / vertices))
+        let coordinates = (0...vertices).map { ( step ) -> LocationCoordinate2D in
+            let bearing = fabs(LocationDirection(step * -360 / vertices))
             return center.coordinate(at: radius, facing: bearing)
         }
 
@@ -65,7 +65,7 @@ extension Polygon {
     /// lies on the boundary line of the polygon or its interior rings.
     ///
     ///Ported from: https://github.com/Turfjs/turf/blob/e53677b0931da9e38bb947da448ee7404adc369d/packages/turf-boolean-point-in-polygon/index.ts#L31-L75
-    public func contains(_ coordinate: CLLocationCoordinate2D, ignoreBoundary: Bool = false) -> Bool {
+    public func contains(_ coordinate: LocationCoordinate2D, ignoreBoundary: Bool = false) -> Bool {
         guard outerRing.contains(coordinate, ignoreBoundary: ignoreBoundary) else {
             return false
         }
