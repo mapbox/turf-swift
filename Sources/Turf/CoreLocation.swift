@@ -1,19 +1,64 @@
 import Foundation
-#if os(Linux)
-public struct CLLocationCoordinate2D {
-    public let latitude: Double
-    public let longitude: Double
+#if canImport(CoreLocation)
+import CoreLocation
+#endif
+
+#if canImport(CoreLocation)
+/**
+ An azimuth measured in degrees clockwise from true north.
+ 
+ This is a compatibility shim to keep the library’s public interface consistent between Apple and non-Apple platforms that lack Core Location. On Apple platforms, you can use `CLLocationDirection` anywhere you see this type.
+ */
+public typealias LocationDirection = CLLocationDirection
+
+/**
+ A distance in meters.
+ 
+ This is a compatibility shim to keep the library’s public interface consistent between Apple and non-Apple platforms that lack Core Location. On Apple platforms, you can use `CLLocationDistance` anywhere you see this type.
+ */
+public typealias LocationDistance = CLLocationDistance
+
+/**
+ A latitude or longitude in degrees.
+ 
+ This is a compatibility shim to keep the library’s public interface consistent between Apple and non-Apple platforms that lack Core Location. On Apple platforms, you can use `CLLocationDegrees` anywhere you see this type.
+ */
+public typealias LocationDegrees = CLLocationDegrees
+
+/**
+ A geographic coordinate.
+ 
+ This is a compatibility shim to keep the library’s public interface consistent between Apple and non-Apple platforms that lack Core Location. On Apple platforms, you can use `CLLocationCoordinate2D` anywhere you see this type.
+ */
+public typealias LocationCoordinate2D = CLLocationCoordinate2D
+#else
+/**
+ An azimuth measured in degrees clockwise from true north.
+ */
+public typealias LocationDirection = Double
+
+/**
+ A distance in meters.
+ */
+public typealias LocationDistance = Double
+
+/**
+ A latitude or longitude in degrees.
+ */
+public typealias LocationDegrees = Double
+
+/**
+ A geographic coordinate.
+ */
+public struct LocationCoordinate2D {
+    let latitude: LocationDegrees
+    let longitude: LocationDegrees
     
-    public init(latitude: Double, longitude: Double) {
+    public init(latitude: LocationDegrees, longitude: LocationDegrees) {
         self.latitude = latitude
         self.longitude = longitude
     }
 }
-public typealias CLLocationDirection = Double
-public typealias CLLocationDistance = Double
-public typealias CLLocationDegrees = Double
-#else
-import CoreLocation
 #endif
 
 extension CLLocationDirection {
