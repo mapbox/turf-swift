@@ -48,12 +48,22 @@ public typealias LocationDistance = Double
 public typealias LocationDegrees = Double
 
 /**
- A geographic coordinate.
+ A geographic coordinate with its components measured in degrees.
  */
 public struct LocationCoordinate2D {
-    let latitude: LocationDegrees
-    let longitude: LocationDegrees
+    /**
+     The latitude in degrees.
+     */
+    public let latitude: LocationDegrees
     
+    /**
+     The longitude in degrees.
+     */
+    public let longitude: LocationDegrees
+    
+    /**
+     Creates a degree-based geographic coordinate.
+     */
     public init(latitude: LocationDegrees, longitude: LocationDegrees) {
         self.latitude = latitude
         self.longitude = longitude
