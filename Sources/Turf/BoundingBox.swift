@@ -22,7 +22,7 @@ public struct BoundingBox: Codable {
         northEast = LocationCoordinate2D(latitude: maxLat, longitude: maxLon)
     }
     
-    public init(_ southWest: LocationCoordinate2D, _ northEast: LocationCoordinate2D) {
+    public init(southWest: LocationCoordinate2D, northEast: LocationCoordinate2D) {
         self.southWest = southWest
         self.northEast = northEast
     }
