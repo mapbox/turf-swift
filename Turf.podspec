@@ -37,6 +37,7 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
   s.module_name = "Turf"
+  s.pod_target_xcconfig = { 'BUILD_LIBRARY_FOR_DISTRIBUTION' => 'YES' }
 
   s.frameworks = 'CoreLocation'
 
