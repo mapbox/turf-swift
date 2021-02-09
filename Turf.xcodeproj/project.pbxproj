@@ -918,7 +918,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.turf;
 				PRODUCT_NAME = Turf;
 				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 			};
 			name = Debug;
@@ -941,7 +940,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.turf;
 				PRODUCT_NAME = Turf;
 				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 			};
 			name = Release;
@@ -1129,7 +1127,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.turf;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1150,7 +1147,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.turf;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1199,7 +1195,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.turf;
 				PRODUCT_NAME = Turf;
 				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 10.0;
 			};
@@ -1222,7 +1217,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.turf;
 				PRODUCT_NAME = Turf;
 				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 10.0;
 			};
@@ -1276,7 +1270,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.turf;
 				PRODUCT_NAME = Turf;
 				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
@@ -1300,7 +1293,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.turf;
 				PRODUCT_NAME = Turf;
 				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
