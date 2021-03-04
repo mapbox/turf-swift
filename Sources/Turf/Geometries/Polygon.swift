@@ -76,4 +76,68 @@ extension Polygon {
         }
         return true
     }
+
+    /// Smooths a `.Polygon`. Based on [Chaikin's algorithm](http://graphics.cs.ucdavis.edu/education/CAGDNotes/Chaikins-Algorithm/Chaikins-Algorithm.html).
+    /// Warning: may create degenerate polygons.
+    ///
+    /// Ported from https://github.com/Turfjs/turf/blob/402716a29f6ae16bf3d0220e213e5380cc5a50c4/packages/turf-polygon-smooth/index.js
+    public func smooth(iterations: Int = 3) -> Polygon {
+        var poly = self
+        var tempOutput: [[LocationCoordinate2D]] = [[]];
+        var outCoords: [[LocationCoordinate2D]] = [[]];
+
+        (0..<iterations).forEach({ i in
+            tempOutput = [[]]
+            
+            if (i > 0) {
+                poly = Polygon(outCoords);
+            }
+
+            processPolygon(poly, &tempOutput);
+            outCoords = tempOutput
+        })
+
+        return Polygon(outCoords);
+    }
+
+    private func processPolygon(_ poly: Polygon, _ tempOutput: inout [[LocationCoordinate2D]]) {
+        var coordIndex = 0
+        var prevGeomIndex = 0;
+        var geometryIndex = 0;
+        var subtractCoordIndex = 0;
+
+        (0..<poly.coordinates.count).forEach { j in
+            (0..<poly.coordinates[j].count - 1).forEach { k in
+                if (geometryIndex > prevGeomIndex) {
+                    prevGeomIndex = geometryIndex;
+                    subtractCoordIndex = coordIndex;
+                    tempOutput.append([]);
+                }
+
+                let currentCoord = poly.coordinates[j][k]
+                let realCoordIndex = coordIndex - subtractCoordIndex;
+                let p1 = poly.coordinates[geometryIndex][realCoordIndex + 1];
+                let p0x = currentCoord.latitude;
+                let p0y = currentCoord.longitude;
+                let p1x = p1.latitude;
+                let p1y = p1.longitude;
+                tempOutput[geometryIndex].append(LocationCoordinate2D(
+                    latitude: 0.75 * p0x + 0.25 * p1x,
+                    longitude: 0.75 * p0y + 0.25 * p1y
+                ));
+                tempOutput[geometryIndex].append(LocationCoordinate2D(
+                    latitude: 0.25 * p0x + 0.75 * p1x,
+                    longitude: 0.25 * p0y + 0.75 * p1y
+                ));
+
+                coordIndex += 1
+            }
+
+            geometryIndex += 1
+        }
+
+        tempOutput.enumerated().forEach({ i, ring in
+            tempOutput[i] = ring + [ring[0]]
+        })
+    }
 }
