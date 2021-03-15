@@ -283,15 +283,13 @@ extension Polygon {
         return result
     }
 
-    /**
-     * Returns true if ring has at least 3 coordinates and its first coordinate is the same as its last
-     *
-     * @private
-     * @param {Array<number>} ring coordinates to be checked
-     * @returns {boolean} true if valid
-     */
+    /// Checks if a ring has at least 3 coordinates. Will return false for a 3 coordinate ring
+    /// where the first and last coordinates are the same
+    ///
+    /// - Parameter ring: Array of coordinates to be checked
+    /// - Returns: true if valid
     private func checkValidity(ring: [LocationCoordinate2D]) -> Bool {
-        if ring.count < 3 { return false }
+        guard ring.count >= 3 else { return false }
         // if the last point is the same as the first, it's not a triangle
         return !(
             ring.count == 3 &&
