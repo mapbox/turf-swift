@@ -12,8 +12,6 @@
 
 A [spatial analysis](http://en.wikipedia.org/wiki/Spatial_analysis) library written in Swift for native iOS, macOS, tvOS, watchOS, and Linux applications, ported from [Turf.js](https://github.com/Turfjs/turf/).
 
-Turf for Swift is **experimental** and its public API is subject to change. Please use with care and open issues for any problems you see or missing features that should be added.
-
 ## Requirements
 
 Turf requires Xcode 9.x and supports the following minimum deployment targets:
