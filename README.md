@@ -92,6 +92,7 @@ Turf.js | Turf-swift
 [turf-polygon-to-line](https://github.com/Turfjs/turf/tree/master/packages/turf-polygon-to-line/) | `LineString(_:)`<br>`MultiLineString(_:)`<br>`FeatureCollection(_:)`
 [turf-simplify](https://github.com/Turfjs/turf/tree/master/packages/turf-simplify) | `LineString.simplified(tolerance:highestQuality:)`
 [turf-polygon-smooth](https://github.com/Turfjs/turf/tree/master/packages/turf-polygon-smooth) | `Polygon.smooth(iterations:)`
+[turf-simplify](https://github.com/Turfjs/turf/tree/master/packages/turf-simplify) | `Polygon.simplified(tolerance:highestQuality:)`
 — | `CLLocationDirection.difference(from:)`<br>`LocationDirection.difference(from:)` on Linux
 — | `CLLocationDirection.wrap(min:max:)`<br>`LocationDirection.wrap(min:max:)` on Linux
 
