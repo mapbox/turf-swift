@@ -44,7 +44,7 @@ class GeoJSONTests: XCTestCase {
         
         let polygon = Geometry.polygon(.init(coordinates))
         let polygonFeature = Feature(geometry: polygon)
-        XCTAssertEqual((polygonFeature.geometry.value as! Polygon).coordinates, coordinates)
+        XCTAssertEqual((polygonFeature.geometry.value as! Turf.Polygon).coordinates, coordinates)
     }
     
     func testMultiPoint() {
