@@ -8,8 +8,8 @@ class MultiLineStringTests: XCTestCase {
     
     func testMultiLineStringFeature() {
         let data = try! Fixture.geojsonData(from: "multiline")!
-        let firstCoordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
-        let lastCoordinate = CLLocationCoordinate2D(latitude: 6, longitude: 6)
+        let firstCoordinate = LocationCoordinate2D(latitude: 0, longitude: 0)
+        let lastCoordinate = LocationCoordinate2D(latitude: 6, longitude: 6)
         
         let geojson = try! GeoJSON.parse(Feature.self, from: data)
         

@@ -9,49 +9,49 @@ class BoundingBoxTests: XCTestCase {
     
     func testAllPositive() {
         let coordinates = [
-            CLLocationCoordinate2D(latitude: 1, longitude: 2),
-            CLLocationCoordinate2D(latitude: 2, longitude: 1)
+            LocationCoordinate2D(latitude: 1, longitude: 2),
+            LocationCoordinate2D(latitude: 2, longitude: 1)
         ]
         let bbox = BoundingBox(from: coordinates)
-        XCTAssertEqual(bbox!.southWest, CLLocationCoordinate2D(latitude: 1, longitude: 1))
-        XCTAssertEqual(bbox!.northEast, CLLocationCoordinate2D(latitude: 2, longitude: 2))
+        XCTAssertEqual(bbox!.southWest, LocationCoordinate2D(latitude: 1, longitude: 1))
+        XCTAssertEqual(bbox!.northEast, LocationCoordinate2D(latitude: 2, longitude: 2))
     }
     
     func testAllNegative() {
         let coordinates = [
-            CLLocationCoordinate2D(latitude: -1, longitude: -2),
-            CLLocationCoordinate2D(latitude: -2, longitude: -1)
+            LocationCoordinate2D(latitude: -1, longitude: -2),
+            LocationCoordinate2D(latitude: -2, longitude: -1)
         ]
         let bbox = BoundingBox(from: coordinates)
-        XCTAssertEqual(bbox!.southWest, CLLocationCoordinate2D(latitude: -2, longitude: -2))
-        XCTAssertEqual(bbox!.northEast, CLLocationCoordinate2D(latitude: -1, longitude: -1))
+        XCTAssertEqual(bbox!.southWest, LocationCoordinate2D(latitude: -2, longitude: -2))
+        XCTAssertEqual(bbox!.northEast, LocationCoordinate2D(latitude: -1, longitude: -1))
     }
     
     func testPositiveLatNegativeLon() {
         let coordinates = [
-            CLLocationCoordinate2D(latitude: 1, longitude: -2),
-            CLLocationCoordinate2D(latitude: 2, longitude: -1)
+            LocationCoordinate2D(latitude: 1, longitude: -2),
+            LocationCoordinate2D(latitude: 2, longitude: -1)
         ]
         let bbox = BoundingBox(from: coordinates)
-        XCTAssertEqual(bbox!.southWest, CLLocationCoordinate2D(latitude: 1, longitude: -2))
-        XCTAssertEqual(bbox!.northEast, CLLocationCoordinate2D(latitude: 2, longitude: -1))
+        XCTAssertEqual(bbox!.southWest, LocationCoordinate2D(latitude: 1, longitude: -2))
+        XCTAssertEqual(bbox!.northEast, LocationCoordinate2D(latitude: 2, longitude: -1))
     }
     
     func testNegativeLatPositiveLon() {
         let coordinates = [
-            CLLocationCoordinate2D(latitude: -1, longitude: 2),
-            CLLocationCoordinate2D(latitude: -2, longitude: 1)
+            LocationCoordinate2D(latitude: -1, longitude: 2),
+            LocationCoordinate2D(latitude: -2, longitude: 1)
         ]
         let bbox = BoundingBox(from: coordinates)
-        XCTAssertEqual(bbox!.southWest, CLLocationCoordinate2D(latitude: -2, longitude: 1))
-        XCTAssertEqual(bbox!.northEast, CLLocationCoordinate2D(latitude: -1, longitude: 2))
+        XCTAssertEqual(bbox!.southWest, LocationCoordinate2D(latitude: -2, longitude: 1))
+        XCTAssertEqual(bbox!.northEast, LocationCoordinate2D(latitude: -1, longitude: 2))
     }
 
     func testContains() {
-        let coordinate = CLLocationCoordinate2D(latitude: 1, longitude: 1)
+        let coordinate = LocationCoordinate2D(latitude: 1, longitude: 1)
         let coordinates = [
-            CLLocationCoordinate2D(latitude: 0, longitude: 0),
-            CLLocationCoordinate2D(latitude: 2, longitude: 2)
+            LocationCoordinate2D(latitude: 0, longitude: 0),
+            LocationCoordinate2D(latitude: 2, longitude: 2)
         ]
         let bbox = BoundingBox(from: coordinates)
 
@@ -59,10 +59,10 @@ class BoundingBoxTests: XCTestCase {
     }
 
     func testDoesNotContain() {
-        let coordinate = CLLocationCoordinate2D(latitude: 2, longitude: 3)
+        let coordinate = LocationCoordinate2D(latitude: 2, longitude: 3)
         let coordinates = [
-            CLLocationCoordinate2D(latitude: 0, longitude: 0),
-            CLLocationCoordinate2D(latitude: 2, longitude: 2)
+            LocationCoordinate2D(latitude: 0, longitude: 0),
+            LocationCoordinate2D(latitude: 2, longitude: 2)
         ]
         let bbox = BoundingBox(from: coordinates)
 
@@ -70,10 +70,10 @@ class BoundingBoxTests: XCTestCase {
     }
 
     func testContainsAtBoundary() {
-        let coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 2)
+        let coordinate = LocationCoordinate2D(latitude: 0, longitude: 2)
         let coordinates = [
-            CLLocationCoordinate2D(latitude: 0, longitude: 0),
-            CLLocationCoordinate2D(latitude: 2, longitude: 2)
+            LocationCoordinate2D(latitude: 0, longitude: 0),
+            LocationCoordinate2D(latitude: 2, longitude: 2)
         ]
         let bbox = BoundingBox(from: coordinates)
 

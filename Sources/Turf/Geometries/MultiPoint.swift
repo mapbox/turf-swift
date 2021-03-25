@@ -5,9 +5,9 @@ import CoreLocation
 
 
 public struct MultiPoint: Equatable {
-    public var coordinates: [CLLocationCoordinate2D]
+    public var coordinates: [LocationCoordinate2D]
     
-    public init(_ coordinates: [CLLocationCoordinate2D]) {
+    public init(_ coordinates: [LocationCoordinate2D]) {
         self.coordinates = coordinates
     }
 }

@@ -76,22 +76,22 @@ extension Geometry: Codable {
             
             switch type {
             case .Point:
-                let coordinates = try container.decode(CLLocationCoordinate2DCodable.self, forKey: .coordinates).decodedCoordinates
+                let coordinates = try container.decode(LocationCoordinate2DCodable.self, forKey: .coordinates).decodedCoordinates
                 self = .point(.init(coordinates))
             case .LineString:
-                let coordinates = try container.decode([CLLocationCoordinate2DCodable].self, forKey: .coordinates).decodedCoordinates
+                let coordinates = try container.decode([LocationCoordinate2DCodable].self, forKey: .coordinates).decodedCoordinates
                 self = .lineString(.init(coordinates))
             case .Polygon:
-                let coordinates = try container.decode([[CLLocationCoordinate2DCodable]].self, forKey: .coordinates).decodedCoordinates
+                let coordinates = try container.decode([[LocationCoordinate2DCodable]].self, forKey: .coordinates).decodedCoordinates
                 self = .polygon(.init(coordinates))
             case .MultiPoint:
-                let coordinates = try container.decode([CLLocationCoordinate2DCodable].self, forKey: .coordinates).decodedCoordinates
+                let coordinates = try container.decode([LocationCoordinate2DCodable].self, forKey: .coordinates).decodedCoordinates
                 self = .multiPoint(.init(coordinates))
             case .MultiLineString:
-                let coordinates = try container.decode([[CLLocationCoordinate2DCodable]].self, forKey: .coordinates).decodedCoordinates
+                let coordinates = try container.decode([[LocationCoordinate2DCodable]].self, forKey: .coordinates).decodedCoordinates
                 self = .multiLineString(.init(coordinates))
             case .MultiPolygon:
-                let coordinates = try container.decode([[[CLLocationCoordinate2DCodable]]].self, forKey: .coordinates).decodedCoordinates
+                let coordinates = try container.decode([[[LocationCoordinate2DCodable]]].self, forKey: .coordinates).decodedCoordinates
                 self = .multiPolygon(.init(coordinates))
             case .GeometryCollection:
                 let geometries = try container.decode([Geometry].self, forKey: .geometries)

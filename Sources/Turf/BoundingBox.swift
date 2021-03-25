@@ -5,7 +5,7 @@ import CoreLocation
 
 public struct BoundingBox: Codable {
     
-    public init?(from coordinates: [CLLocationCoordinate2D]?) {
+    public init?(from coordinates: [LocationCoordinate2D]?) {
         guard coordinates?.count ?? 0 > 0 else {
             return nil
         }
@@ -18,16 +18,16 @@ public struct BoundingBox: Codable {
                 let maxLon = max(coordinate.longitude, result.3)
                 return (minLat: minLat, maxLat: maxLat, minLon: minLon, maxLon: maxLon)
         }
-        southWest = CLLocationCoordinate2D(latitude: minLat, longitude: minLon)
-        northEast = CLLocationCoordinate2D(latitude: maxLat, longitude: maxLon)
+        southWest = LocationCoordinate2D(latitude: minLat, longitude: minLon)
+        northEast = LocationCoordinate2D(latitude: maxLat, longitude: maxLon)
     }
     
-    public init(_ southWest: CLLocationCoordinate2D, _ northEast: CLLocationCoordinate2D) {
+    public init(southWest: LocationCoordinate2D, northEast: LocationCoordinate2D) {
         self.southWest = southWest
         self.northEast = northEast
     }
     
-    public func contains(_ coordinate: CLLocationCoordinate2D, ignoreBoundary: Bool = true) -> Bool {
+    public func contains(_ coordinate: LocationCoordinate2D, ignoreBoundary: Bool = true) -> Bool {
         if ignoreBoundary {
             return southWest.latitude < coordinate.latitude
                 && northEast.latitude > coordinate.latitude
@@ -51,12 +51,12 @@ public struct BoundingBox: Codable {
     
     public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
-        southWest = try container.decode(CLLocationCoordinate2DCodable.self).decodedCoordinates
-        northEast = try container.decode(CLLocationCoordinate2DCodable.self).decodedCoordinates
+        southWest = try container.decode(LocationCoordinate2DCodable.self).decodedCoordinates
+        northEast = try container.decode(LocationCoordinate2DCodable.self).decodedCoordinates
     }
     
     // MARK: - Properties
     
-    public var southWest: CLLocationCoordinate2D
-    public var northEast: CLLocationCoordinate2D
+    public var southWest: LocationCoordinate2D
+    public var northEast: LocationCoordinate2D
 }

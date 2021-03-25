@@ -9,7 +9,7 @@ public typealias RadianDirection = Double
 
 /**
  A `RadianCoordinate2D` is a coordinate represented in radians as opposed to
- `CLLocationCoordinate2D` which is represented in latitude and longitude.
+ `LocationCoordinate2D` which is represented in latitude and longitude.
  */
 public struct RadianCoordinate2D {
     private(set) var latitude: LocationRadians
@@ -20,7 +20,7 @@ public struct RadianCoordinate2D {
         self.longitude = longitude
     }
     
-    public init(_ degreeCoordinate: CLLocationCoordinate2D) {
+    public init(_ degreeCoordinate: LocationCoordinate2D) {
         latitude = degreeCoordinate.latitude.toRadians()
         longitude = degreeCoordinate.longitude.toRadians()
     }
