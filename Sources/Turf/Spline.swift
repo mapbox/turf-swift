@@ -5,24 +5,24 @@ import CoreLocation
 
 
 struct SplinePoint {
-    let x: CLLocationDegrees
-    let y: CLLocationDegrees
-    let z: CLLocationDegrees
+    let x: LocationDegrees
+    let y: LocationDegrees
+    let z: LocationDegrees
     
-    init(coordinate: CLLocationCoordinate2D) {
+    init(coordinate: LocationCoordinate2D) {
         x = coordinate.longitude
         y = coordinate.latitude
         z = 0
     }
     
-    init(x: CLLocationDegrees, y: CLLocationDegrees, z: CLLocationDegrees) {
+    init(x: LocationDegrees, y: LocationDegrees, z: LocationDegrees) {
         self.x = x
         self.y = y
         self.z = z
     }
     
-    var coordinate: CLLocationCoordinate2D {
-        return CLLocationCoordinate2D(latitude: y, longitude: x)
+    var coordinate: LocationCoordinate2D {
+        return LocationCoordinate2D(latitude: y, longitude: x)
     }
 }
 

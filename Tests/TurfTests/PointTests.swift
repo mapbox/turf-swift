@@ -9,7 +9,7 @@ class PointTests: XCTestCase {
     func testPointFeature() {
         let data = try! Fixture.geojsonData(from: "point")!
         let geojson = try! GeoJSON.parse(Feature.self, from: data)
-        let coordinate = CLLocationCoordinate2D(latitude: 26.194876675795218, longitude: 14.765625)
+        let coordinate = LocationCoordinate2D(latitude: 26.194876675795218, longitude: 14.765625)
 
         guard case let .point(point) = geojson.geometry else {
             XCTFail()
