@@ -5,7 +5,6 @@ import CoreLocation
 
 public typealias LocationRadians = Double
 public typealias RadianDistance = Double
-public typealias RadianDirection = Double
 
 /**
  A `RadianCoordinate2D` is a coordinate represented in radians as opposed to
@@ -28,21 +27,22 @@ public struct RadianCoordinate2D {
     /**
      Returns direction given two coordinates.
      */
-    public func direction(to coordinate: RadianCoordinate2D) -> RadianDirection {
+    public func direction(to coordinate: RadianCoordinate2D) -> Measurement<UnitAngle> {
         let a = sin(coordinate.longitude - longitude) * cos(coordinate.latitude)
         let b = cos(latitude) * sin(coordinate.latitude)
             - sin(latitude) * cos(coordinate.latitude) * cos(coordinate.longitude - longitude)
-        return atan2(a, b)
+        return Measurement(value: atan2(a, b), unit: UnitAngle.radians)
     }
     
     /**
      Returns coordinate at a given distance and direction away from coordinate.
      */
-    public func coordinate(at distance: RadianDistance, facing direction: RadianDirection) -> RadianCoordinate2D {
+    public func coordinate(at distance: RadianDistance, facing direction: Measurement<UnitAngle>) -> RadianCoordinate2D {
         let distance = distance, direction = direction
+        let radiansDirection = direction.converted(to: .radians).value
         let otherLatitude = asin(sin(latitude) * cos(distance)
-            + cos(latitude) * sin(distance) * cos(direction))
-        let otherLongitude = longitude + atan2(sin(direction) * sin(distance) * cos(latitude),
+            + cos(latitude) * sin(distance) * cos(radiansDirection))
+        let otherLongitude = longitude + atan2(sin(radiansDirection) * sin(distance) * cos(latitude),
                                                cos(distance) - sin(latitude) * sin(otherLatitude))
         return RadianCoordinate2D(latitude: otherLatitude, longitude: otherLongitude)
     }
