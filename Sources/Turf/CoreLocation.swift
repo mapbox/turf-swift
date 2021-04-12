@@ -193,8 +193,13 @@ extension LocationCoordinate2D: Equatable {
     
     /// Returns a coordinate a certain Haversine distance away in the given direction.
     public func coordinate(at distance: LocationDistance, facing direction: LocationDirection) -> LocationCoordinate2D {
-        let radiansDirection = Measurement(value: direction, unit: UnitAngle.degrees)
-        let radianCoordinate = RadianCoordinate2D(self).coordinate(at: distance / metersPerRadian, facing: radiansDirection)
+        let angle = Measurement(value: direction, unit: UnitAngle.degrees)
+        return coordinate(at: distance, facing: angle)
+    }
+
+    /// Returns a coordinate a certain Haversine distance away in the given direction.
+    public func coordinate(at distance: LocationDistance, facing direction: Measurement<UnitAngle>) -> LocationCoordinate2D {
+        let radianCoordinate = RadianCoordinate2D(self).coordinate(at: distance / metersPerRadian, facing: direction)
         return LocationCoordinate2D(radianCoordinate)
     }
     
