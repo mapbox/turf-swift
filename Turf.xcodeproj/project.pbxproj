@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11E726FA26247D3900C1890B /* LocationCoordinate2DTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E726F926247D3900C1890B /* LocationCoordinate2DTests.swift */; };
+		11E726FB26247D3900C1890B /* LocationCoordinate2DTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E726F926247D3900C1890B /* LocationCoordinate2DTests.swift */; };
+		11E7270326247D4000C1890B /* LocationCoordinate2DTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E726F926247D3900C1890B /* LocationCoordinate2DTests.swift */; };
+		11E7270C2624840900C1890B /* RadianCoordinate2DTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E7270B2624840900C1890B /* RadianCoordinate2DTests.swift */; };
+		11E7270D2624840900C1890B /* RadianCoordinate2DTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E7270B2624840900C1890B /* RadianCoordinate2DTests.swift */; };
+		11E7270E2624840900C1890B /* RadianCoordinate2DTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E7270B2624840900C1890B /* RadianCoordinate2DTests.swift */; };
 		2B5FABFD24066EB7008A285F /* geometry-collection.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 2B5FABFB24066EA5008A285F /* geometry-collection.geojson */; };
 		2B5FABFE24066EB8008A285F /* geometry-collection.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 2B5FABFB24066EA5008A285F /* geometry-collection.geojson */; };
 		2B5FABFF24066EB9008A285F /* geometry-collection.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 2B5FABFB24066EA5008A285F /* geometry-collection.geojson */; };
@@ -183,6 +189,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		11E726F926247D3900C1890B /* LocationCoordinate2DTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCoordinate2DTests.swift; sourceTree = "<group>"; };
+		11E7270B2624840900C1890B /* RadianCoordinate2DTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadianCoordinate2DTests.swift; sourceTree = "<group>"; };
 		2B5FABFB24066EA5008A285F /* geometry-collection.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = "geometry-collection.geojson"; sourceTree = "<group>"; };
 		2B5FAC0024067051008A285F /* GeometryCollectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryCollectionTests.swift; sourceTree = "<group>"; };
 		2B5FAC092406B8B7008A285F /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
@@ -346,6 +354,8 @@
 				2B5FAC0024067051008A285F /* GeometryCollectionTests.swift */,
 				3547ECF9200C3C82009DA062 /* TurfTests.swift */,
 				3547ECFA200C3C82009DA062 /* Fixtures */,
+				11E726F926247D3900C1890B /* LocationCoordinate2DTests.swift */,
+				11E7270B2624840900C1890B /* RadianCoordinate2DTests.swift */,
 			);
 			path = TurfTests;
 			sourceTree = "<group>";
@@ -750,6 +760,8 @@
 			files = (
 				35B56EA020DAF88C00C4923D /* PolygonTests.swift in Sources */,
 				35B56EAC20DAF8CB00C4923D /* MultiPolygonTests.swift in Sources */,
+				11E7270D2624840900C1890B /* RadianCoordinate2DTests.swift in Sources */,
+				11E726FB26247D3900C1890B /* LocationCoordinate2DTests.swift in Sources */,
 				35B56E9820DAF82F00C4923D /* PointTests.swift in Sources */,
 				2B5FAC0224067051008A285F /* GeometryCollectionTests.swift in Sources */,
 				CE7F8165215182FF00A9D221 /* BoundingBoxTests.swift in Sources */,
@@ -795,6 +807,8 @@
 			files = (
 				35B56E9F20DAF88C00C4923D /* PolygonTests.swift in Sources */,
 				2B5FAC122406BADF008A285F /* GeoJSONTests.swift in Sources */,
+				11E7270C2624840900C1890B /* RadianCoordinate2DTests.swift in Sources */,
+				11E726FA26247D3900C1890B /* LocationCoordinate2DTests.swift in Sources */,
 				35B56EAB20DAF8CB00C4923D /* MultiPolygonTests.swift in Sources */,
 				35B56E9720DAF82F00C4923D /* PointTests.swift in Sources */,
 				2B5FAC0124067051008A285F /* GeometryCollectionTests.swift in Sources */,
@@ -840,6 +854,8 @@
 			files = (
 				35B56EA120DAF88C00C4923D /* PolygonTests.swift in Sources */,
 				35B56EAD20DAF8CB00C4923D /* MultiPolygonTests.swift in Sources */,
+				11E7270E2624840900C1890B /* RadianCoordinate2DTests.swift in Sources */,
+				11E7270326247D4000C1890B /* LocationCoordinate2DTests.swift in Sources */,
 				35B56E9920DAF82F00C4923D /* PointTests.swift in Sources */,
 				2B5FAC0324067051008A285F /* GeometryCollectionTests.swift in Sources */,
 				CE7F8166215182FF00A9D221 /* BoundingBoxTests.swift in Sources */,
