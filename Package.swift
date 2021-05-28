@@ -1,10 +1,13 @@
-// swift-tools-version:4.0
+// swift-tools-version:5.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "Turf",
+    platforms: [
+        .macOS(.v10_12), .iOS(.v10), .watchOS(.v3), .tvOS(.v12),
+    ],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
@@ -20,9 +23,11 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "Turf",
-            dependencies: []),
+            dependencies: [],
+            exclude: ["Info.plist"]),
         .testTarget(
             name: "TurfTests",
-            dependencies: ["Turf"]),
+            dependencies: ["Turf"],
+            exclude: ["Info.plist"]),
     ]
 )
