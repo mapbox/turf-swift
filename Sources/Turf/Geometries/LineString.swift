@@ -20,7 +20,7 @@ extension LineString {
     /// Returns a new `.LineString` based on bezier transformation of the input line.
     ///
     /// ported from https://github.com/Turfjs/turf/blob/1ea264853e1be7469c8b7d2795651c9114a069aa/packages/turf-bezier-spline/index.ts
-    func bezier(resolution: Int = 10000, sharpness: Double = 0.85) -> LineString? {
+    public func bezier(resolution: Int = 10000, sharpness: Double = 0.85) -> LineString? {
         let points = coordinates.map {
             SplinePoint(coordinate: $0)
         }
