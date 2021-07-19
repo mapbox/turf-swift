@@ -297,4 +297,55 @@ extension Polygon {
             ring[2].longitude == ring[0].longitude
         )
     }
-}
+
+
+    /// Calculates the centroid using the mean of all vertices.
+    /// This lessens the effect of small islands and artifacts when calculating the centroid of a set of polygons.
+    public func centroid() -> LocationCoordinate2D? {
+        let coordinates = outerRing.coordinates.dropLast()
+        let summed = coordinates
+            .reduce(into: LocationCoordinate2D(latitude: 0, longitude: 0)) { acc, next in
+                acc.latitude += next.latitude
+                acc.longitude += next.longitude
+            }
+        return .init(
+            latitude: summed.latitude / Double(coordinates.count),
+            longitude: summed.longitude / Double(coordinates.count)
+        )
+    }
+    
+    /// Calculates the [center of mass](https://en.wikipedia.org/wiki/Center_of_mass) using this formula: [Centroid of Polygon](https://en.wikipedia.org/wiki/Centroid#Centroid_of_polygon).
+    public func centerOfMass() -> LocationCoordinate2D? {
+        // First, we neutralize the feature (set it around coordinates [0,0]) to prevent rounding errors
+        // We take any point to translate all the points around 0
+        guard let center = centroid() else { return nil }
+        let coordinates = outerRing.coordinates
+        let neutralized = coordinates.map {
+            LocationCoordinate2D(latitude: $0.latitude - center.latitude, longitude: $0.longitude - center.longitude)
+        }
+        
+        var signedArea: Double = 0
+        var sum = LocationCoordinate2D(latitude: 0, longitude: 0)
+        let zipped = zip(neutralized.prefix(upTo: neutralized.count - 1), neutralized.suffix(from: 1))
+        for (pi, pj) in zipped {
+            let (xi, yi) = (pi.longitude, pi.latitude)
+            let (xj, yj) = (pj.longitude, pj.latitude)
+            
+            // common factor to compute the signed area and the final coordinates
+            let a = xi * yj - xj * yi
+            signedArea += a
+            sum.longitude += (xi + xj) * a
+            sum.latitude += (yi + yj) * a
+        }
+        guard signedArea != 0 else { return center }
+        
+        // compute signed area, and factorise 1/6A
+        let area = signedArea / 2
+        let areaFactor = 1 / (6 * area)
+        
+        // final coordinates, adding back values that have been neutralized
+        return .init(
+            latitude: center.latitude + areaFactor * sum.latitude,
+            longitude: center.longitude + areaFactor * sum.longitude
+        )
+    }}
