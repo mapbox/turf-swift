@@ -24,7 +24,7 @@ Just as turf-swift, a stable release of this library is not yet available.
 To install Turf using the [Swift Package Manager](https://swift.org/package-manager/), add the following package to the `dependencies` in your Package.swift file:
 
 ```swift
-.package(url: "https://gitlab.com/maparoni/geojsonkit-turf", from: "1.2.0")
+.package(url: "https://gitlab.com/maparoni/geojsonkit-turf", .branch("main")
 ```
 
 Then `import GeoJSONKitTurf` in any Swift file in your module.
