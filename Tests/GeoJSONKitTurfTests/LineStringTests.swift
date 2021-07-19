@@ -266,6 +266,25 @@ class LineStringTests: XCTestCase {
     ]).distance(from: short, to: long)!, accuracy: 0.1, "Distance between two coordinates between the same vertices should be roughly the same as the distance between those two coordinates")
   }
   
+  func testLineCentroid() {
+    // Adopted from https://github.com/Turfjs/turf/blob/3b20c568e5638f680cde39c26b56fbcf034133f2/packages/turf-centroid/test.js
+    let coordinate = GeoJSON.Position(latitude: 45.759199, longitude: 4.860076)
+    let line = GeoJSON.Geometry.lineString(GeoJSON.LineString(positions: [
+      GeoJSON.Position(latitude: 45.749558, longitude: 4.859948),
+      GeoJSON.Position(latitude: 45.768840, longitude: 4.860204),
+    ]))
+    XCTAssertLessThan(line.centroid()!.distance(to: coordinate), 1)
+  }
+
+  func testLineCentreOfMass() {
+    // Adopted from https://github.com/Turfjs/turf/blob/3b20c568e5638f680cde39c26b56fbcf034133f2/packages/turf-center-of-mass/test.js
+    let coordinate = GeoJSON.Position(latitude: 45.759199, longitude: 4.860076)
+    let line = GeoJSON.Geometry.lineString(GeoJSON.LineString(positions: [
+      GeoJSON.Position(latitude: 45.749558, longitude: 4.859948),
+      GeoJSON.Position(latitude: 45.768840, longitude: 4.860204),
+    ]))
+    XCTAssertLessThan(line.centerOfMass()!.distance(to: coordinate), 1)
+  }
   func testSliced() {
     // https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-line-slice/test.js
     
