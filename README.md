@@ -39,6 +39,8 @@ Turf.js | Turf-swift
 [turf-bearing](https://turfjs.org/docs/#bearing) | `GeoJSON.Position.direction(to:)`<br>`RadianCoordinate2D.direction(to:)`
 [turf-bezier-spline](https://github.com/Turfjs/turf/tree/master/packages/turf-bezier-spline/) | `GeoJSON.LineString.bezier(resolution:sharpness:)`
 [turf-boolean-point-in-polygon](https://github.com/Turfjs/turf/tree/master/packages/turf-boolean-point-in-polygon) | `GeoJSON.Polygon.contains(_:ignoreBoundary:)`
+[turf-center-of-mass](http://turfjs.org/docs/#centerOfMass) | `GeoJSON.Geometry.centerOfMass()` |
+[turf-centroid](http://turfjs.org/docs/#centroid) | `GeoJSON.Geometry.centroid()` |
 [turf-circle](https://turfjs.org/docs/#circle) | `GeoJSON.Polygon(center:radius:vertices:)` |
 [turf-destination](https://github.com/Turfjs/turf/tree/master/packages/turf-destination/) | `GeoJSON.Position.coordinate(at:facing:)<br>`RadianCoordinate2D.coordinate(at:facing:)`
 [turf-distance](https://github.com/Turfjs/turf/tree/master/packages/turf-distance/) | `GeoJSON.Position.distance(to:)`<br>`RadianCoordinate2D.distance(to:)`
