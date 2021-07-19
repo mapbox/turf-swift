@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "geojsonkit",
+        "repositoryURL": "https://gitlab.com/maparoni/geojsonkit.git",
+        "state": {
+          "branch": "main",
+          "revision": "e3178586187feca02ca1f73713b3a6bb13c5fc13",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

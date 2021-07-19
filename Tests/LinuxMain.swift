@@ -1,6 +1,6 @@
 import XCTest
-@testable import Turf
+@testable import GeoJSONKitTurf
 
 XCTMain([
-    testCase(TurfTests.allTests)
+  testCase(GeoJSONKitTurfTests.allTests)
 ])

@@ -1,16 +1,6 @@
-# Turf for Swift
+# GeoJSONKit+Turf
 
-📱[![iOS](https://app.bitrise.io/app/49f5bcca71bf6c8d/status.svg?token=SzGBTkEtxsbuAnbcF9MTog&branch=main)](https://www.bitrise.io/app/49f5bcca71bf6c8d) &nbsp;&nbsp;&nbsp;
-🖥💻[![macOS](https://app.bitrise.io/app/b72273651db53613/status.svg?token=ODv2UnyAHoOxV8APATEBFw&branch=main)](https://www.bitrise.io/app/b72273651db53613) &nbsp;&nbsp;&nbsp;
-📺[![tvOS](https://app.bitrise.io/app/0b037542c2395ffb/status.svg?token=yOtMqbu-5bj8grB1Jmoefg)](https://www.bitrise.io/app/0b037542c2395ffb) &nbsp;&nbsp;&nbsp;
-⌚️[![watchOS](https://app.bitrise.io/app/0d4d611f02295183/status.svg?token=NiLB_E_0IvYYqV4Mj973TQ)](https://www.bitrise.io/app/0d4d611f02295183) &nbsp;&nbsp;&nbsp;
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/TuxFlat.svg" width="20" alt="Linux">[![](https://api.travis-ci.com/mapbox/turf-swift.svg?branch=main)](https://travis-ci.com/mapbox/turf-swift) &nbsp;&nbsp;&nbsp;
-[![codecov](https://codecov.io/gh/mapbox/turf-swift/branch/main/graph/badge.svg?token=WT3aUkO3BM)](https://codecov.io/gh/mapbox/turf-swift)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) &nbsp;&nbsp;&nbsp;
-[![CocoaPods](https://img.shields.io/cocoapods/v/Turf.svg)](http://cocoadocs.org/docsets/Turf/) &nbsp;&nbsp;&nbsp;
-[![SPM compatible](https://img.shields.io/badge/SPM-compatible-4BC51D.svg?style=flat)](https://swift.org/package-manager/) &nbsp;&nbsp;&nbsp;
-
-A [spatial analysis](http://en.wikipedia.org/wiki/Spatial_analysis) library written in Swift for native iOS, macOS, tvOS, watchOS, and Linux applications, ported from [Turf.js](https://github.com/Turfjs/turf/).
+A fork of [turf-swift](https://github.com/mapbox/turf-swift.git) which relies on [GeoJSONKit](https://gitlab.com/maparoni/geojsonkit). turf-swift itself is proted from [Turf.js](https://github.com/Turfjs/turf/). For an alternative see [spatial-algorithms](https://github.com/mapbox/spatial-algorithms/).
 
 ## Requirements
 
@@ -27,41 +17,17 @@ If your project is written in Objective-C, you’ll need to write a compatibilit
 
 ## Installation
 
-Although a stable release of this library is not yet available, prereleases are available for installation using any of the popular Swift dependency managers.
-
-### CocoaPods
-
-To install Turf using [CocoaPods](https://cocoapods.org/):
-
-1. Specify the following dependency in your Podfile:
-   ```rb
-   pod 'Turf', '~> 1.2'
-   ```
-1. Run `pod repo update` if you haven’t lately.
-1. Run `pod install` and open the resulting Xcode workspace.
-1. Add `import Turf` to any Swift file in your application target.
-
-### Carthage
-
-To install Turf using [Carthage](https://github.com/Carthage/Carthage/):
-
-1. Add the following dependency to your Cartfile:
-   ```
-   github "mapbox/turf-swift" ~> 1.2
-   ```
-1. Run `carthage bootstrap`.
-1. Follow the rest of [Carthage’s integration instructions](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application). Your application target’s Embedded Frameworks should include Turf.framework.
-1. Add `import Turf` to any Swift file in your application target.
+Just as turf-swift, a stable release of this library is not yet available.
 
 ### Swift Package Manager
 
 To install Turf using the [Swift Package Manager](https://swift.org/package-manager/), add the following package to the `dependencies` in your Package.swift file:
 
 ```swift
-.package(url: "https://github.com/mapbox/turf-swift.git", from: "1.2.0")
+.package(url: "https://gitlab.com/maparoni/geojsonkit-turf", from: "1.2.0")
 ```
 
-Then `import Turf` in any Swift file in your module.
+Then `import GeoJSONKitTurf` in any Swift file in your module.
 
 
 ## Available functionality
@@ -98,34 +64,4 @@ Turf.js | Turf-swift
 
 ## GeoJSON
 
-turf-swift also contains an experimental GeoJSON encoder/decoder with support for Codable.
-
-```swift
-// Decode unknown GeoJSON type
-let geojson = try! GeoJSON.parse(data)
-
-// Decode known GeoJSON type
-let geojson = try! GeoJSON.parse(FeatureCollection.self, from: data)
-
-// Initialize a PointFeature and encode as GeoJSON
-let coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 1)
-let point = Point(coordinate)
-let pointFeature = Feature(geometry: .point(point))
-let data = try! JSONEncoder().encode(pointFeature)
-let json = String(data: data, encoding: .utf8)
-print(json)
-
-/*
-{
-  "type": "Feature",
-  "geometry": {
-    "type": "Point",
-    "coordinates": [
-      1,
-      0
-    ]
-  }
-}
-*/
-
-```
+This fork relies on [GeoJSONKit](https://gitlab.com/maparoni/geojsonkit).

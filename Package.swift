@@ -1,33 +1,31 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.5
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
-    name: "Turf",
-    platforms: [
-        .macOS(.v10_12), .iOS(.v10), .watchOS(.v3), .tvOS(.v12),
-    ],
-    products: [
-        // Products define the executables and libraries produced by a package, and make them visible to other packages.
-        .library(
-            name: "Turf",
-            targets: ["Turf"]),
-    ],
-    dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
-    ],
-    targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages which this package depends on.
-        .target(
-            name: "Turf",
-            dependencies: [],
-            exclude: ["Info.plist"]),
-        .testTarget(
-            name: "TurfTests",
-            dependencies: ["Turf"],
-            exclude: ["Info.plist"]),
-    ]
+  name: "GeoJSONKitTurf",
+  platforms: [
+    .macOS(.v10_12), .iOS(.v10), .watchOS(.v3), .tvOS(.v12),
+  ],
+  products: [
+    // Products define the executables and libraries produced by a package, and make them visible to other packages.
+    .library(
+      name: "GeoJSONKitTurf",
+      targets: ["GeoJSONKitTurf"]),
+  ],
+  dependencies: [
+    .package(name: "GeoJSONKit", url: "https://gitlab.com/maparoni/geojsonkit.git", .branch("main")),
+  ],
+  targets: [
+    // Targets are the basic building blocks of a package. A target can define a module or a test suite.
+    // Targets can depend on other targets in this package, and on products in packages which this package depends on.
+    .target(
+      name: "GeoJSONKitTurf",
+      dependencies: ["GeoJSONKit"]),
+    .testTarget(
+      name: "GeoJSONKitTurfTests",
+      dependencies: ["GeoJSONKitTurf"],
+      exclude: ["Fixtures"]),
+  ]
 )
