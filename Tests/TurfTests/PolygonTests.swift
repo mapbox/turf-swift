@@ -158,7 +158,7 @@ class PolygonTests: XCTestCase {
         LocationCoordinate2D(latitude: 45.79398056386735, longitude: 4.8250579833984375),
       ],
     ])
-    XCTAssertLessThan(polygon.centroid()!.distance(to: coordinate), 1)
+    XCTAssertLessThan(polygon.centroid!.distance(to: coordinate), 1)
   }
   
   func testPolygonImbalancedCentroid() {
@@ -188,7 +188,7 @@ class PolygonTests: XCTestCase {
         LocationCoordinate2D(latitude: 45.77258200374433, longitude: 4.854240417480469)
       ],
     ])
-    XCTAssertLessThan(polygon.centroid()!.distance(to: coordinate), 1)
+    XCTAssertLessThan(polygon.centroid!.distance(to: coordinate), 1)
   }
   
   func testPolygonCentreOfMass() {
@@ -206,7 +206,7 @@ class PolygonTests: XCTestCase {
         LocationCoordinate2D(latitude: 45.79398056386735, longitude: 4.8250579833984375),
       ],
     ])
-    XCTAssertLessThan(polygon.centerOfMass()!.distance(to: coordinate), 1)
+    XCTAssertLessThan(polygon.centerOfMass!.distance(to: coordinate), 1)
   }
   
   func testPolygonImbalancedCentreOfMass() {
@@ -236,7 +236,7 @@ class PolygonTests: XCTestCase {
         LocationCoordinate2D(latitude: 45.77258200374433, longitude: 4.854240417480469)
       ],
     ])
-    let center = polygon.centerOfMass()!
+    let center = polygon.centerOfMass!
     XCTAssertLessThan(center.distance(to: coordinate), 1)
   }
 

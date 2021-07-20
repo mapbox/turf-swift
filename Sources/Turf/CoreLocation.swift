@@ -54,12 +54,12 @@ public struct LocationCoordinate2D {
     /**
      The latitude in degrees.
      */
-    public internal(set) var latitude: LocationDegrees
+    public var latitude: LocationDegrees
     
     /**
      The longitude in degrees.
      */
-    public internal(set) var longitude: LocationDegrees
+    public var longitude: LocationDegrees
     
     /**
      Creates a degree-based geographic coordinate.

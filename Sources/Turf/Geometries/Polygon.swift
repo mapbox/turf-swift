@@ -301,8 +301,12 @@ extension Polygon {
 
     /// Calculates the centroid using the mean of all vertices.
     /// This lessens the effect of small islands and artifacts when calculating the centroid of a set of polygons.
-    public func centroid() -> LocationCoordinate2D? {
+    public var centroid: LocationCoordinate2D? {
+        // This implementation is a port of: https://github.com/Turfjs/turf/blob/master/packages/turf-centroid/index.ts
+        
         let coordinates = outerRing.coordinates.dropLast()
+        guard coordinates.count > 0 else { return nil }
+        
         let summed = coordinates
             .reduce(into: LocationCoordinate2D(latitude: 0, longitude: 0)) { acc, next in
                 acc.latitude += next.latitude
@@ -315,10 +319,12 @@ extension Polygon {
     }
     
     /// Calculates the [center of mass](https://en.wikipedia.org/wiki/Center_of_mass) using this formula: [Centroid of Polygon](https://en.wikipedia.org/wiki/Centroid#Centroid_of_polygon).
-    public func centerOfMass() -> LocationCoordinate2D? {
+    public var centerOfMass: LocationCoordinate2D? {
+        // This implementation is a port of: https://github.com/Turfjs/turf/blob/master/packages/turf-center-of-mass/index.ts
+        
         // First, we neutralize the feature (set it around coordinates [0,0]) to prevent rounding errors
         // We take any point to translate all the points around 0
-        guard let center = centroid() else { return nil }
+        guard let center = centroid else { return nil }
         let coordinates = outerRing.coordinates
         let neutralized = coordinates.map {
             LocationCoordinate2D(latitude: $0.latitude - center.latitude, longitude: $0.longitude - center.longitude)
