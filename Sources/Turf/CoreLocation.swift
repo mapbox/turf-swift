@@ -71,6 +71,18 @@ public struct LocationCoordinate2D {
 }
 #endif
 
+extension LocationCoordinate2D {
+    /**
+        Returns a normalized coordinate, wrapped to -180 and 180 degrees latitude
+     */
+    var normalized: LocationCoordinate2D {
+        return .init(
+            latitude: latitude,
+            longitude: longitude.wrap(min: -180, max: 180)
+        )
+    }
+}
+
 extension LocationDirection {
     /**
      Returns a normalized number given min and max bounds.

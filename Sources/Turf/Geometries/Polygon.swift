@@ -298,6 +298,15 @@ extension Polygon {
         )
     }
 
+    /// Calculates the absolute centre (of the bounding box).
+    public var center: LocationCoordinate2D? {
+        // This implementation is a port of: https://github.com/Turfjs/turf/blob/master/packages/turf-center/index.ts
+        return BoundingBox(from: outerRing.coordinates)
+            .map { .init(
+                latitude: ($0.southWest.latitude + $0.northEast.latitude) / 2,
+                longitude: ($0.southWest.longitude + $0.northEast.longitude) / 2
+            ) }
+    }
 
     /// Calculates the centroid using the mean of all vertices.
     /// This lessens the effect of small islands and artifacts when calculating the centroid of a set of polygons.
@@ -315,7 +324,7 @@ extension Polygon {
         return .init(
             latitude: summed.latitude / Double(coordinates.count),
             longitude: summed.longitude / Double(coordinates.count)
-        )
+        ).normalized
     }
     
     /// Calculates the [center of mass](https://en.wikipedia.org/wiki/Center_of_mass) using this formula: [Centroid of Polygon](https://en.wikipedia.org/wiki/Centroid#Centroid_of_polygon).
@@ -353,5 +362,5 @@ extension Polygon {
         return .init(
             latitude: center.latitude + areaFactor * sum.latitude,
             longitude: center.longitude + areaFactor * sum.longitude
-        )
+        ).normalized
     }}
