@@ -321,7 +321,7 @@ extension Polygon {
                 acc.latitude += next.latitude
                 acc.longitude += next.longitude
             }
-        return .init(
+        return LocationCoordinate2D(
             latitude: summed.latitude / Double(coordinates.count),
             longitude: summed.longitude / Double(coordinates.count)
         ).normalized
@@ -359,7 +359,7 @@ extension Polygon {
         let areaFactor = 1 / (6 * area)
         
         // final coordinates, adding back values that have been neutralized
-        return .init(
+        return LocationCoordinate2D(
             latitude: center.latitude + areaFactor * sum.latitude,
             longitude: center.longitude + areaFactor * sum.longitude
         ).normalized
