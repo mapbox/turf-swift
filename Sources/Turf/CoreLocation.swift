@@ -54,12 +54,12 @@ public struct LocationCoordinate2D {
     /**
      The latitude in degrees.
      */
-    public let latitude: LocationDegrees
+    public var latitude: LocationDegrees
     
     /**
      The longitude in degrees.
      */
-    public let longitude: LocationDegrees
+    public var longitude: LocationDegrees
     
     /**
      Creates a degree-based geographic coordinate.
@@ -70,6 +70,18 @@ public struct LocationCoordinate2D {
     }
 }
 #endif
+
+extension LocationCoordinate2D {
+    /**
+        Returns a normalized coordinate, wrapped to -180 and 180 degrees latitude
+     */
+    var normalized: LocationCoordinate2D {
+        return .init(
+            latitude: latitude,
+            longitude: longitude.wrap(min: -180, max: 180)
+        )
+    }
+}
 
 extension LocationDirection {
     /**
