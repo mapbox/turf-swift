@@ -75,6 +75,9 @@ Turf.js | Turf-swift
 [turf-bearing](https://turfjs.org/docs/#bearing) | `CLLocationCoordinate2D.direction(to:)`<br>`LocationCoordinate2D.direction(to:)` on Linux<br>`RadianCoordinate2D.direction(to:)`
 [turf-bezier-spline](https://github.com/Turfjs/turf/tree/master/packages/turf-bezier-spline/) | `LineString.bezier(resolution:sharpness:)`
 [turf-boolean-point-in-polygon](https://github.com/Turfjs/turf/tree/master/packages/turf-boolean-point-in-polygon) | `Polygon.contains(_:ignoreBoundary:)`
+[turf-center](http://turfjs.org/docs/#center) | `Polygon.center`
+[turf-center-of-mass](http://turfjs.org/docs/#centerOfMass) | `Polygon.centerOfMass`
+[turf-centroid](http://turfjs.org/docs/#centroid) | `Polygon.centroid`
 [turf-circle](https://turfjs.org/docs/#circle) | `Polygon(center:radius:vertices:)` |
 [turf-destination](https://github.com/Turfjs/turf/tree/master/packages/turf-destination/) | `CLLocationCoordinate2D.coordinate(at:facing:)`<br>`LocationCoordinate2D.coordinate(at:facing:)` on Linux<br>`RadianCoordinate2D.coordinate(at:facing:)`
 [turf-distance](https://github.com/Turfjs/turf/tree/master/packages/turf-distance/) | `CLLocationCoordinate2D.distance(to:)`<br>`LocationCoordinate2D.distance(to:)` on Linux<br>`RadianCoordinate2D.distance(to:)`
