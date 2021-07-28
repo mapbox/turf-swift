@@ -14,6 +14,18 @@ extension GeoJSON.Geometry {
     }
   }
   
+  /// Calculates the absolute centre (of the bounding box).
+  public func center() -> GeoJSON.Position? {
+    switch self {
+    case .point(let position):
+      return position
+    case .lineString(let line):
+      return GeoJSON.BoundingBox(positions: line.positions).center
+    case .polygon(let polygon):
+      return GeoJSON.BoundingBox(positions: polygon.exterior.positions).center
+    }
+  }
+  
   /// Calculates the centroid using the mean of all vertices.
   /// This lessens the effect of small islands and artifacts when calculating the centroid of a set of polygons.
   public func centroid() -> GeoJSON.Position? {
@@ -33,7 +45,7 @@ extension GeoJSON.Geometry {
       return .init(
         latitude: summed.latitude / Double(positions.count),
         longitude: summed.longitude / Double(positions.count)
-      )
+      ).normalized
     }
   }
   
@@ -74,7 +86,7 @@ extension GeoJSON.Geometry {
     return .init(
       latitude: center.latitude + areaFactor * sum.latitude,
       longitude: center.longitude + areaFactor * sum.longitude
-    )
+    ).normalized
   }
 }
 

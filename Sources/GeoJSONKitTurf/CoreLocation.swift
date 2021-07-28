@@ -115,4 +115,14 @@ extension GeoJSON.Position {
   public func distance(to coordinate: GeoJSON.Position) -> LocationDistance {
     return RadianCoordinate2D(self).distance(to: RadianCoordinate2D(coordinate)) * metersPerRadian
   }
+  
+  /**
+   Returns a normalized coordinate, wrapped to -180 and 180 degrees latitude
+   */
+  var normalized: GeoJSON.Position {
+    return .init(
+      latitude: latitude,
+      longitude: longitude.wrap(min: -180, max: 180)
+    )
+  }
 }

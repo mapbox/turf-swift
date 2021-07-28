@@ -19,5 +19,12 @@ extension GeoJSON.BoundingBox {
           && northEasterlyLongitude >= coordinate.longitude
     }
   }
+  
+  public var center: GeoJSON.Position {
+    .init(
+      latitude: (southWesterlyLatitude + northEasterlyLatitude) / 2,
+      longitude: (southWesterlyLongitude + northEasterlyLongitude) / 2
+    )
+  }
 
 }

@@ -159,6 +159,55 @@ class PolygonTests: XCTestCase {
     XCTAssertLessThan(polygon.centroid()!.distance(to: coordinate), 1)
   }
   
+  func testPolygonCentre() {
+    // Adopted from https://github.com/Turfjs/turf/blob/3b20c568e5638f680cde39c26b56fbcf034133f2/packages/turf-center/test.js
+    let coordinate = GeoJSON.Position(latitude: 45.7536760235992, longitude: 4.841880798339844)
+    let polygon = GeoJSON.Geometry.polygon(GeoJSON.Polygon([
+      [
+        GeoJSON.Position(latitude: 45.79398056386735, longitude: 4.8250579833984375),
+        GeoJSON.Position(latitude: 45.79254427435898, longitude: 4.882392883300781),
+        GeoJSON.Position(latitude: 45.76081677972451, longitude: 4.910373687744141),
+        GeoJSON.Position(latitude: 45.7271539426975, longitude: 4.894924163818359),
+        GeoJSON.Position(latitude: 45.71337148333104, longitude: 4.824199676513671),
+        GeoJSON.Position(latitude: 45.74021417890731, longitude: 4.773387908935547),
+        GeoJSON.Position(latitude: 45.778418789239055, longitude: 4.778022766113281),
+        GeoJSON.Position(latitude: 45.79398056386735, longitude: 4.8250579833984375),
+      ],
+    ]))
+    XCTAssertLessThan(polygon.center()!.distance(to: coordinate), 1)
+  }
+  
+  func testPolygonImbalancedCentre() {
+    // Adopted from https://github.com/Turfjs/turf/blob/3b20c568e5638f680cde39c26b56fbcf034133f2/packages/turf-center/test.js
+    let coordinate = GeoJSON.Position(latitude: 45.778762648296855, longitude: 4.851944446563721)
+    let polygon = GeoJSON.Geometry.polygon(GeoJSON.Polygon([
+      [
+        GeoJSON.Position(latitude: 45.77258200374433, longitude: 4.854240417480469),
+        GeoJSON.Position(latitude: 45.777431068484894, longitude: 4.8445844650268555),
+        GeoJSON.Position(latitude: 45.778658234059755, longitude: 4.845442771911621),
+        GeoJSON.Position(latitude: 45.779376562352425, longitude: 4.845914840698242),
+        GeoJSON.Position(latitude: 45.78021460033108, longitude: 4.846644401550292),
+        GeoJSON.Position(latitude: 45.78078326178593, longitude: 4.847245216369629),
+        GeoJSON.Position(latitude: 45.78138184652523, longitude: 4.848060607910156),
+        GeoJSON.Position(latitude: 45.78186070968964, longitude: 4.8487043380737305),
+        GeoJSON.Position(latitude: 45.78248921135124, longitude: 4.849562644958495),
+        GeoJSON.Position(latitude: 45.78302792142197, longitude: 4.850893020629883),
+        GeoJSON.Position(latitude: 45.78374619341895, longitude: 4.852008819580077),
+        GeoJSON.Position(latitude: 45.784075398324866, longitude: 4.852995872497559),
+        GeoJSON.Position(latitude: 45.78443452873236, longitude: 4.853854179382324),
+        GeoJSON.Position(latitude: 45.78470387501975, longitude: 4.8549699783325195),
+        GeoJSON.Position(latitude: 45.784793656826345, longitude: 4.85569953918457),
+        GeoJSON.Position(latitude: 45.784853511283764, longitude: 4.857330322265624),
+        GeoJSON.Position(latitude: 45.78494329284938, longitude: 4.858231544494629),
+        GeoJSON.Position(latitude: 45.784883438488365, longitude: 4.859304428100585),
+        GeoJSON.Position(latitude: 45.77294120818474, longitude: 4.858360290527344),
+        GeoJSON.Position(latitude: 45.77258200374433, longitude: 4.854240417480469)
+      ],
+    ]))
+    let center = polygon.center()!
+    XCTAssertLessThan(center.distance(to: coordinate), 1)
+  }
+  
   func testPolygonCentreOfMass() {
     // Adopted from https://github.com/Turfjs/turf/blob/3b20c568e5638f680cde39c26b56fbcf034133f2/packages/turf-center-of-mass/test.js
     let coordinate = GeoJSON.Position(latitude: 45.75581209996416, longitude: 4.840728965137111)
