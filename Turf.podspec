@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   s.name = "Turf"
-  s.version = "2.0.0-beta.1"
+  s.version = "2.0.0-rc.1"
   s.summary = "Simple spatial analysis."
   s.description = "A spatial analysis library written in Swift for native iOS, macOS, tvOS, watchOS, and Linux applications, ported from Turf.js."
 
