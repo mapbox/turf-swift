@@ -2,12 +2,12 @@
   "object": {
     "pins": [
       {
-        "package": "geojsonkit",
+        "package": "GeoJSONKit",
         "repositoryURL": "https://gitlab.com/maparoni/geojsonkit.git",
         "state": {
           "branch": null,
-          "revision": "e3178586187feca02ca1f73713b3a6bb13c5fc13",
-          "version": "0.2.7"
+          "revision": "a40e0fc916864c3dca9108d02de83f27b01b563b",
+          "version": "0.3.2"
         }
       }
     ]
