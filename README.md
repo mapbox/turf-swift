@@ -15,7 +15,7 @@ Alternatively, you can incorporate GeoJSONKitTurf into a command line tool witho
 
 ## Installation
 
-Just as turf-swift, a stable release of this library is not yet available.
+A stable release is not yet available, so you'll need to point at the "main" branch.
 
 ### Swift Package Manager
 
@@ -59,13 +59,11 @@ Turf.js | Turf-swift
 — | `CLLocationDirection.difference(from:)`<br>`LocationDirection.difference(from:)` on Linux
 — | `CLLocationDirection.wrap(min:max:)`<br>`LocationDirection.wrap(min:max:)` on Linux
 
-## GeoJSON
-
-In contrast to [turf-swift](https://github.com/mapbox/turf-swift.git), this fork does not have any GeoJSON code itself, and instead relies on [GeoJSONKit](https://github.com/maparoni/geojsonkit).
+Note: In contrast to [turf-swift](https://github.com/mapbox/turf-swift.git), this fork does not include any GeoJSON code itself, and instead relies on [GeoJSONKit](https://github.com/maparoni/geojsonkit).
 
 ## CLI
 
-Comes with a mini-CLI `geokitten` with commands:
+Comes with a mini-CLI `geokitten` with these commands:
 
 - `geokitten simplify $input` to simplify a GeoJSON
 
