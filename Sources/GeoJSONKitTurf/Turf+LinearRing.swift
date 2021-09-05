@@ -5,7 +5,7 @@ import CoreLocation
 import GeoJSONKit
 
 /**
- Creates a `Ring` struct that represents a closed figure that is bounded by three or more straight line segments.
+ A `Ring` struct that represents a closed figure that is bounded by three or more straight line segments.
  */
 extension GeoJSON.Polygon.LinearRing {
   
@@ -58,6 +58,34 @@ extension GeoJSON.Polygon.LinearRing {
    * Ported from: https://github.com/Turfjs/turf/blob/e53677b0931da9e38bb947da448ee7404adc369d/packages/turf-boolean-point-in-polygon/index.ts#L77-L108
    */
   public func contains(_ coordinate: GeoJSON.Position, ignoreBoundary: Bool = false) -> Bool {
+    
+    // Optimization for triangles, using barycentric method
+    guard positions.count > 3 else {
+      // x: longitude; y: latitude
+      let p  = coordinate
+      let p0 = positions[0]
+      let p1 = positions[1]
+      let p2 = positions[2]
+      let s = p0.latitude  * p2.longitude
+            - p0.longitude * p2.latitude
+            + (p2.latitude  - p0.latitude)  * p.longitude
+            + (p0.longitude - p2.longitude) * p.latitude
+      let t = p0.longitude * p1.latitude
+            - p0.latitude  * p1.longitude
+            + (p0.latitude  - p1.latitude)  * p.longitude
+            + (p1.longitude - p0.longitude) * p.latitude
+      guard (s < 0) == (t < 0) else { return false }
+      
+      let a = -p1.latitude * p2.longitude
+            + p0.latitude  * (p2.longitude - p1.longitude)
+            + p0.longitude * (p1.latitude - p2.latitude)
+            + p1.longitude * p2.latitude
+      return a < 0
+            ? (s <= 0 && s + t >= a)
+            : (s >= 0 && s + t <= a)
+    }
+    
+    
     let bbox = GeoJSON.BoundingBox(positions: positions)
     guard bbox.contains(coordinate, ignoreBoundary: ignoreBoundary) else {
       return false

@@ -571,102 +571,58 @@ class PolygonTests: XCTestCase {
     XCTAssertEqual(smoothed.coordinates, expected)
   }
   
-  func testSimplifySimplePolygon() {
-    let original = [
-      [
-        GeoJSON.Position(latitude: 26.148429528000065, longitude: -28.29755210099995),
-        GeoJSON.Position(latitude: 26.148582685000065, longitude: -28.29778390599995),
-        GeoJSON.Position(latitude: 26.149207731000047, longitude: -28.29773837299996),
-        GeoJSON.Position(latitude: 26.14925541100007, longitude: -28.297771688999944),
-        GeoJSON.Position(latitude: 26.149255844000038, longitude: -28.297773261999964),
-        GeoJSON.Position(latitude: 26.149276505000046, longitude: -28.29784835099997),
-        GeoJSON.Position(latitude: 26.14928482700003, longitude: -28.29787859399994),
-        GeoJSON.Position(latitude: 26.14928916200006, longitude: -28.29800647199994),
-        GeoJSON.Position(latitude: 26.14931069800008, longitude: -28.298641791999955),
-        GeoJSON.Position(latitude: 26.149339971000074, longitude: -28.298641232999955),
-        GeoJSON.Position(latitude: 26.151298488000066, longitude: -28.29860385099994),
-        GeoJSON.Position(latitude: 26.151290002000053, longitude: -28.298628995999934),
-        GeoJSON.Position(latitude: 26.151417002000073, longitude: -28.299308003999954),
-        GeoJSON.Position(latitude: 26.15159000400007, longitude: -28.299739003999946),
-        GeoJSON.Position(latitude: 26.151951998000072, longitude: -28.30051100299994),
-        GeoJSON.Position(latitude: 26.15206407200003, longitude: -28.30076885099993),
-        GeoJSON.Position(latitude: 26.152066543000046, longitude: -28.30077453499996),
-        GeoJSON.Position(latitude: 26.151987021000025, longitude: -28.300799009999935),
-        GeoJSON.Position(latitude: 26.149896693000073, longitude: -28.301442350999935),
-        GeoJSON.Position(latitude: 26.150354333000053, longitude: -28.30260575099993),
-        GeoJSON.Position(latitude: 26.14914131000006, longitude: -28.302975170999957),
-        GeoJSON.Position(latitude: 26.14836387300005, longitude: -28.302853868999932),
-        GeoJSON.Position(latitude: 26.147575408000023, longitude: -28.30269948399996),
-        GeoJSON.Position(latitude: 26.146257624000043, longitude: -28.302462392999928),
-        GeoJSON.Position(latitude: 26.14557943400007, longitude: -28.302181192999967),
-        GeoJSON.Position(latitude: 26.145492669000078, longitude: -28.302154609999945),
-        GeoJSON.Position(latitude: 26.144921243000056, longitude: -28.303395982999973),
-        GeoJSON.Position(latitude: 26.14482272200007, longitude: -28.30455853999996),
-        GeoJSON.Position(latitude: 26.14431040900007, longitude: -28.30451913099995),
-        GeoJSON.Position(latitude: 26.14429070400007, longitude: -28.304144747999942),
-        GeoJSON.Position(latitude: 26.143837504000032, longitude: -28.304144747999942),
-        GeoJSON.Position(latitude: 26.143613499000026, longitude: -28.304592757999956),
-        GeoJSON.Position(latitude: 26.14346312200007, longitude: -28.304893512999968),
-        GeoJSON.Position(latitude: 26.143260178000048, longitude: -28.304893512999968),
-        GeoJSON.Position(latitude: 26.143246374000057, longitude: -28.304893512999968),
-        GeoJSON.Position(latitude: 26.143147852000027, longitude: -28.304893512999968),
-        GeoJSON.Position(latitude: 26.14295080900007, longitude: -28.304834399999947),
-        GeoJSON.Position(latitude: 26.14200500000004, longitude: -28.30449942699994),
-        GeoJSON.Position(latitude: 26.14198529600003, longitude: -28.304420608999976),
-        GeoJSON.Position(latitude: 26.141525339000054, longitude: -28.304298579999966),
-        GeoJSON.Position(latitude: 26.141019783000047, longitude: -28.30416445299994),
-        GeoJSON.Position(latitude: 26.141118305000077, longitude: -28.304637356999933),
-        GeoJSON.Position(latitude: 26.140940966000073, longitude: -28.30512996599998),
-        GeoJSON.Position(latitude: 26.140376789000072, longitude: -28.306172836999963),
-        GeoJSON.Position(latitude: 26.140476282000066, longitude: -28.30621363399996),
-        GeoJSON.Position(latitude: 26.14041675800007, longitude: -28.306326533999936),
-        GeoJSON.Position(latitude: 26.140146555000058, longitude: -28.30640398099996),
-        GeoJSON.Position(latitude: 26.140073975000064, longitude: -28.306410747999962),
-        GeoJSON.Position(latitude: 26.137315367000042, longitude: -28.305189078999945),
-        GeoJSON.Position(latitude: 26.136645419000047, longitude: -28.304854104999947),
-        GeoJSON.Position(latitude: 26.135719315000074, longitude: -28.30451913099995),
-        GeoJSON.Position(latitude: 26.135515376000058, longitude: -28.304330879999952),
-        GeoJSON.Position(latitude: 26.13546315800005, longitude: -28.304282678999982),
-        GeoJSON.Position(latitude: 26.13558800000004, longitude: -28.30419999999998),
-        GeoJSON.Position(latitude: 26.137463000000025, longitude: -28.30242899999996),
-        GeoJSON.Position(latitude: 26.13794500000006, longitude: -28.30202799999995),
-        GeoJSON.Position(latitude: 26.13796479100006, longitude: -28.30201049699997),
-        GeoJSON.Position(latitude: 26.13798299700005, longitude: -28.302025000999947),
-        GeoJSON.Position(latitude: 26.139450004000025, longitude: -28.30074499999995),
-        GeoJSON.Position(latitude: 26.141302000000053, longitude: -28.29914199999996),
-        GeoJSON.Position(latitude: 26.141913997000074, longitude: -28.29862600399997),
-        GeoJSON.Position(latitude: 26.14212216900006, longitude: -28.29845037299998),
-        GeoJSON.Position(latitude: 26.144304360000035, longitude: -28.296499429999983),
-        GeoJSON.Position(latitude: 26.144799071000023, longitude: -28.29614006399993),
-        GeoJSON.Position(latitude: 26.145209090000037, longitude: -28.295759748999956),
-        GeoJSON.Position(latitude: 26.145465732000048, longitude: -28.295507246999932),
-        GeoJSON.Position(latitude: 26.14575028200005, longitude: -28.295352539999953),
-        GeoJSON.Position(latitude: 26.14589208800004, longitude: -28.295275441999934),
-        GeoJSON.Position(latitude: 26.146584820000044, longitude: -28.295135245999973),
-        GeoJSON.Position(latitude: 26.146587504000024, longitude: -28.295134702999974),
-        GeoJSON.Position(latitude: 26.146827588000065, longitude: -28.295606591999956),
-        GeoJSON.Position(latitude: 26.14685742000006, longitude: -28.29565372899998),
-        GeoJSON.Position(latitude: 26.14691261200005, longitude: -28.29574093599996),
-        GeoJSON.Position(latitude: 26.147077344000024, longitude: -28.296001226999977),
-        GeoJSON.Position(latitude: 26.147117344000037, longitude: -28.296041226999932),
-        GeoJSON.Position(latitude: 26.147907966000048, longitude: -28.29696016899993),
-        GeoJSON.Position(latitude: 26.147913396000035, longitude: -28.296966331999954),
-        GeoJSON.Position(latitude: 26.148429528000065, longitude: -28.29755210099995)
-      ]
-    ]
-    
-    let expected = [
-      [
-        GeoJSON.Position(latitude: 26.148429528000065, longitude: -28.29755210099995),
-        GeoJSON.Position(latitude: 26.135515376000058, longitude: -28.304330879999952),
-        GeoJSON.Position(latitude: 26.13546315800005, longitude: -28.304282678999982),
-        GeoJSON.Position(latitude: 26.148429528000065, longitude: -28.29755210099995)
-      ]
-    ]
-    
-    let polygon = GeoJSON.Polygon(original)
-    let simplified = polygon.simplify(tolerance: 100, highestQuality: false);
-    
-    XCTAssertEqual(simplified.coordinates, expected)
+  func testSimplify() throws {
+    try Fixture.fixtures(folder: "simplify") { name, input, output in
+      let properties: [String: AnyHashable]?
+      switch input.object {
+      case .feature(let feature): properties = feature.properties
+      default: properties = nil
+      }
+      
+      let tolerance = properties?["tolerance"] as? Double ?? 0.01
+      let highQuality = properties?["highQuality"] as? Bool ?? false
+      let simplified = input.simplified(options: .init(algorithm: .RamerDouglasPeucker(tolerance: tolerance), highestQuality: highQuality))
+//      XCTAssertEqual(simplified, output, "Fixture check failed for \(name)")
+
+      if simplified != output {
+        // Give it another chance on the data-level, too
+        do {
+          var options: JSONSerialization.WritingOptions = [.prettyPrinted]
+          if #available(iOS 11.0, OSX 10.13, *) {
+            options.insert(.sortedKeys)
+          }
+          let newData = try simplified.toData(options: options)
+          let oldData = try output.toData(options: options)
+          if newData != oldData {
+            if true {
+              try Self.save(newData, filename: "out_simplified", extension: "geojson")
+              try Self.save(oldData, filename: "out_expected", extension: "geojson")
+            }
+            XCTFail("Fixture check failed for \(name)!")
+          }
+          
+        } catch {
+          XCTFail("Fixture check failed for \(name)! Also: Generating JSON failed with: \(error)")
+        }
+      }
+      
+    }
   }
+}
+
+extension XCTest {
+  static func save(_ data: Data, filename: String, extension fileExtension: String) throws {
+    // TODO: In Swift 5.3, we can use proper resources
+    // See
+    // - https://stackoverflow.com/questions/47177036/use-resources-in-unit-tests-with-swift-package-manager
+    // - https://stackoverflow.com/questions/39815054/how-to-include-assets-resources-in-a-swift-package-manager-library
+    
+    let thisSourceFile = URL(fileURLWithPath: #file)
+    let thisDirectory = thisSourceFile.deletingLastPathComponent()
+    let path = thisDirectory
+      .appendingPathComponent(filename)
+      .appendingPathExtension(fileExtension)
+    return try data.write(to: path)
+  }
+
 }
