@@ -42,7 +42,7 @@ extension GeoJSON.Geometry {
           acc.latitude += next.latitude
           acc.longitude += next.longitude
         }
-      return .init(
+      return GeoJSON.Position(
         latitude: summed.latitude / Double(positions.count),
         longitude: summed.longitude / Double(positions.count)
       ).normalized
@@ -83,7 +83,7 @@ extension GeoJSON.Geometry {
     let areaFactor = 1 / (6 * area)
     
     // final coordinates, adding back values that have been neutralized
-    return .init(
+    return GeoJSON.Position(
       latitude: center.latitude + areaFactor * sum.latitude,
       longitude: center.longitude + areaFactor * sum.longitude
     ).normalized
