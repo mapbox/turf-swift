@@ -1,5 +1,6 @@
 import XCTest
 import Foundation
+import GeoJSONKit
 
 class Fixture {
   static func loadData(folder: String? = nil, filename: String, extension fileExtension: String) throws -> Data {
@@ -43,6 +44,31 @@ class Fixture {
       XCTAssert(false, "Unable to decode JSON fixture at \(name): \(error).")
       return [:]
     }
+  }
+  
+  static func fixtures(folder: String, pair: (String, GeoJSON, GeoJSON) -> Void) throws {
+    let thisSourceFile = URL(fileURLWithPath: #file)
+    let thisDirectory = thisSourceFile.deletingLastPathComponent()
+    
+    let path = thisDirectory
+      .appendingPathComponent("Fixtures", isDirectory: true)
+      .appendingPathComponent(folder, isDirectory: true)
+    let inDir = path.appendingPathComponent("in", isDirectory: true)
+    let outDir = path.appendingPathComponent("out", isDirectory: true)
+    
+    let inputs = try FileManager.default.contentsOfDirectory(at: inDir, includingPropertiesForKeys: nil, options: .skipsSubdirectoryDescendants)
+    
+    for inPath in inputs {
+      let outPath = outDir.appendingPathComponent(inPath.lastPathComponent)
+      let inputData = try Data(contentsOf: inPath)
+      let outputData = try Data(contentsOf: outPath)
+      pair(
+        inPath.lastPathComponent,
+        try GeoJSON(data: inputData),
+        try GeoJSON(data: outputData)
+      )
+    }
+
   }
 
 }
