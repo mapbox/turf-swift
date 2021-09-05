@@ -158,4 +158,69 @@ class TurfTests: XCTestCase {
         let midCoord = mid(coord1, coord2)
         XCTAssertEqual(coord1.distance(to: midCoord), coord2.distance(to: midCoord), accuracy: 1)
     }
+    
+    func testSimplifyFixtures() throws
+    {
+        try Fixture.fixtures(folder: "simplify") { name, inputData, outputData in
+            do {
+                let input = try JSONDecoder().decode(GeoJSON.self, from: inputData)
+                let output = try JSONDecoder().decode(GeoJSON.self, from: outputData)
+                
+                let properties = input.decodedFeature?.properties
+                let tolerance = properties?["tolerance"] as? Double ?? 0.01
+                let highQuality = properties?["highQuality"] as? Bool ?? false
+                
+                for (input, output) in zip(input.features, output.features) {
+                    switch (input.geometry, output.geometry) {
+                    case (.point, .point), (.multiPoint, .multiPoint):
+                        break // nothing to simplify
+                    
+                    case let (.lineString(lineIn), .lineString(lineOut)):
+                        let simplified = lineIn.simplify(tolerance: tolerance, highestQuality: highQuality)
+                        XCTAssertEqual(lineOut.coordinates, simplified.coordinates, accuracy: 0.00001, "Fixture test failed for \(name)")
+
+                    case let (.polygon(polyIn), .polygon(polyOut)):
+                        let simplified = polyIn.simplify(tolerance: tolerance, highestQuality: highQuality)
+                        XCTAssertEqual(polyOut.coordinates, simplified.coordinates, accuracy: 0.00001, "Fixture test failed for \(name)")
+
+                    default:
+                        XCTFail("Not-supported fixtures for \(name)")
+                    }
+                }
+            } catch {
+                XCTFail("Parsing fixture failed for \(name): \(error)")
+            }
+        }
+    }
+}
+
+extension GeoJSON {
+    var features: [Feature] {
+        if let feature = self.decodedFeature {
+            return [feature]
+        } else if let featureCollection = self.decodedFeatureCollection {
+            return featureCollection.features
+        } else {
+            return []
+        }
+    }
+}
+
+func XCTAssertEqual(_ expected: [[LocationCoordinate2D]], _ actual: [[LocationCoordinate2D]], accuracy: CLLocationDegrees, _ message: @autoclosure () -> String = "", file: StaticString = #filePath, line: UInt = #line) {
+    XCTAssertEqual(expected.count, actual.count, message(), file: file, line: line)
+    guard expected.count == actual.count else { return }
+    
+    for (ex, ac) in zip(expected, actual) {
+        XCTAssertEqual(ex, ac, accuracy: accuracy, message())
+    }
+}
+
+func XCTAssertEqual(_ expected: [LocationCoordinate2D], _ actual: [LocationCoordinate2D], accuracy: CLLocationDegrees, _ message: @autoclosure () -> String = "", file: StaticString = #filePath, line: UInt = #line) {
+    XCTAssertEqual(expected.count, actual.count, message(), file: file, line: line)
+    guard expected.count == actual.count else { return }
+    
+    for (ex, ac) in zip(expected, actual) {
+        XCTAssertEqual(ex.latitude, ac.latitude, accuracy: accuracy, message())
+        XCTAssertEqual(ex.longitude, ac.longitude, accuracy: accuracy, message())
+    }
 }

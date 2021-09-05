@@ -40,5 +40,27 @@ class Fixture {
             return [:]
         }
     }
+    
+    static func fixtures(folder: String, pair: (String, Data, Data) throws -> Void) throws {
+        let thisSourceFile = URL(fileURLWithPath: #file)
+        let thisDirectory = thisSourceFile.deletingLastPathComponent()
+        
+        let path = thisDirectory
+            .appendingPathComponent("Fixtures", isDirectory: true)
+            .appendingPathComponent(folder, isDirectory: true)
+        let inDir = path.appendingPathComponent("in", isDirectory: true)
+        let outDir = path.appendingPathComponent("out", isDirectory: true)
+        
+        let inputs = try FileManager.default.contentsOfDirectory(at: inDir, includingPropertiesForKeys: nil, options: .skipsSubdirectoryDescendants)
+        
+        for inPath in inputs {
+            let outPath = outDir.appendingPathComponent(inPath.lastPathComponent)
+            try pair(
+                inPath.lastPathComponent,
+                try Data(contentsOf: inPath),
+                try Data(contentsOf: outPath)
+            )
+        }
+    }
 }
 
