@@ -30,25 +30,25 @@ public struct SimplifyOptions {
 }
 
 extension GeoJSON {
-  func simplified(options: SimplifyOptions = .init()) -> GeoJSON {
+  public func simplified(options: SimplifyOptions = .init()) -> GeoJSON {
     var copy = self
     copy.simplify(options: options)
     return copy
   }
   
-  mutating func simplify(options: SimplifyOptions = .init()) {
+  public mutating func simplify(options: SimplifyOptions = .init()) {
     object.simplify(options: options)
   }
 }
 
 extension GeoJSON.GeoJSONObject {
-  func simplified(options: SimplifyOptions = .init()) -> GeoJSON.GeoJSONObject {
+  public func simplified(options: SimplifyOptions = .init()) -> GeoJSON.GeoJSONObject {
     var copy = self
     copy.simplify(options: options)
     return copy
   }
   
-  mutating func simplify(options: SimplifyOptions = .init()) {
+  public mutating func simplify(options: SimplifyOptions = .init()) {
     switch self {
     case .feature(let feature):
       self = .feature(feature.simplified(options: options))
@@ -61,25 +61,25 @@ extension GeoJSON.GeoJSONObject {
 }
 
 extension GeoJSON.Feature {
-  func simplified(options: SimplifyOptions = .init()) -> GeoJSON.Feature {
+  public func simplified(options: SimplifyOptions = .init()) -> GeoJSON.Feature {
     var copy = self
     copy.simplify(options: options)
     return copy
   }
   
-  mutating func simplify(options: SimplifyOptions = .init()) {
+  public mutating func simplify(options: SimplifyOptions = .init()) {
     geometry.simplify(options: options)
   }
 }
 
 extension GeoJSON.GeometryObject {
-  func simplified(options: SimplifyOptions = .init()) -> GeoJSON.GeometryObject {
+  public func simplified(options: SimplifyOptions = .init()) -> GeoJSON.GeometryObject {
     var copy = self
     copy.simplify(options: options)
     return copy
   }
   
-  mutating func simplify(options: SimplifyOptions = .init()) {
+  public mutating func simplify(options: SimplifyOptions = .init()) {
     switch self {
     case .single(let geometry):
       self = .single(geometry.simplified(options: options))
@@ -92,13 +92,13 @@ extension GeoJSON.GeometryObject {
 }
 
 extension GeoJSON.Geometry {
-  func simplified(options: SimplifyOptions = .init()) -> GeoJSON.Geometry {
+  public func simplified(options: SimplifyOptions = .init()) -> GeoJSON.Geometry {
     var copy = self
     copy.simplify(options: options)
     return copy
   }
   
-  mutating func simplify(options: SimplifyOptions = .init()) {
+  public mutating func simplify(options: SimplifyOptions = .init()) {
     switch self {
     case .point: return
     case .lineString(let line):
