@@ -67,9 +67,25 @@ Comes with a mini-CLI `geokitten` with these commands:
 
 - `geokitten simplify $input` to simplify a GeoJSON
 
-Install via:
+### Installation
 
+<details>
+<summary>Via SPM</summary>
+
+First clone or download the repository, then run this:
+
+```bash
+swift build -c release
+sudo cp .build/release/geokitten /usr/local/bin/geokitten
 ```
-$ swift build -c release
-$ sudo cp .build/release/GeoKitten /usr/local/bin/geokitten
+</details>
+
+<details>
+<summary>Via <a href="https://github.com/yonaskolb/Mint">Mint</a></summary>
+
+```bash
+mint install maparoni/GeoJSONKit-Turf@main
 ```
+
+If you get a permissions error, check [this Mint issue](https://github.com/yonaskolb/Mint/issues/188).
+</details>

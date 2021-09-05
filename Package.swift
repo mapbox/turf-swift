@@ -12,7 +12,7 @@ let package = Package(
       name: "GeoJSONKitTurf",
       targets: ["GeoJSONKitTurf"]),
     .executable(
-      name: "GeoKitten",
+      name: "geokitten",
       targets: ["GeoKitten"]),
   ],
   dependencies: [
