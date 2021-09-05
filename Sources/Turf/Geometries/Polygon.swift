@@ -164,9 +164,8 @@ extension Polygon {
     ///
     /// Ported from https://github.com/Turfjs/turf/blob/master/packages/turf-simplify/lib/simplify.js
     public mutating func simplified(tolerance: Double = 1.0, highestQuality: Bool = false) {
-        guard coordinates.allSatisfy({ $0.count > 3 }) else { return }
-
-        coordinates = coordinates.map({ ring in
+        coordinates = coordinates.map { ring in
+            guard ring.count > 3 else { return ring }
             let squareTolerance = tolerance * tolerance
             var tolerance = tolerance
 
