@@ -1,6 +1,6 @@
 # GeoJSONKit+Turf
 
-A fork of [turf-swift](https://github.com/mapbox/turf-swift.git) which relies on [GeoJSONKit](https://gitlab.com/maparoni/geojsonkit). turf-swift itself is proted from [Turf.js](https://github.com/Turfjs/turf/). For an alternative see [spatial-algorithms](https://github.com/mapbox/spatial-algorithms/).
+A fork of [turf-swift](https://github.com/mapbox/turf-swift.git) which relies on [GeoJSONKit](https://github.com/maparoni/geojsonkit). turf-swift itself is proted from [Turf.js](https://github.com/Turfjs/turf/). For an alternative see [spatial-algorithms](https://github.com/mapbox/spatial-algorithms/).
 
 ## Requirements
 
@@ -22,7 +22,7 @@ Just as turf-swift, a stable release of this library is not yet available.
 To install GeoJSONKitTurf using the [Swift Package Manager](https://swift.org/package-manager/), add the following package to the `dependencies` in your Package.swift file:
 
 ```swift
-.package(url: "https://gitlab.com/maparoni/geojsonkit-turf", .branch("main")
+.package(url: "https://github.com/maparoni/geojsonkit-turf", .branch("main")
 ```
 
 Then `import GeoJSONKitTurf` in any Swift file in your module.
@@ -54,12 +54,11 @@ Turf.js | Turf-swift
 [turf-line-slice-along](https://github.com/Turfjs/turf/tree/master/packages/turf-line-slice-along/) | `GeoJSON.LineString.trimmed(from:distance:)`
 [turf-midpoint](https://github.com/Turfjs/turf/blob/master/packages/turf-midpoint/index.js) | `mid(_:_:)`
 [turf-nearest-point-on-line](https://github.com/Turfjs/turf/tree/master/packages/turf-nearest-point-on-line/) | `GeoJSON.LineString.closestCoordinate(to:)`
-[turf-simplify](https://github.com/Turfjs/turf/tree/master/packages/turf-simplify) | `GeoJSON.LineString.simplified(tolerance:highestQuality:)`
 [turf-polygon-smooth](https://github.com/Turfjs/turf/tree/master/packages/turf-polygon-smooth) | `GeoJSON.Polygon.smooth(iterations:)`
-[turf-simplify](https://github.com/Turfjs/turf/tree/master/packages/turf-simplify) | `GeoJSON.Polygon.simplified(tolerance:highestQuality:)`
+[turf-simplify](https://github.com/Turfjs/turf/tree/master/packages/turf-simplify) | `GeoJSON.simplify(options:)`
 — | `CLLocationDirection.difference(from:)`<br>`LocationDirection.difference(from:)` on Linux
 — | `CLLocationDirection.wrap(min:max:)`<br>`LocationDirection.wrap(min:max:)` on Linux
 
 ## GeoJSON
 
-This fork relies on [GeoJSONKit](https://gitlab.com/maparoni/geojsonkit).
+In contrast to [turf-swift](https://github.com/mapbox/turf-swift.git), this fork does not have any GeoJSON code itself, and instead relies on [GeoJSONKit](https://github.com/maparoni/geojsonkit).

@@ -15,7 +15,7 @@ let package = Package(
       targets: ["GeoJSONKitTurf"]),
   ],
   dependencies: [
-    .package(name: "GeoJSONKit", url: "https://gitlab.com/maparoni/geojsonkit.git", from: "0.2.7"),
+    .package(name: "GeoJSONKit", url: "https://github.com/maparoni/geojsonkit.git", from: "0.3.0"),
   ],
   targets: [
     // Targets are the basic building blocks of a package. A target can define a module or a test suite.

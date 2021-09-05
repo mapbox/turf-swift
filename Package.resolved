@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "GeoJSONKit",
-        "repositoryURL": "https://gitlab.com/maparoni/geojsonkit.git",
+        "repositoryURL": "https://github.com/maparoni/geojsonkit.git",
         "state": {
           "branch": null,
           "revision": "a40e0fc916864c3dca9108d02de83f27b01b563b",
