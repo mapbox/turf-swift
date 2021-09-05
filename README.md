@@ -62,3 +62,16 @@ Turf.js | Turf-swift
 ## GeoJSON
 
 In contrast to [turf-swift](https://github.com/mapbox/turf-swift.git), this fork does not have any GeoJSON code itself, and instead relies on [GeoJSONKit](https://github.com/maparoni/geojsonkit).
+
+## CLI
+
+Comes with a mini-CLI `geokitten` with commands:
+
+- `geokitten simplify $input` to simplify a GeoJSON
+
+Install via:
+
+```
+$ swift build -c release
+$ sudo cp .build/release/GeoKitten /usr/local/bin/geokitten
+```
