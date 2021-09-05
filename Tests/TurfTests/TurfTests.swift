@@ -167,8 +167,8 @@ class TurfTests: XCTestCase {
                 let output = try JSONDecoder().decode(GeoJSON.self, from: outputData)
                 
                 let properties = input.decodedFeature?.properties
-                let tolerance = properties?["tolerance"] as? Double ?? 0.01
-                let highQuality = properties?["highQuality"] as? Bool ?? false
+                let tolerance = (properties?["tolerance"] as? NSNumber)?.doubleValue ?? 0.01
+                let highQuality = (properties?["highQuality"] as? NSNumber)?.boolValue ?? false
                 
                 for (input, output) in zip(input.features, output.features) {
                     switch (input.geometry, output.geometry) {
