@@ -196,7 +196,6 @@ extension Polygon {
         coordinates = coordinates.map{ ring in
             guard ring.count > 2 else { return ring }
 
-
             var prevCoordinate = ring[0]
             var newCoordinates = [prevCoordinate]
             var coordinate = ring[1]
@@ -231,7 +230,7 @@ extension Polygon {
         var dy = segmentEnd.longitude - y
 
         if dx != 0 || dy != 0 {
-            let t = ((segmentStart.latitude - x) * dx + (coordinate.longitude - y) * dy) / (dx * dx + dy * dy)
+            let t = ((coordinate.latitude - x) * dx + (coordinate.longitude - y) * dy) / (dx * dx + dy * dy)
             if t > 1 {
                 x = segmentEnd.latitude
                 y = segmentEnd.longitude

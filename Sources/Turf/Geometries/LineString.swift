@@ -253,7 +253,7 @@ extension LineString {
         var dy = segmentEnd.longitude - y
 
         if dx != 0 || dy != 0 {
-            let t = ((segmentStart.latitude - x) * dx + (coordinate.longitude - y) * dy) / (dx * dx + dy * dy)
+            let t = ((coordinate.latitude - x) * dx + (coordinate.longitude - y) * dy) / (dx * dx + dy * dy)
             if t > 1 {
                 x = segmentEnd.latitude
                 y = segmentEnd.longitude
