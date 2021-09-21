@@ -1,12 +1,10 @@
 import Foundation
-#if !os(Linux)
-import CoreLocation
-#endif
+
 import GeoJSONKit
 
-let metersPerRadian: LocationDistance = 6_373_000.0
+let metersPerRadian: GeoJSON.Distance = 6_373_000.0
 // WGS84 equatorial radius as specified by the International Union of Geodesy and Geophysics
-let equatorialRadius: LocationDistance = 6_378_137
+let equatorialRadius: GeoJSON.Distance = 6_378_137
 
 public typealias LineSegment = (GeoJSON.Position, GeoJSON.Position)
 

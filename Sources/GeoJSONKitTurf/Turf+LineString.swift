@@ -1,7 +1,5 @@
 import Foundation
-#if !os(Linux)
-import CoreLocation
-#endif
+
 import GeoJSONKit
 
 extension GeoJSON.LineString {
@@ -24,14 +22,14 @@ extension GeoJSON.LineString {
   }
   
   /// Returns a `.LineString` along a `.LineString` within a distance from a coordinate.
-  public func trimmed(from coordinate: GeoJSON.Position, distance: LocationDistance) -> GeoJSON.LineString? {
+  public func trimmed(from coordinate: GeoJSON.Position, distance: GeoJSON.Distance) -> GeoJSON.LineString? {
     let startVertex = closestCoordinate(to: coordinate)
     guard startVertex != nil && distance != 0 else {
       return nil
     }
     
     var vertices: [GeoJSON.Position] = [startVertex!.coordinate]
-    var cumulativeDistance: LocationDistance = 0
+    var cumulativeDistance: GeoJSON.Distance = 0
     let addVertex = { (vertex: GeoJSON.Position) -> Bool in
       let lastVertex = vertices.last!
       let incrementalDistance = lastVertex.distance(to: vertex)
@@ -75,19 +73,19 @@ extension GeoJSON.LineString {
     /// The index of the coordinate
     public let index: Array<GeoJSON.Position>.Index
     /// The coordinate’s distance from the start of the polyline
-    public let distance: LocationDistance
+    public let distance: GeoJSON.Distance
   }
   
   /// Returns a coordinate along a `.LineString` at a certain distance from the start of the polyline.
-  public func coordinateFromStart(distance: LocationDistance) -> GeoJSON.Position? {
+  public func coordinateFromStart(distance: GeoJSON.Distance) -> GeoJSON.Position? {
     return indexedCoordinateFromStart(distance: distance)?.coordinate
   }
   
   /// Returns an indexed coordinate along a `.LineString` at a certain distance from the start of the polyline.
   ///
   /// Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-along/index.js
-  public func indexedCoordinateFromStart(distance: LocationDistance) -> IndexedCoordinate? {
-    var traveled: LocationDistance = 0
+  public func indexedCoordinateFromStart(distance: GeoJSON.Distance) -> IndexedCoordinate? {
+    var traveled: GeoJSON.Distance = 0
     
     guard let firstCoordinate = coordinates.first else {
       return nil
@@ -122,7 +120,7 @@ extension GeoJSON.LineString {
   /// Returns the distance along a slice of a `.LineString` with the given endpoints.
   ///
   /// Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-line-slice/index.js
-  public func distance(from start: GeoJSON.Position? = nil, to end: GeoJSON.Position? = nil) -> LocationDistance? {
+  public func distance(from start: GeoJSON.Position? = nil, to end: GeoJSON.Position? = nil) -> GeoJSON.Distance? {
     guard !coordinates.isEmpty else { return nil }
     
     guard let slicedCoordinates = sliced(from: start, to: end)?.coordinates else {
@@ -170,7 +168,7 @@ extension GeoJSON.LineString {
     }
     
     var closestCoordinate: IndexedCoordinate?
-    var closestDistance: LocationDistance?
+    var closestDistance: GeoJSON.Distance?
     
     for index in 0..<coordinates.count - 1 {
       let segment = (coordinates[index], coordinates[index + 1])
@@ -181,7 +179,7 @@ extension GeoJSON.LineString {
       let perpendicularPoint1 = coordinate.coordinate(at: maxDistance, facing: direction + 90)
       let perpendicularPoint2 = coordinate.coordinate(at: maxDistance, facing: direction - 90)
       let intersectionPoint = intersection((perpendicularPoint1, perpendicularPoint2), segment)
-      let intersectionDistance: LocationDistance? = intersectionPoint != nil ? coordinate.distance(to: intersectionPoint!) : nil
+      let intersectionDistance: GeoJSON.Distance? = intersectionPoint != nil ? coordinate.distance(to: intersectionPoint!) : nil
       
       if distances.0 < closestDistance ?? .greatestFiniteMagnitude {
         closestCoordinate = IndexedCoordinate(coordinate: segment.0,

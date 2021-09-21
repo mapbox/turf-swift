@@ -1,7 +1,4 @@
 import Foundation
-#if !os(Linux)
-import CoreLocation
-#endif
 
 import GeoJSONKit
 
@@ -17,12 +14,12 @@ extension GeoJSON.Polygon {
    The recommended amount is 64.
    - Returns: A polygon shape which approximates a circle.
    */
-  public init(center: GeoJSON.Position, radius: LocationDistance, vertices: Int) {
+  public init(center: GeoJSON.Position, radius: GeoJSON.Distance, vertices: Int) {
     // The first and last coordinates in a polygon must be identical,
     // which is why we're using the inclusive range operator in this case.
     // Ported from https://github.com/Turfjs/turf/blob/17002ccd57e04e84ddb38d7e3ac8ede35b019c58/packages/turf-circle/index.ts
     let positions = (0...vertices).map { ( step ) -> GeoJSON.Position in
-      let bearing = fabs(LocationDirection(step * -360 / vertices))
+      let bearing = fabs(GeoJSON.Direction(step * -360 / vertices))
       return center.coordinate(at: radius, facing: bearing)
     }
     

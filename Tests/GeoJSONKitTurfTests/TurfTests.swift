@@ -1,24 +1,21 @@
 import XCTest
-#if !os(Linux)
-import CoreLocation
-#endif
-@testable import GeoJSONKit
+
+import GeoJSONKit
 @testable import GeoJSONKitTurf
 
-let metersPerMile: LocationDistance = 1_609.344
-
+let metersPerMile: GeoJSON.Distance = 1_609.344
 
 class TurfTests: XCTestCase {
   
   func testWrap() {
-    let a = (380 as LocationDirection).wrap(min: 0, max: 360)
+    let a = (380 as GeoJSON.Direction).wrap(min: 0, max: 360)
     XCTAssertEqual(a, 20)
     
-    let b = (-30 as LocationDirection).wrap(min: 0, max: 360)
+    let b = (-30 as GeoJSON.Direction).wrap(min: 0, max: 360)
     XCTAssertEqual(b, 330)
   }
   
-  func testCLLocationCoordinate2() {
+  func testPositionDirection() {
     let coord1 = GeoJSON.Position(latitude: 35, longitude: 35)
     let coord2 = GeoJSON.Position(latitude: -10, longitude: -10)
     let a = coord1.direction(to: coord2)
@@ -35,12 +32,12 @@ class TurfTests: XCTestCase {
     XCTAssertEqual(a, coord1)
   }
   
-  func testCLLocationDegrees() {
-    let degree: CLLocationDegrees = 100
+  func testDegreeesToRadians() {
+    let degree: GeoJSON.Degrees = 100
     let a = degree.toRadians()
     XCTAssertEqual(a, 2, accuracy: 1)
     
-    let radian: LocationRadians = 4
+    let radian: GeoJSON.DegreesRadians = 4
     let b = radian.toDegrees()
     XCTAssertEqual(b, 229, accuracy: 1)
   }

@@ -69,7 +69,7 @@ struct DouglasPeucker {
     }
   }
   
-  private static func squareSegmentDistance(_ coordinate: GeoJSON.Position, start: GeoJSON.Position, end: GeoJSON.Position) -> LocationDistance {
+  private static func squareSegmentDistance(_ coordinate: GeoJSON.Position, start: GeoJSON.Position, end: GeoJSON.Position) -> GeoJSON.Distance {
     var x = start.longitude
     var y = start.latitude
     var dx = end.longitude - x

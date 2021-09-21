@@ -1,7 +1,5 @@
 import XCTest
-#if !os(Linux)
-import CoreLocation
-#endif
+
 import GeoJSONKit
 @testable import GeoJSONKitTurf
 
@@ -95,7 +93,7 @@ class PolygonTests: XCTestCase {
   {
     let coord = GeoJSON.Position(latitude: 10.0, longitude: 5.0)
     let radius = 500
-    let circleShape = GeoJSON.Polygon(center: coord, radius: LocationDistance(radius), vertices: 64)
+    let circleShape = GeoJSON.Polygon(center: coord, radius: GeoJSON.Distance(radius), vertices: 64)
     
     // Test number of vertices is 64.
     let expctedNumberOfSteps = circleShape.coordinates[0].count - 1
@@ -105,7 +103,7 @@ class PolygonTests: XCTestCase {
     let startingCoord = circleShape.coordinates[0][0]
     let oppositeCoord = circleShape.coordinates[0][circleShape.coordinates[0].count / 2]
     
-    let expectedDiameter = LocationDistance(radius * 2)
+    let expectedDiameter = GeoJSON.Distance(radius * 2)
     let diameter = startingCoord.distance(to: oppositeCoord)
     
     XCTAssertEqual(expectedDiameter, diameter, accuracy: 0.25)
@@ -612,11 +610,6 @@ class PolygonTests: XCTestCase {
 
 extension XCTest {
   static func save(_ data: Data, filename: String, extension fileExtension: String) throws {
-    // TODO: In Swift 5.3, we can use proper resources
-    // See
-    // - https://stackoverflow.com/questions/47177036/use-resources-in-unit-tests-with-swift-package-manager
-    // - https://stackoverflow.com/questions/39815054/how-to-include-assets-resources-in-a-swift-package-manager-library
-    
     let thisSourceFile = URL(fileURLWithPath: #file)
     let thisDirectory = thisSourceFile.deletingLastPathComponent()
     let path = thisDirectory

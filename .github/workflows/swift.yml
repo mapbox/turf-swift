@@ -7,13 +7,23 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-
+  macos:
     runs-on: macos-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: swift build -v
-    - name: Run tests
-      run: swift test -v
+      run: swift build
+    - name: Test
+      run: swift test
+
+  linux:
+    runs-on: ubuntu-latest
+    container:
+      image: swift:5.4
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: swift build
+    - name: Test
+      run: swift test
+

@@ -16,7 +16,7 @@ let package = Package(
       targets: ["GeoKitten"]),
   ],
   dependencies: [
-    .package(name: "GeoJSONKit", url: "https://github.com/maparoni/geojsonkit.git", from: "0.3.0"),
+    .package(name: "GeoJSONKit", url: "https://github.com/maparoni/geojsonkit.git", from: "0.4.2"),
     .package(url: "https://github.com/apple/swift-argument-parser", .upToNextMajor(from: "0.4.0")),
   ],
   targets: [

@@ -1,7 +1,5 @@
 import XCTest
-#if !os(Linux)
-import CoreLocation
-#endif
+
 import GeoJSONKit
 @testable import GeoJSONKitTurf
 

@@ -1,7 +1,5 @@
 import Foundation
-#if !os(Linux)
-import CoreLocation
-#endif
+
 import GeoJSONKit
 
 /**

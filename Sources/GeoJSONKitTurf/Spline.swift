@@ -3,9 +3,9 @@ import Foundation
 import GeoJSONKit
 
 struct SplinePoint {
-  let x: LocationDegrees
-  let y: LocationDegrees
-  let z: LocationDegrees
+  let x: GeoJSON.Degrees
+  let y: GeoJSON.Degrees
+  let z: GeoJSON.Degrees
   
   init(coordinate: GeoJSON.Position) {
     x = coordinate.longitude
@@ -13,7 +13,7 @@ struct SplinePoint {
     z = 0
   }
   
-  init(x: LocationDegrees, y: LocationDegrees, z: LocationDegrees) {
+  init(x: GeoJSON.Degrees, y: GeoJSON.Degrees, z: GeoJSON.Degrees) {
     self.x = x
     self.y = y
     self.z = z

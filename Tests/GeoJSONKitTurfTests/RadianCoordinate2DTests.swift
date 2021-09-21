@@ -1,7 +1,5 @@
 import XCTest
-#if !os(Linux)
-import CoreLocation
-#endif
+
 @testable import GeoJSONKitTurf
 
 class RadianCoordinate2DTests: XCTestCase {
