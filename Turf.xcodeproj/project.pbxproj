@@ -137,6 +137,10 @@
 		35ECAF372099EC0700DC3BC3 /* FeatureIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ECAF352099EC0700DC3BC3 /* FeatureIdentifier.swift */; };
 		35ECAF382099EC0700DC3BC3 /* FeatureIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ECAF352099EC0700DC3BC3 /* FeatureIdentifier.swift */; };
 		35ECAF392099EC0700DC3BC3 /* FeatureIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ECAF352099EC0700DC3BC3 /* FeatureIdentifier.swift */; };
+		3A40B38226E48262004457C4 /* Simplifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A40B38126E48262004457C4 /* Simplifier.swift */; };
+		3A40B38326E48262004457C4 /* Simplifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A40B38126E48262004457C4 /* Simplifier.swift */; };
+		3A40B38426E48262004457C4 /* Simplifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A40B38126E48262004457C4 /* Simplifier.swift */; };
+		3A40B38526E48262004457C4 /* Simplifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A40B38126E48262004457C4 /* Simplifier.swift */; };
 		7AA969AC21B98F8F009C57FE /* Spline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA969AB21B98F8F009C57FE /* Spline.swift */; };
 		7AA969AD21B98F8F009C57FE /* Spline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA969AB21B98F8F009C57FE /* Spline.swift */; };
 		7AA969AE21B98F8F009C57FE /* Spline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA969AB21B98F8F009C57FE /* Spline.swift */; };
@@ -236,6 +240,7 @@
 		35B56EAE20DAF8DE00C4923D /* FeatureCollectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureCollectionTests.swift; sourceTree = "<group>"; };
 		35ECAF2E20974A1800DC3BC3 /* Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
 		35ECAF352099EC0700DC3BC3 /* FeatureIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureIdentifier.swift; sourceTree = "<group>"; };
+		3A40B38126E48262004457C4 /* Simplifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Simplifier.swift; sourceTree = "<group>"; };
 		7AA969AB21B98F8F009C57FE /* Spline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spline.swift; sourceTree = "<group>"; };
 		C46809D52124199500BAD5E1 /* featurecollection-no-properties.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = "featurecollection-no-properties.geojson"; sourceTree = "<group>"; };
 		CE2EB997214C246A00915A30 /* BoundingBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
@@ -331,6 +336,7 @@
 				2B74CD90248538E500EE6693 /* Geometries */,
 				35B56E6920DAF3C500C4923D /* RadianCoordinate2D.swift */,
 				35B56E6E20DAF41F00C4923D /* Ring.swift */,
+				3A40B38126E48262004457C4 /* Simplifier.swift */,
 				7AA969AB21B98F8F009C57FE /* Spline.swift */,
 				3547ECF1200C3C78009DA062 /* Turf.swift */,
 			);
@@ -743,6 +749,7 @@
 				35B56E9320DAF66A00C4923D /* FeatureCollection.swift in Sources */,
 				2B74CD882485388C00EE6693 /* MultiPolygon.swift in Sources */,
 				2B64F7AD2407ECD400C2559B /* LineString.swift in Sources */,
+				3A40B38326E48262004457C4 /* Simplifier.swift in Sources */,
 				35ECAF3020974A2000DC3BC3 /* Geometry.swift in Sources */,
 				35B56E7520DAF47D00C4923D /* Polygon.swift in Sources */,
 				7AA969AD21B98F8F009C57FE /* Spline.swift in Sources */,
@@ -790,6 +797,7 @@
 				35B56E9220DAF66A00C4923D /* FeatureCollection.swift in Sources */,
 				2B74CD872485388C00EE6693 /* MultiPolygon.swift in Sources */,
 				2B64F7AC2407ECD300C2559B /* LineString.swift in Sources */,
+				3A40B38226E48262004457C4 /* Simplifier.swift in Sources */,
 				35ECAF2F20974A1800DC3BC3 /* Geometry.swift in Sources */,
 				35B56E7420DAF47D00C4923D /* Polygon.swift in Sources */,
 				7AA969AC21B98F8F009C57FE /* Spline.swift in Sources */,
@@ -837,6 +845,7 @@
 				35B56E9420DAF66A00C4923D /* FeatureCollection.swift in Sources */,
 				2B74CD892485388C00EE6693 /* MultiPolygon.swift in Sources */,
 				2B64F7AE2407ECD500C2559B /* LineString.swift in Sources */,
+				3A40B38426E48262004457C4 /* Simplifier.swift in Sources */,
 				35ECAF3120974A2100DC3BC3 /* Geometry.swift in Sources */,
 				35B56E7620DAF47D00C4923D /* Polygon.swift in Sources */,
 				7AA969AE21B98F8F009C57FE /* Spline.swift in Sources */,
@@ -884,6 +893,7 @@
 				35B56E9520DAF66A00C4923D /* FeatureCollection.swift in Sources */,
 				2B74CD8A2485388C00EE6693 /* MultiPolygon.swift in Sources */,
 				2B64F7AF2407ECD600C2559B /* LineString.swift in Sources */,
+				3A40B38526E48262004457C4 /* Simplifier.swift in Sources */,
 				35ECAF3220974A2100DC3BC3 /* Geometry.swift in Sources */,
 				35B56E7720DAF47D00C4923D /* Polygon.swift in Sources */,
 				7AA969AF21B98F8F009C57FE /* Spline.swift in Sources */,

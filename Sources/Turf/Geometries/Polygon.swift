@@ -164,123 +164,28 @@ extension Polygon {
     ///
     /// Ported from https://github.com/Turfjs/turf/blob/master/packages/turf-simplify/lib/simplify.js
     public mutating func simplified(tolerance: Double = 1.0, highestQuality: Bool = false) {
-        guard coordinates.allSatisfy({ $0.count > 3 }) else { return }
-
-        coordinates = coordinates.map({ ring in
-            let squareTolerance = tolerance * tolerance
-            var tolerance = tolerance
-
-            if !highestQuality {
-                simplified(radialTolerance: squareTolerance)
-            }
+        coordinates = coordinates.map { ring in
+            guard ring.count > 3 else { return ring }
             
-            var simpleRing = simplifyDouglasPeucker(ring, tolerance: tolerance);
-            //remove 1 percent of tolerance until enough points to make a triangle
-            while (!checkValidity(ring: simpleRing)) {
-                tolerance -= tolerance * 0.01;
-                simpleRing = simplifyDouglasPeucker(ring, tolerance: tolerance)
-            }
+            var tolerance = tolerance
+            var simpleRing: [LocationCoordinate2D]
+            repeat {
+                simpleRing = Simplifier.simplify(ring, tolerance: tolerance, highestQuality: highestQuality)
+                
+                //remove 1 percent of tolerance until enough points to make a triangle
+                tolerance -= tolerance * 0.01
+
+            } while !checkValidity(ring: simpleRing)
 
             if (
                 simpleRing[simpleRing.count - 1].latitude != simpleRing[0].latitude ||
                 simpleRing[simpleRing.count - 1].longitude != simpleRing[0].longitude
             ) {
-                simpleRing.append(simpleRing[0]);
+                simpleRing.append(simpleRing[0])
             }
 
-            return simpleRing;
-        })
-    }
-
-    private mutating func simplified(radialTolerance: Double) {
-        coordinates = coordinates.map{ ring in
-            guard ring.count > 2 else { return ring }
-
-
-            var prevCoordinate = ring[0]
-            var newCoordinates = [prevCoordinate]
-            var coordinate = ring[1]
-
-            for index in 1 ..< ring.count {
-                coordinate = ring[index]
-
-                if squareDistance(from: coordinate, to: prevCoordinate) > radialTolerance {
-                    newCoordinates.append(coordinate)
-                    prevCoordinate = coordinate
-                }
-            }
-
-            if prevCoordinate != coordinate {
-                newCoordinates.append(coordinate)
-            }
-
-            return newCoordinates
+            return simpleRing
         }
-    }
-
-    private func squareDistance(from origin: LocationCoordinate2D, to destination: LocationCoordinate2D) -> Double {
-        let dx = origin.longitude - destination.longitude
-        let dy = origin.latitude - destination.latitude
-        return dx * dx + dy * dy
-    }
-
-    private func squareSegmentDistance(_ coordinate: LocationCoordinate2D, segmentStart: LocationCoordinate2D, segmentEnd: LocationCoordinate2D) -> LocationDistance {
-        var x = segmentStart.latitude
-        var y = segmentStart.longitude
-        var dx = segmentEnd.latitude - x
-        var dy = segmentEnd.longitude - y
-
-        if dx != 0 || dy != 0 {
-            let t = ((segmentStart.latitude - x) * dx + (coordinate.longitude - y) * dy) / (dx * dx + dy * dy)
-            if t > 1 {
-                x = segmentEnd.latitude
-                y = segmentEnd.longitude
-            } else if t > 0 {
-                x += dx * t
-                y += dy * t
-            }
-        }
-
-        dx = coordinate.latitude - x
-        dy = coordinate.longitude - y
-
-        return dx * dx + dy * dy
-    }
-
-    private func simplifyDouglasPeuckerStep(_ coordinates: [LocationCoordinate2D], first: Int, last: Int, tolerance: Double, simplified: inout [LocationCoordinate2D]) {
-        var maxSquareDistance = tolerance
-        var index = 0
-
-        for i in first + 1 ..< last {
-            let squareDistance = squareSegmentDistance(coordinates[i], segmentStart: coordinates[first], segmentEnd: coordinates[last])
-
-            if squareDistance > maxSquareDistance {
-                index = i
-                maxSquareDistance = squareDistance
-            }
-        }
-
-        if maxSquareDistance > tolerance {
-            if index - first > 1 {
-                simplifyDouglasPeuckerStep(coordinates, first: first, last: index, tolerance: tolerance, simplified: &simplified)
-            }
-            simplified.append(coordinates[index])
-            if last - index > 1 {
-                simplifyDouglasPeuckerStep(coordinates, first: index, last: last, tolerance: tolerance, simplified: &simplified)
-            }
-        }
-    }
-
-    private func simplifyDouglasPeucker(_ coordinates: [LocationCoordinate2D], tolerance: Double) -> [LocationCoordinate2D] {
-        if coordinates.count <= 2 {
-            return coordinates
-        }
-
-        let lastPoint = coordinates.count - 1
-        var result = [coordinates[0]]
-        simplifyDouglasPeuckerStep(coordinates, first: 0, last: lastPoint, tolerance: tolerance, simplified: &result)
-        result.append(coordinates[lastPoint])
-        return result
     }
 
     /// Checks if a ring has at least 3 coordinates. Will return false for a 3 coordinate ring
