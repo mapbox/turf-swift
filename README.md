@@ -14,7 +14,7 @@ A [spatial analysis](http://en.wikipedia.org/wiki/Spatial_analysis) library writ
 
 ## Requirements
 
-Turf requires Xcode 9.x and supports the following minimum deployment targets:
+Turf requires Xcode 12.0 or above and supports the following minimum deployment targets:
 
 * iOS 10.0 and above
 * macOS 10.12 (Sierra) and above
