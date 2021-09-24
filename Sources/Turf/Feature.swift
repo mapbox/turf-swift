@@ -11,10 +11,10 @@ public struct Feature: GeoJSONObject {
     public var geometry: Geometry
     
     private enum CodingKeys: String, CodingKey {
-            case type
-            case geometry
-            case properties
-            case identifier = "id"
+        case type
+        case geometry
+        case properties
+        case identifier = "id"
     }
     
     public init(geometry: Geometry) {

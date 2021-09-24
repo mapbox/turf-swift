@@ -71,53 +71,53 @@ public enum Geometry {
 
 extension Geometry: Codable {
     public init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-            let type = try container.decode(GeometryType.self, forKey: .type)
-            
-            switch type {
-            case .Point:
-                let coordinates = try container.decode(LocationCoordinate2DCodable.self, forKey: .coordinates).decodedCoordinates
-                self = .point(.init(coordinates))
-            case .LineString:
-                let coordinates = try container.decode([LocationCoordinate2DCodable].self, forKey: .coordinates).decodedCoordinates
-                self = .lineString(.init(coordinates))
-            case .Polygon:
-                let coordinates = try container.decode([[LocationCoordinate2DCodable]].self, forKey: .coordinates).decodedCoordinates
-                self = .polygon(.init(coordinates))
-            case .MultiPoint:
-                let coordinates = try container.decode([LocationCoordinate2DCodable].self, forKey: .coordinates).decodedCoordinates
-                self = .multiPoint(.init(coordinates))
-            case .MultiLineString:
-                let coordinates = try container.decode([[LocationCoordinate2DCodable]].self, forKey: .coordinates).decodedCoordinates
-                self = .multiLineString(.init(coordinates))
-            case .MultiPolygon:
-                let coordinates = try container.decode([[[LocationCoordinate2DCodable]]].self, forKey: .coordinates).decodedCoordinates
-                self = .multiPolygon(.init(coordinates))
-            case .GeometryCollection:
-                let geometries = try container.decode([Geometry].self, forKey: .geometries)
-                self = .geometryCollection(.init(geometries: geometries))
-            }
-        }
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let type = try container.decode(GeometryType.self, forKey: .type)
         
-        public func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(type.rawValue, forKey: .type)
-            
-            switch self {
-            case .point(let representation):
-                try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
-            case .lineString(let representation):
-                try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
-            case .polygon(let representation):
-                try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
-            case .multiPoint(let representation):
-                try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
-            case .multiLineString(let representation):
-                try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
-            case .multiPolygon(let representation):
-                try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
-            case .geometryCollection(let representation):
-                try container.encode(representation.geometries, forKey: .geometries)
-            }
+        switch type {
+        case .Point:
+            let coordinates = try container.decode(LocationCoordinate2DCodable.self, forKey: .coordinates).decodedCoordinates
+            self = .point(.init(coordinates))
+        case .LineString:
+            let coordinates = try container.decode([LocationCoordinate2DCodable].self, forKey: .coordinates).decodedCoordinates
+            self = .lineString(.init(coordinates))
+        case .Polygon:
+            let coordinates = try container.decode([[LocationCoordinate2DCodable]].self, forKey: .coordinates).decodedCoordinates
+            self = .polygon(.init(coordinates))
+        case .MultiPoint:
+            let coordinates = try container.decode([LocationCoordinate2DCodable].self, forKey: .coordinates).decodedCoordinates
+            self = .multiPoint(.init(coordinates))
+        case .MultiLineString:
+            let coordinates = try container.decode([[LocationCoordinate2DCodable]].self, forKey: .coordinates).decodedCoordinates
+            self = .multiLineString(.init(coordinates))
+        case .MultiPolygon:
+            let coordinates = try container.decode([[[LocationCoordinate2DCodable]]].self, forKey: .coordinates).decodedCoordinates
+            self = .multiPolygon(.init(coordinates))
+        case .GeometryCollection:
+            let geometries = try container.decode([Geometry].self, forKey: .geometries)
+            self = .geometryCollection(.init(geometries: geometries))
         }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(type.rawValue, forKey: .type)
+        
+        switch self {
+        case .point(let representation):
+            try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
+        case .lineString(let representation):
+            try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
+        case .polygon(let representation):
+            try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
+        case .multiPoint(let representation):
+            try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
+        case .multiLineString(let representation):
+            try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
+        case .multiPolygon(let representation):
+            try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
+        case .geometryCollection(let representation):
+            try container.encode(representation.geometries, forKey: .geometries)
+        }
+    }
 }
