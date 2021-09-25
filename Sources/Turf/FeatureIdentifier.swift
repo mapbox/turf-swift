@@ -3,15 +3,6 @@ import Foundation
 public enum Number: Equatable {
     case int(Int)
     case double(Double)
-    
-    public var value: Any? {
-        switch self {
-        case .int(let value):
-            return value
-        case .double(let value):
-            return value
-        }
-    }
 }
 
 extension Number: Codable {
@@ -42,15 +33,6 @@ extension Number: Codable {
 public enum FeatureIdentifier {
     case string(String)
     case number(Number)
-    
-    public var value: Any? {
-        switch self {
-        case .number(let value):
-            return value
-        case .string(let value):
-            return value
-        }
-    }
 }
 
 extension FeatureIdentifier: Codable {

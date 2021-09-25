@@ -10,7 +10,6 @@ class LineStringTests: XCTestCase {
         let data = try! Fixture.geojsonData(from: "simple-line")!
         let geojson = try! GeoJSON.parse(Feature.self, from: data)
         
-        XCTAssert(geojson.geometry.type == .LineString)
         guard case let .lineString(lineStringCoordinates) = geojson.geometry else {
             XCTFail()
             return
@@ -21,7 +20,11 @@ class LineStringTests: XCTestCase {
         let last = LocationCoordinate2D(latitude: 10, longitude: 0)
         XCTAssert(lineStringCoordinates.coordinates.first == first)
         XCTAssert(lineStringCoordinates.coordinates.last == last)
-        XCTAssert(geojson.identifier!.value as! String == "1")
+        if case let .string(string) = geojson.identifier {
+            XCTAssertEqual(string, "1")
+        } else {
+            XCTFail()
+        }
         
         let encodedData = try! JSONEncoder().encode(geojson)
         let decoded = try! GeoJSON.parse(Feature.self, from: encodedData)
@@ -31,7 +34,12 @@ class LineStringTests: XCTestCase {
         }
         
         XCTAssertEqual(lineStringCoordinates, decodedLineStringCoordinates)
-        XCTAssertEqual(geojson.identifier!.value as! String, decoded.identifier!.value! as! String)
+        if case let .string(string) = geojson.identifier,
+           case let .string(decodedString) = decoded.identifier {
+            XCTAssertEqual(string, decodedString)
+        } else {
+            XCTFail()
+        }
     }
     
     func testClosestCoordinate() {

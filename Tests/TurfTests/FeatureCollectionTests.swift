@@ -10,10 +10,10 @@ class FeatureCollectionTests: XCTestCase {
         let data = try! Fixture.geojsonData(from: "featurecollection")!
         let geojson = try! GeoJSON.parse(FeatureCollection.self, from: data)
         
-        XCTAssert(geojson.features[0].geometry.type == .LineString)
-        XCTAssert(geojson.features[1].geometry.type == .Polygon)
-        XCTAssert(geojson.features[2].geometry.type == .Polygon)
-        XCTAssert(geojson.features[3].geometry.type == .Point)
+        if case .lineString = geojson.features[0].geometry {} else { XCTFail() }
+        if case .polygon = geojson.features[1].geometry {} else { XCTFail() }
+        if case .polygon = geojson.features[2].geometry {} else { XCTFail() }
+        if case .point = geojson.features[3].geometry {} else { XCTFail() }
         
         let lineStringFeature = geojson.features[0]
         guard case let .lineString(lineStringCoordinates) = lineStringFeature.geometry else {
@@ -47,10 +47,10 @@ class FeatureCollectionTests: XCTestCase {
         let encodedData = try! JSONEncoder().encode(geojson)
         let decoded = try! GeoJSON.parse(FeatureCollection.self, from: encodedData)
         
-        XCTAssert(decoded.features[0].geometry.type == .LineString)
-        XCTAssert(decoded.features[1].geometry.type == .Polygon)
-        XCTAssert(decoded.features[2].geometry.type == .Polygon)
-        XCTAssert(decoded.features[3].geometry.type == .Point)
+        if case .lineString = decoded.features[0].geometry {} else { XCTFail() }
+        if case .polygon = decoded.features[1].geometry {} else { XCTFail() }
+        if case .polygon = decoded.features[2].geometry {} else { XCTFail() }
+        if case .point = decoded.features[3].geometry {} else { XCTFail() }
         
         let decodedLineStringFeature = decoded.features[0]
         guard case let .lineString(decodedLineStringCoordinates) = decodedLineStringFeature.geometry else {

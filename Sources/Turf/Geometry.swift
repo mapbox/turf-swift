@@ -3,17 +3,6 @@ import Foundation
 import CoreLocation
 #endif
 
-
-public enum GeometryType: String, Codable, CaseIterable {
-    case Point
-    case LineString
-    case Polygon
-    case MultiPoint
-    case MultiLineString
-    case MultiPolygon
-    case GeometryCollection
-}
-
 public enum Geometry {
     private enum CodingKeys: String, CodingKey {
         case type
@@ -29,7 +18,17 @@ public enum Geometry {
     case multiPolygon(_ geometry: MultiPolygon)
     case geometryCollection(_ geometry: GeometryCollection)
     
-    public var type: GeometryType {
+    enum GeometryType: String, Codable, CaseIterable {
+        case Point
+        case LineString
+        case Polygon
+        case MultiPoint
+        case MultiLineString
+        case MultiPolygon
+        case GeometryCollection
+    }
+    
+    var type: GeometryType {
         switch self {
         case .point(_):
             return .Point
@@ -45,25 +44,6 @@ public enum Geometry {
             return .MultiPolygon
         case .geometryCollection(_):
             return .GeometryCollection
-        }
-    }
-    
-    public var value: Any? {
-        switch self {
-        case .point(let value):
-            return value
-        case .lineString(let value):
-            return value
-        case .polygon(let value):
-            return value
-        case .multiPoint(let value):
-            return value
-        case .multiLineString(let value):
-            return value
-        case .multiPolygon(let value):
-            return value
-        case .geometryCollection(let value):
-            return value
         }
     }
 }

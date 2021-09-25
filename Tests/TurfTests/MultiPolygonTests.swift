@@ -16,7 +16,6 @@ class MultiPolygonTests: XCTestCase {
         
         let geojson = try! GeoJSON.parse(Feature.self, from: data)
         
-        XCTAssert(geojson.geometry.type == .MultiPolygon)
         guard case let .multiPolygon(multipolygonCoordinates) = geojson.geometry else {
             XCTFail()
             return
@@ -87,7 +86,6 @@ class MultiPolygonTests: XCTestCase {
             return
         }
         
-        XCTAssert(decodedCustomMultiPolygon.geometry.type == .MultiPolygon)
         guard case let .multiPolygon(decodedMultipolygonCoordinates) = decodedCustomMultiPolygon.geometry else {
             XCTFail()
             return

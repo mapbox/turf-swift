@@ -16,15 +16,28 @@ class PointTests: XCTestCase {
             return
         }
         XCTAssertEqual(point.coordinates, coordinate)
-        XCTAssert((geojson.identifier!.value as! Number).value! as! Int == 1)
+        if case let .number(.int(int)) = geojson.identifier {
+            XCTAssertEqual(int, 1)
+        } else {
+            XCTFail()
+        }
 
         let encodedData = try! JSONEncoder().encode(geojson)
         let decoded = try! GeoJSON.parse(Feature.self, from: encodedData)
-
-        XCTAssertEqual(geojson.geometry.value as! Point,
-                       decoded.geometry.value as! Point)
-        XCTAssertEqual(geojson.identifier!.value as! Number,
-                       decoded.identifier!.value as! Number)
+        
+        if case let .point(point) = geojson.geometry,
+           case let .point(decodedPoint) = decoded.geometry {
+            XCTAssertEqual(point, decodedPoint)
+        } else {
+            XCTFail()
+        }
+        
+        if case let .number(number) = geojson.identifier,
+           case let .number(decodedNumber) = decoded.identifier {
+            XCTAssertEqual(number, decodedNumber)
+        } else {
+            XCTFail()
+        }
     }
     
     func testUnkownPointFeature() {
@@ -32,6 +45,6 @@ class PointTests: XCTestCase {
         let geojson = try! GeoJSON.parse(data)
         
         XCTAssert(geojson.decoded is Feature)
-        XCTAssert(geojson.decodedFeature?.geometry.type == .Point)
+        guard case .point = geojson.decodedFeature?.geometry else { return XCTFail() }
     }
 }

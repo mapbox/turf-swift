@@ -13,7 +13,6 @@ class MultiLineStringTests: XCTestCase {
         
         let geojson = try! GeoJSON.parse(Feature.self, from: data)
         
-        XCTAssert(geojson.geometry.type == .MultiLineString)
         guard case let .multiLineString(multiLineStringCoordinates) = geojson.geometry else {
             XCTFail()
             return

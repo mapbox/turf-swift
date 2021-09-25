@@ -22,15 +22,11 @@ class GeometryCollectionTests: XCTestCase {
             return
         }
         
-        XCTAssert(geometryCollectionFeature.geometry.type == .GeometryCollection)
-        XCTAssert(geometryCollectionFeature.geometry.value is GeometryCollection)
-        
         guard case let .geometryCollection(geometries) = geometryCollectionFeature.geometry else {
             XCTFail()
             return
         }
         
-        XCTAssert(geometries.geometries[2].type == .MultiPolygon)
         guard case let .multiPolygon(decodedMultiPolygonCoordinate) = geometries.geometries[2] else {
             XCTFail()
             return
@@ -56,15 +52,11 @@ class GeometryCollectionTests: XCTestCase {
             return
         }
         
-        XCTAssert(geometryCollectionFeature.geometry.type == .GeometryCollection)
-        XCTAssert(geometryCollectionFeature.geometry.value is GeometryCollection)
-        
         guard case let .geometryCollection(geometries) = geometryCollectionFeature.geometry else {
             XCTFail()
             return
         }
         
-        XCTAssert(geometries.geometries[2].type == .MultiPolygon)
         guard case let .multiPolygon(decodedMultiPolygonCoordinate) = geometries.geometries[2] else {
             XCTFail()
             return

@@ -12,8 +12,7 @@ class MultiPointTests: XCTestCase {
         let lastCoordinate = LocationCoordinate2D(latitude: 24.926294766395593, longitude: 17.75390625)
         
         let geojson = try! GeoJSON.parse(Feature.self, from: data)
-                
-        XCTAssert(geojson.geometry.type == .MultiPoint)
+        
         guard case let .multiPoint(multipointCoordinates) = geojson.geometry else {
             XCTFail()
             return
