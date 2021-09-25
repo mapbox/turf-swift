@@ -166,6 +166,9 @@
 		DA9424A32010296300CDB4E6 /* Turf.h in Headers */ = {isa = PBXBuildFile; fileRef = 3547ECEF200C3C78009DA062 /* Turf.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA9424A42010298300CDB4E6 /* CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3547ECF0200C3C78009DA062 /* CoreLocation.swift */; };
 		DA9424A52010298300CDB4E6 /* Turf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3547ECF1200C3C78009DA062 /* Turf.swift */; };
+		DA972D7A26FEB9DC009F5615 /* simplify in Resources */ = {isa = PBXBuildFile; fileRef = DA972D7926FEB9DC009F5615 /* simplify */; };
+		DA972D7B26FEB9DD009F5615 /* simplify in Resources */ = {isa = PBXBuildFile; fileRef = DA972D7926FEB9DC009F5615 /* simplify */; };
+		DA972D7C26FEB9DD009F5615 /* simplify in Resources */ = {isa = PBXBuildFile; fileRef = DA972D7926FEB9DC009F5615 /* simplify */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -248,6 +251,7 @@
 		DA39EB6520101F98004D87F7 /* Turf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Turf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA39EB6D20101F99004D87F7 /* TurfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA94249B2010283900CDB4E6 /* Turf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Turf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA972D7926FEB9DC009F5615 /* simplify */ = {isa = PBXFileReference; lastKnownFileType = folder; path = simplify; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -369,6 +373,7 @@
 		3547ECFA200C3C82009DA062 /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
+				DA972D7926FEB9DC009F5615 /* simplify */,
 				35166859202EFE680032A97E /* multiline.geojson */,
 				3516685D202EFF130032A97E /* multipolygon.geojson */,
 				3502F7A6201F616E00399EFE /* simple-line.geojson */,
@@ -665,6 +670,7 @@
 			files = (
 				C46809D821249E8F00BAD5E1 /* featurecollection-no-properties.geojson in Resources */,
 				3534C3BB200C419200F93581 /* polygon.geojson in Resources */,
+				DA972D7B26FEB9DD009F5615 /* simplify in Resources */,
 				3516685B202EFE690032A97E /* multiline.geojson in Resources */,
 				3502F7A8201F616E00399EFE /* simple-line.geojson in Resources */,
 				35166857202E6CEE0032A97E /* multipoint.geojson in Resources */,
@@ -689,6 +695,7 @@
 			files = (
 				C46809D721241B5100BAD5E1 /* featurecollection-no-properties.geojson in Resources */,
 				3534C3B9200C419100F93581 /* polygon.geojson in Resources */,
+				DA972D7A26FEB9DC009F5615 /* simplify in Resources */,
 				3516685A202EFE690032A97E /* multiline.geojson in Resources */,
 				3502F7A7201F616E00399EFE /* simple-line.geojson in Resources */,
 				35166856202E6CEE0032A97E /* multipoint.geojson in Resources */,
@@ -713,6 +720,7 @@
 			files = (
 				C46809D921249E9700BAD5E1 /* featurecollection-no-properties.geojson in Resources */,
 				DA39EB82201024A3004D87F7 /* polygon.geojson in Resources */,
+				DA972D7C26FEB9DD009F5615 /* simplify in Resources */,
 				3516685C202EFE690032A97E /* multiline.geojson in Resources */,
 				3502F7A9201F616E00399EFE /* simple-line.geojson in Resources */,
 				35166858202E6CEE0032A97E /* multipoint.geojson in Resources */,
