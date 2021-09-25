@@ -5,7 +5,7 @@ import CoreLocation
 
 public enum Geometry {
     private enum CodingKeys: String, CodingKey {
-        case type
+        case kind = "type"
         case coordinates
         case geometries
     }
@@ -18,7 +18,7 @@ public enum Geometry {
     case multiPolygon(_ geometry: MultiPolygon)
     case geometryCollection(_ geometry: GeometryCollection)
     
-    enum GeometryType: String, Codable, CaseIterable {
+    enum Kind: String, Codable, CaseIterable {
         case Point
         case LineString
         case Polygon
@@ -28,7 +28,7 @@ public enum Geometry {
         case GeometryCollection
     }
     
-    var type: GeometryType {
+    var kind: Kind {
         switch self {
         case .point(_):
             return .Point
@@ -52,9 +52,9 @@ public enum Geometry {
 extension Geometry: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let type = try container.decode(GeometryType.self, forKey: .type)
+        let kind = try container.decode(Kind.self, forKey: .kind)
         
-        switch type {
+        switch kind {
         case .Point:
             let coordinates = try container.decode(LocationCoordinate2DCodable.self, forKey: .coordinates).decodedCoordinates
             self = .point(.init(coordinates))
@@ -81,7 +81,7 @@ extension Geometry: Codable {
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(type.rawValue, forKey: .type)
+        try container.encode(kind.rawValue, forKey: .kind)
         
         switch self {
         case .point(let representation):
