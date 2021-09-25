@@ -8,7 +8,7 @@ class LineStringTests: XCTestCase {
         
     func testLineStringFeature() {
         let data = try! Fixture.geojsonData(from: "simple-line")!
-        let geojson = try! GeoJSON.parse(Feature.self, from: data)
+        let geojson = try! JSONDecoder().decode(Feature.self, from: data)
         
         guard case let .lineString(lineStringCoordinates) = geojson.geometry else {
             XCTFail()
@@ -27,7 +27,7 @@ class LineStringTests: XCTestCase {
         }
         
         let encodedData = try! JSONEncoder().encode(geojson)
-        let decoded = try! GeoJSON.parse(Feature.self, from: encodedData)
+        let decoded = try! JSONDecoder().decode(Feature.self, from: encodedData)
         guard case let .lineString(decodedLineStringCoordinates) = decoded.geometry else {
             XCTFail()
             return

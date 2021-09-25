@@ -8,7 +8,7 @@ class PolygonTests: XCTestCase {
     
     func testPolygonFeature() {
         let data = try! Fixture.geojsonData(from: "polygon")!
-        let geojson = try! GeoJSON.parse(Feature.self, from: data)
+        let geojson = try! JSONDecoder().decode(Feature.self, from: data)
         
         let firstCoordinate = LocationCoordinate2D(latitude: 37.00255267215955, longitude: -109.05029296875)
         let lastCoordinate = LocationCoordinate2D(latitude: 40.6306300839918, longitude: -108.56689453125)
@@ -29,7 +29,7 @@ class PolygonTests: XCTestCase {
         XCTAssert(polygon.innerRings.first?.coordinates.count == 5)
         
         let encodedData = try! JSONEncoder().encode(geojson)
-        let decoded = try! GeoJSON.parse(Feature.self, from: encodedData)
+        let decoded = try! JSONDecoder().decode(Feature.self, from: encodedData)
         guard case let .polygon(decodedPolygon) = decoded.geometry else {
                    XCTFail()
                    return

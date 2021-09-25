@@ -3,6 +3,9 @@ import Foundation
 import CoreLocation
 #endif
 
+/**
+ A [Geometry object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1) represents points, curves, and surfaces in coordinate space.
+ */
 public enum Geometry {
     private enum CodingKeys: String, CodingKey {
         case kind = "type"

@@ -8,32 +8,33 @@ class PointTests: XCTestCase {
 
     func testPointFeature() {
         let data = try! Fixture.geojsonData(from: "point")!
-        let geojson = try! GeoJSON.parse(Feature.self, from: data)
+        let geojson = try! JSONDecoder().decode(GeoJSONObject.self, from: data)
         let coordinate = LocationCoordinate2D(latitude: 26.194876675795218, longitude: 14.765625)
 
-        guard case let .point(point) = geojson.geometry else {
+        guard case let .feature(feature) = geojson,
+              case let .point(point) = feature.geometry else {
             XCTFail()
             return
         }
         XCTAssertEqual(point.coordinates, coordinate)
-        if case let .number(.int(int)) = geojson.identifier {
+        if case let .number(.int(int)) = feature.identifier {
             XCTAssertEqual(int, 1)
         } else {
             XCTFail()
         }
 
         let encodedData = try! JSONEncoder().encode(geojson)
-        let decoded = try! GeoJSON.parse(Feature.self, from: encodedData)
+        let decoded = try! JSONDecoder().decode(GeoJSONObject.self, from: encodedData)
         
-        if case let .point(point) = geojson.geometry,
-           case let .point(decodedPoint) = decoded.geometry {
-            XCTAssertEqual(point, decodedPoint)
-        } else {
-            XCTFail()
+        guard case let .feature(decodedFeature) = decoded,
+              case let .point(decodedPoint) = decodedFeature.geometry else {
+            return XCTFail()
         }
         
-        if case let .number(number) = geojson.identifier,
-           case let .number(decodedNumber) = decoded.identifier {
+        XCTAssertEqual(point, decodedPoint)
+        
+        if case let .number(number) = feature.identifier,
+           case let .number(decodedNumber) = decodedFeature.identifier {
             XCTAssertEqual(number, decodedNumber)
         } else {
             XCTFail()
@@ -42,9 +43,22 @@ class PointTests: XCTestCase {
     
     func testUnkownPointFeature() {
         let data = try! Fixture.geojsonData(from: "point")!
-        let geojson = try! GeoJSON.parse(data)
+        let geojson = try! JSONDecoder().decode(GeoJSONObject.self, from: data)
         
-        XCTAssert(geojson.decoded is Feature)
-        guard case .point = geojson.decodedFeature?.geometry else { return XCTFail() }
+        guard case let .feature(feature) = geojson,
+              case let .point(point) = feature.geometry else {
+            return XCTFail()
+        }
+        
+        var encodedData: Data?
+        XCTAssertNoThrow(encodedData = try JSONEncoder().encode(GeoJSONObject.geometry(feature.geometry)))
+        XCTAssertNotNil(encodedData)
+        
+        var decoded: GeoJSONObject?
+        XCTAssertNoThrow(decoded = try JSONDecoder().decode(GeoJSONObject.self, from: encodedData!))
+        XCTAssertNotNil(decoded)
+        
+        guard case let .geometry(.point(decodedPoint)) = decoded else { return XCTFail() }
+        XCTAssertEqual(point, decodedPoint)
     }
 }

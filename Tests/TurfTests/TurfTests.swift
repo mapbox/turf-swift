@@ -163,10 +163,10 @@ class TurfTests: XCTestCase {
     {
         try Fixture.fixtures(folder: "simplify") { name, inputData, outputData in
             do {
-                let input = try JSONDecoder().decode(GeoJSON.self, from: inputData)
-                let output = try JSONDecoder().decode(GeoJSON.self, from: outputData)
+                let input = try JSONDecoder().decode(GeoJSONObject.self, from: inputData)
+                let output = try JSONDecoder().decode(GeoJSONObject.self, from: outputData)
                 
-                let properties = input.decodedFeature?.properties
+                let properties = input.properties
                 let tolerance = (properties?["tolerance"] as? NSNumber)?.doubleValue ?? 0.01
                 let highQuality = (properties?["highQuality"] as? NSNumber)?.boolValue ?? false
                 
@@ -194,14 +194,26 @@ class TurfTests: XCTestCase {
     }
 }
 
-extension GeoJSON {
+extension GeoJSONObject {
+    var properties: [String: Any?]? {
+        switch self {
+        case .geometry:
+            return nil
+        case .feature(let feature):
+            return feature.properties
+        case .featureCollection(let featureCollection):
+            return featureCollection.properties
+        }
+    }
+    
     var features: [Feature] {
-        if let feature = self.decodedFeature {
-            return [feature]
-        } else if let featureCollection = self.decodedFeatureCollection {
-            return featureCollection.features
-        } else {
+        switch self {
+        case .geometry:
             return []
+        case .feature(let feature):
+            return [feature]
+        case .featureCollection(let featureCollection):
+            return featureCollection.features
         }
     }
 }
