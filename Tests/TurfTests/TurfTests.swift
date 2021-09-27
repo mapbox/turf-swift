@@ -166,11 +166,11 @@ class TurfTests: XCTestCase {
                 let input = try JSONDecoder().decode(GeoJSONObject.self, from: inputData)
                 let output = try JSONDecoder().decode(GeoJSONObject.self, from: outputData)
                 
-                let properties = input.properties
-                let tolerance = (properties?["tolerance"] as? NSNumber)?.doubleValue ?? 0.01
-                let highQuality = (properties?["highQuality"] as? NSNumber)?.boolValue ?? false
-                
                 for (input, output) in zip(input.features, output.features) {
+                    let properties = input.properties
+                    let tolerance = (properties?["tolerance"] as? NSNumber)?.doubleValue ?? 0.01
+                    let highQuality = (properties?["highQuality"] as? NSNumber)?.boolValue ?? false
+                    
                     switch (input.geometry, output.geometry) {
                     case (.point, .point), (.multiPoint, .multiPoint):
                         break // nothing to simplify
@@ -195,17 +195,6 @@ class TurfTests: XCTestCase {
 }
 
 extension GeoJSONObject {
-    var properties: [String: Any?]? {
-        switch self {
-        case .geometry:
-            return nil
-        case .feature(let feature):
-            return feature.properties
-        case .featureCollection(let featureCollection):
-            return featureCollection.properties
-        }
-    }
-    
     var features: [Feature] {
         switch self {
         case .geometry:

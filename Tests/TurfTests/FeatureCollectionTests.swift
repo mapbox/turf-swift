@@ -134,6 +134,8 @@ class FeatureCollectionTests: XCTestCase {
         
         guard case let .featureCollection(featureCollection) = geojson else { return XCTFail() }
         XCTAssertEqual(featureCollection.features.count, 4)
-        XCTAssertEqual(featureCollection.properties?["tolerance"] as? Double, 0.01)
+        for feature in featureCollection.features {
+            XCTAssertEqual(feature.properties?["tolerance"] as? Double, 0.01)
+        }
     }
 }

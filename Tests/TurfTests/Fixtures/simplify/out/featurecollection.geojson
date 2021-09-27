@@ -1,13 +1,11 @@
 {
   "type": "FeatureCollection",
-  "properties": {
-    "tolerance": 0.01
-  },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "id": 1
+        "id": 1,
+        "tolerance": 0.01
       },
       "geometry": {
         "type": "LineString",
@@ -20,7 +18,8 @@
     {
       "type": "Feature",
       "properties": {
-        "id": 2
+        "id": 2,
+        "tolerance": 0.01
       },
       "geometry": {
         "type": "Polygon",
@@ -37,7 +36,8 @@
     {
       "type": "Feature",
       "properties": {
-        "id": 3
+        "id": 3,
+        "tolerance": 0.01
       },
       "geometry": {
         "type": "Polygon",
@@ -65,7 +65,8 @@
     {
       "type": "Feature",
       "properties": {
-        "id": 4
+        "id": 4,
+        "tolerance": 0.01
       },
       "geometry": {
         "type": "Point",
