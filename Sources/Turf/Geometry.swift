@@ -20,8 +20,6 @@ public enum Geometry {
 extension Geometry: Codable {
     private enum CodingKeys: String, CodingKey {
         case kind = "type"
-        case coordinates
-        case geometries
     }
     
     enum Kind: String, Codable, CaseIterable {
