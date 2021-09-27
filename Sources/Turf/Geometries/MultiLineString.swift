@@ -15,3 +15,27 @@ public struct MultiLineString: Equatable {
         self.coordinates = polygon.coordinates
     }
 }
+
+extension MultiLineString: Codable {
+    enum CodingKeys: String, CodingKey {
+        case kind = "type"
+        case coordinates
+    }
+    
+    enum Kind: String, Codable {
+        case MultiLineString
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        _ = try container.decode(Kind.self, forKey: .kind)
+        let coordinates = try container.decode([[LocationCoordinate2DCodable]].self, forKey: .coordinates).decodedCoordinates
+        self = .init(coordinates)
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(Kind.MultiLineString, forKey: .kind)
+        try container.encode(coordinates.codableCoordinates, forKey: .coordinates)
+    }
+}
