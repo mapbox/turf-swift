@@ -3,7 +3,9 @@ import Foundation
 import CoreLocation
 #endif
 
-public struct BoundingBox: Codable {
+public struct BoundingBox {
+    public var southWest: LocationCoordinate2D
+    public var northEast: LocationCoordinate2D
     
     public init?(from coordinates: [LocationCoordinate2D]?) {
         guard coordinates?.count ?? 0 > 0 else {
@@ -40,9 +42,18 @@ public struct BoundingBox: Codable {
                 && northEast.longitude >= coordinate.longitude
         }
     }
-    
-    // MARK: - Codable
-    
+}
+
+extension BoundingBox: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(southWest.longitude)
+        hasher.combine(southWest.latitude)
+        hasher.combine(northEast.longitude)
+        hasher.combine(northEast.latitude)
+    }
+}
+
+extension BoundingBox: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
         try container.encode(southWest.codableCoordinates)
@@ -54,9 +65,4 @@ public struct BoundingBox: Codable {
         southWest = try container.decode(LocationCoordinate2DCodable.self).decodedCoordinates
         northEast = try container.decode(LocationCoordinate2DCodable.self).decodedCoordinates
     }
-    
-    // MARK: - Properties
-    
-    public var southWest: LocationCoordinate2D
-    public var northEast: LocationCoordinate2D
 }
