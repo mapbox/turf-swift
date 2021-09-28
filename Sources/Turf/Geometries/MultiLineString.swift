@@ -3,15 +3,52 @@ import Foundation
 import CoreLocation
 #endif
 
-
+/**
+ A [MultiLineString geometry](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.5) is a collection of `LineString` geometries that are disconnected but related.
+ */
 public struct MultiLineString: Equatable {
+    /// The positions at which the multi–line string is located. Each nested array corresponds to one line string.
     public var coordinates: [[LocationCoordinate2D]]
     
+    /**
+     Initializes a multi–line string defined by the given positions.
+     
+     - parameter coordinates: The positions at which the multi–line string is located. Each nested array corresponds to one line string.
+     */
     public init(_ coordinates: [[LocationCoordinate2D]]) {
         self.coordinates = coordinates
     }
     
+    /**
+     Initializes a multi–line string coincident to the given polygon’s linear rings.
+     
+     - parameter polygon: The polygon whose linear rings are coincident to the multi–line string.
+     */
     public init(_ polygon: Polygon) {
         self.coordinates = polygon.coordinates
+    }
+}
+
+extension MultiLineString: Codable {
+    enum CodingKeys: String, CodingKey {
+        case kind = "type"
+        case coordinates
+    }
+    
+    enum Kind: String, Codable {
+        case MultiLineString
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        _ = try container.decode(Kind.self, forKey: .kind)
+        let coordinates = try container.decode([[LocationCoordinate2DCodable]].self, forKey: .coordinates).decodedCoordinates
+        self = .init(coordinates)
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(Kind.MultiLineString, forKey: .kind)
+        try container.encode(coordinates.codableCoordinates, forKey: .coordinates)
     }
 }

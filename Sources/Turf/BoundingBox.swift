@@ -3,8 +3,21 @@ import Foundation
 import CoreLocation
 #endif
 
-public struct BoundingBox: Codable {
+/**
+ A [bounding box](https://datatracker.ietf.org/doc/html/rfc7946#section-5) indicates the extremes of a `GeoJSONObject` along the x- and y-axes (longitude and latitude, respectively).
+ */
+public struct BoundingBox {
+    /// The southwesternmost position contained in the bounding box.
+    public var southWest: LocationCoordinate2D
     
+    /// The northeasternmost position contained in the bounding box.
+    public var northEast: LocationCoordinate2D
+    
+    /**
+     Initializes the smallest bounding box that contains all the given coordinates.
+     
+     - parameter coordinates: The coordinates to fit in the bounding box.
+     */
     public init?(from coordinates: [LocationCoordinate2D]?) {
         guard coordinates?.count ?? 0 > 0 else {
             return nil
@@ -22,11 +35,24 @@ public struct BoundingBox: Codable {
         northEast = LocationCoordinate2D(latitude: maxLat, longitude: maxLon)
     }
     
+    /**
+     Initializes a bounding box defined by its southwesternmost and northeasternmost positions.
+     
+     - parameter southWest: The southwesternmost position contained in the bounding box.
+     - parameter northEast: The northeasternmost position contained in the bounding box.
+     */
     public init(southWest: LocationCoordinate2D, northEast: LocationCoordinate2D) {
         self.southWest = southWest
         self.northEast = northEast
     }
     
+    /**
+     Returns a Boolean value indicating whether the bounding box contains the given position.
+     
+     - parameter coordinate: The coordinate that may or may not be contained by the bounding box.
+     - parameter ignoreBoundary: A Boolean value indicating whether a position lying exactly on the edge of the bounding box should be considered to be contained in the bounding box.
+     - returns: `true` if the bounding box contains the position; `false` otherwise.
+     */
     public func contains(_ coordinate: LocationCoordinate2D, ignoreBoundary: Bool = true) -> Bool {
         if ignoreBoundary {
             return southWest.latitude < coordinate.latitude
@@ -40,9 +66,18 @@ public struct BoundingBox: Codable {
                 && northEast.longitude >= coordinate.longitude
         }
     }
-    
-    // MARK: - Codable
-    
+}
+
+extension BoundingBox: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(southWest.longitude)
+        hasher.combine(southWest.latitude)
+        hasher.combine(northEast.longitude)
+        hasher.combine(northEast.latitude)
+    }
+}
+
+extension BoundingBox: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
         try container.encode(southWest.codableCoordinates)
@@ -54,9 +89,4 @@ public struct BoundingBox: Codable {
         southWest = try container.decode(LocationCoordinate2DCodable.self).decodedCoordinates
         northEast = try container.decode(LocationCoordinate2DCodable.self).decodedCoordinates
     }
-    
-    // MARK: - Properties
-    
-    public var southWest: LocationCoordinate2D
-    public var northEast: LocationCoordinate2D
 }

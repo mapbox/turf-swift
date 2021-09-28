@@ -163,14 +163,25 @@ class TurfTests: XCTestCase {
     {
         try Fixture.fixtures(folder: "simplify") { name, inputData, outputData in
             do {
-                let input = try JSONDecoder().decode(GeoJSON.self, from: inputData)
-                let output = try JSONDecoder().decode(GeoJSON.self, from: outputData)
-                
-                let properties = input.decodedFeature?.properties
-                let tolerance = (properties?["tolerance"] as? NSNumber)?.doubleValue ?? 0.01
-                let highQuality = (properties?["highQuality"] as? NSNumber)?.boolValue ?? false
+                let input = try JSONDecoder().decode(GeoJSONObject.self, from: inputData)
+                let output = try JSONDecoder().decode(GeoJSONObject.self, from: outputData)
                 
                 for (input, output) in zip(input.features, output.features) {
+                    let properties = input.properties
+                    let tolerance: Double
+                    if case let .number(number) = properties?["tolerance"] {
+                        tolerance = number
+                    } else {
+                        tolerance = 0.01
+                    }
+                    
+                    let highQuality: Bool
+                    if case let .boolean(boolean) = properties?["highQuality"] {
+                        highQuality = boolean
+                    } else {
+                        highQuality = false
+                    }
+                    
                     switch (input.geometry, output.geometry) {
                     case (.point, .point), (.multiPoint, .multiPoint):
                         break // nothing to simplify
@@ -194,14 +205,15 @@ class TurfTests: XCTestCase {
     }
 }
 
-extension GeoJSON {
+extension GeoJSONObject {
     var features: [Feature] {
-        if let feature = self.decodedFeature {
-            return [feature]
-        } else if let featureCollection = self.decodedFeatureCollection {
-            return featureCollection.features
-        } else {
+        switch self {
+        case .geometry:
             return []
+        case .feature(let feature):
+            return [feature]
+        case .featureCollection(let featureCollection):
+            return featureCollection.features
         }
     }
 }

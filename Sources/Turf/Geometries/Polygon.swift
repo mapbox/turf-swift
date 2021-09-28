@@ -3,14 +3,28 @@ import Foundation
 import CoreLocation
 #endif
 
-
+/**
+ A [Polygon geometry](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.6) is conceptually a collection of `Ring`s that form a single connected geometry.
+ */
 public struct Polygon: Equatable {
+    /// The positions at which the polygon is located. Each nested array corresponds to one linear ring.
     public var coordinates: [[LocationCoordinate2D]]
     
+    /**
+     Initializes a polygon defined by the given positions.
+     
+     - parameter coordinates: The positions at which the polygon is located. Each nested array corresponds to one linear ring.
+     */
     public init(_ coordinates: [[LocationCoordinate2D]]) {
         self.coordinates = coordinates
     }
     
+    /**
+     Initializes a polygon defined by the given linear rings.
+     
+     - parameter outerRing: The outer linear ring.
+     - parameter innerRings: The inner linear rings that define “holes” in the polygon.
+     */
     public init(outerRing: Ring, innerRings: [Ring] = []) {
         self.coordinates = ([outerRing] + innerRings).map { $0.coordinates }
     }
@@ -38,20 +52,44 @@ public struct Polygon: Equatable {
     }
 }
 
+extension Polygon: Codable {
+    enum CodingKeys: String, CodingKey {
+        case kind = "type"
+        case coordinates
+    }
+    
+    enum Kind: String, Codable {
+        case Polygon
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        _ = try container.decode(Kind.self, forKey: .kind)
+        let coordinates = try container.decode([[LocationCoordinate2DCodable]].self, forKey: .coordinates).decodedCoordinates
+        self = .init(coordinates)
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(Kind.Polygon, forKey: .kind)
+        try container.encode(coordinates.codableCoordinates, forKey: .coordinates)
+    }
+}
+
 extension Polygon {
-    /// Representation of `.Polygon`s coordinates of inner rings
+    /// Representation of `Polygon`s coordinates of inner rings
     public var innerRings: [Ring] {
         return Array(coordinates.suffix(from: 1)).map { Ring(coordinates: $0) }
     }
     
-    /// Representation of `.Polygon`s coordinates of outer ring
+    /// Representation of `Polygon`s coordinates of outer ring
     public var outerRing: Ring {
         get {
             return Ring(coordinates: coordinates.first! )
         }
     }
     
-    /// An area of current `.Polygon`
+    /// An area of current `Polygon`
     ///
     /// Ported from https://github.com/Turfjs/turf/blob/a94151418cb969868fdb42955a19a133512da0fd/packages/turf-area/index.js
     public var area: Double {
@@ -77,7 +115,7 @@ extension Polygon {
         return true
     }
 
-    /// Smooths a `.Polygon`. Based on [Chaikin's algorithm](http://graphics.cs.ucdavis.edu/education/CAGDNotes/Chaikins-Algorithm/Chaikins-Algorithm.html).
+    /// Smooths a `Polygon`. Based on [Chaikin's algorithm](http://graphics.cs.ucdavis.edu/education/CAGDNotes/Chaikins-Algorithm/Chaikins-Algorithm.html).
     /// Warning: may create degenerate polygons.
     ///
     /// Ported from https://github.com/Turfjs/turf/blob/402716a29f6ae16bf3d0220e213e5380cc5a50c4/packages/turf-polygon-smooth/index.js

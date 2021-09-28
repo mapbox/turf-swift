@@ -1,55 +1,78 @@
 import Foundation
 
-public enum Number: Equatable {
-    case int(Int)
-    case double(Double)
+/**
+ A [feature identifier](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2) identifies a `Feature` object.
+ */
+public enum FeatureIdentifier: Equatable {
+    /// A string.
+    case string(_ string: String)
     
-    public var value: Any? {
-        switch self {
-        case .int(let value):
-            return value
-        case .double(let value):
-            return value
-        }
+    /**
+     A floating-point number.
+     
+     - parameter number: A floating-point number. JSON does not distinguish numeric types of different precisions. If you need integer precision, cast this associated value to an `Int`.
+     */
+    case number(_ number: Double)
+    
+    /// Initializes a feature identifier representing the given string.
+    public init(_ string: String) {
+        self = .string(string)
+    }
+    
+    /**
+     Initializes a feature identifier representing the given integer.
+     
+     - parameter number: An integer. JSON does not distinguish numeric types of different precisions, so the integer is stored as a floating-point number.
+     */
+    public init<Source>(_ number: Source) where Source: BinaryInteger {
+        self = .number(Double(number))
+    }
+    
+    /// Initializes a feature identifier representing the given floating-point number.
+    public init<Source>(_ number: Source) where Source: BinaryFloatingPoint {
+        self = .number(Double(number))
     }
 }
 
-extension Number: Codable {
-    enum CodingKeys: String, CodingKey {
-        case int, double
-    }
+extension FeatureIdentifier: RawRepresentable {
+    public typealias RawValue = Any
     
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let value = try? container.decode(Int.self) {
-            self = .int(value)
+    public init?(rawValue: Any) {
+        // Like `JSONSerialization.jsonObject(with:options:)` with `JSONSerialization.ReadingOptions.fragmentsAllowed` specified.
+        if let string = rawValue as? String {
+            self = .string(string)
+        } else if let number = rawValue as? NSNumber {
+            self = .number(number.doubleValue)
         } else {
-            self = .double(try container.decode(Double.self))
+            return nil
         }
     }
     
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
+    public var rawValue: Any {
         switch self {
-        case .int(let value):
-            try container.encode(value)
-        case .double(let value):
-            try container.encode(value)
+        case let .string(value):
+            return value
+        case let .number(value):
+            return value
         }
     }
 }
 
-public enum FeatureIdentifier {
-    case string(String)
-    case number(Number)
-    
-    public var value: Any? {
-        switch self {
-        case .number(let value):
-            return value
-        case .string(let value):
-            return value
-        }
+extension FeatureIdentifier: ExpressibleByStringLiteral {
+    public init(stringLiteral value: StringLiteralType) {
+        self = .init(value)
+    }
+}
+
+extension FeatureIdentifier: ExpressibleByIntegerLiteral {
+    public init(integerLiteral value: IntegerLiteralType) {
+        self = .init(value)
+    }
+}
+
+extension FeatureIdentifier: ExpressibleByFloatLiteral {
+    public init(floatLiteral value: FloatLiteralType) {
+        self = .number(value)
     }
 }
 
@@ -63,7 +86,7 @@ extension FeatureIdentifier: Codable {
         if let value = try? container.decode(String.self) {
             self = .string(value)
         } else {
-            self = .number(try container.decode(Number.self))
+            self = .number(try container.decode(Double.self))
         }
     }
     

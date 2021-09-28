@@ -3,103 +3,60 @@ import Foundation
 import CoreLocation
 #endif
 
-public enum FeatureType: String, Codable {
-    case feature = "Feature"
-    case featureCollection = "FeatureCollection"
+/**
+ A [GeoJSON object](https://datatracker.ietf.org/doc/html/rfc7946#section-3) represents a Geometry, Feature, or collection of
+ Features.
+ */
+public enum GeoJSONObject: Equatable {
+    /**
+     A [Geometry object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1) represents points, curves, and surfaces in coordinate space.
+     
+     - parameter geometry: The GeoJSON object as a Geometry object.
+     */
+    case geometry(_ geometry: Geometry)
+    
+    /**
+     A [Feature object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2) represents a spatially bounded thing.
+     
+     - parameter feature: The GeoJSON object as a Feature object.
+     */
+    case feature(_ feature: Feature)
+    
+    /**
+     A [FeatureCollection object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.3) is a collection of Feature objects.
+     
+     - parameter featureCollection: The GeoJSON object as a FeatureCollection object.
+     */
+    case featureCollection(_ featureCollection: FeatureCollection)
 }
 
-struct FeatureProxy: Codable {
-    public var type: FeatureType
-        
+extension GeoJSONObject: Codable {
     private enum CodingKeys: String, CodingKey {
-        case type
+        case kind = "type"
     }
     
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        do {
-            type = try container.decode(FeatureType.self, forKey: .type)
-        } catch {
-            throw GeoJSONError.noTypeFound
-        }
-    }
-    
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(type, forKey: .type)
-    }
-}
-
-public protocol GeoJSONObject: Codable {
-    var type: FeatureType { get }
-    var identifier: FeatureIdentifier? { get set }
-    var properties: [String: Any?]? { get set }
-}
-
-public enum GeoJSONError: Error {
-    case unknownType
-    case noTypeFound
-}
-
-public class GeoJSON: Codable {
-    
-    public var decoded: Codable?
-    public var decodedFeature: Feature? {
-        return decoded as? Feature
-    }
-    public var decodedFeatureCollection: FeatureCollection? {
-        return decoded as? FeatureCollection
-    }
-    
-    public required init(from decoder: Decoder) throws {
+        let kindContainer = try decoder.container(keyedBy: CodingKeys.self)
         let container = try decoder.singleValueContainer()
-        let featureProxy = try container.decode(FeatureProxy.self)
-        
-        switch featureProxy.type {
-        case .feature:
-            self.decoded = try container.decode(Feature.self)
-        case .featureCollection:
-            self.decoded = try container.decode(FeatureCollection.self)
+        switch try kindContainer.decode(String.self, forKey: .kind) {
+        case Feature.Kind.Feature.rawValue:
+            self = .feature(try container.decode(Feature.self))
+        case FeatureCollection.Kind.FeatureCollection.rawValue:
+            self = .featureCollection(try container.decode(FeatureCollection.self))
+        default:
+            self = .geometry(try container.decode(Geometry.self))
         }
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
-        
-        if let value = decoded as? FeatureCollection {
-            try container.encode(value)
-        } else if let value = decoded as? Feature {
-            try container.encode(value)
-        } else {
-            throw GeoJSONError.unknownType
+        switch self {
+        case .geometry(let geometry):
+            try container.encode(geometry)
+        case .feature(let feature):
+            try container.encode(feature)
+        case .featureCollection(let featureCollection):
+            try container.encode(featureCollection)
         }
-    }
-    
-    /**
-     Parse JSON encoded data into a GeoJSON of unknown type.
-     
-     - Parameter data: the JSON encoded GeoJSON data.
-     
-     - Throws: `GeoJSONError` if the type is not compatible.
-     
-     - Returns: decoded GeoJSON of any compatible type.
-     */
-    public static func parse(_ data: Data) throws -> GeoJSON {
-        return try JSONDecoder().decode(GeoJSON.self, from: data)
-    }
-    
-    
-    /**
-     Parse JSON encoded data into a GeoJSON of known type.
-     
-     - Parameter type: The known GeoJSON type (T).
-     - Parameter data: the JSON encoded GeoJSON data.
-     
-     - Throws: `GeoJSONError` if the type is not compatible.
-     
-     - Returns: decoded GeoJSON of type T.
-     */
-    public static func parse<T: GeoJSONObject>(_ type: T.Type, from data: Data) throws -> T {
-        return try JSONDecoder().decode(T.self, from: data)
     }
 }

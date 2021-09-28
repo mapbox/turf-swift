@@ -169,6 +169,13 @@
 		DA972D7A26FEB9DC009F5615 /* simplify in Resources */ = {isa = PBXBuildFile; fileRef = DA972D7926FEB9DC009F5615 /* simplify */; };
 		DA972D7B26FEB9DD009F5615 /* simplify in Resources */ = {isa = PBXBuildFile; fileRef = DA972D7926FEB9DC009F5615 /* simplify */; };
 		DA972D7C26FEB9DD009F5615 /* simplify in Resources */ = {isa = PBXBuildFile; fileRef = DA972D7926FEB9DC009F5615 /* simplify */; };
+		DA972D932702763B009F5615 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA972D922702763B009F5615 /* JSON.swift */; };
+		DA972D942702763C009F5615 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA972D922702763B009F5615 /* JSON.swift */; };
+		DA972D952702763C009F5615 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA972D922702763B009F5615 /* JSON.swift */; };
+		DA972D962702763C009F5615 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA972D922702763B009F5615 /* JSON.swift */; };
+		DA972DA6270289C5009F5615 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA972DA5270289C5009F5615 /* JSONTests.swift */; };
+		DA972DA7270289C5009F5615 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA972DA5270289C5009F5615 /* JSONTests.swift */; };
+		DA972DA8270289C5009F5615 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA972DA5270289C5009F5615 /* JSONTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -252,6 +259,8 @@
 		DA39EB6D20101F99004D87F7 /* TurfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA94249B2010283900CDB4E6 /* Turf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Turf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA972D7926FEB9DC009F5615 /* simplify */ = {isa = PBXFileReference; lastKnownFileType = folder; path = simplify; sourceTree = "<group>"; };
+		DA972D922702763B009F5615 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		DA972DA5270289C5009F5615 /* JSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -338,6 +347,7 @@
 				3502F790201F507500399EFE /* GeoJSON.swift */,
 				35ECAF2E20974A1800DC3BC3 /* Geometry.swift */,
 				2B74CD90248538E500EE6693 /* Geometries */,
+				DA972D922702763B009F5615 /* JSON.swift */,
 				35B56E6920DAF3C500C4923D /* RadianCoordinate2D.swift */,
 				35B56E6E20DAF41F00C4923D /* Ring.swift */,
 				3A40B38126E48262004457C4 /* Simplifier.swift */,
@@ -362,6 +372,7 @@
 				35B56E9620DAF82F00C4923D /* PointTests.swift */,
 				35B56E9E20DAF88C00C4923D /* PolygonTests.swift */,
 				2B5FAC0024067051008A285F /* GeometryCollectionTests.swift */,
+				DA972DA5270289C5009F5615 /* JSONTests.swift */,
 				3547ECF9200C3C82009DA062 /* TurfTests.swift */,
 				3547ECFA200C3C82009DA062 /* Fixtures */,
 				11E726F926247D3900C1890B /* LocationCoordinate2DTests.swift */,
@@ -761,6 +772,7 @@
 				35ECAF3020974A2000DC3BC3 /* Geometry.swift in Sources */,
 				35B56E7520DAF47D00C4923D /* Polygon.swift in Sources */,
 				7AA969AD21B98F8F009C57FE /* Spline.swift in Sources */,
+				DA972D942702763C009F5615 /* JSON.swift in Sources */,
 				CE2EB999214C247100915A30 /* BoundingBox.swift in Sources */,
 				2B74CD792485372800EE6693 /* Point.swift in Sources */,
 				35B56E7020DAF41F00C4923D /* Ring.swift in Sources */,
@@ -777,6 +789,7 @@
 				35B56EAC20DAF8CB00C4923D /* MultiPolygonTests.swift in Sources */,
 				11E7270D2624840900C1890B /* RadianCoordinate2DTests.swift in Sources */,
 				11E726FB26247D3900C1890B /* LocationCoordinate2DTests.swift in Sources */,
+				DA972DA7270289C5009F5615 /* JSONTests.swift in Sources */,
 				35B56E9820DAF82F00C4923D /* PointTests.swift in Sources */,
 				2B5FAC0224067051008A285F /* GeometryCollectionTests.swift in Sources */,
 				CE7F8165215182FF00A9D221 /* BoundingBoxTests.swift in Sources */,
@@ -809,6 +822,7 @@
 				35ECAF2F20974A1800DC3BC3 /* Geometry.swift in Sources */,
 				35B56E7420DAF47D00C4923D /* Polygon.swift in Sources */,
 				7AA969AC21B98F8F009C57FE /* Spline.swift in Sources */,
+				DA972D932702763B009F5615 /* JSON.swift in Sources */,
 				CE2EB998214C246A00915A30 /* BoundingBox.swift in Sources */,
 				2B74CD782485372800EE6693 /* Point.swift in Sources */,
 				35B56E6F20DAF41F00C4923D /* Ring.swift in Sources */,
@@ -825,6 +839,7 @@
 				2B5FAC122406BADF008A285F /* GeoJSONTests.swift in Sources */,
 				11E7270C2624840900C1890B /* RadianCoordinate2DTests.swift in Sources */,
 				11E726FA26247D3900C1890B /* LocationCoordinate2DTests.swift in Sources */,
+				DA972DA6270289C5009F5615 /* JSONTests.swift in Sources */,
 				35B56EAB20DAF8CB00C4923D /* MultiPolygonTests.swift in Sources */,
 				35B56E9720DAF82F00C4923D /* PointTests.swift in Sources */,
 				2B5FAC0124067051008A285F /* GeometryCollectionTests.swift in Sources */,
@@ -857,6 +872,7 @@
 				35ECAF3120974A2100DC3BC3 /* Geometry.swift in Sources */,
 				35B56E7620DAF47D00C4923D /* Polygon.swift in Sources */,
 				7AA969AE21B98F8F009C57FE /* Spline.swift in Sources */,
+				DA972D952702763C009F5615 /* JSON.swift in Sources */,
 				CE2EB99A214C247100915A30 /* BoundingBox.swift in Sources */,
 				2B74CD7A2485372800EE6693 /* Point.swift in Sources */,
 				35B56E7120DAF41F00C4923D /* Ring.swift in Sources */,
@@ -873,6 +889,7 @@
 				35B56EAD20DAF8CB00C4923D /* MultiPolygonTests.swift in Sources */,
 				11E7270E2624840900C1890B /* RadianCoordinate2DTests.swift in Sources */,
 				11E7270326247D4000C1890B /* LocationCoordinate2DTests.swift in Sources */,
+				DA972DA8270289C5009F5615 /* JSONTests.swift in Sources */,
 				35B56E9920DAF82F00C4923D /* PointTests.swift in Sources */,
 				2B5FAC0324067051008A285F /* GeometryCollectionTests.swift in Sources */,
 				CE7F8166215182FF00A9D221 /* BoundingBoxTests.swift in Sources */,
@@ -905,6 +922,7 @@
 				35ECAF3220974A2100DC3BC3 /* Geometry.swift in Sources */,
 				35B56E7720DAF47D00C4923D /* Polygon.swift in Sources */,
 				7AA969AF21B98F8F009C57FE /* Spline.swift in Sources */,
+				DA972D962702763C009F5615 /* JSON.swift in Sources */,
 				CE2EB99B214C247200915A30 /* BoundingBox.swift in Sources */,
 				2B74CD7B2485372800EE6693 /* Point.swift in Sources */,
 				35B56E7220DAF41F00C4923D /* Ring.swift in Sources */,

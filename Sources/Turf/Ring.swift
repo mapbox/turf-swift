@@ -4,11 +4,17 @@ import CoreLocation
 #endif
 
 /**
- Creates a `Ring` struct that represents a closed figure that is bounded by three or more straight line segments.
+ A [linear ring](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.6) is a closed figure bounded by three or more straight line segments.
  */
 public struct Ring {
+    /// The positions at which the linear ring is located.
     public var coordinates: [LocationCoordinate2D]
     
+    /**
+     Initializes a linear ring defined by the given positions.
+     
+     - parameter coordinates: The positions at which the linear ring is located.
+     */
     public init(coordinates: [LocationCoordinate2D]) {
         self.coordinates = coordinates
     }

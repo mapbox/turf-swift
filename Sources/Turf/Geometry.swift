@@ -3,121 +3,85 @@ import Foundation
 import CoreLocation
 #endif
 
-
-public enum GeometryType: String, Codable, CaseIterable {
-    case Point
-    case LineString
-    case Polygon
-    case MultiPoint
-    case MultiLineString
-    case MultiPolygon
-    case GeometryCollection
-}
-
-public enum Geometry {
-    private enum CodingKeys: String, CodingKey {
-        case type
-        case coordinates
-        case geometries
-    }
-    
+/**
+ A [Geometry object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1) represents points, curves, and surfaces in coordinate space. Use an instance of this enumeration whenever a value could be any kind of Geometry object.
+ */
+public enum Geometry: Equatable {
+    /// A single position.
     case point(_ geometry: Point)
+    
+    /// A collection of two or more positions, each position connected to the next position linearly.
     case lineString(_ geometry: LineString)
+    
+    /// Conceptually, a collection of `Ring`s that form a single connected geometry.
     case polygon(_ geometry: Polygon)
+    
+    /// A collection of positions that are disconnected but related.
     case multiPoint(_ geometry: MultiPoint)
+    
+    /// A collection of `LineString` geometries that are disconnected but related.
     case multiLineString(_ geometry: MultiLineString)
+    
+    /// A collection of `Polygon` geometries that are disconnected but related.
     case multiPolygon(_ geometry: MultiPolygon)
+    
+    /// A heterogeneous collection of geometries that are related.
     case geometryCollection(_ geometry: GeometryCollection)
-    
-    public var type: GeometryType {
-        switch self {
-        case .point(_):
-            return .Point
-        case .lineString(_):
-            return .LineString
-        case .polygon(_):
-            return .Polygon
-        case .multiPoint(_):
-            return .MultiPoint
-        case .multiLineString(_):
-            return .MultiLineString
-        case .multiPolygon(_):
-            return .MultiPolygon
-        case .geometryCollection(_):
-            return .GeometryCollection
-        }
-    }
-    
-    public var value: Any? {
-        switch self {
-        case .point(let value):
-            return value
-        case .lineString(let value):
-            return value
-        case .polygon(let value):
-            return value
-        case .multiPoint(let value):
-            return value
-        case .multiLineString(let value):
-            return value
-        case .multiPolygon(let value):
-            return value
-        case .geometryCollection(let value):
-            return value
-        }
-    }
 }
-
 
 extension Geometry: Codable {
+    private enum CodingKeys: String, CodingKey {
+        case kind = "type"
+    }
+    
+    enum Kind: String, Codable, CaseIterable {
+        case Point
+        case LineString
+        case Polygon
+        case MultiPoint
+        case MultiLineString
+        case MultiPolygon
+        case GeometryCollection
+    }
+    
     public init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-            let type = try container.decode(GeometryType.self, forKey: .type)
-            
-            switch type {
-            case .Point:
-                let coordinates = try container.decode(LocationCoordinate2DCodable.self, forKey: .coordinates).decodedCoordinates
-                self = .point(.init(coordinates))
-            case .LineString:
-                let coordinates = try container.decode([LocationCoordinate2DCodable].self, forKey: .coordinates).decodedCoordinates
-                self = .lineString(.init(coordinates))
-            case .Polygon:
-                let coordinates = try container.decode([[LocationCoordinate2DCodable]].self, forKey: .coordinates).decodedCoordinates
-                self = .polygon(.init(coordinates))
-            case .MultiPoint:
-                let coordinates = try container.decode([LocationCoordinate2DCodable].self, forKey: .coordinates).decodedCoordinates
-                self = .multiPoint(.init(coordinates))
-            case .MultiLineString:
-                let coordinates = try container.decode([[LocationCoordinate2DCodable]].self, forKey: .coordinates).decodedCoordinates
-                self = .multiLineString(.init(coordinates))
-            case .MultiPolygon:
-                let coordinates = try container.decode([[[LocationCoordinate2DCodable]]].self, forKey: .coordinates).decodedCoordinates
-                self = .multiPolygon(.init(coordinates))
-            case .GeometryCollection:
-                let geometries = try container.decode([Geometry].self, forKey: .geometries)
-                self = .geometryCollection(.init(geometries: geometries))
-            }
+        let kindContainer = try decoder.container(keyedBy: CodingKeys.self)
+        let container = try decoder.singleValueContainer()
+        switch try kindContainer.decode(Kind.self, forKey: .kind) {
+        case .Point:
+            self = .point(try container.decode(Point.self))
+        case .LineString:
+            self = .lineString(try container.decode(LineString.self))
+        case .Polygon:
+            self = .polygon(try container.decode(Polygon.self))
+        case .MultiPoint:
+            self = .multiPoint(try container.decode(MultiPoint.self))
+        case .MultiLineString:
+            self = .multiLineString(try container.decode(MultiLineString.self))
+        case .MultiPolygon:
+            self = .multiPolygon(try container.decode(MultiPolygon.self))
+        case .GeometryCollection:
+            self = .geometryCollection(try container.decode(GeometryCollection.self))
         }
-        
-        public func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: CodingKeys.self)
-            try container.encode(type.rawValue, forKey: .type)
-            
-            switch self {
-            case .point(let representation):
-                try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
-            case .lineString(let representation):
-                try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
-            case .polygon(let representation):
-                try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
-            case .multiPoint(let representation):
-                try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
-            case .multiLineString(let representation):
-                try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
-            case .multiPolygon(let representation):
-                try container.encode(representation.coordinates.codableCoordinates, forKey: .coordinates)
-            case .geometryCollection(let representation):
-                try container.encode(representation.geometries, forKey: .geometries)
-            }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .point(let point):
+            try container.encode(point)
+        case .lineString(let lineString):
+            try container.encode(lineString)
+        case .polygon(let polygon):
+            try container.encode(polygon)
+        case .multiPoint(let multiPoint):
+            try container.encode(multiPoint)
+        case .multiLineString(let multiLineString):
+            try container.encode(multiLineString)
+        case .multiPolygon(let multiPolygon):
+            try container.encode(multiPolygon)
+        case .geometryCollection(let geometryCollection):
+            try container.encode(geometryCollection)
         }
+    }
 }

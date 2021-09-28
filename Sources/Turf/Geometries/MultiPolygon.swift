@@ -3,18 +3,55 @@ import Foundation
 import CoreLocation
 #endif
 
-
+/**
+ A [MultiPolygon geometry](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.7) is a collection of `Polygon` geometries that are disconnected but related.
+ */
 public struct MultiPolygon: Equatable {
+    /// The positions at which the multipolygon is located. Each nested array corresponds to one polygon.
     public var coordinates: [[[LocationCoordinate2D]]]
     
+    /**
+     Initializes a multipolygon defined by the given positions.
+     
+     - parameter coordinates: The positions at which the multipolygon is located. Each nested array corresponds to one polygon.
+     */
     public init(_ coordinates: [[[LocationCoordinate2D]]]) {
         self.coordinates = coordinates
     }
     
+    /**
+     Initializes a multipolygon coincident to the given polygons.
+     
+     - parameter polygons: The polygons that together are coincident to the multipolygon.
+     */
     public init(_ polygons: [Polygon]) {
         self.coordinates = polygons.map { (polygon) -> [[LocationCoordinate2D]] in
             return polygon.coordinates
         }
+    }
+}
+
+extension MultiPolygon: Codable {
+    enum CodingKeys: String, CodingKey {
+        case kind = "type"
+        case coordinates
+    }
+    
+    enum Kind: String, Codable {
+        case MultiPolygon
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        _ = try container.decode(Kind.self, forKey: .kind)
+        let coordinates = try container.decode([[[LocationCoordinate2DCodable]]].self, forKey: .coordinates).decodedCoordinates
+        self = .init(coordinates)
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(Kind.MultiPolygon, forKey: .kind)
+        try container.encode(coordinates.codableCoordinates, forKey: .coordinates)
     }
 }
 
