@@ -3,17 +3,29 @@ import Foundation
 public enum FeatureIdentifier: Equatable {
     case string(String)
     case number(Double)
+    
+    public init(_ string: String) {
+        self = .string(string)
+    }
+    
+    public init<Source>(_ number: Source) where Source: BinaryInteger {
+        self = .number(Double(number))
+    }
+    
+    public init<Source>(_ number: Source) where Source: BinaryFloatingPoint {
+        self = .number(Double(number))
+    }
 }
 
 extension FeatureIdentifier: ExpressibleByStringLiteral {
     public init(stringLiteral value: StringLiteralType) {
-        self = .string(value)
+        self = .init(value)
     }
 }
 
 extension FeatureIdentifier: ExpressibleByIntegerLiteral {
     public init(integerLiteral value: IntegerLiteralType) {
-        self = .number(Double(value))
+        self = .init(value)
     }
 }
 

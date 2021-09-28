@@ -13,6 +13,30 @@ public enum JSONValue: Equatable {
     case array(_ values: JSONArray)
     case object(_ properties: JSONObject)
     
+    public init(_ string: String) {
+        self = .string(string)
+    }
+    
+    public init<Source>(_ number: Source) where Source: BinaryInteger {
+        self = .number(Double(number))
+    }
+    
+    public init<Source>(_ number: Source) where Source: BinaryFloatingPoint {
+        self = .number(Double(number))
+    }
+    
+    public init(_ bool: Bool) {
+        self = .boolean(bool)
+    }
+    
+    public init(_ values: JSONArray) {
+        self = .array(values)
+    }
+    
+    public init(_ properties: JSONObject) {
+        self = .object(properties)
+    }
+    
     /**
      The value expressed as a Swift standard library type.
      
@@ -46,25 +70,25 @@ public typealias JSONObject = [String: JSONValue?]
 
 extension JSONValue: ExpressibleByStringLiteral {
     public init(stringLiteral value: StringLiteralType) {
-        self = .string(value)
+        self = .init(value)
     }
 }
 
 extension JSONValue: ExpressibleByIntegerLiteral {
     public init(integerLiteral value: IntegerLiteralType) {
-        self = .number(Double(value))
+        self = .init(value)
     }
 }
 
 extension JSONValue: ExpressibleByFloatLiteral {
     public init(floatLiteral value: FloatLiteralType) {
-        self = .number(value)
+        self = .init(value)
     }
 }
 
 extension JSONValue: ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: BooleanLiteralType) {
-        self = .boolean(value)
+        self = .init(value)
     }
 }
 
@@ -72,7 +96,7 @@ extension JSONValue: ExpressibleByArrayLiteral {
     public typealias ArrayLiteralElement = JSONValue?
     
     public init(arrayLiteral elements: ArrayLiteralElement...) {
-        self = .array(elements)
+        self = .init(elements)
     }
 }
 
@@ -81,7 +105,7 @@ extension JSONValue: ExpressibleByDictionaryLiteral {
     public typealias Value = JSONValue?
     
     public init(dictionaryLiteral elements: (Key, Value)...) {
-        self = .object(.init(uniqueKeysWithValues: elements))
+        self = .init(.init(uniqueKeysWithValues: elements))
     }
 }
 
