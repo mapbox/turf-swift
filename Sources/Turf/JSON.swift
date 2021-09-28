@@ -5,7 +5,9 @@ import Foundation
  
  This type does not represent the `null` value in JSON. Use `Optional<JSONValue>` wherever `null` is accepted.
  */
-public enum JSONValue: Equatable {
+public enum JSONValue: Equatable, RawRepresentable {
+    public typealias RawValue = Any
+    
     // case null would be redundant to Optional.none
     case string(_ string: String)
     case number(_ number: Double)
@@ -37,11 +39,23 @@ public enum JSONValue: Equatable {
         self = .object(properties)
     }
     
-    /**
-     The value expressed as a Swift standard library type.
-     
-     The computed value is consistent with the return value of `JSONSerialization.jsonObject(with:options:)` with `JSONSerialization.ReadingOptions.allowFragments` specified.
-     */
+    public init?(rawValue: Any) {
+        // Like `JSONSerialization.jsonObject(with:options:)` with `JSONSerialization.ReadingOptions.fragmentsAllowed` specified.
+        if let bool = rawValue as? Bool {
+            self = .boolean(bool)
+        } else if let string = rawValue as? String {
+            self = .string(string)
+        } else if let number = rawValue as? NSNumber {
+            self = .number(number.doubleValue)
+        } else if let array = rawValue as? JSONArray.RawValue {
+            self = .array(.init(rawValue: array))
+        } else if let object = rawValue as? JSONObject.RawValue {
+            self = .object(.init(rawValue: object))
+        } else {
+            return nil
+        }
+    }
+    
     public var rawValue: Any {
         switch self {
         case let .boolean(value):
@@ -51,9 +65,9 @@ public enum JSONValue: Equatable {
         case let .number(value):
             return value
         case let .object(value):
-            return value.mapValues { $0?.rawValue }
+            return value.rawValue
         case let .array(value):
-            return value.map { $0?.rawValue }
+            return value.rawValue
         }
     }
 }
@@ -63,10 +77,34 @@ public enum JSONValue: Equatable {
  */
 public typealias JSONArray = [JSONValue?]
 
+extension JSONArray: RawRepresentable {
+    public typealias RawValue = [Any?]
+    
+    public init(rawValue values: RawValue) {
+        self = values.map(JSONValue.init(rawValue:))
+    }
+    
+    public var rawValue: RawValue {
+        return map { $0?.rawValue }
+    }
+}
+
 /**
  A JSON object represented in memory by a dictionary with strings as keys and `JSONValue` instances as values.
  */
 public typealias JSONObject = [String: JSONValue?]
+
+extension JSONObject: RawRepresentable {
+    public typealias RawValue = [String: Any?]
+    
+    public init(rawValue: RawValue) {
+        self = rawValue.mapValues { $0.flatMap(JSONValue.init(rawValue:)) }
+    }
+    
+    public var rawValue: RawValue {
+        return mapValues { $0?.rawValue }
+    }
+}
 
 extension JSONValue: ExpressibleByStringLiteral {
     public init(stringLiteral value: StringLiteralType) {

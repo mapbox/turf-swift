@@ -2,6 +2,36 @@ import XCTest
 import Turf
 
 class JSONTests: XCTestCase {
+    func testRawValues() {
+        XCTAssertEqual(JSONValue(rawValue: "Jason" as NSString), .string("Jason"))
+        XCTAssertEqual(JSONValue(rawValue: 42 as NSNumber), .number(42))
+        XCTAssertEqual(JSONValue(rawValue: 3.1415 as NSNumber), .number(3.1415))
+        XCTAssertEqual(JSONValue(rawValue: false as NSNumber), .boolean(false))
+        XCTAssertEqual(JSONValue(rawValue: true as NSNumber), .boolean(true))
+        XCTAssertEqual(JSONValue(rawValue: ["Jason", 42, 3.1415, false, true, nil, [], [:]] as NSArray),
+                       .array(["Jason", 42, 3.1415, false, true, nil, [], [:]]))
+        XCTAssertEqual(JSONValue(rawValue: [
+            "string": "Jason",
+            "integer": 42,
+            "float": 3.1415,
+            "false": false,
+            "true": true,
+            "nil": nil,
+            "array": [],
+            "dictionary": [:],
+        ] as NSDictionary),
+        .object([
+            "string": "Jason",
+            "integer": 42,
+            "float": 3.1415,
+            "false": false,
+            "true": true,
+            "nil": nil,
+            "array": [],
+            "dictionary": [:],
+        ]))
+    }
+    
     func testLiterals() throws {
         if case let JSONValue.string(string) = "Jason" {
             XCTAssertEqual(string, "Jason")
