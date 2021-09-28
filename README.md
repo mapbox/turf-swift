@@ -101,20 +101,24 @@ Turf.js | Turf-swift
 
 ## GeoJSON
 
-turf-swift also contains an experimental GeoJSON encoder/decoder with support for Codable.
+turf-swift also contains a GeoJSON encoder/decoder with support for Codable.
 
 ```swift
-// Decode unknown GeoJSON type
-let geojson = try! GeoJSON.parse(data)
+// Decode an unknown GeoJSON object.
+let geojson = try JSONDecoder().decode(GeoJSONObject.self, from: data)
+guard case let .feature(feature) = geojson,
+      case let .point(point) = feature.geometry else {
+    return
+}
 
-// Decode known GeoJSON type
-let geojson = try! GeoJSON.parse(FeatureCollection.self, from: data)
+// Decode a known GeoJSON object.
+let featureCollection = try JSONDecoder().decode(FeatureCollection.self, from: data)
 
-// Initialize a PointFeature and encode as GeoJSON
+// Initialize a Point feature and encode it as GeoJSON.
 let coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 1)
 let point = Point(coordinate)
 let pointFeature = Feature(geometry: .point(point))
-let data = try! JSONEncoder().encode(pointFeature)
+let data = try JSONEncoder().encode(pointFeature)
 let json = String(data: data, encoding: .utf8)
 print(json)
 
