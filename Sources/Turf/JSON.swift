@@ -47,10 +47,12 @@ public enum JSONValue: Equatable, RawRepresentable {
             self = .string(string)
         } else if let number = rawValue as? NSNumber {
             self = .number(number.doubleValue)
-        } else if let array = rawValue as? JSONArray.RawValue {
-            self = .array(.init(rawValue: array))
-        } else if let object = rawValue as? JSONObject.RawValue {
-            self = .object(.init(rawValue: object))
+        } else if let rawArray = rawValue as? JSONArray.RawValue,
+                  let array = JSONArray(rawValue: rawArray) {
+            self = .array(array)
+        } else if let rawObject = rawValue as? JSONObject.RawValue,
+                  let object = JSONObject(rawValue: rawObject) {
+            self = .object(object)
         } else {
             return nil
         }
@@ -80,7 +82,7 @@ public typealias JSONArray = [JSONValue?]
 extension JSONArray: RawRepresentable {
     public typealias RawValue = [Any?]
     
-    public init(rawValue values: RawValue) {
+    public init?(rawValue values: RawValue) {
         self = values.map(JSONValue.init(rawValue:))
     }
     
@@ -97,7 +99,7 @@ public typealias JSONObject = [String: JSONValue?]
 extension JSONObject: RawRepresentable {
     public typealias RawValue = [String: Any?]
     
-    public init(rawValue: RawValue) {
+    public init?(rawValue: RawValue) {
         self = rawValue.mapValues { $0.flatMap(JSONValue.init(rawValue:)) }
     }
     
