@@ -5,9 +5,7 @@ import Foundation
  
  This type does not represent the `null` value in JSON. Use `Optional<JSONValue>` wherever `null` is accepted.
  */
-public enum JSONValue: Equatable, RawRepresentable {
-    public typealias RawValue = Any
-    
+public enum JSONValue: Equatable {
     // case null would be redundant to Optional.none
     
     /// A string.
@@ -62,6 +60,10 @@ public enum JSONValue: Equatable, RawRepresentable {
     public init(_ properties: JSONObject) {
         self = .object(properties)
     }
+}
+
+extension JSONValue: RawRepresentable {
+    public typealias RawValue = Any
     
     public init?(rawValue: Any) {
         // Like `JSONSerialization.jsonObject(with:options:)` with `JSONSerialization.ReadingOptions.fragmentsAllowed` specified.

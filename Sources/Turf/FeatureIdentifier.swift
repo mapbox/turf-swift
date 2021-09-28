@@ -34,6 +34,30 @@ public enum FeatureIdentifier: Equatable {
     }
 }
 
+extension FeatureIdentifier: RawRepresentable {
+    public typealias RawValue = Any
+    
+    public init?(rawValue: Any) {
+        // Like `JSONSerialization.jsonObject(with:options:)` with `JSONSerialization.ReadingOptions.fragmentsAllowed` specified.
+        if let string = rawValue as? String {
+            self = .string(string)
+        } else if let number = rawValue as? NSNumber {
+            self = .number(number.doubleValue)
+        } else {
+            return nil
+        }
+    }
+    
+    public var rawValue: Any {
+        switch self {
+        case let .string(value):
+            return value
+        case let .number(value):
+            return value
+        }
+    }
+}
+
 extension FeatureIdentifier: ExpressibleByStringLiteral {
     public init(stringLiteral value: StringLiteralType) {
         self = .init(value)

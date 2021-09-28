@@ -116,6 +116,12 @@ class GeoJSONTests: XCTestCase {
         XCTAssertEqual(multiPolygon.coordinates, coordinates)
     }
     
+    func testRawFeatureIdentifierValues() {
+        XCTAssertEqual(FeatureIdentifier(rawValue: "Jason" as NSString)?.rawValue as? String, "Jason")
+        XCTAssertEqual(FeatureIdentifier(rawValue: 42 as NSNumber)?.rawValue as? Double, 42)
+        XCTAssertEqual(FeatureIdentifier(rawValue: 3.1415 as NSNumber)?.rawValue as? Double, 3.1415)
+    }
+    
     func testFeatureIdentifierLiterals() {
         if case let FeatureIdentifier.string(string) = "Jason" {
             XCTAssertEqual(string, "Jason")
