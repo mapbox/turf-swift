@@ -6,21 +6,13 @@ import CoreLocation
 /**
  A [Feature object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2) represents a spatially bounded thing.
  */
-public struct Feature {
+public struct Feature: Equatable {
     public var identifier: FeatureIdentifier?
     public var properties: JSONObject?
     public var geometry: Geometry?
     
     public init(geometry: Geometry?) {
         self.geometry = geometry
-    }
-}
-
-extension Feature: Equatable {
-    public static func == (lhs: Feature, rhs: Feature) -> Bool {
-        return lhs.identifier == rhs.identifier &&
-            lhs.geometry == rhs.geometry &&
-            lhs.properties == rhs.properties
     }
 }
 
