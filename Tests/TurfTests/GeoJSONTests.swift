@@ -115,4 +115,49 @@ class GeoJSONTests: XCTestCase {
         guard case let .multiPolygon(multiPolygon) = feature.geometry else { return XCTFail() }
         XCTAssertEqual(multiPolygon.coordinates, coordinates)
     }
+    
+    func testFeatureIdentifierLiterals() {
+        if case let FeatureIdentifier.string(string) = "Jason" {
+            XCTAssertEqual(string, "Jason")
+        } else {
+            XCTFail()
+        }
+        
+        if case let FeatureIdentifier.number(number) = 42 {
+            XCTAssertEqual(number, 42)
+        } else {
+            XCTFail()
+        }
+        
+        if case let FeatureIdentifier.number(number) = 3.1415 {
+            XCTAssertEqual(number, 3.1415)
+        } else {
+            XCTFail()
+        }
+    }
+    
+    func testPropertiesCoding() {
+        let coordinate = LocationCoordinate2D(latitude: 10, longitude: 30)
+        var feature = Feature(geometry: .point(.init(coordinate)))
+        feature.properties = [
+            "string": "Jason",
+            "integer": 42,
+            "float": 3.1415,
+            "false": false,
+            "true": true,
+            "nil": nil,
+            "array": [],
+            "dictionary": [:],
+        ]
+        
+        var encodedFeature: Data?
+        XCTAssertNoThrow(encodedFeature = try JSONEncoder().encode(feature))
+        guard let encodedData = encodedFeature else { return XCTFail() }
+        
+        var decodedFeature: Feature?
+        XCTAssertNoThrow(decodedFeature = try JSONDecoder().decode(Feature.self, from: encodedData))
+        XCTAssertNotNil(decodedFeature)
+        
+        XCTAssertEqual(decodedFeature, feature)
+    }
 }

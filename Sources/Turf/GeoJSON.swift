@@ -7,7 +7,7 @@ import CoreLocation
  A [GeoJSON object](https://datatracker.ietf.org/doc/html/rfc7946#section-3) represents a Geometry, Feature, or collection of
  Features.
  */
-public enum GeoJSONObject {
+public enum GeoJSONObject: Equatable {
     /**
      A [Geometry object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1) represents points, curves, and surfaces in coordinate space.
      

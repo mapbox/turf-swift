@@ -22,7 +22,11 @@ class FeatureCollectionTests: XCTestCase {
             return
         }
         XCTAssert(lineStringCoordinates.coordinates.count == 19)
-        XCTAssert(lineStringFeature.properties!["id"] as! Int == 1)
+        if case let .number(number) = lineStringFeature.properties?["id"] {
+            XCTAssertEqual(number, 1)
+        } else {
+            XCTFail()
+        }
         XCTAssert(lineStringCoordinates.coordinates.first!.latitude == -26.17500493262446)
         XCTAssert(lineStringCoordinates.coordinates.first!.longitude == 27.977542877197266)
         
@@ -31,7 +35,11 @@ class FeatureCollectionTests: XCTestCase {
             XCTFail()
             return
         }
-        XCTAssert(polygonFeature.properties!["id"] as! Int == 2)
+        if case let .number(number) = polygonFeature.properties?["id"] {
+            XCTAssertEqual(number, 2)
+        } else {
+            XCTFail()
+        }
         XCTAssert(polygonCoordinates.coordinates[0].count == 21)
         XCTAssert(polygonCoordinates.coordinates[0].first!.latitude == -26.199035448897074)
         XCTAssert(polygonCoordinates.coordinates[0].first!.longitude == 27.972049713134762)
@@ -41,7 +49,11 @@ class FeatureCollectionTests: XCTestCase {
             XCTFail()
             return
         }
-        XCTAssert(pointFeature.properties!["id"] as! Int == 4)
+        if case let .number(number) = pointFeature.properties?["id"] {
+            XCTAssertEqual(number, 4)
+        } else {
+            XCTFail()
+        }
         XCTAssert(pointCoordinates.coordinates.latitude == -26.152510345365126)
         XCTAssert(pointCoordinates.coordinates.longitude == 27.95642852783203)
         
@@ -60,7 +72,11 @@ class FeatureCollectionTests: XCTestCase {
             return
         }
         XCTAssert(decodedLineStringCoordinates.coordinates.count == 19)
-        XCTAssert(decodedLineStringFeature.properties!["id"] as! Int == 1)
+        if case let .number(number) = decodedLineStringFeature.properties?["id"] {
+            XCTAssertEqual(number, 1)
+        } else {
+            XCTFail()
+        }
         XCTAssert(decodedLineStringCoordinates.coordinates.first!.latitude == -26.17500493262446)
         XCTAssert(decodedLineStringCoordinates.coordinates.first!.longitude == 27.977542877197266)
         
@@ -69,7 +85,11 @@ class FeatureCollectionTests: XCTestCase {
             XCTFail()
             return
         }
-        XCTAssert(decodedPolygonFeature.properties!["id"] as! Int == 2)
+        if case let .number(number) = decodedPolygonFeature.properties?["id"] {
+            XCTAssertEqual(number, 2)
+        } else {
+            XCTFail()
+        }
         XCTAssert(decodedPolygonCoordinates.coordinates[0].count == 21)
         XCTAssert(decodedPolygonCoordinates.coordinates[0].first!.latitude == -26.199035448897074)
         XCTAssert(decodedPolygonCoordinates.coordinates[0].first!.longitude == 27.972049713134762)
@@ -79,7 +99,11 @@ class FeatureCollectionTests: XCTestCase {
             XCTFail()
             return
         }
-        XCTAssert(decodedPointFeature.properties!["id"] as! Int == 4)
+        if case let .number(number) = decodedPointFeature.properties?["id"] {
+            XCTAssertEqual(number, 4)
+        } else {
+            XCTFail()
+        }
         XCTAssert(decodedPointCoordinates.coordinates.latitude == -26.152510345365126)
         XCTAssert(decodedPointCoordinates.coordinates.longitude == 27.95642852783203)
     }
@@ -135,7 +159,11 @@ class FeatureCollectionTests: XCTestCase {
         guard case let .featureCollection(featureCollection) = geojson else { return XCTFail() }
         XCTAssertEqual(featureCollection.features.count, 4)
         for feature in featureCollection.features {
-            XCTAssertEqual(feature.properties?["tolerance"] as? Double, 0.01)
+            if case let .number(tolerance) = feature.properties?["tolerance"] {
+                XCTAssertEqual(tolerance, 0.01)
+            } else {
+                XCTFail()
+            }
         }
     }
 }

@@ -3,7 +3,7 @@ import Foundation
 /**
  A [FeatureCollection object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.3) is a collection of Feature objects.
  */
-public struct FeatureCollection {
+public struct FeatureCollection: Equatable {
     public var features: Array<Feature> = []
     
     public init(features: [Feature]) {

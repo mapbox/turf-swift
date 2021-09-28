@@ -6,7 +6,7 @@ import CoreLocation
 /**
  A [Geometry object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1) represents points, curves, and surfaces in coordinate space.
  */
-public enum Geometry {
+public enum Geometry: Equatable {
     case point(_ geometry: Point)
     case lineString(_ geometry: LineString)
     case polygon(_ geometry: Polygon)
@@ -15,7 +15,6 @@ public enum Geometry {
     case multiPolygon(_ geometry: MultiPolygon)
     case geometryCollection(_ geometry: GeometryCollection)
 }
-
 
 extension Geometry: Codable {
     private enum CodingKeys: String, CodingKey {

@@ -13,8 +13,8 @@ class PolygonTests: XCTestCase {
         let firstCoordinate = LocationCoordinate2D(latitude: 37.00255267215955, longitude: -109.05029296875)
         let lastCoordinate = LocationCoordinate2D(latitude: 40.6306300839918, longitude: -108.56689453125)
         
-        if case let .number(.double(double)) = geojson.identifier {
-            XCTAssertEqual(double, 1.01)
+        if case let .number(number) = geojson.identifier {
+            XCTAssertEqual(number, 1.01)
         } else {
             XCTFail()
         }

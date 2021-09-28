@@ -73,7 +73,7 @@ class MultiPolygonTests: XCTestCase {
         
         let multiPolygon = Geometry.multiPolygon(.init(coordinates))
         var multiPolygonFeature = Feature(geometry: multiPolygon)
-        multiPolygonFeature.identifier = FeatureIdentifier.string("uniqueIdentifier")
+        multiPolygonFeature.identifier = "uniqueIdentifier"
         multiPolygonFeature.properties = ["some": "var"]
 
         let encodedData = try! JSONEncoder().encode(multiPolygonFeature)

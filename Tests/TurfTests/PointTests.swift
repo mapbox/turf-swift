@@ -17,8 +17,8 @@ class PointTests: XCTestCase {
             return
         }
         XCTAssertEqual(point.coordinates, coordinate)
-        if case let .number(.int(int)) = feature.identifier {
-            XCTAssertEqual(int, 1)
+        if case let .number(number) = feature.identifier {
+            XCTAssertEqual(number, 1)
         } else {
             XCTFail()
         }

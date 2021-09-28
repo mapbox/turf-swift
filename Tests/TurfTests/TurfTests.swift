@@ -168,8 +168,19 @@ class TurfTests: XCTestCase {
                 
                 for (input, output) in zip(input.features, output.features) {
                     let properties = input.properties
-                    let tolerance = (properties?["tolerance"] as? NSNumber)?.doubleValue ?? 0.01
-                    let highQuality = (properties?["highQuality"] as? NSNumber)?.boolValue ?? false
+                    let tolerance: Double
+                    if case let .number(number) = properties?["tolerance"] {
+                        tolerance = number
+                    } else {
+                        tolerance = 0.01
+                    }
+                    
+                    let highQuality: Bool
+                    if case let .boolean(boolean) = properties?["highQuality"] {
+                        highQuality = boolean
+                    } else {
+                        highQuality = false
+                    }
                     
                     switch (input.geometry, output.geometry) {
                     case (.point, .point), (.multiPoint, .multiPoint):

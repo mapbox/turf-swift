@@ -8,11 +8,19 @@ import CoreLocation
  */
 public struct Feature {
     public var identifier: FeatureIdentifier?
-    public var properties: [String : Any?]?
+    public var properties: JSONObject?
     public var geometry: Geometry
     
     public init(geometry: Geometry) {
         self.geometry = geometry
+    }
+}
+
+extension Feature: Equatable {
+    public static func == (lhs: Feature, rhs: Feature) -> Bool {
+        return lhs.identifier == rhs.identifier &&
+            lhs.geometry == rhs.geometry &&
+            lhs.properties == rhs.properties
     }
 }
 
@@ -32,7 +40,7 @@ extension Feature: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         _ = try container.decode(Kind.self, forKey: .kind)
         geometry = try container.decode(Geometry.self, forKey: .geometry)
-        properties = try container.decodeIfPresent([String: Any?].self, forKey: .properties)
+        properties = try container.decodeIfPresent(JSONObject.self, forKey: .properties)
         identifier = try container.decodeIfPresent(FeatureIdentifier.self, forKey: .identifier)
     }
     

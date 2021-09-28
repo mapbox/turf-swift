@@ -4,7 +4,7 @@ import CoreLocation
 #endif
 
 
-public struct GeometryCollection {
+public struct GeometryCollection: Equatable {
     public var geometries: [Geometry]
     
     public init(geometries: [Geometry]) {
