@@ -9,9 +9,9 @@ import CoreLocation
 public struct Feature {
     public var identifier: FeatureIdentifier?
     public var properties: JSONObject?
-    public var geometry: Geometry
+    public var geometry: Geometry?
     
-    public init(geometry: Geometry) {
+    public init(geometry: Geometry?) {
         self.geometry = geometry
     }
 }
@@ -39,7 +39,7 @@ extension Feature: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         _ = try container.decode(Kind.self, forKey: .kind)
-        geometry = try container.decode(Geometry.self, forKey: .geometry)
+        geometry = try container.decodeIfPresent(Geometry.self, forKey: .geometry)
         properties = try container.decodeIfPresent(JSONObject.self, forKey: .properties)
         identifier = try container.decodeIfPresent(FeatureIdentifier.self, forKey: .identifier)
     }
@@ -47,7 +47,7 @@ extension Feature: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(Kind.Feature, forKey: .kind)
-        try container.encodeIfPresent(geometry, forKey: .geometry)
+        try container.encode(geometry, forKey: .geometry)
         try container.encodeIfPresent(properties, forKey: .properties)
         try container.encodeIfPresent(identifier, forKey: .identifier)
     }

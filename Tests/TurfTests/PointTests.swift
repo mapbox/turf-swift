@@ -51,7 +51,7 @@ class PointTests: XCTestCase {
         }
         
         var encodedData: Data?
-        XCTAssertNoThrow(encodedData = try JSONEncoder().encode(GeoJSONObject.geometry(feature.geometry)))
+        XCTAssertNoThrow(encodedData = try JSONEncoder().encode(GeoJSONObject.geometry(XCTUnwrap(feature.geometry))))
         XCTAssertNotNil(encodedData)
         
         var decoded: GeoJSONObject?

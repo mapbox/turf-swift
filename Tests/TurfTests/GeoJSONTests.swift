@@ -136,6 +136,28 @@ class GeoJSONTests: XCTestCase {
         }
     }
     
+    func testFeatureCoding() {
+        let feature = Feature(geometry: nil)
+        XCTAssertNil(feature.geometry)
+        
+        var encodedFeature: Data?
+        XCTAssertNoThrow(encodedFeature = try JSONEncoder().encode(feature))
+        guard let encodedData = encodedFeature else { return XCTFail() }
+        
+        var deserializedFeature: JSONObject?
+        XCTAssertNoThrow(deserializedFeature = try JSONSerialization.jsonObject(with: encodedData, options: []) as? JSONObject)
+        if let geometry = deserializedFeature?["geometry"] {
+            XCTAssertNil(geometry)
+        }
+        
+        var decodedFeature: Feature?
+        XCTAssertNoThrow(decodedFeature = try JSONDecoder().decode(Feature.self, from: encodedData))
+        XCTAssertNotNil(decodedFeature)
+        
+        XCTAssertNil(feature.geometry)
+        XCTAssertEqual(decodedFeature, feature)
+    }
+    
     func testPropertiesCoding() {
         let coordinate = LocationCoordinate2D(latitude: 10, longitude: 30)
         var feature = Feature(geometry: .point(.init(coordinate)))
