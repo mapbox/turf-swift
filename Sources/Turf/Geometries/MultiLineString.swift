@@ -3,14 +3,27 @@ import Foundation
 import CoreLocation
 #endif
 
-
+/**
+ A [MultiLineString geometry](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.5) is a collection of `LineString` geometries that are disconnected but related.
+ */
 public struct MultiLineString: Equatable {
+    /// The positions at which the multi–line string is located. Each nested array corresponds to one line string.
     public var coordinates: [[LocationCoordinate2D]]
     
+    /**
+     Initializes a multi–line string defined by the given positions.
+     
+     - parameter coordinates: The positions at which the multi–line string is located. Each nested array corresponds to one line string.
+     */
     public init(_ coordinates: [[LocationCoordinate2D]]) {
         self.coordinates = coordinates
     }
     
+    /**
+     Initializes a multi–line string coincident to the given polygon’s linear rings.
+     
+     - parameter polygon: The polygon whose linear rings are coincident to the multi–line string.
+     */
     public init(_ polygon: Polygon) {
         self.coordinates = polygon.coordinates
     }

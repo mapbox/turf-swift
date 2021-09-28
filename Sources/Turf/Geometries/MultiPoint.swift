@@ -3,10 +3,18 @@ import Foundation
 import CoreLocation
 #endif
 
-
+/**
+ A [MultiPoint geometry](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.3) represents a collection of disconnected but related positions.
+ */
 public struct MultiPoint: Equatable {
+    /// The positions at which the multipoint is located.
     public var coordinates: [LocationCoordinate2D]
     
+    /**
+     Initializes a multipoint defined by the given positions.
+     
+     - parameter coordinates: The positions at which the multipoint is located.
+     */
     public init(_ coordinates: [LocationCoordinate2D]) {
         self.coordinates = coordinates
     }

@@ -4,15 +4,28 @@ import CoreLocation
 #endif
 
 /**
- A [Geometry object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1) represents points, curves, and surfaces in coordinate space.
+ A [Geometry object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1) represents points, curves, and surfaces in coordinate space. Use an instance of this enumeration whenever a value could be any kind of Geometry object.
  */
 public enum Geometry: Equatable {
+    /// A single position.
     case point(_ geometry: Point)
+    
+    /// A collection of two or more positions, each position connected to the next position linearly.
     case lineString(_ geometry: LineString)
+    
+    /// Conceptually, a collection of `Ring`s that form a single connected geometry.
     case polygon(_ geometry: Polygon)
+    
+    /// A collection of positions that are disconnected but related.
     case multiPoint(_ geometry: MultiPoint)
+    
+    /// A collection of `LineString` geometries that are disconnected but related.
     case multiLineString(_ geometry: MultiLineString)
+    
+    /// A collection of `Polygon` geometries that are disconnected but related.
     case multiPolygon(_ geometry: MultiPolygon)
+    
+    /// A heterogeneous collection of geometries that are related.
     case geometryCollection(_ geometry: GeometryCollection)
 }
 

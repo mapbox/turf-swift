@@ -3,13 +3,22 @@ import Foundation
 import CoreLocation
 #endif
 
-
+/**
+ A [Point geometry](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.2) represents a single position.
+ */
 public struct Point: Equatable {
-    /** Note: The pluralization of `coordinates` is defined
-     in the GeoJSON RFC, so we've kept it for consistency.
-     https://tools.ietf.org/html/rfc7946#section-1.5 */
+    /**
+     The position at which the point is located.
+     
+     This property has a plural name for consistency with [RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.2). For convenience, it is represented by a `LocationCoordinate2D` instead of a dedicated `Position` type.
+     */
     public var coordinates: LocationCoordinate2D
     
+    /**
+     Initializes a point defined by the given position.
+     
+     - parameter coordinates: The position at which the point is located.
+     */
     public init(_ coordinates: LocationCoordinate2D) {
         self.coordinates = coordinates
     }

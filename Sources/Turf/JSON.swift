@@ -9,32 +9,56 @@ public enum JSONValue: Equatable, RawRepresentable {
     public typealias RawValue = Any
     
     // case null would be redundant to Optional.none
+    
+    /// A string.
     case string(_ string: String)
+    
+    /**
+     A floating-point number.
+     
+     JSON does not distinguish numeric types of different precisions. If you need integer precision, cast the value to an `Int`.
+     */
     case number(_ number: Double)
+    
+    /// A Boolean value.
     case boolean(_ bool: Bool)
+    
+    /// A heterogeneous array of JSON values and `null` values.
     case array(_ values: JSONArray)
+    
+    /// An object containing JSON values and `null` values keyed by strings.
     case object(_ properties: JSONObject)
     
+    /// Initializes a JSON value representing the given string.
     public init(_ string: String) {
         self = .string(string)
     }
     
+    /**
+     Initializes a JSON value representing the given integer.
+     
+     - parameter number: An integer. JSON does not distinguish numeric types of different precisions, so the integer is stored as a floating-point number.
+     */
     public init<Source>(_ number: Source) where Source: BinaryInteger {
         self = .number(Double(number))
     }
     
+    /// Initializes a JSON value representing the given floating-point number.
     public init<Source>(_ number: Source) where Source: BinaryFloatingPoint {
         self = .number(Double(number))
     }
     
+    /// Initializes a JSON value representing the given Boolean value.
     public init(_ bool: Bool) {
         self = .boolean(bool)
     }
     
+    /// Initializes a JSON value representing the given JSON array.
     public init(_ values: JSONArray) {
         self = .array(values)
     }
     
+    /// Initializes a JSON value representing the given JSON object.
     public init(_ properties: JSONObject) {
         self = .object(properties)
     }

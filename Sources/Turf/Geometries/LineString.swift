@@ -3,14 +3,27 @@ import Foundation
 import CoreLocation
 #endif
 
-
+/**
+ A [LineString geometry](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.4) is a collection of two or more positions, each position connected to the next position linearly.
+ */
 public struct LineString: Equatable {
+    /// The positions at which the line string is located.
     public var coordinates: [LocationCoordinate2D]
     
+    /**
+     Initializes a line string defined by given positions.
+     
+     - parameter coordinates: The positions at which the line string is located.
+     */
     public init(_ coordinates: [LocationCoordinate2D]) {
         self.coordinates = coordinates
     }
     
+    /**
+     Initializes a line string coincident to the given linear ring.
+     
+     - parameter ring: The linear ring coincident to the line string.
+     */
     public init(_ ring: Ring) {
         self.coordinates = ring.coordinates
     }

@@ -1,17 +1,34 @@
 import Foundation
 
+/**
+ A [feature identifier](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2) identifies a `Feature` object.
+ */
 public enum FeatureIdentifier: Equatable {
-    case string(String)
-    case number(Double)
+    /// A string.
+    case string(_ string: String)
     
+    /**
+     A floating-point number.
+     
+     - parameter number: A floating-point number. JSON does not distinguish numeric types of different precisions. If you need integer precision, cast this associated value to an `Int`.
+     */
+    case number(_ number: Double)
+    
+    /// Initializes a feature identifier representing the given string.
     public init(_ string: String) {
         self = .string(string)
     }
     
+    /**
+     Initializes a feature identifier representing the given integer.
+     
+     - parameter number: An integer. JSON does not distinguish numeric types of different precisions, so the integer is stored as a floating-point number.
+     */
     public init<Source>(_ number: Source) where Source: BinaryInteger {
         self = .number(Double(number))
     }
     
+    /// Initializes a feature identifier representing the given floating-point number.
     public init<Source>(_ number: Source) where Source: BinaryFloatingPoint {
         self = .number(Double(number))
     }
