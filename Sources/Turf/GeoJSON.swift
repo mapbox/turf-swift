@@ -28,6 +28,11 @@ public enum GeoJSONObject: Equatable {
      - parameter featureCollection: The GeoJSON object as a FeatureCollection object.
      */
     case featureCollection(_ featureCollection: FeatureCollection)
+    
+    /// Initializes a GeoJSON object representing the given GeoJSON object–convertible instance.
+    public init(_ object: GeoJSONObjectConvertible) {
+        self = object.geoJSONObject
+    }
 }
 
 extension GeoJSONObject: Codable {
@@ -59,4 +64,24 @@ extension GeoJSONObject: Codable {
             try container.encode(featureCollection)
         }
     }
+}
+
+/**
+ A type that can be represented as a `GeoJSONObject` instance.
+ */
+public protocol GeoJSONObjectConvertible {
+    /// The instance wrapped in a `GeoJSONObject` instance.
+    var geoJSONObject: GeoJSONObject { get }
+}
+
+extension Geometry: GeoJSONObjectConvertible {
+    public var geoJSONObject: GeoJSONObject { return .geometry(self) }
+}
+
+extension Feature: GeoJSONObjectConvertible {
+    public var geoJSONObject: GeoJSONObject { return .feature(self) }
+}
+
+extension FeatureCollection: GeoJSONObjectConvertible {
+    public var geoJSONObject: GeoJSONObject { return .featureCollection(self) }
 }

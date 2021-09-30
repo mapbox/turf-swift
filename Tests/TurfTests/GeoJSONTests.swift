@@ -6,6 +6,29 @@ import struct Turf.Polygon
 import CoreLocation
 
 class GeoJSONTests: XCTestCase {
+    func testConversion() {
+        let nullIsland = LocationCoordinate2D(latitude: 0, longitude: 0)
+        XCTAssertEqual(Geometry(Point(nullIsland)),
+                       .point(Point(nullIsland)))
+        XCTAssertEqual(Geometry(LineString([nullIsland, nullIsland])),
+                       .lineString(LineString([nullIsland, nullIsland])))
+        XCTAssertEqual(Geometry(Polygon([[nullIsland, nullIsland, nullIsland]])),
+                       .polygon(Polygon([[nullIsland, nullIsland, nullIsland]])))
+        XCTAssertEqual(Geometry(MultiPoint([nullIsland, nullIsland, nullIsland])),
+                       .multiPoint(MultiPoint([nullIsland, nullIsland, nullIsland])))
+        XCTAssertEqual(Geometry(MultiLineString([[nullIsland, nullIsland, nullIsland]])),
+                       .multiLineString(MultiLineString([[nullIsland, nullIsland, nullIsland]])))
+        XCTAssertEqual(Geometry(MultiPolygon([[[nullIsland, nullIsland, nullIsland]]])),
+                       .multiPolygon(MultiPolygon([[[nullIsland, nullIsland, nullIsland]]])))
+        XCTAssertEqual(Geometry(GeometryCollection(geometries: [])),
+                       .geometryCollection(GeometryCollection(geometries: [])))
+        
+        XCTAssertEqual(GeoJSONObject(Geometry(Point(nullIsland))), .geometry(.point(.init(nullIsland))))
+        XCTAssertEqual(GeoJSONObject(Feature(geometry: nil)), .feature(.init(geometry: nil)))
+        let nullGeometry: Geometry? = nil
+        XCTAssertEqual(GeoJSONObject(Feature(geometry: nullGeometry)), .feature(.init(geometry: nil)))
+        XCTAssertEqual(GeoJSONObject(FeatureCollection(features: [])), .featureCollection(.init(features: [])))
+    }
     
     func testPoint() {
         let coordinate = LocationCoordinate2D(latitude: 10, longitude: 30)

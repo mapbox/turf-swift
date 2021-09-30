@@ -27,6 +27,11 @@ public enum Geometry: Equatable {
     
     /// A heterogeneous collection of geometries that are related.
     case geometryCollection(_ geometry: GeometryCollection)
+    
+    /// Initializes a geometry representing the given geometry–convertible instance.
+    public init(_ geometry: GeometryConvertible) {
+        self = geometry.geometry
+    }
 }
 
 extension Geometry: Codable {
@@ -84,4 +89,44 @@ extension Geometry: Codable {
             try container.encode(geometryCollection)
         }
     }
+}
+
+/**
+ A type that can be represented as a `Geometry` instance.
+ */
+public protocol GeometryConvertible {
+    /// The instance wrapped in a `Geometry` instance.
+    var geometry: Geometry { get }
+}
+
+extension Geometry: GeometryConvertible {
+    public var geometry: Geometry { return self }
+}
+
+extension Point: GeometryConvertible {
+    public var geometry: Geometry { return .point(self) }
+}
+
+extension LineString: GeometryConvertible {
+    public var geometry: Geometry { return .lineString(self) }
+}
+
+extension Polygon: GeometryConvertible {
+    public var geometry: Geometry { return .polygon(self) }
+}
+
+extension MultiPoint: GeometryConvertible {
+    public var geometry: Geometry { return .multiPoint(self) }
+}
+
+extension MultiLineString: GeometryConvertible {
+    public var geometry: Geometry { return .multiLineString(self) }
+}
+
+extension MultiPolygon: GeometryConvertible {
+    public var geometry: Geometry { return .multiPolygon(self) }
+}
+
+extension GeometryCollection: GeometryConvertible {
+    public var geometry: Geometry { return .geometryCollection(self) }
 }

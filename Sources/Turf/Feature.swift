@@ -25,8 +25,17 @@ public struct Feature: Equatable {
      
      - parameter geometry: The geometry at which the feature is located.
      */
-    public init(geometry: Geometry?) {
+    public init(geometry: Geometry) {
         self.geometry = geometry
+    }
+    
+    /**
+     Initializes a feature defined by the given geometry-convertible instance.
+     
+     - parameter geometry: The geometry-convertible instance that bounds the feature.
+     */
+    public init(geometry: GeometryConvertible?) {
+        self.geometry = geometry?.geometry
     }
 }
 
