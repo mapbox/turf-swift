@@ -27,9 +27,9 @@ public enum JSONValue: Equatable {
     /// An object containing JSON values and `null` values keyed by strings.
     case object(_ properties: JSONObject)
     
-    /// Initializes a JSON value representing the given string.
-    public init(_ string: String) {
-        self = .string(string)
+    /// Initializes a JSON value representing the given JSON value–convertible instance.
+    public init(_ value: JSONValueConvertible) {
+        self = value.jsonValue
     }
     
     /**
@@ -38,27 +38,22 @@ public enum JSONValue: Equatable {
      - parameter number: An integer. JSON does not distinguish numeric types of different precisions, so the integer is stored as a floating-point number.
      */
     public init<Source>(_ number: Source) where Source: BinaryInteger {
-        self = .number(Double(number))
+        self.init(Double(number))
     }
     
     /// Initializes a JSON value representing the given floating-point number.
     public init<Source>(_ number: Source) where Source: BinaryFloatingPoint {
-        self = .number(Double(number))
+        self.init(Double(number))
     }
     
-    /// Initializes a JSON value representing the given Boolean value.
-    public init(_ bool: Bool) {
-        self = .boolean(bool)
+    /// Initializes a JSON value representing the given JSON-convertible array.
+    public init(_ values: [JSONValueConvertible?]) {
+        self = .array(JSONArray(values))
     }
     
-    /// Initializes a JSON value representing the given JSON array.
-    public init(_ values: JSONArray) {
-        self = .array(values)
-    }
-    
-    /// Initializes a JSON value representing the given JSON object.
-    public init(_ properties: JSONObject) {
-        self = .object(properties)
+    /// Initializes a JSON value representing the given JSON-convertible object.
+    public init(_ properties: [String: JSONValueConvertible?]) {
+        self = .object(JSONObject(properties))
     }
 }
 
@@ -105,6 +100,13 @@ extension JSONValue: RawRepresentable {
  */
 public typealias JSONArray = [JSONValue?]
 
+extension JSONArray {
+    public init(_ elements: [JSONValueConvertible?]) {
+        let values = elements.map { $0?.jsonValue }
+        self.init(values)
+    }
+}
+
 extension JSONArray: RawRepresentable {
     public typealias RawValue = [Any?]
     
@@ -122,6 +124,12 @@ extension JSONArray: RawRepresentable {
  */
 public typealias JSONObject = [String: JSONValue?]
 
+extension JSONObject {
+    public init(_ elements: [String: JSONValueConvertible?]) {
+        self.init(uniqueKeysWithValues: elements.map { ($0.0, $0.1?.jsonValue) })
+    }
+}
+
 extension JSONObject: RawRepresentable {
     public typealias RawValue = [String: Any?]
     
@@ -136,42 +144,42 @@ extension JSONObject: RawRepresentable {
 
 extension JSONValue: ExpressibleByStringLiteral {
     public init(stringLiteral value: StringLiteralType) {
-        self = .init(value)
+        self.init(value)
     }
 }
 
 extension JSONValue: ExpressibleByIntegerLiteral {
     public init(integerLiteral value: IntegerLiteralType) {
-        self = .init(value)
+        self.init(value)
     }
 }
 
 extension JSONValue: ExpressibleByFloatLiteral {
     public init(floatLiteral value: FloatLiteralType) {
-        self = .init(value)
+        self.init(value)
     }
 }
 
 extension JSONValue: ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: BooleanLiteralType) {
-        self = .init(value)
+        self.init(value)
     }
 }
 
 extension JSONValue: ExpressibleByArrayLiteral {
-    public typealias ArrayLiteralElement = JSONValue?
+    public typealias ArrayLiteralElement = JSONValueConvertible?
     
     public init(arrayLiteral elements: ArrayLiteralElement...) {
-        self = .init(elements)
+        self.init(elements)
     }
 }
 
 extension JSONValue: ExpressibleByDictionaryLiteral {
     public typealias Key = String
-    public typealias Value = JSONValue?
+    public typealias Value = JSONValueConvertible?
     
     public init(dictionaryLiteral elements: (Key, Value)...) {
-        self = .init(.init(uniqueKeysWithValues: elements))
+        self = .object(JSONObject(uniqueKeysWithValues: elements.map { ($0.0, $0.1?.jsonValue) }))
     }
 }
 
@@ -207,5 +215,41 @@ extension JSONValue: Codable {
         case let .array(value):
             try container.encode(value)
         }
+    }
+}
+
+/**
+ A type that can be represented as a `JSONValue` instance.
+ */
+public protocol JSONValueConvertible {
+    /// The instance wrapped in a `JSONValue` instance.
+    var jsonValue: JSONValue { get }
+}
+
+extension String: JSONValueConvertible {
+    public var jsonValue: JSONValue { return .string(self) }
+}
+
+extension Int: JSONValueConvertible {
+    public var jsonValue: JSONValue { return .number(Double(self)) }
+}
+
+extension Double: JSONValueConvertible {
+    public var jsonValue: JSONValue { return .number(Double(self)) }
+}
+
+extension Bool: JSONValueConvertible {
+    public var jsonValue: JSONValue { return .boolean(self) }
+}
+
+extension Array: JSONValueConvertible where Element == JSONValueConvertible? {
+    public var jsonValue: JSONValue {
+        return .array(map { $0?.jsonValue })
+    }
+}
+
+extension Dictionary: JSONValueConvertible where Key == String, Value == JSONValueConvertible? {
+    public var jsonValue: JSONValue {
+        return .object(JSONObject(uniqueKeysWithValues: map { ($0.0, $0.1?.jsonValue) }))
     }
 }
