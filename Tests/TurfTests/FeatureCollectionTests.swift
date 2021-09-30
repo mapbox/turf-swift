@@ -94,35 +94,55 @@ class FeatureCollectionTests: XCTestCase {
         XCTAssert(geojson.decoded is FeatureCollection)
     }
     
-    func testPerformanceDecodeFeatureCollection() {
-        let data = try! Fixture.geojsonData(from: "featurecollection")!
-        
+    func testPerformanceDecodeSmallFeatureCollection() {
+        let johannesburg = try! Fixture.geojsonData(from: "featurecollection")!
         measure {
             for _ in 0...100 {
-                _ = try! GeoJSON.parse(FeatureCollection.self, from: data)
+                _ = try! GeoJSON.parse(FeatureCollection.self, from: johannesburg)
             }
         }
     }
     
-    func testPerformanceEncodeFeatureCollection() {
-        let data = try! Fixture.geojsonData(from: "featurecollection")!
-        let decoded = try! GeoJSON.parse(FeatureCollection.self, from: data)
-        
+    func testPerformanceDecodeLargeFeatureCollection() {
+        let navajo = try! Fixture.geojsonData(from: "navajo")!
+        measure {
+            _ = try! GeoJSON.parse(FeatureCollection.self, from: navajo)
+        }
+    }
+    
+    func testPerformanceEncodeSmallFeatureCollection() {
+        let johannesburg = try! Fixture.geojsonData(from: "featurecollection")!
+        let johannesburgDecoded = try! GeoJSON.parse(FeatureCollection.self, from: johannesburg)
         measure {
             for _ in 0...100 {
-                _ = try! JSONEncoder().encode(decoded)
+                _ = try! JSONEncoder().encode(johannesburgDecoded)
             }
         }
     }
     
-    func testPerformanceDecodeEncodeFeatureCollection() {
-        let data = try! Fixture.geojsonData(from: "featurecollection")!
-        
+    func testPerformanceEncodeLargeFeatureCollection() {
+        let navajo = try! Fixture.geojsonData(from: "navajo")!
+        let navajoDecoded = try! GeoJSON.parse(FeatureCollection.self, from: navajo)
+        measure {
+            _ = try! JSONEncoder().encode(navajoDecoded)
+        }
+    }
+    
+    func testPerformanceDecodeEncodeSmallFeatureCollection() {
+        let johannesburg = try! Fixture.geojsonData(from: "featurecollection")!
         measure {
             for _ in 0...100 {
-                let decoded = try! GeoJSON.parse(FeatureCollection.self, from: data)
-                _ = try! JSONEncoder().encode(decoded)
+                let johannesburgDecoded = try! GeoJSON.parse(FeatureCollection.self, from: johannesburg)
+                _ = try! JSONEncoder().encode(johannesburgDecoded)
             }
+        }
+    }
+    
+    func testPerformanceDecodeEncodeLargeFeatureCollection() {
+        let navajo = try! Fixture.geojsonData(from: "navajo")!
+        measure {
+            let navajoDecoded = try! GeoJSON.parse(FeatureCollection.self, from: navajo)
+            _ = try! JSONEncoder().encode(navajoDecoded)
         }
     }
     

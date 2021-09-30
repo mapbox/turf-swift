@@ -153,6 +153,9 @@
 		DA39EB80201023E4004D87F7 /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3547ECFD200C3C82009DA062 /* Fixture.swift */; };
 		DA39EB81201024A3004D87F7 /* dc-line.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3547ECFB200C3C82009DA062 /* dc-line.geojson */; };
 		DA39EB82201024A3004D87F7 /* polygon.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3547ECFC200C3C82009DA062 /* polygon.geojson */; };
+		DA4A8EDB27059C490071C85C /* navajo.geojson in Resources */ = {isa = PBXBuildFile; fileRef = DA4A8EDA27059C480071C85C /* navajo.geojson */; };
+		DA4A8EDC27059C490071C85C /* navajo.geojson in Resources */ = {isa = PBXBuildFile; fileRef = DA4A8EDA27059C480071C85C /* navajo.geojson */; };
+		DA4A8EDD27059C490071C85C /* navajo.geojson in Resources */ = {isa = PBXBuildFile; fileRef = DA4A8EDA27059C480071C85C /* navajo.geojson */; };
 		DA9424A32010296300CDB4E6 /* Turf.h in Headers */ = {isa = PBXBuildFile; fileRef = 3547ECEF200C3C78009DA062 /* Turf.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA9424A42010298300CDB4E6 /* CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3547ECF0200C3C78009DA062 /* CoreLocation.swift */; };
 		DA9424A52010298300CDB4E6 /* Turf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3547ECF1200C3C78009DA062 /* Turf.swift */; };
@@ -234,6 +237,7 @@
 		CE7F8163215182FF00A9D221 /* BoundingBoxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBoxTests.swift; sourceTree = "<group>"; };
 		DA39EB6520101F98004D87F7 /* Turf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Turf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA39EB6D20101F99004D87F7 /* TurfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA4A8EDA27059C480071C85C /* navajo.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = navajo.geojson; sourceTree = "<group>"; };
 		DA94249B2010283900CDB4E6 /* Turf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Turf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -363,6 +367,7 @@
 				2B5FABFB24066EA5008A285F /* geometry-collection.geojson */,
 				357495BD208E3432007D7477 /* featurecollection.geojson */,
 				C46809D52124199500BAD5E1 /* featurecollection-no-properties.geojson */,
+				DA4A8EDA27059C480071C85C /* navajo.geojson */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -648,6 +653,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C46809D821249E8F00BAD5E1 /* featurecollection-no-properties.geojson in Resources */,
+				DA4A8EDC27059C490071C85C /* navajo.geojson in Resources */,
 				3534C3BB200C419200F93581 /* polygon.geojson in Resources */,
 				3516685B202EFE690032A97E /* multiline.geojson in Resources */,
 				3502F7A8201F616E00399EFE /* simple-line.geojson in Resources */,
@@ -672,6 +678,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C46809D721241B5100BAD5E1 /* featurecollection-no-properties.geojson in Resources */,
+				DA4A8EDB27059C490071C85C /* navajo.geojson in Resources */,
 				3534C3B9200C419100F93581 /* polygon.geojson in Resources */,
 				3516685A202EFE690032A97E /* multiline.geojson in Resources */,
 				3502F7A7201F616E00399EFE /* simple-line.geojson in Resources */,
@@ -696,6 +703,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C46809D921249E9700BAD5E1 /* featurecollection-no-properties.geojson in Resources */,
+				DA4A8EDD27059C490071C85C /* navajo.geojson in Resources */,
 				DA39EB82201024A3004D87F7 /* polygon.geojson in Resources */,
 				3516685C202EFE690032A97E /* multiline.geojson in Resources */,
 				3502F7A9201F616E00399EFE /* simple-line.geojson in Resources */,
