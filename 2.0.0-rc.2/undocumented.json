@@ -1,0 +1,89 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/Feature.swift",
+      "line": 10,
+      "symbol": "Feature.identifier",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/Feature.swift",
+      "line": 11,
+      "symbol": "Feature.properties",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/Feature.swift",
+      "line": 12,
+      "symbol": "Feature.geometry",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/Feature.swift",
+      "line": 14,
+      "symbol": "Feature.init(geometry:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/FeatureCollection.swift",
+      "line": 7,
+      "symbol": "FeatureCollection.features",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/FeatureCollection.swift",
+      "line": 9,
+      "symbol": "FeatureCollection.init(features:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/Geometries/MultiPolygon.swift",
+      "line": 60,
+      "symbol": "MultiPolygon.polygons",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/RadianCoordinate2D.swift",
+      "line": 6,
+      "symbol": "LocationRadians",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/RadianCoordinate2D.swift",
+      "line": 7,
+      "symbol": "RadianDistance",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/RadianCoordinate2D.swift",
+      "line": 17,
+      "symbol": "RadianCoordinate2D.init(latitude:longitude:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/RadianCoordinate2D.swift",
+      "line": 22,
+      "symbol": "RadianCoordinate2D.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/Turf.swift",
+      "line": 10,
+      "symbol": "LineSegment",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/mxn/hub/turf-swift"
+}
