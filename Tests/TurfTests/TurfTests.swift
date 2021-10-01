@@ -187,11 +187,11 @@ class TurfTests: XCTestCase {
                         break // nothing to simplify
                     
                     case let (.lineString(lineIn), .lineString(lineOut)):
-                        let simplified = lineIn.simplify(tolerance: tolerance, highestQuality: highQuality)
+                        let simplified = lineIn.simplified(tolerance: tolerance, highestQuality: highQuality)
                         XCTAssertEqual(lineOut.coordinates, simplified.coordinates, accuracy: 0.00001, "Fixture test failed for \(name)")
 
                     case let (.polygon(polyIn), .polygon(polyOut)):
-                        let simplified = polyIn.simplify(tolerance: tolerance, highestQuality: highQuality)
+                        let simplified = polyIn.simplified(tolerance: tolerance, highestQuality: highQuality)
                         XCTAssertEqual(polyOut.coordinates, simplified.coordinates, accuracy: 0.00001, "Fixture test failed for \(name)")
 
                     default:
