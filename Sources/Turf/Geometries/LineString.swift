@@ -13,6 +13,8 @@ public struct LineString: Equatable {
     /**
      Initializes a line string defined by given positions.
      
+     This initializer is equivalent to the [`lineString`](https://turfjs.org/docs/#lineString) function in the turf-helpers package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/)).
+     
      - parameter coordinates: The positions at which the line string is located.
      */
     public init(_ coordinates: [LocationCoordinate2D]) {
@@ -21,6 +23,8 @@ public struct LineString: Equatable {
     
     /**
      Initializes a line string coincident to the given linear ring.
+     
+     This initializer is roughly equivalent to the [`polygon-to-line`](https://turfjs.org/docs/#polygonToLine) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-polygon-to-line/)), except that it accepts a linear ring instead of a full polygon.
      
      - parameter ring: The linear ring coincident to the line string.
      */
@@ -54,10 +58,13 @@ extension LineString: Codable {
 }
 
 extension LineString {
-    /// Returns a new `.LineString` based on bezier transformation of the input line.
-    ///
-    /// ported from https://github.com/Turfjs/turf/blob/1ea264853e1be7469c8b7d2795651c9114a069aa/packages/turf-bezier-spline/index.ts
+    /**
+     Returns the line string transformed into an approximation of a curve by applying a Bézier spline algorithm.
+     
+     This method is equivalent to the [turf-bezier-spline](https://turfjs.org/docs/#bezierSpline) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-bezier-spline/)).
+     */
     public func bezier(resolution: Int = 10000, sharpness: Double = 0.85) -> LineString? {
+        // Ported from https://github.com/Turfjs/turf/blob/1ea264853e1be7469c8b7d2795651c9114a069aa/packages/turf-bezier-spline/index.ts
         let points = coordinates.map {
             SplinePoint(coordinate: $0)
         }
@@ -70,7 +77,11 @@ extension LineString {
         return LineString(coords)
     }
     
-    /// Returns a `.LineString` along a `.LineString` within a distance from a coordinate.
+    /**
+     Returns the portion of the line string that begins at the given coordinate and extends the given distance along the line string.
+     
+     This method is roughly equivalent to the [turf-line-slice-along](https://turfjs.org/docs/#lineSliceAlong) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-line-slice-along/)), except that it accepts a starting position instead of a starting distance along the line string.
+     */
     public func trimmed(from coordinate: LocationCoordinate2D, distance: LocationDistance) -> LineString? {
         let startVertex = closestCoordinate(to: coordinate)
         guard startVertex != nil && distance != 0 else {
@@ -113,9 +124,9 @@ extension LineString {
         return LineString(vertices)
     }
     
-    /// `IndexedCoordinate` is a coordinate with additional information such as
-    /// the index from its position in the polyline and distance from the start
-    /// of the polyline.
+    /**
+     `IndexedCoordinate` is a coordinate with additional information such as the index from its position in the polyline and distance from the start of the polyline.
+     */
     public struct IndexedCoordinate {
         /// The coordinate
         public let coordinate: Array<LocationCoordinate2D>.Element
@@ -125,15 +136,20 @@ extension LineString {
         public let distance: LocationDistance
     }
     
-    /// Returns a coordinate along a `.LineString` at a certain distance from the start of the polyline.
+    /**
+     Returns a coordinate along a line string at a certain distance from the start of the polyline.
+     
+     This method is equivalent to the [turf-along](https://turfjs.org/docs/#along) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-along/)).
+     */
     public func coordinateFromStart(distance: LocationDistance) -> LocationCoordinate2D? {
         return indexedCoordinateFromStart(distance: distance)?.coordinate
     }
     
-    /// Returns an indexed coordinate along a `.LineString` at a certain distance from the start of the polyline.
-    ///
-    /// Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-along/index.js
+    /**
+     Returns an indexed coordinate along a line string at a certain distance from the start of the polyline.
+     */
     public func indexedCoordinateFromStart(distance: LocationDistance) -> IndexedCoordinate? {
+        // Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-along/index.js
         var traveled: LocationDistance = 0
         
         guard let firstCoordinate = coordinates.first else {
@@ -166,10 +182,13 @@ extension LineString {
     }
     
     
-    /// Returns the distance along a slice of a `.LineString` with the given endpoints.
-    ///
-    /// Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-line-slice/index.js
+    /**
+     Returns the distance along a slice of the line string with the given endpoints.
+     
+     If the `start` and `end` arguments are unspecified, this method is equivalent to the [turf-length](https://turfjs.org/docs/#length) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-length/)).
+     */
     public func distance(from start: LocationCoordinate2D? = nil, to end: LocationCoordinate2D? = nil) -> LocationDistance? {
+        // Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-line-slice/index.js
         guard !coordinates.isEmpty else { return nil }
         
         guard let slicedCoordinates = sliced(from: start, to: end)?.coordinates else {
@@ -180,10 +199,13 @@ extension LineString {
         return zippedCoordinates.map { $0.distance(to: $1) }.reduce(0, +)
     }
     
-    /// Returns a subset of the `.LineString` between given coordinates.
-    ///
-    /// Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-line-slice/index.js
+    /**
+     Returns a subset of the line string between two given coordinates.
+     
+     This method is equivalent to the [turf-line-slice](https://turfjs.org/docs/#lineSlice) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-line-slice/)).
+     */
     public func sliced(from start: LocationCoordinate2D? = nil, to end: LocationCoordinate2D? = nil) -> LineString? {
+        // Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-line-slice/index.js
         guard !coordinates.isEmpty else { return nil }
                 
         let startVertex = (start != nil ? closestCoordinate(to: start!) : nil) ?? IndexedCoordinate(coordinate: coordinates.first!, index: 0, distance: 0)
@@ -204,12 +226,15 @@ extension LineString {
         return LineString(coords)
     }
     
-    /// Returns the geographic coordinate along the `.LineString` that is closest to the given coordinate as the crow flies.
-    /// The returned coordinate may not correspond to one of the polyline’s vertices, but it always lies along the polyline.
-    ///
-    /// Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-point-on-line/index.js
-    
+    /**
+     Returns the geographic coordinate along the line string that is closest to the given coordinate as the crow flies.
+     
+     The returned coordinate may not correspond to one of the polyline’s vertices, but it always lies along the polyline.
+     
+     This method is equivalent to the [turf-nearest-point-on-line](https://turfjs.org/docs/#nearestPointOnLine) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-nearest-point-on-line/)).
+     */
     public func closestCoordinate(to coordinate: LocationCoordinate2D) -> IndexedCoordinate? {
+        // Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-point-on-line/index.js
         guard let startCoordinate = coordinates.first else { return nil }
         
         guard coordinates.count > 1 else {
@@ -253,15 +278,17 @@ extension LineString {
         return closestCoordinate
     }
 
-    /// Returns a copy of the LineString with the Ramer–Douglas–Peucker algorithm applied to it.
-    ///
-    /// tolerance:  Controls the level of simplification by specifying the maximum allowed distance between the original line point
-    /// and the simplified point. Higher tolerance values results in higher simplification.
-    /// 
-    /// highestQuality: Excludes distance-based preprocessing step which leads to highest quality simplification. High quality simplification runs considerably slower so consider how much precision is needed in your application.
-    ///
-    /// Ported from https://github.com/Turfjs/turf/blob/master/packages/turf-simplify/lib/simplify.js
+    /**
+     Returns a copy of the line string simplified using the Ramer–Douglas–Peucker algorithm.
+     
+     This method is equivalent to the [turf-simplify](https://turfjs.org/docs/#simplify) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-simplify/)).
+     
+     - parameter tolerance: Controls the level of simplification by specifying the maximum allowed distance between the original line point and the simplified point. A higher tolerance value results in higher simplification.
+     - parameter highestQuality: Excludes the distance-based preprocessing step that leads to highest-quality simplification. High-quality simplification runs considerably slower, so consider how much precision is needed in your application.
+     - returns: A simplified line string.
+     */
     public func simplified(tolerance: Double = 1.0, highestQuality: Bool = false) -> LineString {
+        // Ported from https://github.com/Turfjs/turf/blob/4e8342acb1dbd099f5e91c8ee27f05fb2647ee1b/packages/turf-simplify/lib/simplify.js
         guard coordinates.count > 2 else { return LineString(coordinates) }
 
         var copy = LineString(coordinates)
@@ -269,15 +296,16 @@ extension LineString {
         return copy
     }
 
-    /// Mutates the LineString into a simplified version using the Ramer–Douglas–Peucker algorithm.
-    ///
-    /// tolerance:  Controls the level of simplification by specifying the maximum allowed distance between the original line point
-    /// and the simplified point. Higher tolerance values results in higher simplification.
-    ///
-    /// highestQuality: Excludes distance-based preprocessing step which leads to highest quality simplification. High quality simplification runs considerably slower so consider how much precision is needed in your application.
-    ///
-    /// Ported from https://github.com/Turfjs/turf/blob/master/packages/turf-simplify/lib/simplify.js
+    /**
+     Simplifies the line string in place using the Ramer–Douglas–Peucker algorithm.
+     
+     This method is nearly equivalent to the [turf-simplify](https://turfjs.org/docs/#simplify) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-simplify/)), except that it mutates the line string it is called on.
+     
+     - parameter tolerance: Controls the level of simplification by specifying the maximum allowed distance between the original line point and the simplified point. A higher tolerance value results in higher simplification.
+     - parameter highestQuality: Excludes the distance-based preprocessing step that leads to highest-quality simplification. High-quality simplification runs considerably slower, so consider how much precision is needed in your application.
+     */
     public mutating func simplify(tolerance: Double = 1.0, highestQuality: Bool = false) {
+        // Ported from https://github.com/Turfjs/turf/blob/4e8342acb1dbd099f5e91c8ee27f05fb2647ee1b/packages/turf-simplify/lib/simplify.js
         coordinates = Simplifier.simplify(coordinates, tolerance: tolerance, highestQuality: highestQuality)
     }
 }

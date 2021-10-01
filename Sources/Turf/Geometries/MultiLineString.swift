@@ -22,6 +22,8 @@ public struct MultiLineString: Equatable {
     /**
      Initializes a multi–line string coincident to the given polygon’s linear rings.
      
+     This initializer is equivalent to the [`polygon-to-line`](https://turfjs.org/docs/#polygonToLine) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-polygon-to-line/)).
+     
      - parameter polygon: The polygon whose linear rings are coincident to the multi–line string.
      */
     public init(_ polygon: Polygon) {
