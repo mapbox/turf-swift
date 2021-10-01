@@ -261,11 +261,11 @@ extension LineString {
     /// highestQuality: Excludes distance-based preprocessing step which leads to highest quality simplification. High quality simplification runs considerably slower so consider how much precision is needed in your application.
     ///
     /// Ported from https://github.com/Turfjs/turf/blob/master/packages/turf-simplify/lib/simplify.js
-    public func simplify(tolerance: Double = 1.0, highestQuality: Bool = false) -> LineString {
+    public func simplified(tolerance: Double = 1.0, highestQuality: Bool = false) -> LineString {
         guard coordinates.count > 2 else { return LineString(coordinates) }
 
         var copy = LineString(coordinates)
-        copy.simplified(tolerance: tolerance, highestQuality: highestQuality)
+        copy.simplify(tolerance: tolerance, highestQuality: highestQuality)
         return copy
     }
 
@@ -277,7 +277,7 @@ extension LineString {
     /// highestQuality: Excludes distance-based preprocessing step which leads to highest quality simplification. High quality simplification runs considerably slower so consider how much precision is needed in your application.
     ///
     /// Ported from https://github.com/Turfjs/turf/blob/master/packages/turf-simplify/lib/simplify.js
-    public mutating func simplified(tolerance: Double = 1.0, highestQuality: Bool = false) {
+    public mutating func simplify(tolerance: Double = 1.0, highestQuality: Bool = false) {
         coordinates = Simplifier.simplify(coordinates, tolerance: tolerance, highestQuality: highestQuality)
     }
 }
