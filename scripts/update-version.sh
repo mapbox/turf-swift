@@ -39,6 +39,12 @@ elif [[ $SHORT_VERSION != $SEM_VERSION ]]; then
     sed -i '' -E "s/:tag => 'v[^']+'/:tag => 'v${SEM_VERSION}'/g; s/\"mapbox\/turf-swift\" \"v[^\"]+\"/\"mapbox\/turf-swift\" \"v${SEM_VERSION}\"/g; s/\.exact\(\"*[^\"]+/.exact(\"${SEM_VERSION}/g" README.md
 fi
 
+# Skip updating the documentation badge for prereleases.
+if [[ $SHORT_VERSION == $SEM_VERSION ]]; then
+    step "Updating readmes to version ${SEM_VERSION}…"
+    sed -i '' -E "s/turf-swift\/${MINOR_VERSION}\/badge.svg/g; s/turf-swift\/${SEM_VERSION}\/badge.svg/g" README.md
+fi
+
 step "Updating copyright year to ${YEAR}…"
 
 sed -i '' -E "s/© ([0-9]{4})[–-][0-9]{4}/© \\1–${YEAR}/g" LICENSE.md docs/jazzy.yml
