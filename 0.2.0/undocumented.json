@@ -1,0 +1,649 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/Codable.swift",
+      "line": 6,
+      "symbol": "JSONType",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/Codable.swift",
+      "line": 7,
+      "symbol": "JSONType.jsonValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/Codable.swift",
+      "line": 11,
+      "symbol": "Int.jsonValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/Codable.swift",
+      "line": 14,
+      "symbol": "String.jsonValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/Codable.swift",
+      "line": 17,
+      "symbol": "Double.jsonValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/Codable.swift",
+      "line": 20,
+      "symbol": "Bool.jsonValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/Codable.swift",
+      "line": 23,
+      "symbol": "AnyJSONType",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/Codable.swift",
+      "line": 24,
+      "symbol": "AnyJSONType.jsonValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/FeatureIdentifier.swift",
+      "line": 3,
+      "symbol": "Number",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/FeatureIdentifier.swift",
+      "line": 4,
+      "symbol": "Number.int(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/FeatureIdentifier.swift",
+      "line": 5,
+      "symbol": "Number.double(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/FeatureIdentifier.swift",
+      "line": 17,
+      "symbol": "Number",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/FeatureIdentifier.swift",
+      "line": 42,
+      "symbol": "FeatureIdentifier",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/FeatureIdentifier.swift",
+      "line": 43,
+      "symbol": "FeatureIdentifier.string(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/FeatureIdentifier.swift",
+      "line": 44,
+      "symbol": "FeatureIdentifier.number(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/FeatureIdentifier.swift",
+      "line": 56,
+      "symbol": "FeatureIdentifier",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 6,
+      "symbol": "GeoJSONObject",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 7,
+      "symbol": "GeoJSONObject.identifier",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 8,
+      "symbol": "GeoJSONObject.properties",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 17,
+      "symbol": "FeatureVariant",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 18,
+      "symbol": "FeatureVariant.pointFeature(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 19,
+      "symbol": "FeatureVariant.lineStringFeature(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 20,
+      "symbol": "FeatureVariant.polygonFeature(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 21,
+      "symbol": "FeatureVariant.multiPointFeature(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 22,
+      "symbol": "FeatureVariant.multiLineStringFeature(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 23,
+      "symbol": "FeatureVariant.multiPolygonFeature(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 43,
+      "symbol": "FeatureVariant",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 81,
+      "symbol": "Feature",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 82,
+      "symbol": "Feature.type",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 104,
+      "symbol": "PointFeature",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 105,
+      "symbol": "PointFeature.identifier",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 106,
+      "symbol": "PointFeature.geometry",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 107,
+      "symbol": "PointFeature.properties",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 124,
+      "symbol": "LineStringFeature",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 125,
+      "symbol": "LineStringFeature.identifier",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 126,
+      "symbol": "LineStringFeature.geometry",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 127,
+      "symbol": "LineStringFeature.properties",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 144,
+      "symbol": "PolygonFeature",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 145,
+      "symbol": "PolygonFeature.identifier",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 146,
+      "symbol": "PolygonFeature.geometry",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 147,
+      "symbol": "PolygonFeature.properties",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 164,
+      "symbol": "MultiPolygonFeature",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 165,
+      "symbol": "MultiPolygonFeature.identifier",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 166,
+      "symbol": "MultiPolygonFeature.geometry",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 167,
+      "symbol": "MultiPolygonFeature.properties",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 184,
+      "symbol": "MultiPointFeature",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 185,
+      "symbol": "MultiPointFeature.identifier",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 186,
+      "symbol": "MultiPointFeature.geometry",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 187,
+      "symbol": "MultiPointFeature.properties",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 204,
+      "symbol": "MultiLineStringFeature",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 205,
+      "symbol": "MultiLineStringFeature.identifier",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 206,
+      "symbol": "MultiLineStringFeature.geometry",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 207,
+      "symbol": "MultiLineStringFeature.properties",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 224,
+      "symbol": "FeatureCollection",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 225,
+      "symbol": "FeatureCollection.identifier",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 226,
+      "symbol": "FeatureCollection.features",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 227,
+      "symbol": "FeatureCollection.properties",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 251,
+      "symbol": "GeoJSONType",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 252,
+      "symbol": "GeoJSONType.Feature",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 253,
+      "symbol": "GeoJSONType.FeatureCollection",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 257,
+      "symbol": "GeoJSONError",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 258,
+      "symbol": "GeoJSONError.unknownType",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 259,
+      "symbol": "GeoJSONError.noTypeFound",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/GeoJSON.swift",
+      "line": 262,
+      "symbol": "GeoJSON",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/Geometry.swift",
+      "line": 6,
+      "symbol": "GeometryType",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/Geometry.swift",
+      "line": 7,
+      "symbol": "GeometryType.Point",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/Geometry.swift",
+      "line": 8,
+      "symbol": "GeometryType.LineString",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/Geometry.swift",
+      "line": 9,
+      "symbol": "GeometryType.Polygon",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/Geometry.swift",
+      "line": 10,
+      "symbol": "GeometryType.MultiPoint",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/Geometry.swift",
+      "line": 11,
+      "symbol": "GeometryType.MultiLineString",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/Geometry.swift",
+      "line": 12,
+      "symbol": "GeometryType.MultiPolygon",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/Geometry.swift",
+      "line": 17,
+      "symbol": "Geometry",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/Geometry.swift",
+      "line": 18,
+      "symbol": "Geometry.type",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/Geometry.swift",
+      "line": 20,
+      "symbol": "Geometry.geometryType",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/Geometry.swift",
+      "line": 26,
+      "symbol": "Polyline",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/Geometry.swift",
+      "line": 33,
+      "symbol": "Point.coordinates",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/Geometry.swift",
+      "line": 41,
+      "symbol": "LineString.coordinates",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/Geometry.swift",
+      "line": 49,
+      "symbol": "Polygon.coordinates",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/Geometry.swift",
+      "line": 55,
+      "symbol": "Polygon.innerRings",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/Geometry.swift",
+      "line": 59,
+      "symbol": "Polygon.outerRing",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/Geometry.swift",
+      "line": 69,
+      "symbol": "MultiPoint.coordinates",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/Geometry.swift",
+      "line": 77,
+      "symbol": "MultiLineString.coordinates",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/GeoJSON/Geometry.swift",
+      "line": 85,
+      "symbol": "MultiPolygon.coordinates",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/Turf.swift",
+      "line": 6,
+      "symbol": "LocationRadians",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/Turf.swift",
+      "line": 7,
+      "symbol": "RadianDistance",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/Turf.swift",
+      "line": 8,
+      "symbol": "RadianDirection",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/Turf.swift",
+      "line": 23,
+      "symbol": "RadianCoordinate2D.init(latitude:longitude:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/Turf.swift",
+      "line": 28,
+      "symbol": "RadianCoordinate2D.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/Turf.swift",
+      "line": 65,
+      "symbol": "LineSegment",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/Turf.swift",
+      "line": 68,
+      "symbol": "Turf",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/Turf.swift",
+      "line": 292,
+      "symbol": "Ring.init(coordinates:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mxn/hub/turf-swift/Sources/Turf/Turf.swift",
+      "line": 344,
+      "symbol": "Polygon.area",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/mxn/hub/turf-swift"
+}
