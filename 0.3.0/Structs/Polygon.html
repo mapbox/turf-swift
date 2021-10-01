@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Polygon Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/Polygon" class="dashAnchor"></a>
+    <a title="Polygon Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">Turf for Swift</a> (37% documented)</p>
+        <p class="header-right"><a href="https://github.com/mapbox/turf-swift"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right"><a href="dash-feed://https%3A%2F%2Fmapbox.github.io%2Fturf-swift%2F0.3.0%2Fdocsets%2FTurf.xml"><img src="../img/dash.png"/>Install in Dash</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">Turf Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Polygon Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/GeoJSON.html">GeoJSON</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/FeatureIdentifier.html">FeatureIdentifier</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FeatureType.html">FeatureType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FeatureVariant.html">FeatureVariant</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GeoJSONError.html">GeoJSONError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GeoJSONType.html">GeoJSONType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GeometryType.html">GeometryType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Number.html">Number</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Bool.html">Bool</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/CLLocationCoordinate2D.html">CLLocationCoordinate2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/CLLocationDegrees.html">CLLocationDegrees</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/CLLocationDirection.html">CLLocationDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Double.html">Double</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Int.html">Int</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/String.html">String</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/GeoJSONObject.html">GeoJSONObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/JSONType.html">JSONType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/AnyJSONType.html">AnyJSONType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BoundingBox.html">BoundingBox</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/CLLocationCoordinate2D">CLLocationCoordinate2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Feature.html">Feature</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FeatureCollection.html">FeatureCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Geometry.html">Geometry</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LineString.html">LineString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LineString/IndexedCoordinate.html">– IndexedCoordinate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LineStringFeature.html">LineStringFeature</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MultiLineString.html">MultiLineString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MultiLineStringFeature.html">MultiLineStringFeature</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MultiPoint.html">MultiPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MultiPointFeature.html">MultiPointFeature</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MultiPolygon.html">MultiPolygon</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MultiPolygonFeature.html">MultiPolygonFeature</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Point.html">Point</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PointFeature.html">PointFeature</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Polygon.html">Polygon</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PolygonFeature.html">PolygonFeature</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RadianCoordinate2D.html">RadianCoordinate2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Ring.html">Ring</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Turf.html">Turf</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/CLLocationDegrees">CLLocationDegrees</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/CLLocationDirection">CLLocationDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/CLLocationDistance">CLLocationDistance</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:4Turf11LineSegmenta">LineSegment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:4Turf15LocationRadiansa">LocationRadians</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:4Turf8Polylinea">Polyline</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:4Turf15RadianDirectiona">RadianDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:4Turf14RadianDistancea">RadianDistance</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Polygon</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Polygon</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                </div>
+              </div>
+            <p>A <code>Polygon</code> geometry represents a shape constisting of a closed <code><a href="../Structs/LineString.html">LineString</a></code>.</p>
+
+              <div class="slightly-smaller">
+                <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v0.3.0/Sources/Turf/Polygon.swift#L10-L25">Show on GitHub</a>
+              </div>
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf7PolygonV11coordinatesSaySaySo22CLLocationCoordinate2DVGGvp"></a>
+                    <a name="//apple_ref/swift/Property/coordinates" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf7PolygonV11coordinatesSaySaySo22CLLocationCoordinate2DVGGvp">coordinates</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">coordinates</span><span class="p">:</span> <span class="p">[[</span><span class="kt"><a href="../Structs.html#/CLLocationCoordinate2D">CLLocationCoordinate2D</a></span><span class="p">]]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v0.3.0/Sources/Turf/Polygon.swift#L">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf7PolygonVyACSaySaySo22CLLocationCoordinate2DVGGcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf7PolygonVyACSaySaySo22CLLocationCoordinate2DVGGcfc">init(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">coordinates</span><span class="p">:</span> <span class="p">[[</span><span class="kt"><a href="../Structs.html#/CLLocationCoordinate2D">CLLocationCoordinate2D</a></span><span class="p">]])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v0.3.0/Sources/Turf/Polygon.swift#L14-L16">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf7PolygonV10innerRingsSayAA4RingVGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/innerRings" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf7PolygonV10innerRingsSayAA4RingVGSgvp">innerRings</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">innerRings</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Ring.html">Ring</a></span><span class="p">]?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v0.3.0/Sources/Turf/Polygon.swift#L18-L20">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf7PolygonV9outerRingAA0D0Vvp"></a>
+                    <a name="//apple_ref/swift/Property/outerRing" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf7PolygonV9outerRingAA0D0Vvp">outerRing</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">outerRing</span><span class="p">:</span> <span class="kt"><a href="../Structs/Ring.html">Ring</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v0.3.0/Sources/Turf/Polygon.swift#L22-L24">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf7PolygonV4areaSdvp"></a>
+                    <a name="//apple_ref/swift/Property/area" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf7PolygonV4areaSdvp">area</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">area</span><span class="p">:</span> <span class="kt">Double</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v0.3.0/Sources/Turf/Polygon.swift#L56-L60">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf7PolygonV8contains_14ignoreBoundarySbSo22CLLocationCoordinate2DV_SbtF"></a>
+                    <a name="//apple_ref/swift/Method/contains(_:ignoreBoundary:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf7PolygonV8contains_14ignoreBoundarySbSo22CLLocationCoordinate2DV_SbtF">contains(_:<wbr>ignoreBoundary:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Determines if the given coordinate falls within the polygon and outside of its interior rings.
+ The optional parameter <code>ignoreBoundary</code> will result in the method returning true if the given coordinate
+ lies on the boundary line of the polygon or its interior rings.</p>
+
+<p>Ported from: <a href="https://github.com/Turfjs/turf/blob/e53677b0931da9e38bb947da448ee7404adc369d/packages/turf-boolean-point-in-polygon/index.ts#L31-L75">https://github.com/Turfjs/turf/blob/e53677b0931da9e38bb947da448ee7404adc369d/packages/turf-boolean-point-in-polygon/index.ts#L31-L75</a></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">contains</span><span class="p">(</span><span class="n">_</span> <span class="nv">coordinate</span><span class="p">:</span> <span class="kt"><a href="../Structs.html#/CLLocationCoordinate2D">CLLocationCoordinate2D</a></span><span class="p">,</span> <span class="nv">ignoreBoundary</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v0.3.0/Sources/Turf/Polygon.swift#L72-L88">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>© 2014–2018 <a class="link" href="https://www.mapbox.com/" target="_blank" rel="external">Mapbox</a>. See <a class="link" href="https://github.com/mapbox/turf-swift/blob/main/LICENSE.md" target="_blank" rel="external">license</a> for more details.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

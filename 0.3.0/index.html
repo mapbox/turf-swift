@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Turf  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a title="Turf  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">Turf for Swift</a> (37% documented)</p>
+        <p class="header-right"><a href="https://github.com/mapbox/turf-swift"><img src="img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right"><a href="dash-feed://https%3A%2F%2Fmapbox.github.io%2Fturf-swift%2F0.3.0%2Fdocsets%2FTurf.xml"><img src="img/dash.png"/>Install in Dash</a></p>
+        <p class="header-right">
+          <form role="search" action="search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">Turf Reference</a>
+        <img id="carat" src="img/carat.png" />
+        Turf  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/GeoJSON.html">GeoJSON</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/FeatureIdentifier.html">FeatureIdentifier</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/FeatureType.html">FeatureType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/FeatureVariant.html">FeatureVariant</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/GeoJSONError.html">GeoJSONError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/GeoJSONType.html">GeoJSONType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/GeometryType.html">GeometryType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Number.html">Number</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/Bool.html">Bool</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/CLLocationCoordinate2D.html">CLLocationCoordinate2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/CLLocationDegrees.html">CLLocationDegrees</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/CLLocationDirection.html">CLLocationDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/Double.html">Double</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/Int.html">Int</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/String.html">String</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Protocols/GeoJSONObject.html">GeoJSONObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/JSONType.html">JSONType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/AnyJSONType.html">AnyJSONType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/BoundingBox.html">BoundingBox</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs.html#/CLLocationCoordinate2D">CLLocationCoordinate2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Feature.html">Feature</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FeatureCollection.html">FeatureCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Geometry.html">Geometry</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LineString.html">LineString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LineString/IndexedCoordinate.html">– IndexedCoordinate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LineStringFeature.html">LineStringFeature</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MultiLineString.html">MultiLineString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MultiLineStringFeature.html">MultiLineStringFeature</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MultiPoint.html">MultiPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MultiPointFeature.html">MultiPointFeature</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MultiPolygon.html">MultiPolygon</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MultiPolygonFeature.html">MultiPolygonFeature</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Point.html">Point</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/PointFeature.html">PointFeature</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Polygon.html">Polygon</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/PolygonFeature.html">PolygonFeature</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RadianCoordinate2D.html">RadianCoordinate2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Ring.html">Ring</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Turf.html">Turf</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/CLLocationDegrees">CLLocationDegrees</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/CLLocationDirection">CLLocationDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/CLLocationDistance">CLLocationDistance</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:4Turf11LineSegmenta">LineSegment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:4Turf15LocationRadiansa">LocationRadians</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:4Turf8Polylinea">Polyline</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:4Turf15RadianDirectiona">RadianDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:4Turf14RadianDistancea">RadianDistance</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 id='turf-for-swift' class='heading'>Turf for Swift</h1>
+
+<p>📱<a href="https://www.bitrise.io/app/49f5bcca71bf6c8d"><img src="https://app.bitrise.io/app/49f5bcca71bf6c8d/status.svg?token=SzGBTkEtxsbuAnbcF9MTog&branch=master" alt="iOS"></a> &nbsp;&nbsp;&nbsp;
+🖥💻<a href="https://www.bitrise.io/app/b72273651db53613"><img src="https://app.bitrise.io/app/b72273651db53613/status.svg?token=ODv2UnyAHoOxV8APATEBFw&branch=master" alt="macOS"></a> &nbsp;&nbsp;&nbsp;
+📺<a href="https://www.bitrise.io/app/0b037542c2395ffb"><img src="https://app.bitrise.io/app/0b037542c2395ffb/status.svg?token=yOtMqbu-5bj8grB1Jmoefg" alt="tvOS"></a> &nbsp;&nbsp;&nbsp;
+⌚️<a href="https://www.bitrise.io/app/0d4d611f02295183"><img src="https://app.bitrise.io/app/0d4d611f02295183/status.svg?token=NiLB_E_0IvYYqV4Mj973TQ" alt="watchOS"></a> &nbsp;&nbsp;&nbsp;
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/TuxFlat.svg" width="20" alt="Linux"><a href="https://travis-ci.org/mapbox/turf-swift"><img src="https://api.travis-ci.org/mapbox/turf-swift.svg?branch=master" alt=""></a><br>
+<a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage compatible"></a> &nbsp;&nbsp;&nbsp;
+<a href="http://cocoadocs.org/docsets/Turf/"><img src="https://img.shields.io/cocoapods/v/Turf.svg" alt="CocoaPods"></a> &nbsp;&nbsp;&nbsp;
+<a href="https://swift.org/package-manager/"><img src="https://img.shields.io/badge/SPM-compatible-4BC51D.svg?style=flat" alt="SPM compatible"></a> &nbsp;&nbsp;&nbsp;</p>
+
+<p>A <a href="http://en.wikipedia.org/wiki/Spatial_analysis">spatial analysis</a> library written in Swift for native iOS, macOS, tvOS, watchOS, and Linux applications, ported from <a href="https://github.com/Turfjs/turf/">Turf.js</a>.</p>
+
+<p>Turf for Swift is <strong>experimental</strong> and its public API is subject to change. Please use with care and open issues for any problems you see or missing features that should be added.</p>
+<h2 id='requirements' class='heading'>Requirements</h2>
+
+<p>Turf is written in Swift 4. It requires Xcode 9.x and supports the following minimum deployment targets:</p>
+
+<ul>
+<li>iOS 8.0 and above</li>
+<li>macOS 10.10.0 (Yosemite) and above</li>
+<li>tvOS 9.0 and above</li>
+<li>watchOS 2.0 and above</li>
+</ul>
+
+<p>Alternatively, you can incorporate Turf into a command line tool without Xcode on any platform that <a href="https://swift.org/download/">Swift</a> supports, including Linux.</p>
+
+<p>If your project is written in Objective-C, you’ll need to write a compatibility layer between turf-swift and your Objective-C code. If your project is written in Objective-C++, you may be able to use <a href="https://github.com/mapbox/spatial-algorithms/">spatial-algorithms</a> as an alternative to Turf.</p>
+<h2 id='installation' class='heading'>Installation</h2>
+
+<p>Although a stable release of this library is not yet available, prereleases are available for installation using any of the popular Swift dependency managers.</p>
+<h3 id='cocoapods' class='heading'>CocoaPods</h3>
+
+<p>To install Turf using <a href="https://cocoapods.org/">CocoaPods</a>:</p>
+
+<ol>
+<li>Specify the following dependency in your Podfile:
+<code>rb
+pod &#39;Turf&#39;, &#39;~&gt; 0.3&#39;
+</code></li>
+<li>Run <code>pod repo update</code> if you haven’t lately.</li>
+<li>Run <code>pod install</code> and open the resulting Xcode workspace.</li>
+<li>Add <code>import Turf</code> to any Swift file in your application target.</li>
+</ol>
+<h3 id='carthage' class='heading'>Carthage</h3>
+
+<p>To install Turf using <a href="https://github.com/Carthage/Carthage/">Carthage</a>:</p>
+
+<ol>
+<li>Add the following dependency to your Cartfile:
+<code>
+github &quot;mapbox/turf-swift&quot; ~&gt; 0.3
+</code></li>
+<li>Run <code>carthage bootstrap</code>.</li>
+<li>Follow the rest of <a href="https://github.com/Carthage/Carthage#adding-frameworks-to-an-application">Carthage’s integration instructions</a>. Your application target’s Embedded Frameworks should include Turf.framework.</li>
+<li>Add <code>import Turf</code> to any Swift file in your application target.</li>
+</ol>
+<h3 id='swift-package-manager' class='heading'>Swift Package Manager</h3>
+
+<p>To install Turf using the <a href="https://swift.org/package-manager/">Swift Package Manager</a>, add the following package to the <code>dependencies</code> in your Package.swift file:</p>
+<pre class="highlight swift"><code><span class="o">.</span><span class="kt">Package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/mapbox/turf-swift.git"</span><span class="p">,</span> <span class="o">.</span><span class="nf">upToNextMinor</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="s">"0.2"</span><span class="p">))</span>
+</code></pre>
+
+<p>Then <code>import Turf</code> in any Swift file in your module.</p>
+<h2 id='available-functionality' class='heading'>Available functionality</h2>
+
+<p>This work-in-progress port of <a href="https://github.com/Turfjs/turf/">Turf.js</a> contains the following functionality:</p>
+
+<table><thead>
+<tr>
+<th>Turf.js</th>
+<th>Turf-swift</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="https://github.com/Turfjs/turf/tree/master/packages/turf-along/">turf-along</a></td>
+<td><code><a href="Structs/LineString.html#/s:4Turf10LineStringV19coordinateFromStart8distanceSo22CLLocationCoordinate2DVSgSd_tF">LineString.coordinateFromStart(distance:)</a></code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/Turfjs/turf/blob/master/packages/turf-area/">turf-area</a></td>
+<td><code><a href="Structs/Polygon.html#/s:4Turf7PolygonV4areaSdvp">Polygon.area</a></code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/Turfjs/turf/tree/master/packages/turf-boolean-point-in-polygon">turf-boolean-point-in-polygon</a></td>
+<td><code>Polygon.contains(point:ignoreBoundary:)</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/Turfjs/turf/tree/master/packages/turf-destination/">turf-destination</a></td>
+<td><code>CLLocationCoordinate2D.coordinate(at:facing:)</code><br><code>RadianCoordinate2D.coordinate(at:facing:)</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/Turfjs/turf/tree/master/packages/turf-distance/">turf-distance</a></td>
+<td><code>CLLocationCoordinate2D.distance(to:)</code><br><code>RadianCoordinate2D.distance(to:)</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/#polygon">turf-helpers#polygon</a></td>
+<td><code>Polygon(outerRing:innerRings:)</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/#linestring">turf-helpers#lineString</a></td>
+<td><code>LineString(_:)</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/#degreesToRadians">turf-helpers#degreesToRadians</a></td>
+<td><code>CLLocationDegrees.toRadians()</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/#radiansToDegrees">turf-helpers#radiansToDegrees</a></td>
+<td><code>CLLocationDegrees.toDegrees()</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/Turfjs/turf/tree/master/packages/turf-helpers#convertlength">turf-helpers#convertLength</a><br><a href="https://github.com/Turfjs/turf/tree/master/packages/turf-helpers#convertarea">turf-helpers#convertArea</a></td>
+<td><code>Measurement.converted(to:)</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/Turfjs/turf/tree/master/packages/turf-length/">turf-length</a></td>
+<td><code><a href="Structs/LineString.html#/s:4Turf10LineStringV8distance4from2toSdSo22CLLocationCoordinate2DVSg_AItF">LineString.distance(from:to:)</a></code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/Turfjs/turf/tree/master/packages/turf-line-intersect/">turf-line-intersect</a></td>
+<td><code><a href="Structs/Turf.html#/s:4TurfAAV12intersectionySo22CLLocationCoordinate2DVSgAE_AEt_AE_AEttFZ">Turf.intersection(_:_:)</a></code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/Turfjs/turf/tree/master/packages/turf-line-slice/">turf-line-slice</a></td>
+<td><code><a href="Structs/LineString.html#/s:4Turf10LineStringV6sliced4from2toACSo22CLLocationCoordinate2DVSg_AItF">LineString.sliced(from:to:)</a></code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/Turfjs/turf/tree/master/packages/turf-line-slice-along/">turf-line-slice-along</a></td>
+<td><code><a href="Structs/LineString.html#/s:4Turf10LineStringV7trimmed4from8distanceACSo22CLLocationCoordinate2DV_SdtF">LineString.trimmed(from:distance:)</a></code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/Turfjs/turf/tree/master/packages/turf-nearest-point-on-line/">turf-nearest-point-on-line</a></td>
+<td><code><a href="Structs/LineString.html#/s:4Turf10LineStringV17closestCoordinate2toAC07IndexedE0VSgSo22CLLocationCoordinate2DV_tF">LineString.closestCoordinate(to:)</a></code></td>
+</tr>
+<tr>
+<td>—</td>
+<td><code>CLLocationCoordinate2D.direction(to:)</code><br><code>RadianCoordinate2D.direction(to:)</code></td>
+</tr>
+<tr>
+<td>—</td>
+<td><code>CLLocationDirection.difference(from:)</code></td>
+</tr>
+<tr>
+<td>—</td>
+<td><code>CLLocationDirection.wrap(min:max:)</code></td>
+</tr>
+</tbody></table>
+<h2 id='geojson' class='heading'>GeoJSON</h2>
+
+<p>turf-swift also contains an experimental GeoJSON encoder/decoder with support for Codable.</p>
+<pre class="highlight swift"><code><span class="c1">// Decode unknown GeoJSON type</span>
+<span class="k">let</span> <span class="nv">geojson</span> <span class="o">=</span> <span class="k">try!</span> <span class="kt">GeoJSON</span><span class="o">.</span><span class="nf">parse</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="n">data</span><span class="p">)</span>
+
+<span class="c1">// Decode known GeoJSON type</span>
+<span class="k">let</span> <span class="nv">geojson</span> <span class="o">=</span> <span class="k">try!</span> <span class="kt">GeoJSON</span><span class="o">.</span><span class="nf">parse</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span> <span class="nv">as</span><span class="p">:</span> <span class="kt">FeatureCollection</span><span class="o">.</span><span class="k">self</span><span class="p">)</span>
+
+<span class="c1">// Initialize a PointFeature and encode as GeoJSON</span>
+<span class="k">let</span> <span class="nv">coordinate</span> <span class="o">=</span> <span class="kt">CLLocationCoordinate2D</span><span class="p">(</span><span class="nv">latitude</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">longitude</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">point</span> <span class="o">=</span> <span class="kt">Point</span><span class="p">(</span><span class="n">coordinate</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">pointFeature</span> <span class="o">=</span> <span class="kt">PointFeature</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">data</span> <span class="o">=</span> <span class="k">try!</span> <span class="kt">JSONEncoder</span><span class="p">()</span><span class="o">.</span><span class="nf">encode</span><span class="p">(</span><span class="n">pointFeature</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">json</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="o">.</span><span class="n">utf8</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
+
+<span class="cm">/*
+{
+  "type": "Feature",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      1,
+      0
+    ]
+  }
+}
+*/</span>
+
+</code></pre>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>© 2014–2018 <a class="link" href="https://www.mapbox.com/" target="_blank" rel="external">Mapbox</a>. See <a class="link" href="https://github.com/mapbox/turf-swift/blob/main/LICENSE.md" target="_blank" rel="external">license</a> for more details.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
