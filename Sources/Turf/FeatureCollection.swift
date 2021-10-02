@@ -4,8 +4,14 @@ import Foundation
  A [FeatureCollection object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.3) is a collection of Feature objects.
  */
 public struct FeatureCollection: Equatable {
-    public var features: Array<Feature> = []
+    /// The features that the collection contains.
+    public var features: [Feature] = []
     
+    /**
+     Initializes a feature collection containing the given features.
+     
+     - parameter features: The features that the collection contains.
+     */
     public init(features: [Feature]) {
         self.features = features
     }
