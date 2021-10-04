@@ -107,6 +107,8 @@ extension LocationDirection {
 extension LocationDegrees {
     /**
      Returns the direction in radians.
+     
+     This method is equivalent to the [`degreesToRadians`](https://turfjs.org/docs/#degreesToRadians) method of the turf-helpers package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/)).
      */
     public func toRadians() -> LocationRadians {
         return self * .pi / 180.0
@@ -114,6 +116,8 @@ extension LocationDegrees {
     
     /**
      Returns the direction in degrees.
+     
+     This method is equivalent to the [`radiansToDegrees`](https://turfjs.org/docs/#radiansToDegrees) method of the turf-helpers package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/)).
      */
     public func toDegrees() -> LocationDirection {
         return self * 180.0 / .pi
@@ -198,7 +202,11 @@ extension LocationCoordinate2D: Equatable {
         return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
     }
     
-    /// Returns the direction from the receiver to the given coordinate.
+    /**
+     Returns the direction from the receiver to the given coordinate.
+     
+     This method is equivalent to the [turf-bearing](https://turfjs.org/docs/#bearing) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-bearing/)).
+     */
     public func direction(to coordinate: LocationCoordinate2D) -> LocationDirection {
         return RadianCoordinate2D(self).direction(to: RadianCoordinate2D(coordinate)).converted(to: .degrees).value
     }
@@ -209,7 +217,11 @@ extension LocationCoordinate2D: Equatable {
         return coordinate(at: distance, facing: angle)
     }
 
-    /// Returns a coordinate a certain Haversine distance away in the given direction.
+    /**
+     Returns a coordinate a certain Haversine distance away in the given direction.
+     
+     This method is equivalent to the [turf-destination](https://turfjs.org/docs/#destination) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-destination/)).
+     */
     public func coordinate(at distance: LocationDistance, facing direction: Measurement<UnitAngle>) -> LocationCoordinate2D {
         let radianCoordinate = RadianCoordinate2D(self).coordinate(at: distance / metersPerRadian, facing: direction)
         return LocationCoordinate2D(radianCoordinate)
@@ -217,6 +229,8 @@ extension LocationCoordinate2D: Equatable {
     
     /**
      Returns the Haversine distance between two coordinates measured in degrees.
+     
+     This method is equivalent to the [turf-distance](https://turfjs.org/docs/#distance) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-distance/)).
      */
     public func distance(to coordinate: LocationCoordinate2D) -> LocationDistance {
         return RadianCoordinate2D(self).distance(to: RadianCoordinate2D(coordinate)) * metersPerRadian

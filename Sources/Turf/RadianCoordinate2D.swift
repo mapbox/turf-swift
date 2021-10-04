@@ -3,22 +3,38 @@ import Foundation
 import CoreLocation
 #endif
 
+/// A latitude or longitude measured in radians, as opposed to `LocationDegrees`, which is measured in degrees of arc.
 public typealias LocationRadians = Double
+
+/// A difference in latitude or longitude measured in radians, as opposed to `CLLocationDegrees`, which is used by some libraries to represent a similar distance measured in degrees of arc.
 public typealias RadianDistance = Double
 
 /**
- A `RadianCoordinate2D` is a coordinate represented in radians as opposed to
- `LocationCoordinate2D` which is represented in latitude and longitude.
+ A coordinate pair measured in radians, as opposed to `LocationCoordinate2D`, which is measured in degrees of arc.
  */
 public struct RadianCoordinate2D {
+    /// The latitude measured in radians.
     private(set) var latitude: LocationRadians
+    
+    /// The longitude measured in radians.
     private(set) var longitude: LocationRadians
     
+    /**
+     Initializes a coordinate pair located at the given latitude and longitude.
+     
+     - parameter latitude: The latitude measured in radians.
+     - parameter longitude: The longitude measured in radians.
+     */
     public init(latitude: LocationRadians, longitude: LocationRadians) {
         self.latitude = latitude
         self.longitude = longitude
     }
     
+    /**
+     Initializes a coordinate pair measured in radians that is coincident to the given coordinate pair measured in degrees of arc.
+     
+     - parameter degreeCoordinate: A coordinate pair measured in degrees of arc.
+     */
     public init(_ degreeCoordinate: LocationCoordinate2D) {
         latitude = degreeCoordinate.latitude.toRadians()
         longitude = degreeCoordinate.longitude.toRadians()

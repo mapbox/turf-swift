@@ -13,6 +13,8 @@ public struct Polygon: Equatable {
     /**
      Initializes a polygon defined by the given positions.
      
+     This initializer is equivalent to the [`polygon`](https://turfjs.org/docs/#polygon) function in the turf-helpers package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/)).
+     
      - parameter coordinates: The positions at which the polygon is located. Each nested array corresponds to one linear ring.
      */
     public init(_ coordinates: [[LocationCoordinate2D]]) {
@@ -32,6 +34,8 @@ public struct Polygon: Equatable {
     /**
      Initializes a polygon as a given center coordinate with a given number of
      vertices, as a means to approximate a circle.
+     
+     This initializer is equivalent to the [turf-circle](https://turfjs.org/docs/#circle) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-circle/)).
 
      - Parameter center: The center coordinate for the polygon.
      - Parameter radius: The radius of the polygon, measured in meters.
@@ -89,21 +93,29 @@ extension Polygon {
         }
     }
     
-    /// An area of current `Polygon`
-    ///
-    /// Ported from https://github.com/Turfjs/turf/blob/a94151418cb969868fdb42955a19a133512da0fd/packages/turf-area/index.js
+    /**
+     The polygon’s area.
+     
+     This property is equivalent to the [turf-area](https://turfjs.org/docs/#area) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-area/)).
+     */
     public var area: Double {
+        // Ported from https://github.com/Turfjs/turf/blob/a94151418cb969868fdb42955a19a133512da0fd/packages/turf-area/index.js
         return abs(outerRing.area) - innerRings
             .map { abs($0.area) }
             .reduce(0, +)
     }
     
-    /// Determines if the given coordinate falls within the polygon and outside of its interior rings.
-    /// The optional parameter `ignoreBoundary` will result in the method returning true if the given coordinate
-    /// lies on the boundary line of the polygon or its interior rings.
-    ///
-    ///Ported from: https://github.com/Turfjs/turf/blob/e53677b0931da9e38bb947da448ee7404adc369d/packages/turf-boolean-point-in-polygon/index.ts#L31-L75
+    /**
+     Returns whether the given coordinate falls within the polygon and outside of its interior rings.
+     
+     This method is equivalent to the [turf-boolean-point-in-polygon](https://turfjs.org/docs/#booleanPointInPolygon) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-boolean-point-in-polygon/)).
+     
+     - parameter coordinate: The coordinate to test for containment.
+     - parameter ignoreBoundary: Consider the coordinate to fall within the polygon even if it lies directly on one of the polygon’s linear rings.
+     - returns: True if the coordinate falls within the polygon; false otherwise.
+     */
     public func contains(_ coordinate: LocationCoordinate2D, ignoreBoundary: Bool = false) -> Bool {
+        // Ported from  https://github.com/Turfjs/turf/blob/e53677b0931da9e38bb947da448ee7404adc369d/packages/turf-boolean-point-in-polygon/index.ts#L31-L75
         guard outerRing.contains(coordinate, ignoreBoundary: ignoreBoundary) else {
             return false
         }
@@ -115,11 +127,15 @@ extension Polygon {
         return true
     }
 
-    /// Smooths a `Polygon`. Based on [Chaikin's algorithm](http://graphics.cs.ucdavis.edu/education/CAGDNotes/Chaikins-Algorithm/Chaikins-Algorithm.html).
-    /// Warning: may create degenerate polygons.
-    ///
-    /// Ported from https://github.com/Turfjs/turf/blob/402716a29f6ae16bf3d0220e213e5380cc5a50c4/packages/turf-polygon-smooth/index.js
+    /**
+     Returns the polygon with corners smoothed out using [Chaikin’s algorithm](https://www.cs.unc.edu/~dm/UNC/COMP258/LECTURES/Chaikins-Algorithm.pdf).
+     
+     This method is equivalent to the [turf-polygon-smooth](https://turfjs.org/docs/#polygonSmooth) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-polygon-smooth/)).
+     
+     - note: The returned polygon may be a degenerate polygon.
+     */
     public func smooth(iterations: Int = 3) -> Polygon {
+        // Ported from https://github.com/Turfjs/turf/blob/402716a29f6ae16bf3d0220e213e5380cc5a50c4/packages/turf-polygon-smooth/index.js
         var poly = self
         var tempOutput: [[LocationCoordinate2D]] = [[]];
         var outCoords: [[LocationCoordinate2D]] = [[]];
@@ -179,29 +195,32 @@ extension Polygon {
         })
     }
 
-    /// Returns a copy of the Polygon with the Ramer–Douglas–Peucker algorithm applied to it.
-    ///
-    /// tolerance:  Controls the level of simplification by specifying the maximum allowed distance between the original line point
-    /// and the simplified point. Higher tolerance values results in higher simplification.
-    ///
-    /// highestQuality: Excludes distance-based preprocessing step which leads to highest quality simplification. High quality simplification runs considerably slower so consider how much precision is needed in your application.
-    ///
-    /// Ported from https://github.com/Turfjs/turf/blob/master/packages/turf-simplify/lib/simplify.js
+    /**
+     Returns a copy of the polygon simplified using the Ramer–Douglas–Peucker algorithm.
+     
+     This method is equivalent to the [turf-simplify](https://turfjs.org/docs/#simplify) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-simplify/)).
+     
+     - parameter tolerance: Controls the level of simplification by specifying the maximum allowed distance between the original line point and the simplified point. A higher tolerance value results in higher simplification.
+     - parameter highestQuality: Excludes the distance-based preprocessing step that leads to highest-quality simplification. High-quality simplification runs considerably slower, so consider how much precision is needed in your application.
+     - returns: A simplified polygon.
+     */
     public func simplified(tolerance: Double = 1.0, highestQuality: Bool = false) -> Polygon {
+        // Ported from https://github.com/Turfjs/turf/blob/89505bf5df83dfde95a96de7c9abcdfd22ce5f63/packages/turf-simplify/lib/simplify.js
         var copy = Polygon(coordinates)
         copy.simplify(tolerance: tolerance, highestQuality: highestQuality)
         return copy
     }
 
-    /// Mutates the Polygon into a simplified version using the Ramer–Douglas–Peucker algorithm.
-    ///
-    /// tolerance:  Controls the level of simplification by specifying the maximum allowed distance between the original line point
-    /// and the simplified point. Higher tolerance values results in higher simplification.
-    ///
-    /// highestQuality: Excludes distance-based preprocessing step which leads to highest quality simplification. High quality simplification runs considerably slower so consider how much precision is needed in your application.
-    ///
-    /// Ported from https://github.com/Turfjs/turf/blob/master/packages/turf-simplify/lib/simplify.js
+    /**
+     Simplifies the polygon in place using the Ramer–Douglas–Peucker algorithm.
+     
+     This method is nearly equivalent to the [turf-simplify](https://turfjs.org/docs/#simplify) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-simplify/)), except that it mutates the polygon it is called on.
+     
+     - parameter tolerance: Controls the level of simplification by specifying the maximum allowed distance between the original line point and the simplified point. A higher tolerance value results in higher simplification.
+     - parameter highestQuality: Excludes the distance-based preprocessing step that leads to highest-quality simplification. High-quality simplification runs considerably slower, so consider how much precision is needed in your application.
+     */
     public mutating func simplify(tolerance: Double = 1.0, highestQuality: Bool = false) {
+        // Ported from https://github.com/Turfjs/turf/blob/89505bf5df83dfde95a96de7c9abcdfd22ce5f63/packages/turf-simplify/lib/simplify.js
         coordinates = coordinates.map { ring in
             guard ring.count > 3 else { return ring }
             
@@ -241,9 +260,13 @@ extension Polygon {
         )
     }
 
-    /// Calculates the absolute centre (of the bounding box).
+    /**
+     Calculates the absolute center of the bounding box.
+     
+     This property is equivalent to the [turf-center](https://turfjs.org/docs/#center) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-center/)).
+     */
     public var center: LocationCoordinate2D? {
-        // This implementation is a port of: https://github.com/Turfjs/turf/blob/master/packages/turf-center/index.ts
+        // This implementation is a port of: https://github.com/Turfjs/turf/blob/89505bf5df83dfde95a96de7c9abcdfd22ce5f63/packages/turf-center/index.ts
         return BoundingBox(from: outerRing.coordinates)
             .map { .init(
                 latitude: ($0.southWest.latitude + $0.northEast.latitude) / 2,
@@ -251,10 +274,15 @@ extension Polygon {
             ) }
     }
 
-    /// Calculates the centroid using the mean of all vertices.
-    /// This lessens the effect of small islands and artifacts when calculating the centroid of a set of polygons.
+    /**
+     Calculates the centroid using the mean of all vertices.
+     
+     Compared to `center` and `centerOfMass`, the centroid is less affected by small islands and artifacts.
+     
+     This property is equivalent to the [turf-centroid](https://turfjs.org/docs/#centroid) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-centroid/)).
+     */
     public var centroid: LocationCoordinate2D? {
-        // This implementation is a port of: https://github.com/Turfjs/turf/blob/master/packages/turf-centroid/index.ts
+        // Ported from https://github.com/Turfjs/turf/blob/89505bf5df83dfde95a96de7c9abcdfd22ce5f63/packages/turf-centroid/index.ts
         
         let coordinates = outerRing.coordinates.dropLast()
         guard coordinates.count > 0 else { return nil }
@@ -270,9 +298,13 @@ extension Polygon {
         ).normalized
     }
     
-    /// Calculates the [center of mass](https://en.wikipedia.org/wiki/Center_of_mass) using this formula: [Centroid of Polygon](https://en.wikipedia.org/wiki/Centroid#Centroid_of_polygon).
+    /**
+     Calculates the [center of mass](https://en.wikipedia.org/wiki/Center_of_mass) using the [centroid of polygon](https://en.wikipedia.org/wiki/Centroid#Centroid_of_polygon) formula.
+     
+     This property is equivalent to the [turf-center-of-mass](https://turfjs.org/docs/#centerOfMass) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-center-of-mass/)).
+     */
     public var centerOfMass: LocationCoordinate2D? {
-        // This implementation is a port of: https://github.com/Turfjs/turf/blob/master/packages/turf-center-of-mass/index.ts
+        // Ported from https://github.com/Turfjs/turf/blob/89505bf5df83dfde95a96de7c9abcdfd22ce5f63/packages/turf-center-of-mass/index.ts
         
         // First, we neutralize the feature (set it around coordinates [0,0]) to prevent rounding errors
         // We take any point to translate all the points around 0

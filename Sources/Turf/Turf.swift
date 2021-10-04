@@ -7,10 +7,13 @@ let metersPerRadian: LocationDistance = 6_373_000.0
 // WGS84 equatorial radius as specified by the International Union of Geodesy and Geophysics
 let equatorialRadius: LocationDistance = 6_378_137
 
+/// A segment between two positions in a `LineString` geometry or `Ring`.
 public typealias LineSegment = (LocationCoordinate2D, LocationCoordinate2D)
 
 /**
  Returns the intersection of two line segments.
+ 
+ This function is roughly equivalent to the [turf-line-intersect](https://turfjs.org/docs/#lineIntersect) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-line-intersect/)), except that it only accepts individual line segments instead of whole line strings.
  */
 public func intersection(_ line1: LineSegment, _ line2: LineSegment) -> LocationCoordinate2D? {
     // Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-point-on-line/index.js, in turn adapted from http://jsfiddle.net/justin_c_rounds/Gd2S2/light/
@@ -39,7 +42,9 @@ public func intersection(_ line1: LineSegment, _ line2: LineSegment) -> Location
 }
 
 /**
- Returns the point midway between two coordinates measured in degrees
+ Returns the point midway between two coordinates measured in degrees.
+ 
+ This function is equivalent to the [turf-midpoint](https://turfjs.org/docs/#midpoint) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-midpoint/)). 
  */
 public func mid(_ coord1: LocationCoordinate2D, _ coord2: LocationCoordinate2D) -> LocationCoordinate2D {
     let dist = coord1.distance(to: coord2)

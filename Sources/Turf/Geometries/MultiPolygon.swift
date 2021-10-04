@@ -10,6 +10,13 @@ public struct MultiPolygon: Equatable {
     /// The positions at which the multipolygon is located. Each nested array corresponds to one polygon.
     public var coordinates: [[[LocationCoordinate2D]]]
     
+    /// The polygon geometries that conceptually form the multipolygon.
+    public var polygons: [Polygon] {
+        return coordinates.map { (coordinates) -> Polygon in
+            return Polygon(coordinates)
+        }
+    }
+    
     /**
      Initializes a multipolygon defined by the given positions.
      
@@ -56,13 +63,6 @@ extension MultiPolygon: Codable {
 }
 
 extension MultiPolygon {
-    
-    public var polygons: [Polygon] {
-        return coordinates.map { (coordinates) -> Polygon in
-            return Polygon(coordinates)
-        }
-    }
-    
     /**
      * Determines if the given coordinate falls within any of the polygons.
      * The optional parameter `ignoreBoundary` will result in the method returning true if the given coordinate

@@ -7,10 +7,24 @@ import CoreLocation
  A [Feature object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2) represents a spatially bounded thing.
  */
 public struct Feature: Equatable {
+    /**
+     A string or number that commonly identifies the feature in the context of a data set.
+     
+     Turf does not guarantee that the feature is unique; however, a data set may make such a guarantee.
+     */
     public var identifier: FeatureIdentifier?
+    
+    /// Arbitrary, JSON-compatible attributes to associate with the feature.
     public var properties: JSONObject?
+    
+    /// The geometry at which the feature is located.
     public var geometry: Geometry?
     
+    /**
+     Initializes a feature located at the given geometry.
+     
+     - parameter geometry: The geometry at which the feature is located.
+     */
     public init(geometry: Geometry?) {
         self.geometry = geometry
     }
