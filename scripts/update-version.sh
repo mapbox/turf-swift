@@ -42,7 +42,7 @@ fi
 # Skip updating the documentation badge for prereleases.
 if [[ $SHORT_VERSION == $SEM_VERSION ]]; then
     step "Updating readmes to version ${SEM_VERSION}…"
-    sed -i '' -E "s/turf-swift\/${MINOR_VERSION}\/badge.svg/g; s/turf-swift\/${SEM_VERSION}\/badge.svg/g" README.md
+    sed -i '' -E "s/turf-swift\/[^/]+\/badge\.svg/turf-swift\/${SEM_VERSION}\/badge.svg/g" README.md
 fi
 
 step "Updating copyright year to ${YEAR}…"
