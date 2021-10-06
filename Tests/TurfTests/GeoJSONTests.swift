@@ -23,11 +23,16 @@ class GeoJSONTests: XCTestCase {
         XCTAssertEqual(Geometry(GeometryCollection(geometries: [])),
                        .geometryCollection(GeometryCollection(geometries: [])))
         
+        XCTAssertEqual(Geometry(Geometry(Geometry(Geometry(Point(nullIsland))))), .point(.init(nullIsland)))
+        
         XCTAssertEqual(GeoJSONObject(Geometry(Point(nullIsland))), .geometry(.point(.init(nullIsland))))
         XCTAssertEqual(GeoJSONObject(Feature(geometry: nil)), .feature(.init(geometry: nil)))
         let nullGeometry: Geometry? = nil
         XCTAssertEqual(GeoJSONObject(Feature(geometry: nullGeometry)), .feature(.init(geometry: nil)))
         XCTAssertEqual(GeoJSONObject(FeatureCollection(features: [])), .featureCollection(.init(features: [])))
+        
+        XCTAssertEqual(GeoJSONObject(GeoJSONObject(GeoJSONObject(GeoJSONObject(Geometry(Point(nullIsland)))))),
+                       .geometry(.point(.init(nullIsland))))
     }
     
     func testPoint() {

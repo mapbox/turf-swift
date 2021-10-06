@@ -74,6 +74,10 @@ public protocol GeoJSONObjectConvertible {
     var geoJSONObject: GeoJSONObject { get }
 }
 
+extension GeoJSONObject: GeoJSONObjectConvertible {
+    public var geoJSONObject: GeoJSONObject { return self }
+}
+
 extension Geometry: GeoJSONObjectConvertible {
     public var geoJSONObject: GeoJSONObject { return .geometry(self) }
 }
