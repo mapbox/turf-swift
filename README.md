@@ -7,7 +7,7 @@
 <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/TuxFlat.svg" width="20" alt="Linux">[![](https://api.travis-ci.com/mapbox/turf-swift.svg?branch=main)](https://travis-ci.com/mapbox/turf-swift) &nbsp;&nbsp;&nbsp;
 [![](https://mapbox.github.io/turf-swift/1.2.0/badge.svg)](https://mapbox.github.io/turf-swift/) &nbsp;&nbsp;&nbsp;
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) &nbsp;&nbsp;&nbsp;
-[![CocoaPods](https://img.shields.io/cocoapods/v/Turf.svg)](http://cocoadocs.org/docsets/Turf/) &nbsp;&nbsp;&nbsp;
+[![CocoaPods](https://img.shields.io/cocoapods/v/Turf.svg)](https://cocoapods.org/pods/Turf/) &nbsp;&nbsp;&nbsp;
 [![SPM compatible](https://img.shields.io/badge/SPM-compatible-4BC51D.svg?style=flat)](https://swift.org/package-manager/) &nbsp;&nbsp;&nbsp;
 
 A [spatial analysis](http://en.wikipedia.org/wiki/Spatial_analysis) library written in Swift for native iOS, macOS, tvOS, watchOS, and Linux applications, ported from [Turf.js](https://github.com/Turfjs/turf/).
