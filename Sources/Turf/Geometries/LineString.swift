@@ -308,7 +308,7 @@ extension LineString {
             let direction = segment.0.direction(to: segment.1)
             let perpendicularPoint1 = coordinate.coordinate(at: maxDistance, facing: direction + 90)
             let perpendicularPoint2 = coordinate.coordinate(at: maxDistance, facing: direction - 90)
-            let intersectionPoint = intersection((perpendicularPoint1, perpendicularPoint2), segment)
+            let intersectionPoint = Turf.intersection((perpendicularPoint1, perpendicularPoint2), segment)
             let intersectionDistance: LocationDistance? = intersectionPoint != nil ? coordinate.distance(to: intersectionPoint!) : nil
             
             if distances.0 < closestDistance ?? .greatestFiniteMagnitude {
@@ -363,5 +363,26 @@ extension LineString {
     public mutating func simplify(tolerance: Double = 1.0, highestQuality: Bool = false) {
         // Ported from https://github.com/Turfjs/turf/blob/4e8342acb1dbd099f5e91c8ee27f05fb2647ee1b/packages/turf-simplify/lib/simplify.js
         coordinates = Simplifier.simplify(coordinates, tolerance: tolerance, highestQuality: highestQuality)
+    }
+    
+    /**
+     Returns all intersections with another `LineString`.
+     
+     This function is roughly equivalent to the [turf-line-intersect](https://turfjs.org/docs/#lineIntersect) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-line-intersect/)).
+     */
+    public func intersection(with line: LineString) -> [LocationCoordinate2D]? {
+        var intersections: [String : LocationCoordinate2D] = [:]
+        zip(coordinates.dropLast(), coordinates.dropFirst()).forEach { segment1 in
+            zip(line.coordinates.dropLast(), line.coordinates.dropFirst()).forEach { segment2 in
+                if let intersection = Turf.intersection(LineSegment(segment1.0, segment1.1),
+                                                        LineSegment(segment2.0, segment2.1)) {
+                    let key = "\(intersection.latitude),\(intersection.longitude)"
+                    if intersections[key] == nil {
+                        intersections[key] = intersection
+                    }
+                }
+            }
+        }
+        return intersections.isEmpty ? ([LocationCoordinate2D]?).none : Array(intersections.values)
     }
 }

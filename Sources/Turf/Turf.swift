@@ -14,6 +14,8 @@ public typealias LineSegment = (LocationCoordinate2D, LocationCoordinate2D)
  Returns the intersection of two line segments.
  
  This function is roughly equivalent to the [turf-line-intersect](https://turfjs.org/docs/#lineIntersect) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-line-intersect/)), except that it only accepts individual line segments instead of whole line strings.
+ 
+ - seealso: `LineString.intersection(with:)`
  */
 public func intersection(_ line1: LineSegment, _ line2: LineSegment) -> LocationCoordinate2D? {
     // Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-point-on-line/index.js, in turn adapted from http://jsfiddle.net/justin_c_rounds/Gd2S2/light/
