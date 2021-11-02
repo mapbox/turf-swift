@@ -80,9 +80,11 @@ extension LineString {
     /**
      Returns the portion of the line string that begins at the given start distance and extends the given stop distance along the line string.
      
-     This method is roughly equivalent to the [turf-line-slice-along](https://turfjs.org/docs/#lineSliceAlong) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-line-slice-along/)).
+     This method is equivalent to the [turf-line-slice-along](https://turfjs.org/docs/#lineSliceAlong) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-line-slice-along/)).
      */
-    public func lineSliceAlong(startDistance: LocationDistance, stopDistance: LocationDistance) -> LineString? {
+    public func trimmed(from startDistance: LocationDistance, to stopDistance: LocationDistance) -> LineString? {
+        // The method is porting from https://github.com/Turfjs/turf/blob/5375941072b90d489389db22b43bfe809d5e451e/packages/turf-line-slice-along/index.js
+        guard startDistance >= 0.0 && stopDistance >= startDistance else { return nil }
         let coordinates = self.coordinates
         var traveled: LocationDistance = 0
         var slice = [LocationCoordinate2D]()

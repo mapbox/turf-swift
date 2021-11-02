@@ -351,7 +351,7 @@ class LineStringTests: XCTestCase {
         XCTAssertNotEqual(slicedCoordinates?.first, slicedCoordinates?.last, "vertical slice should not collapse to first coordinate")
     }
     
-    func testLineSliceAlong() {
+    func testTrimmed() {
         // https://github.com/Turfjs/turf/blob/5375941072b90d489389db22b43bfe809d5e451e/packages/turf-line-slice-along/test.js
         
         // turf-line-slice-along -- line1
@@ -379,30 +379,35 @@ class LineStringTests: XCTestCase {
         
         var startPoint = line1.coordinateFromStart(distance: startDistance)
         var endPoint = line1.coordinateFromStart(distance: stopDistance)
-        var sliced = line1.lineSliceAlong(startDistance: startDistance, stopDistance: stopDistance)
+        var sliced = line1.trimmed(from: startDistance, to: stopDistance)
         XCTAssertNotNil(sliced, "should return valid lineString")
         XCTAssertEqual(sliced!.coordinates.first!, startPoint)
         XCTAssertEqual(sliced!.coordinates.last!, endPoint)
         
         stopDistance = 2414016.0
         endPoint = line1.coordinateFromStart(distance: stopDistance)
-        sliced = line1.lineSliceAlong(startDistance: startDistance, stopDistance: stopDistance)
+        sliced = line1.trimmed(from: startDistance, to: stopDistance)
         XCTAssertNotNil(sliced, "should return valid lineString")
         XCTAssertEqual(sliced!.coordinates.first!, startPoint)
         XCTAssertEqual(sliced!.coordinates.last!, endPoint)
         
         startDistance = 8046720
         stopDistance = 12874752.0
-        sliced = line1.lineSliceAlong(startDistance: startDistance, stopDistance: stopDistance)
+        sliced = line1.trimmed(from: startDistance, to: stopDistance)
         XCTAssertNil(sliced, "should return nil")
         
         startDistance = line1.distance()!
         stopDistance = startDistance + 100.0
         startPoint = line1.coordinateFromStart(distance: startDistance)
         endPoint = line1.coordinateFromStart(distance: stopDistance)
-        sliced = line1.lineSliceAlong(startDistance: startDistance, stopDistance: stopDistance)
+        sliced = line1.trimmed(from: startDistance, to: stopDistance)
         XCTAssertNotNil(sliced, "should return valid lineString")
         XCTAssertEqual(sliced!.coordinates.first!, startPoint)
         XCTAssertEqual(sliced!.coordinates.last!, endPoint)
+        
+        startDistance = -0.376
+        stopDistance = 543.0
+        sliced = line1.trimmed(from: startDistance, to: stopDistance)
+        XCTAssertNil(sliced, "should return nil")
     }
 }
