@@ -89,7 +89,7 @@ Turf.js | Turf for Swift
 [turf-length#length](https://turfjs.org/docs/#length) | `LineString.distance(from:to:)`
 [turf-line-intersect#lineIntersect](https://turfjs.org/docs/#lineIntersect) | `intersection(_:_:)`
 [turf-line-slice#lineSlice](https://turfjs.org/docs/#lineSlice) | `LineString.sliced(from:to:)`
-[turf-line-slice-along#lineSliceAlong](https://turfjs.org/docs/#lineSliceAlong) | `LineString.trimmed(from:distance:)`
+[turf-line-slice-along#lineSliceAlong](https://turfjs.org/docs/#lineSliceAlong) | `LineString.trimmed(from:to:)`
 [turf-midpoint#midpoint](https://turfjs.org/docs/#midpoint) | `mid(_:_:)`
 [turf-nearest-point-on-line#nearestPointOnLine](https://turfjs.org/docs/#nearestPointOnLine) | `LineString.closestCoordinate(to:)`
 [turf-polygon-to-line#polygonToLine](https://turfjs.org/docs/#polygonToLine) | `LineString(_:)`<br>`MultiLineString(_:)`
