@@ -59,6 +59,7 @@ Turf.js | Turf-swift
 [turf-midpoint](https://github.com/Turfjs/turf/blob/master/packages/turf-midpoint/index.js) | `mid(_:_:)`
 [turf-nearest-point-on-line](https://github.com/Turfjs/turf/tree/master/packages/turf-nearest-point-on-line/) | `GeoJSON.LineString.closestCoordinate(to:)`
 [turf-polygon-smooth](https://github.com/Turfjs/turf/tree/master/packages/turf-polygon-smooth) | `GeoJSON.Polygon.smooth(iterations:)`
+[turf-union](https://github.com/Turfjs/turf/tree/master/packages/turf-union) | Not provided, but see [ASPolygonKit](https://github.com/nighthawk/ASPolygonKit) 
 [turf-simplify](https://github.com/Turfjs/turf/tree/master/packages/turf-simplify) | `GeoJSON.simplify(options:)`
 — | `GeoJSON.Direction.difference(from:)`
 — | `GeoJSON.Direction.wrap(min:max:)`
