@@ -1,8 +1,0 @@
-ignore:
-  - "Tests"
-
-coverage:
-  status:
-    project:
-      default:
-        threshold: 1%
