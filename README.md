@@ -1,6 +1,6 @@
 # GeoJSONKit+Turf
 
-A fork of [turf-swift](https://github.com/mapbox/turf-swift.git) which relies on [GeoJSONKit](https://github.com/maparoni/geojsonkit). turf-swift itself is ported from [Turf.js](https://github.com/Turfjs/turf/). For an alternative see [spatial-algorithms](https://github.com/mapbox/spatial-algorithms/).
+This package provides various geospatial extensions for [GeoJSONKit](https://github.com/maparoni/geojsonkit). It is a fork of [turf-swift](https://github.com/mapbox/turf-swift.git), which is ported from [Turf.js](https://github.com/Turfjs/turf/).
 
 ## Requirements
 
