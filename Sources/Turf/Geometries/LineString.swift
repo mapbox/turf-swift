@@ -78,9 +78,65 @@ extension LineString {
     }
     
     /**
-     Returns the portion of the line string that begins at the given coordinate and extends the given distance along the line string.
+     Returns the portion of the line string that begins at the given start distance and extends the given stop distance along the line string.
      
-     This method is roughly equivalent to the [turf-line-slice-along](https://turfjs.org/docs/#lineSliceAlong) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-line-slice-along/)), except that it accepts a starting position instead of a starting distance along the line string.
+     This method is equivalent to the [turf-line-slice-along](https://turfjs.org/docs/#lineSliceAlong) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-line-slice-along/)).
+     */
+    public func trimmed(from startDistance: LocationDistance, to stopDistance: LocationDistance) -> LineString? {
+        // The method is porting from https://github.com/Turfjs/turf/blob/5375941072b90d489389db22b43bfe809d5e451e/packages/turf-line-slice-along/index.js
+        guard startDistance >= 0.0 && stopDistance >= startDistance else { return nil }
+        let coordinates = self.coordinates
+        var traveled: LocationDistance = 0
+        var slice = [LocationCoordinate2D]()
+        
+        for i in 0..<coordinates.endIndex {
+            if startDistance >= traveled && i == coordinates.endIndex - 1 {
+                break
+            } else if traveled > startDistance && slice.isEmpty {
+                let overshoot = startDistance - traveled
+                if overshoot == 0.0 {
+                    slice.append(coordinates[i])
+                    return LineString(slice)
+                }
+                let direction = coordinates[i].direction(to: coordinates[i - 1]) - 180
+                let interpolated = coordinates[i].coordinate(at: overshoot, facing: direction)
+                slice.append(interpolated)
+            }
+            
+            if traveled >= stopDistance {
+                let overshoot = stopDistance - traveled
+                if overshoot == 0.0 {
+                    slice.append(coordinates[i])
+                    return LineString(slice)
+                }
+                let direction = coordinates[i].direction(to: coordinates[i - 1]) - 180
+                let interpolated = coordinates[i].coordinate(at: overshoot, facing: direction)
+                slice.append(interpolated)
+                return LineString(slice)
+            }
+            
+            if traveled >= startDistance {
+                slice.append(coordinates[i])
+            }
+            
+            if i == coordinates.count - 1 {
+                return LineString(slice)
+            }
+            
+            traveled += distance(from: coordinates[i], to: coordinates[i + 1]) ?? 0.0
+        }
+        
+        if traveled < startDistance { return nil }
+        
+        if let last = coordinates.last {
+            return LineString([last, last])
+        }
+        
+        return nil
+    }
+    
+    /**
+     Returns the portion of the line string that begins at the given coordinate and extends the given distance along the line string.
      */
     public func trimmed(from coordinate: LocationCoordinate2D, distance: LocationDistance) -> LineString? {
         let startVertex = closestCoordinate(to: coordinate)
