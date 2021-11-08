@@ -87,7 +87,7 @@ Turf.js | Turf for Swift
 [turf-helpers#radiansToDegrees](https://turfjs.org/docs/#radiansToDegrees) | `CLLocationDegrees.toDegrees()`<br>`LocationDegrees.toDegrees()` on Linux
 [turf-helpers#convertLength](https://turfjs.org/docs/#convertLength)<br>[turf-helpers#convertArea](https://turfjs.org/docs/#convertArea) | `Measurement.converted(to:)`
 [turf-length#length](https://turfjs.org/docs/#length) | `LineString.distance(from:to:)`
-[turf-line-intersect#lineIntersect](https://turfjs.org/docs/#lineIntersect) | `intersection(_:_:)`
+[turf-line-intersect#lineIntersect](https://turfjs.org/docs/#lineIntersect) | `LineString.intersections(with:)`
 [turf-line-slice#lineSlice](https://turfjs.org/docs/#lineSlice) | `LineString.sliced(from:to:)`
 [turf-line-slice-along#lineSliceAlong](https://turfjs.org/docs/#lineSliceAlong) | `LineString.trimmed(from:to:)`
 [turf-midpoint#midpoint](https://turfjs.org/docs/#midpoint) | `mid(_:_:)`

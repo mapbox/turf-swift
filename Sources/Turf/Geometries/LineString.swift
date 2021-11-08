@@ -31,6 +31,13 @@ public struct LineString: Equatable {
     public init(_ ring: Ring) {
         self.coordinates = ring.coordinates
     }
+    
+    /**
+     Representation of current `LineString` as an array of `LineSegment`s.
+     */
+    var segments: [LineSegment] {
+        return zip(coordinates.dropLast(), coordinates.dropFirst()).map { LineSegment($0.0, $0.1) }
+    }
 }
 
 extension LineString: Codable {
@@ -368,12 +375,17 @@ extension LineString {
     /**
      Returns all intersections with another `LineString`.
      
-     This function is roughly equivalent to the [turf-line-intersect](https://turfjs.org/docs/#lineIntersect) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-line-intersect/)).
+     This function is roughly equivalent to the [turf-line-intersect](https://turfjs.org/docs/#lineIntersect) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-line-intersect/)). Order of found intersections is not determined.
+     
+     You can also use `Turf.intersection(_:, _:)` if you need to find intersection of individual `LineSegment`s.
+     
+     - seealso: `Turf.intersection(_:, _:)`
      */
-    public func intersection(with line: LineString) -> [LocationCoordinate2D]? {
+    public func intersections(with line: LineString) -> [LocationCoordinate2D] {
         var intersections: [String : LocationCoordinate2D] = [:]
-        zip(coordinates.dropLast(), coordinates.dropFirst()).forEach { segment1 in
-            zip(line.coordinates.dropLast(), line.coordinates.dropFirst()).forEach { segment2 in
+        
+        for segment1 in segments {
+            for segment2 in line.segments {
                 if let intersection = Turf.intersection(LineSegment(segment1.0, segment1.1),
                                                         LineSegment(segment2.0, segment2.1)) {
                     let key = "\(intersection.latitude),\(intersection.longitude)"
@@ -383,6 +395,6 @@ extension LineString {
                 }
             }
         }
-        return intersections.isEmpty ? ([LocationCoordinate2D]?).none : Array(intersections.values)
+        return Array(intersections.values)
     }
 }
