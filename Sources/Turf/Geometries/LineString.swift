@@ -382,19 +382,30 @@ extension LineString {
      - seealso: `Turf.intersection(_:, _:)`
      */
     public func intersections(with line: LineString) -> [LocationCoordinate2D] {
-        var intersections: [String : LocationCoordinate2D] = [:]
-        
+        var intersections = Set<HashableCoordinate>()
         for segment1 in segments {
             for segment2 in line.segments {
                 if let intersection = Turf.intersection(LineSegment(segment1.0, segment1.1),
                                                         LineSegment(segment2.0, segment2.1)) {
-                    let key = "\(intersection.latitude),\(intersection.longitude)"
-                    if intersections[key] == nil {
-                        intersections[key] = intersection
-                    }
+                    intersections.insert(.init(intersection))
                 }
             }
         }
-        return Array(intersections.values)
+        return intersections.map(\.locationCoordinate)
+    }
+    
+    private struct HashableCoordinate: Hashable {
+        let latitude: Double
+        let longitude: Double
+        
+        var locationCoordinate: LocationCoordinate2D {
+            return LocationCoordinate2D(latitude: latitude,
+                                        longitude: longitude)
+        }
+        
+        init(_ coordinate: LocationCoordinate2D) {
+            self.latitude = coordinate.latitude
+            self.longitude = coordinate.longitude
+        }
     }
 }

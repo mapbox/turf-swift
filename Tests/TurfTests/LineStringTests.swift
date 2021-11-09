@@ -410,4 +410,21 @@ class LineStringTests: XCTestCase {
         sliced = line1.trimmed(from: startDistance, to: stopDistance)
         XCTAssertNil(sliced, "should return nil")
     }
+    
+    func testIntersections() {
+        let lineString = LineString([.init(latitude: 2, longitude: 1),
+                                     .init(latitude: 2, longitude: 5),
+                                     .init(latitude: 2, longitude: 9)])
+        
+        let intersectingLineString = LineString([.init(latitude: 4, longitude: 1),
+                                                 .init(latitude: 0, longitude: 5),
+                                                 .init(latitude: 2, longitude: 9)])
+        
+        let intersections = lineString.intersections(with: intersectingLineString)
+        
+        XCTAssertEqual(intersections.sorted(by: { $0.longitude < $1.longitude }),
+                       [.init(latitude: 2, longitude: 3),
+                        .init(latitude: 2, longitude: 9)],
+                       accuracy: 0, "LineString intersections are not correct.")
+    }
 }
