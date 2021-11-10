@@ -40,6 +40,13 @@ class TurfTests: XCTestCase {
         XCTAssertEqual(a, coord1)
     }
     
+    func testIntersectionOnEnd() {
+        let coord1 = LocationCoordinate2D(latitude: 20, longitude: 20)
+        let a = intersection((LocationCoordinate2D(latitude: 20, longitude: 20), LocationCoordinate2D(latitude: 40, longitude: 40)),
+                             (LocationCoordinate2D(latitude: 20, longitude: 20), LocationCoordinate2D(latitude: 40, longitude: 20)))
+        XCTAssertEqual(a, coord1)
+    }
+    
     func testCLLocationDegrees() {
         let degree: CLLocationDegrees = 100
         let a = degree.toRadians()

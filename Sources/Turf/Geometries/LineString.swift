@@ -31,6 +31,13 @@ public struct LineString: Equatable {
     public init(_ ring: Ring) {
         self.coordinates = ring.coordinates
     }
+    
+    /**
+     Representation of current `LineString` as an array of `LineSegment`s.
+     */
+    var segments: [LineSegment] {
+        return zip(coordinates.dropLast(), coordinates.dropFirst()).map { LineSegment($0.0, $0.1) }
+    }
 }
 
 extension LineString: Codable {
@@ -308,7 +315,7 @@ extension LineString {
             let direction = segment.0.direction(to: segment.1)
             let perpendicularPoint1 = coordinate.coordinate(at: maxDistance, facing: direction + 90)
             let perpendicularPoint2 = coordinate.coordinate(at: maxDistance, facing: direction - 90)
-            let intersectionPoint = intersection((perpendicularPoint1, perpendicularPoint2), segment)
+            let intersectionPoint = Turf.intersection((perpendicularPoint1, perpendicularPoint2), segment)
             let intersectionDistance: LocationDistance? = intersectionPoint != nil ? coordinate.distance(to: intersectionPoint!) : nil
             
             if distances.0 < closestDistance ?? .greatestFiniteMagnitude {
@@ -363,5 +370,42 @@ extension LineString {
     public mutating func simplify(tolerance: Double = 1.0, highestQuality: Bool = false) {
         // Ported from https://github.com/Turfjs/turf/blob/4e8342acb1dbd099f5e91c8ee27f05fb2647ee1b/packages/turf-simplify/lib/simplify.js
         coordinates = Simplifier.simplify(coordinates, tolerance: tolerance, highestQuality: highestQuality)
+    }
+    
+    /**
+     Returns all intersections with another `LineString`.
+     
+     This function is roughly equivalent to the [turf-line-intersect](https://turfjs.org/docs/#lineIntersect) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-line-intersect/)). Order of found intersections is not determined.
+     
+     You can also use `Turf.intersection(_:, _:)` if you need to find intersection of individual `LineSegment`s.
+     
+     - seealso: `Turf.intersection(_:, _:)`
+     */
+    public func intersections(with line: LineString) -> [LocationCoordinate2D] {
+        var intersections = Set<HashableCoordinate>()
+        for segment1 in segments {
+            for segment2 in line.segments {
+                if let intersection = Turf.intersection(LineSegment(segment1.0, segment1.1),
+                                                        LineSegment(segment2.0, segment2.1)) {
+                    intersections.insert(.init(intersection))
+                }
+            }
+        }
+        return intersections.map { $0.locationCoordinate }
+    }
+    
+    private struct HashableCoordinate: Hashable {
+        let latitude: Double
+        let longitude: Double
+        
+        var locationCoordinate: LocationCoordinate2D {
+            return LocationCoordinate2D(latitude: latitude,
+                                        longitude: longitude)
+        }
+        
+        init(_ coordinate: LocationCoordinate2D) {
+            self.latitude = coordinate.latitude
+            self.longitude = coordinate.longitude
+        }
     }
 }
