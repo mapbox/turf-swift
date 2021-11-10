@@ -391,7 +391,7 @@ extension LineString {
                 }
             }
         }
-        return intersections.map(\.locationCoordinate)
+        return intersections.map { $0.locationCoordinate }
     }
     
     private struct HashableCoordinate: Hashable {

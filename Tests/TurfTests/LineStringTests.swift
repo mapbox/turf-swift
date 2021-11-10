@@ -420,11 +420,25 @@ class LineStringTests: XCTestCase {
                                                  .init(latitude: 0, longitude: 5),
                                                  .init(latitude: 2, longitude: 9)])
         
-        let intersections = lineString.intersections(with: intersectingLineString)
+        var intersections = lineString.intersections(with: intersectingLineString)
         
         XCTAssertEqual(intersections.sorted(by: { $0.longitude < $1.longitude }),
                        [.init(latitude: 2, longitude: 3),
                         .init(latitude: 2, longitude: 9)],
                        accuracy: 0, "LineString intersections are not correct.")
+        
+        let notIntersectingLineString = LineString([.init(latitude: 1, longitude: 1),
+                                                    .init(latitude: 1, longitude: 5),
+                                                    .init(latitude: 1, longitude: 9)])
+        
+        intersections = lineString.intersections(with: notIntersectingLineString)
+        
+        XCTAssertTrue(intersections.isEmpty, "Found impossible LineString intersection(s).")
+        
+        let emptyLineString = LineString([])
+        
+        intersections = lineString.intersections(with: emptyLineString)
+        
+        XCTAssertTrue(intersections.isEmpty, "Found impossible LineString intersection(s).")
     }
 }
