@@ -6,7 +6,7 @@ import CoreLocation
 /**
  A [Feature object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2) represents a spatially bounded thing.
  */
-public struct Feature: Equatable {
+public struct Feature: Equatable, ForeignMemberContainer {
     /**
      A string or number that commonly identifies the feature in the context of a data set.
      
@@ -19,6 +19,8 @@ public struct Feature: Equatable {
     
     /// The geometry at which the feature is located.
     public var geometry: Geometry?
+    
+    public var foreignMembers: JSONObject = [:]
     
     /**
      Initializes a feature located at the given geometry.
@@ -57,6 +59,7 @@ extension Feature: Codable {
         geometry = try container.decodeIfPresent(Geometry.self, forKey: .geometry)
         properties = try container.decodeIfPresent(JSONObject.self, forKey: .properties)
         identifier = try container.decodeIfPresent(FeatureIdentifier.self, forKey: .identifier)
+        try decodeForeignMembers(notKeyedBy: CodingKeys.self, with: decoder)
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -65,5 +68,6 @@ extension Feature: Codable {
         try container.encode(geometry, forKey: .geometry)
         try container.encodeIfPresent(properties, forKey: .properties)
         try container.encodeIfPresent(identifier, forKey: .identifier)
+        try encodeForeignMembers(notKeyedBy: CodingKeys.self, to: encoder)
     }
 }

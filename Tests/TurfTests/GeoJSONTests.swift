@@ -216,4 +216,32 @@ class GeoJSONTests: XCTestCase {
         
         XCTAssertEqual(decodedFeature, feature)
     }
+    
+    func testForeignMemberCoding(in object: GeoJSONObject) throws {
+        let data = try JSONEncoder().encode(object)
+        guard var json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any?] else {
+            return
+        }
+        json["title"] = "Example Feature"
+        
+        let modifiedData = try JSONSerialization.data(withJSONObject: json, options: [])
+        let modifiedObject = try JSONDecoder().decode(GeoJSONObject.self, from: modifiedData)
+        
+        let roundTrippedData = try JSONEncoder().encode(modifiedObject)
+        let roundTrippedJSON = try JSONSerialization.jsonObject(with: roundTrippedData, options: []) as? [String: Any?]
+        XCTAssertEqual(roundTrippedJSON?["title"] as? String, "Example Feature")
+    }
+    
+    func testForeignMemberCoding() throws {
+        let nullIsland = LocationCoordinate2D(latitude: 0, longitude: 0)
+        try testForeignMemberCoding(in: .geometry(.point(Point(nullIsland))))
+        try testForeignMemberCoding(in: .geometry(.lineString(LineString([nullIsland, nullIsland]))))
+        try testForeignMemberCoding(in: .geometry(.polygon(Polygon([[nullIsland, nullIsland, nullIsland]]))))
+        try testForeignMemberCoding(in: .geometry(.multiPoint(MultiPoint([nullIsland, nullIsland, nullIsland]))))
+        try testForeignMemberCoding(in: .geometry(.multiLineString(MultiLineString([[nullIsland, nullIsland, nullIsland]]))))
+        try testForeignMemberCoding(in: .geometry(.multiPolygon(MultiPolygon([[[nullIsland, nullIsland, nullIsland]]]))))
+        try testForeignMemberCoding(in: .geometry(.geometryCollection(GeometryCollection(geometries: []))))
+        try testForeignMemberCoding(in: .feature(.init(geometry: nil)))
+        try testForeignMemberCoding(in: .featureCollection(.init(features: [])))
+    }
 }
