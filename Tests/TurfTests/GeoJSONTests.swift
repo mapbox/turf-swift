@@ -218,18 +218,39 @@ class GeoJSONTests: XCTestCase {
     }
     
     func testForeignMemberCoding(in object: GeoJSONObject) throws {
+        let today = ISO8601DateFormatter().string(from: Date())
+        
         let data = try JSONEncoder().encode(object)
         guard var json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any?] else {
             return
         }
-        json["title"] = "Example Feature"
+        
+        // Convert the GeoJSON object to valid GeoJSON-T <https://github.com/kgeographer/geojson-t/>.
+        XCTAssert(json["when"] == nil)
+        json["when"] = [
+            "timespans": [
+                [
+                    // Starts and ends sometime today.
+                    "start": [
+                        "in": today,
+                    ],
+                    "end": [
+                        "in": today,
+                    ],
+                ],
+            ],
+            "duration": "PT1M", // 1 minute long
+            "label": "Today",
+        ]
         
         let modifiedData = try JSONSerialization.data(withJSONObject: json, options: [])
         let modifiedObject = try JSONDecoder().decode(GeoJSONObject.self, from: modifiedData)
         
         let roundTrippedData = try JSONEncoder().encode(modifiedObject)
         let roundTrippedJSON = try JSONSerialization.jsonObject(with: roundTrippedData, options: []) as? [String: Any?]
-        XCTAssertEqual(roundTrippedJSON?["title"] as? String, "Example Feature")
+        
+        let when = try XCTUnwrap(roundTrippedJSON?["when"] as? [String: Any?])
+        XCTAssertEqual(when as NSDictionary, json["when"] as? NSDictionary)
     }
     
     func testForeignMemberCoding() throws {
