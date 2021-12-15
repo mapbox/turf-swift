@@ -216,4 +216,53 @@ class GeoJSONTests: XCTestCase {
         
         XCTAssertEqual(decodedFeature, feature)
     }
+    
+    func testForeignMemberCoding(in object: GeoJSONObject) throws {
+        let today = ISO8601DateFormatter().string(from: Date())
+        
+        let data = try JSONEncoder().encode(object)
+        guard var json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any?] else {
+            return
+        }
+        
+        // Convert the GeoJSON object to valid GeoJSON-T <https://github.com/kgeographer/geojson-t/>.
+        XCTAssert(json["when"] == nil)
+        json["when"] = [
+            "timespans": [
+                [
+                    // Starts and ends sometime today.
+                    "start": [
+                        "in": today,
+                    ],
+                    "end": [
+                        "in": today,
+                    ],
+                ],
+            ],
+            "duration": "PT1M", // 1 minute long
+            "label": "Today",
+        ]
+        
+        let modifiedData = try JSONSerialization.data(withJSONObject: json, options: [])
+        let modifiedObject = try JSONDecoder().decode(GeoJSONObject.self, from: modifiedData)
+        
+        let roundTrippedData = try JSONEncoder().encode(modifiedObject)
+        let roundTrippedJSON = try JSONSerialization.jsonObject(with: roundTrippedData, options: []) as? [String: Any?]
+        
+        let when = try XCTUnwrap(roundTrippedJSON?["when"] as? [String: Any?])
+        XCTAssertEqual(when as NSDictionary, json["when"] as? NSDictionary)
+    }
+    
+    func testForeignMemberCoding() throws {
+        let nullIsland = LocationCoordinate2D(latitude: 0, longitude: 0)
+        try testForeignMemberCoding(in: .geometry(.point(Point(nullIsland))))
+        try testForeignMemberCoding(in: .geometry(.lineString(LineString([nullIsland, nullIsland]))))
+        try testForeignMemberCoding(in: .geometry(.polygon(Polygon([[nullIsland, nullIsland, nullIsland]]))))
+        try testForeignMemberCoding(in: .geometry(.multiPoint(MultiPoint([nullIsland, nullIsland, nullIsland]))))
+        try testForeignMemberCoding(in: .geometry(.multiLineString(MultiLineString([[nullIsland, nullIsland, nullIsland]]))))
+        try testForeignMemberCoding(in: .geometry(.multiPolygon(MultiPolygon([[[nullIsland, nullIsland, nullIsland]]]))))
+        try testForeignMemberCoding(in: .geometry(.geometryCollection(GeometryCollection(geometries: []))))
+        try testForeignMemberCoding(in: .feature(.init(geometry: nil)))
+        try testForeignMemberCoding(in: .featureCollection(.init(features: [])))
+    }
 }

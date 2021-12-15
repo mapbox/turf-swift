@@ -89,3 +89,38 @@ extension Feature: GeoJSONObjectConvertible {
 extension FeatureCollection: GeoJSONObjectConvertible {
     public var geoJSONObject: GeoJSONObject { return .featureCollection(self) }
 }
+
+/**
+ A GeoJSON object that can contain [foreign members](https://datatracker.ietf.org/doc/html/rfc7946#section-6.1) in arbitrary keys.
+ */
+public protocol ForeignMemberContainer {
+    /// [Foreign members](https://datatracker.ietf.org/doc/html/rfc7946#section-6.1) to round-trip to JSON.
+    var foreignMembers: JSONObject { get set }
+}
+
+extension ForeignMemberContainer {
+    /**
+     Decodes any foreign members using the given decoder.
+     */
+    mutating func decodeForeignMembers<WellKnownCodingKeys>(notKeyedBy _: WellKnownCodingKeys.Type, with decoder: Decoder) throws where WellKnownCodingKeys: CodingKey {
+        let foreignMemberContainer = try decoder.container(keyedBy: AnyCodingKey.self)
+        for key in foreignMemberContainer.allKeys {
+            if WellKnownCodingKeys(stringValue: key.stringValue) == nil {
+                foreignMembers[key.stringValue] = try foreignMemberContainer.decode(JSONValue?.self, forKey: key)
+            }
+        }
+    }
+    
+    /**
+     Encodes any foreign members using the given encoder.
+     */
+    func encodeForeignMembers<WellKnownCodingKeys>(notKeyedBy _: WellKnownCodingKeys.Type, to encoder: Encoder) throws where WellKnownCodingKeys: CodingKey {
+        var foreignMemberContainer = encoder.container(keyedBy: AnyCodingKey.self)
+        for (key, value) in foreignMembers {
+            if let key = AnyCodingKey(stringValue: key),
+               WellKnownCodingKeys(stringValue: key.stringValue) == nil {
+                try foreignMemberContainer.encode(value, forKey: key)
+            }
+        }
+    }
+}

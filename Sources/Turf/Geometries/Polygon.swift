@@ -6,9 +6,11 @@ import CoreLocation
 /**
  A [Polygon geometry](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.6) is conceptually a collection of `Ring`s that form a single connected geometry.
  */
-public struct Polygon: Equatable {
+public struct Polygon: Equatable, ForeignMemberContainer {
     /// The positions at which the polygon is located. Each nested array corresponds to one linear ring.
     public var coordinates: [[LocationCoordinate2D]]
+    
+    public var foreignMembers: JSONObject = [:]
     
     /**
      Initializes a polygon defined by the given positions.
@@ -71,12 +73,14 @@ extension Polygon: Codable {
         _ = try container.decode(Kind.self, forKey: .kind)
         let coordinates = try container.decode([[LocationCoordinate2DCodable]].self, forKey: .coordinates).decodedCoordinates
         self = .init(coordinates)
+        try decodeForeignMembers(notKeyedBy: CodingKeys.self, with: decoder)
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(Kind.Polygon, forKey: .kind)
         try container.encode(coordinates.codableCoordinates, forKey: .coordinates)
+        try encodeForeignMembers(notKeyedBy: CodingKeys.self, to: encoder)
     }
 }
 

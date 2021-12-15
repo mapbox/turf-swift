@@ -58,9 +58,7 @@ public struct Ring {
         }
         return area
     }
-}
-
-extension Ring {
+    
     /**
      * Determines if the given point falls within the ring.
      * The optional parameter `ignoreBoundary` will result in the method returning true if the given point
@@ -103,5 +101,17 @@ extension Ring {
             i = i + 1
         }
         return isInside
+    }
+}
+
+extension Ring: Codable {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self = Ring(coordinates: try container.decode([LocationCoordinate2DCodable].self).decodedCoordinates)
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(coordinates.codableCoordinates)
     }
 }

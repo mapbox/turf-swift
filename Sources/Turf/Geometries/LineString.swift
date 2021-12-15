@@ -6,9 +6,11 @@ import CoreLocation
 /**
  A [LineString geometry](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.4) is a collection of two or more positions, each position connected to the next position linearly.
  */
-public struct LineString: Equatable {
+public struct LineString: Equatable, ForeignMemberContainer {
     /// The positions at which the line string is located.
     public var coordinates: [LocationCoordinate2D]
+    
+    public var foreignMembers: JSONObject = [:]
     
     /**
      Initializes a line string defined by given positions.
@@ -55,12 +57,14 @@ extension LineString: Codable {
         _ = try container.decode(Kind.self, forKey: .kind)
         let coordinates = try container.decode([LocationCoordinate2DCodable].self, forKey: .coordinates).decodedCoordinates
         self = .init(coordinates)
+        try decodeForeignMembers(notKeyedBy: CodingKeys.self, with: decoder)
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(Kind.LineString, forKey: .kind)
         try container.encode(coordinates.codableCoordinates, forKey: .coordinates)
+        try encodeForeignMembers(notKeyedBy: CodingKeys.self, to: encoder)
     }
 }
 
