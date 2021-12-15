@@ -17,14 +17,3 @@ struct AnyCodingKey: CodingKey {
         self.intValue = intValue
     }
 }
-
-extension KeyedDecodingContainer {
-    /**
-     All the keys the decoder has for this container, except for the well-known keys in the given type.
-     */
-    func foreignKeys<WellKnownCodingKeys>(excludingKeysIn _: WellKnownCodingKeys.Type) -> [Key] where WellKnownCodingKeys: CodingKey {
-        return allKeys.filter {
-            WellKnownCodingKeys(stringValue: $0.stringValue) == nil
-        }
-    }
-}

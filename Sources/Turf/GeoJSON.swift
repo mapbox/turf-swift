@@ -104,8 +104,10 @@ extension ForeignMemberContainer {
      */
     mutating func decodeForeignMembers<WellKnownCodingKeys>(notKeyedBy _: WellKnownCodingKeys.Type, with decoder: Decoder) throws where WellKnownCodingKeys: CodingKey {
         let foreignMemberContainer = try decoder.container(keyedBy: AnyCodingKey.self)
-        for key in foreignMemberContainer.foreignKeys(excludingKeysIn: WellKnownCodingKeys.self) {
-            foreignMembers[key.stringValue] = try foreignMemberContainer.decode(JSONValue?.self, forKey: key)
+        for key in foreignMemberContainer.allKeys {
+            if WellKnownCodingKeys(stringValue: key.stringValue) == nil {
+                foreignMembers[key.stringValue] = try foreignMemberContainer.decode(JSONValue?.self, forKey: key)
+            }
         }
     }
     
