@@ -75,6 +75,22 @@ class JSONTests: XCTestCase {
             XCTFail()
         }
         
+        if case JSONValue.boolean = 0 {
+            XCTFail()
+        }
+        
+        if case JSONValue.boolean = 1 {
+            XCTFail()
+        }
+        
+        if case JSONValue.number = false {
+            XCTFail()
+        }
+        
+        if case JSONValue.number = true {
+            XCTFail()
+        }
+        
         if case let JSONValue.array(array) = ["Jason", 42, 3.1415, false, true, nil, [], [:]],
            array.count == 8 {
             if case let .string(string) = array[0] {
