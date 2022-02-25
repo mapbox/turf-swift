@@ -67,12 +67,42 @@ extension JSONValue: RawRepresentable {
     
     public init?(rawValue: Any) {
         // Like `JSONSerialization.jsonObject(with:options:)` with `JSONSerialization.ReadingOptions.fragmentsAllowed` specified.
-        if let bool = rawValue as? Bool {
-            self = .boolean(bool)
-        } else if let string = rawValue as? String {
+        if let string = rawValue as? String {
             self = .string(string)
         } else if let number = rawValue as? NSNumber {
-            self = .number(number.doubleValue)
+            /// When a Swift Bool or Objective-C BOOL is boxed with NSNumber, the value of the
+            /// resulting NSNumber's objCType property is 'c' (Int8 (aka CChar) in Swift, char in
+            /// Objective-C) and the value is 0 for false/NO and 1 for true/YES.
+            ///
+            /// Strictly speaking, an NSNumber with those characteristics can be created by boxing
+            /// other non-boolean values (e.g. boxing 0 or 1 using the `init(value: CChar)`
+            /// initializer). Moreover, NSNumber doesn't guarantee to preserve the type suggested
+            /// by the initializer that's used to create it.
+            ///
+            /// This means that when these values are encountered, it is ambiguous whether to
+            /// decode to JSONValue.number or JSONValue.boolean.
+            ///
+            /// In practice, choosing .boolean yields the desired result more often since it is more
+            /// common to work with Bool than it is Int8.
+            switch String(cString: number.objCType) {
+            case "c": // char
+                if number.int8Value == 0 {
+                    self = .boolean(false)
+                } else if number.int8Value == 1 {
+                    self = .boolean(true)
+                } else {
+                    self = .number(number.doubleValue)
+                }
+            default:
+                self = .number(number.doubleValue)
+            }
+        } else if let boolean = rawValue as? Bool {
+            /// This branch must happen after the `NSNumber` branch
+            /// to avoid converting `NSNumber` instances with values
+            /// 0 and 1 but of objCType != 'c' to `Bool` since `as? Bool`
+            /// can succeed when the NSNumber's value is 0 or 1 even
+            /// when its objCType is not 'c'.
+            self = .boolean(boolean)
         } else if let rawArray = rawValue as? JSONArray.RawValue,
                   let array = JSONArray(rawValue: rawArray) {
             self = .array(array)
