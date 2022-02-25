@@ -8,6 +8,10 @@ class JSONTests: XCTestCase {
         XCTAssertEqual(JSONValue(rawValue: 3.1415 as NSNumber), .number(3.1415))
         XCTAssertEqual(JSONValue(rawValue: false as NSNumber), .boolean(false))
         XCTAssertEqual(JSONValue(rawValue: true as NSNumber), .boolean(true))
+        XCTAssertEqual(JSONValue(rawValue: false), .boolean(false))
+        XCTAssertEqual(JSONValue(rawValue: true), .boolean(true))
+        XCTAssertEqual(JSONValue(rawValue: 0 as NSNumber), .number(0))
+        XCTAssertEqual(JSONValue(rawValue: 1 as NSNumber), .number(1))
         XCTAssertEqual(JSONValue(rawValue: ["Jason", 42, 3.1415, false, true, nil, [], [:]] as NSArray),
                        .array(["Jason", 42, 3.1415, false, true, nil, [], [:]]))
         XCTAssertEqual(JSONValue(rawValue: [
@@ -245,5 +249,13 @@ class JSONTests: XCTestCase {
         XCTAssertEqual(decodedValue?.rawValue as? NSDictionary, rawObject as NSDictionary)
         
         XCTAssertNoThrow(try JSONEncoder().encode(decodedValue))
+
+        // check decoding of 0/1 true/false to ensure unwanted conversions are avoided
+        let rawString = "[0, 1, true, false]"
+        // force-unwrap is safe since we control the input
+        let serializedArrayFromString = rawString.data(using: .utf8)!
+        XCTAssertNoThrow(decodedValue = try JSONDecoder().decode(JSONValue.self, from: serializedArrayFromString))
+        XCTAssertNotNil(decodedValue)
+        XCTAssertEqual(.array([.number(0), .number(1), .boolean(true), .boolean(false)]), decodedValue)
     }
 }
