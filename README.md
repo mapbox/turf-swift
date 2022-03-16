@@ -15,8 +15,6 @@ It's also compatible with Linux (and possibly other platforms), as long as you h
 
 ## Installation
 
-A stable release is not yet available, so you'll need to point at the "main" branch.
-
 ### Swift Package Manager
 
 To install GeoJSONKitTurf using the [Swift Package Manager](https://swift.org/package-manager/), add the following package to the `dependencies` in your Package.swift file:
