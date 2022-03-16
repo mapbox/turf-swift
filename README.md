@@ -22,7 +22,7 @@ A stable release is not yet available, so you'll need to point at the "main" bra
 To install GeoJSONKitTurf using the [Swift Package Manager](https://swift.org/package-manager/), add the following package to the `dependencies` in your Package.swift file:
 
 ```swift
-.package(name: "GeoJSONKitTurf", url: "https://github.com/maparoni/geojsonkit-turf", .branch("main"))
+.package(name: "GeoJSONKitTurf", url: "https://github.com/maparoni/geojsonkit-turf", from: "0.1.0")
 ```
 
 Then usen: 
