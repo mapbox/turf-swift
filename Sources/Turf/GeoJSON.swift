@@ -98,12 +98,24 @@ public protocol ForeignMemberContainer {
     var foreignMembers: JSONObject { get set }
 }
 
+/**
+ Key to pass to populate a `userInfo` dictionary, which is passed to the `JSONDecoder` or `JSONEncoder` to enable processing foreign members.
+*/
+public extension CodingUserInfoKey {
+    /**
+     Indicates if coding of foreign members is enabled.
+     
+     Boolean flag to enable coding. Default (or missing) value is to ignore foreign members.
+     */
+    static let allowForeignMembersCoding = CodingUserInfoKey(rawValue: "com.mapbox.turf.coding.allowForeignMembersCodingKey")!
+}
+
 extension ForeignMemberContainer {
     /**
      Decodes any foreign members using the given decoder.
      */
     mutating func decodeForeignMembers<WellKnownCodingKeys>(notKeyedBy _: WellKnownCodingKeys.Type, with decoder: Decoder) throws where WellKnownCodingKeys: CodingKey {
-        guard let allowCoding = decoder.userInfo[.geometryForeignMembersCodingKey] as? Bool,
+        guard let allowCoding = decoder.userInfo[.allowForeignMembersCoding] as? Bool,
               allowCoding else { return }
         
         let foreignMemberContainer = try decoder.container(keyedBy: AnyCodingKey.self)
@@ -118,7 +130,7 @@ extension ForeignMemberContainer {
      Encodes any foreign members using the given encoder.
      */
     func encodeForeignMembers<WellKnownCodingKeys>(notKeyedBy _: WellKnownCodingKeys.Type, to encoder: Encoder) throws where WellKnownCodingKeys: CodingKey {
-        guard let allowCoding = encoder.userInfo[.geometryForeignMembersCodingKey] as? Bool,
+        guard let allowCoding = encoder.userInfo[.allowForeignMembersCoding] as? Bool,
               allowCoding else { return }
         
         var foreignMemberContainer = encoder.container(keyedBy: AnyCodingKey.self)

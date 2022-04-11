@@ -34,10 +34,6 @@ public enum Geometry: Equatable {
     }
 }
 
-public extension CodingUserInfoKey {
-    static let geometryForeignMembersCodingKey = CodingUserInfoKey(rawValue: "GeometryForeignMembersCodingKey")!
-}
-
 extension Geometry: Codable {
     private enum CodingKeys: String, CodingKey {
         case kind = "type"
