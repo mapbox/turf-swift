@@ -103,6 +103,9 @@ extension ForeignMemberContainer {
      Decodes any foreign members using the given decoder.
      */
     mutating func decodeForeignMembers<WellKnownCodingKeys>(notKeyedBy _: WellKnownCodingKeys.Type, with decoder: Decoder) throws where WellKnownCodingKeys: CodingKey {
+        guard let allowCoding = decoder.userInfo[.geometryForeignMembersCodingKey] as? Bool,
+              allowCoding else { return }
+        
         let foreignMemberContainer = try decoder.container(keyedBy: AnyCodingKey.self)
         for key in foreignMemberContainer.allKeys {
             if WellKnownCodingKeys(stringValue: key.stringValue) == nil {
@@ -115,6 +118,9 @@ extension ForeignMemberContainer {
      Encodes any foreign members using the given encoder.
      */
     func encodeForeignMembers<WellKnownCodingKeys>(notKeyedBy _: WellKnownCodingKeys.Type, to encoder: Encoder) throws where WellKnownCodingKeys: CodingKey {
+        guard let allowCoding = encoder.userInfo[.geometryForeignMembersCodingKey] as? Bool,
+              allowCoding else { return }
+        
         var foreignMemberContainer = encoder.container(keyedBy: AnyCodingKey.self)
         for (key, value) in foreignMembers {
             if let key = AnyCodingKey(stringValue: key),

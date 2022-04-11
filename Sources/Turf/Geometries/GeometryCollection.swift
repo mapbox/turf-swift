@@ -52,19 +52,13 @@ extension GeometryCollection: Codable {
         _ = try container.decode(Kind.self, forKey: .kind)
         let geometries = try container.decode([Geometry].self, forKey: .geometries)
         self = .init(geometries: geometries)
-        if let allowCoding = decoder.userInfo[.geometryForeignMembersCodingKey] as? Bool,
-           allowCoding {
-            try decodeForeignMembers(notKeyedBy: CodingKeys.self, with: decoder)
-        }
+        try decodeForeignMembers(notKeyedBy: CodingKeys.self, with: decoder)
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(Kind.GeometryCollection, forKey: .kind)
         try container.encode(geometries, forKey: .geometries)
-        if let allowCoding = encoder.userInfo[.geometryForeignMembersCodingKey] as? Bool,
-           allowCoding {
-            try encodeForeignMembers(notKeyedBy: CodingKeys.self, to: encoder)
-        }
+        try encodeForeignMembers(notKeyedBy: CodingKeys.self, to: encoder)
     }
 }
