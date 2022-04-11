@@ -41,13 +41,19 @@ extension Point: Codable {
         _ = try container.decode(Kind.self, forKey: .kind)
         let coordinates = try container.decode(LocationCoordinate2DCodable.self, forKey: .coordinates).decodedCoordinates
         self = .init(coordinates)
-        try decodeForeignMembers(notKeyedBy: CodingKeys.self, with: decoder)
+        if let allowCoding = decoder.userInfo[.geometryForeignMembersCodingKey] as? Bool,
+           allowCoding {
+            try decodeForeignMembers(notKeyedBy: CodingKeys.self, with: decoder)
+        }
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(Kind.Point, forKey: .kind)
         try container.encode(coordinates.codableCoordinates, forKey: .coordinates)
-        try encodeForeignMembers(notKeyedBy: CodingKeys.self, to: encoder)
+        if let allowCoding = encoder.userInfo[.geometryForeignMembersCodingKey] as? Bool,
+           allowCoding {
+            try encodeForeignMembers(notKeyedBy: CodingKeys.self, to: encoder)
+        }
     }
 }
