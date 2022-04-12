@@ -4,8 +4,9 @@ import CoreLocation
 #endif
 
 /**
- A [GeoJSON object](https://datatracker.ietf.org/doc/html/rfc7946#section-3) represents a Geometry, Feature, or collection of
- Features.
+ A [GeoJSON object](https://datatracker.ietf.org/doc/html/rfc7946#section-3) represents a Geometry, Feature, or collection of Features.
+ 
+ - Note: [Foreign members](https://datatracker.ietf.org/doc/html/rfc7946#section-6.1) which may be present inside are coded only if used `JSONEncoder` or `JSONDecoder` has `userInfo[.includesForeignMembers] = true`.
  */
 public enum GeoJSONObject: Equatable {
     /**
@@ -95,7 +96,21 @@ extension FeatureCollection: GeoJSONObjectConvertible {
  */
 public protocol ForeignMemberContainer {
     /// [Foreign members](https://datatracker.ietf.org/doc/html/rfc7946#section-6.1) to round-trip to JSON.
+    ///
+    /// Members are coded only if used `JSONEncoder` or `JSONDecoder` has `userInfo[.includesForeignMembers] = true`.
     var foreignMembers: JSONObject { get set }
+}
+
+/**
+ Key to pass to populate a `userInfo` dictionary, which is passed to the `JSONDecoder` or `JSONEncoder` to enable processing foreign members.
+*/
+public extension CodingUserInfoKey {
+    /**
+     Indicates if coding of foreign members is enabled.
+     
+     Boolean flag to enable coding. Default (or missing) value is to ignore foreign members.
+     */
+    static let includesForeignMembers = CodingUserInfoKey(rawValue: "com.mapbox.turf.coding.includesForeignMembers")!
 }
 
 extension ForeignMemberContainer {
@@ -103,6 +118,9 @@ extension ForeignMemberContainer {
      Decodes any foreign members using the given decoder.
      */
     mutating func decodeForeignMembers<WellKnownCodingKeys>(notKeyedBy _: WellKnownCodingKeys.Type, with decoder: Decoder) throws where WellKnownCodingKeys: CodingKey {
+        guard let allowCoding = decoder.userInfo[.includesForeignMembers] as? Bool,
+              allowCoding else { return }
+        
         let foreignMemberContainer = try decoder.container(keyedBy: AnyCodingKey.self)
         for key in foreignMemberContainer.allKeys {
             if WellKnownCodingKeys(stringValue: key.stringValue) == nil {
@@ -115,6 +133,9 @@ extension ForeignMemberContainer {
      Encodes any foreign members using the given encoder.
      */
     func encodeForeignMembers<WellKnownCodingKeys>(notKeyedBy _: WellKnownCodingKeys.Type, to encoder: Encoder) throws where WellKnownCodingKeys: CodingKey {
+        guard let allowCoding = encoder.userInfo[.includesForeignMembers] as? Bool,
+              allowCoding else { return }
+        
         var foreignMemberContainer = encoder.container(keyedBy: AnyCodingKey.self)
         for (key, value) in foreignMembers {
             if let key = AnyCodingKey(stringValue: key),
