@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Structures  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Section/Structures" class="dashAnchor"></a>
+    <a title="Structures  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">Turf for Swift</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/mapbox/turf-swift"><img src="img/gh.png" alt="GitHub"/>View on GitHub</a></p>
+        <p class="header-right"><a href="dash-feed://https%3A%2F%2Fmapbox.github.io%2Fturf-swift%2F2.4.0%2Fdocsets%2FTurf.xml"><img src="img/dash.png" alt="Dash"/>Install in Dash</a></p>
+        <div class="header-right">
+          <form role="search" action="search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </div>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">Turf Reference</a>
+        <img id="carat" src="img/carat.png" alt=""/>
+        Structures  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/FeatureIdentifier.html">FeatureIdentifier</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/GeoJSONObject.html">GeoJSONObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Geometry.html">Geometry</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/JSONValue.html">JSONValue</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/CodingUserInfoKey.html">CodingUserInfoKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/JSONArray.html">JSONArray</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/JSONObject.html">JSONObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/LocationCoordinate2D.html">LocationCoordinate2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/LocationDegrees.html">LocationDegrees</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/LocationDirection.html">LocationDirection</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:4Turf12intersectionySo22CLLocationCoordinate2DVSgAD_ADt_AD_ADttF">intersection(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:4Turf3midySo22CLLocationCoordinate2DVAD_ADtF">mid(_:_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Protocols/ForeignMemberContainer.html">ForeignMemberContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/GeoJSONObjectConvertible.html">GeoJSONObjectConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/GeometryConvertible.html">GeometryConvertible</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/BoundingBox.html">BoundingBox</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Feature.html">Feature</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FeatureCollection.html">FeatureCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/GeometryCollection.html">GeometryCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LineString.html">LineString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LineString/IndexedCoordinate.html">– IndexedCoordinate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LocationCoordinate2D.html">LocationCoordinate2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MultiLineString.html">MultiLineString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MultiPoint.html">MultiPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MultiPolygon.html">MultiPolygon</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Point.html">Point</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Polygon.html">Polygon</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RadianCoordinate2D.html">RadianCoordinate2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Ring.html">Ring</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:4Turf9JSONArraya">JSONArray</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:4Turf10JSONObjecta">JSONObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:4Turf11LineSegmenta">LineSegment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:4Turf20LocationCoordinate2Da">LocationCoordinate2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/LocationDegrees">LocationDegrees</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:4Turf15LocationDegreesa">LocationDegrees</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/LocationDirection">LocationDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:4Turf17LocationDirectiona">LocationDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/LocationDistance">LocationDistance</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:4Turf16LocationDistancea">LocationDistance</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:4Turf15LocationRadiansa">LocationRadians</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:4Turf14RadianDistancea">RadianDistance</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Structures</h1>
+            <p>The following structures are available globally.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf11BoundingBoxV"></a>
+                    <a name="//apple_ref/swift/Struct/BoundingBox" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf11BoundingBoxV">BoundingBox</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A <a href="https://datatracker.ietf.org/doc/html/rfc7946#section-5">bounding box</a> indicates the extremes of a <code><a href="Enums/GeoJSONObject.html">GeoJSONObject</a></code> along the x- and y-axes (longitude and latitude, respectively).</p>
+
+                        <a href="Structs/BoundingBox.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">BoundingBox</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">BoundingBox</span><span class="p">:</span> <span class="kt">Hashable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">BoundingBox</span><span class="p">:</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v2.4.0/Sources/Turf/BoundingBox.swift#L9-L69">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Struct/LocationCoordinate2D" class="dashAnchor"></a>
+                    <a class="token" href="#/">LocationCoordinate2D</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A geographic coordinate with its components measured in degrees.</p>
+
+                        <a href="Structs/LocationCoordinate2D.html" class="slightly-smaller">See more</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf7FeatureV"></a>
+                    <a name="//apple_ref/swift/Struct/Feature" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf7FeatureV">Feature</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A <a href="https://datatracker.ietf.org/doc/html/rfc7946#section-3.2">Feature object</a> represents a spatially bounded thing.</p>
+
+                        <a href="Structs/Feature.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Feature</span> <span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt"><a href="Protocols/ForeignMemberContainer.html">ForeignMemberContainer</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Feature</span><span class="p">:</span> <span class="kt">Codable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Feature</span><span class="p">:</span> <span class="kt"><a href="Protocols/GeoJSONObjectConvertible.html">GeoJSONObjectConvertible</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v2.4.0/Sources/Turf/Feature.swift#L9-L42">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf17FeatureCollectionV"></a>
+                    <a name="//apple_ref/swift/Struct/FeatureCollection" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf17FeatureCollectionV">FeatureCollection</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A <a href="https://datatracker.ietf.org/doc/html/rfc7946#section-3.3">FeatureCollection object</a> is a collection of Feature objects.</p>
+
+                        <a href="Structs/FeatureCollection.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">FeatureCollection</span> <span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt"><a href="Protocols/ForeignMemberContainer.html">ForeignMemberContainer</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">FeatureCollection</span><span class="p">:</span> <span class="kt">Codable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">FeatureCollection</span><span class="p">:</span> <span class="kt"><a href="Protocols/GeoJSONObjectConvertible.html">GeoJSONObjectConvertible</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v2.4.0/Sources/Turf/FeatureCollection.swift#L6-L20">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf18GeometryCollectionV"></a>
+                    <a name="//apple_ref/swift/Struct/GeometryCollection" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf18GeometryCollectionV">GeometryCollection</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A <a href="https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.8">GeometryCollection geometry</a> is a heterogeneous collection of <code><a href="Enums/Geometry.html">Geometry</a></code> objects that are related.</p>
+
+                        <a href="Structs/GeometryCollection.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GeometryCollection</span> <span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt"><a href="Protocols/ForeignMemberContainer.html">ForeignMemberContainer</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">GeometryCollection</span><span class="p">:</span> <span class="kt">Codable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">GeometryCollection</span><span class="p">:</span> <span class="kt"><a href="Protocols/GeometryConvertible.html">GeometryConvertible</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v2.4.0/Sources/Turf/Geometries/GeometryCollection.swift#L9-L38">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf10LineStringV"></a>
+                    <a name="//apple_ref/swift/Struct/LineString" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf10LineStringV">LineString</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A <a href="https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.4">LineString geometry</a> is a collection of two or more positions, each position connected to the next position linearly.</p>
+
+                        <a href="Structs/LineString.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">LineString</span> <span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt"><a href="Protocols/ForeignMemberContainer.html">ForeignMemberContainer</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">LineString</span><span class="p">:</span> <span class="kt">Codable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">LineString</span><span class="p">:</span> <span class="kt"><a href="Protocols/GeometryConvertible.html">GeometryConvertible</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v2.4.0/Sources/Turf/Geometries/LineString.swift#L9-L43">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf15MultiLineStringV"></a>
+                    <a name="//apple_ref/swift/Struct/MultiLineString" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf15MultiLineStringV">MultiLineString</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A <a href="https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.5">MultiLineString geometry</a> is a collection of <code><a href="Structs/LineString.html">LineString</a></code> geometries that are disconnected but related.</p>
+
+                        <a href="Structs/MultiLineString.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MultiLineString</span> <span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt"><a href="Protocols/ForeignMemberContainer.html">ForeignMemberContainer</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">MultiLineString</span><span class="p">:</span> <span class="kt">Codable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">MultiLineString</span><span class="p">:</span> <span class="kt"><a href="Protocols/GeometryConvertible.html">GeometryConvertible</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v2.4.0/Sources/Turf/Geometries/MultiLineString.swift#L9-L34">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf10MultiPointV"></a>
+                    <a name="//apple_ref/swift/Struct/MultiPoint" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf10MultiPointV">MultiPoint</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A <a href="https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.3">MultiPoint geometry</a> represents a collection of disconnected but related positions.</p>
+
+                        <a href="Structs/MultiPoint.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MultiPoint</span> <span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt"><a href="Protocols/ForeignMemberContainer.html">ForeignMemberContainer</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">MultiPoint</span><span class="p">:</span> <span class="kt">Codable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">MultiPoint</span><span class="p">:</span> <span class="kt"><a href="Protocols/GeometryConvertible.html">GeometryConvertible</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v2.4.0/Sources/Turf/Geometries/MultiPoint.swift#L9-L23">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf12MultiPolygonV"></a>
+                    <a name="//apple_ref/swift/Struct/MultiPolygon" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf12MultiPolygonV">MultiPolygon</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A <a href="https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.7">MultiPolygon geometry</a> is a collection of <code><a href="Structs/Polygon.html">Polygon</a></code> geometries that are disconnected but related.</p>
+
+                        <a href="Structs/MultiPolygon.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MultiPolygon</span> <span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt"><a href="Protocols/ForeignMemberContainer.html">ForeignMemberContainer</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">MultiPolygon</span><span class="p">:</span> <span class="kt">Codable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">MultiPolygon</span><span class="p">:</span> <span class="kt"><a href="Protocols/GeometryConvertible.html">GeometryConvertible</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v2.4.0/Sources/Turf/Geometries/MultiPolygon.swift#L9-L41">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf5PointV"></a>
+                    <a name="//apple_ref/swift/Struct/Point" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf5PointV">Point</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A <a href="https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.2">Point geometry</a> represents a single position.</p>
+
+                        <a href="Structs/Point.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Point</span> <span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt"><a href="Protocols/ForeignMemberContainer.html">ForeignMemberContainer</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Point</span><span class="p">:</span> <span class="kt">Codable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Point</span><span class="p">:</span> <span class="kt"><a href="Protocols/GeometryConvertible.html">GeometryConvertible</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v2.4.0/Sources/Turf/Geometries/Point.swift#L9-L27">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf7PolygonV"></a>
+                    <a name="//apple_ref/swift/Struct/Polygon" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf7PolygonV">Polygon</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A <a href="https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.6">Polygon geometry</a> is conceptually a collection of <code><a href="Structs/Ring.html">Ring</a></code>s that form a single connected geometry.</p>
+
+                        <a href="Structs/Polygon.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Polygon</span> <span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt"><a href="Protocols/ForeignMemberContainer.html">ForeignMemberContainer</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Polygon</span><span class="p">:</span> <span class="kt">Codable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Polygon</span><span class="p">:</span> <span class="kt"><a href="Protocols/GeometryConvertible.html">GeometryConvertible</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v2.4.0/Sources/Turf/Geometries/Polygon.swift#L9-L59">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf18RadianCoordinate2DV"></a>
+                    <a name="//apple_ref/swift/Struct/RadianCoordinate2D" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf18RadianCoordinate2DV">RadianCoordinate2D</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A coordinate pair measured in radians, as opposed to <code><a href="Typealiases.html#/s:4Turf20LocationCoordinate2Da">LocationCoordinate2D</a></code>, which is measured in degrees of arc.</p>
+
+                        <a href="Structs/RadianCoordinate2D.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RadianCoordinate2D</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v2.4.0/Sources/Turf/RadianCoordinate2D.swift#L15-L74">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf4RingV"></a>
+                    <a name="//apple_ref/swift/Struct/Ring" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf4RingV">Ring</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A <a href="https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.6">linear ring</a> is a closed figure bounded by three or more straight line segments.</p>
+
+                        <a href="Structs/Ring.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Ring</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Ring</span><span class="p">:</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v2.4.0/Sources/Turf/Ring.swift#L9-L105">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>© 2014–2022 <a class="link" href="https://www.mapbox.com/" target="_blank" rel="external noopener">Mapbox</a>. See <a class="link" href="https://github.com/mapbox/turf-swift/blob/main/LICENSE.md" target="_blank" rel="external noopener">license</a> for more details.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>

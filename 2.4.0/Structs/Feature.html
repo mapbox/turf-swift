@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Feature Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/Feature" class="dashAnchor"></a>
+    <a title="Feature Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">Turf for Swift</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/mapbox/turf-swift"><img src="../img/gh.png" alt="GitHub"/>View on GitHub</a></p>
+        <p class="header-right"><a href="dash-feed://https%3A%2F%2Fmapbox.github.io%2Fturf-swift%2F2.4.0%2Fdocsets%2FTurf.xml"><img src="../img/dash.png" alt="Dash"/>Install in Dash</a></p>
+        <div class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </div>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">Turf Reference</a>
+        <img id="carat" src="../img/carat.png" alt=""/>
+        Feature Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/FeatureIdentifier.html">FeatureIdentifier</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GeoJSONObject.html">GeoJSONObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Geometry.html">Geometry</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/JSONValue.html">JSONValue</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/CodingUserInfoKey.html">CodingUserInfoKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/JSONArray.html">JSONArray</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/JSONObject.html">JSONObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/LocationCoordinate2D.html">LocationCoordinate2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/LocationDegrees.html">LocationDegrees</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/LocationDirection.html">LocationDirection</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:4Turf12intersectionySo22CLLocationCoordinate2DVSgAD_ADt_AD_ADttF">intersection(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:4Turf3midySo22CLLocationCoordinate2DVAD_ADtF">mid(_:_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/ForeignMemberContainer.html">ForeignMemberContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/GeoJSONObjectConvertible.html">GeoJSONObjectConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/GeometryConvertible.html">GeometryConvertible</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/BoundingBox.html">BoundingBox</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Feature.html">Feature</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FeatureCollection.html">FeatureCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GeometryCollection.html">GeometryCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LineString.html">LineString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LineString/IndexedCoordinate.html">– IndexedCoordinate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LocationCoordinate2D.html">LocationCoordinate2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MultiLineString.html">MultiLineString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MultiPoint.html">MultiPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MultiPolygon.html">MultiPolygon</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Point.html">Point</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Polygon.html">Polygon</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RadianCoordinate2D.html">RadianCoordinate2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Ring.html">Ring</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:4Turf9JSONArraya">JSONArray</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:4Turf10JSONObjecta">JSONObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:4Turf11LineSegmenta">LineSegment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:4Turf20LocationCoordinate2Da">LocationCoordinate2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/LocationDegrees">LocationDegrees</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:4Turf15LocationDegreesa">LocationDegrees</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/LocationDirection">LocationDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:4Turf17LocationDirectiona">LocationDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/LocationDistance">LocationDistance</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:4Turf16LocationDistancea">LocationDistance</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:4Turf15LocationRadiansa">LocationRadians</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:4Turf14RadianDistancea">RadianDistance</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Feature</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Feature</span> <span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt"><a href="../Protocols/ForeignMemberContainer.html">ForeignMemberContainer</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Feature</span><span class="p">:</span> <span class="kt">Codable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Feature</span><span class="p">:</span> <span class="kt"><a href="../Protocols/GeoJSONObjectConvertible.html">GeoJSONObjectConvertible</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>A <a href="https://datatracker.ietf.org/doc/html/rfc7946#section-3.2">Feature object</a> represents a spatially bounded thing.</p>
+
+              <div class="slightly-smaller">
+                <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v2.4.0/Sources/Turf/Feature.swift#L9-L42">Show on GitHub</a>
+              </div>
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf7FeatureV10identifierAA0B10IdentifierOSgvp"></a>
+                    <a name="//apple_ref/swift/Property/identifier" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf7FeatureV10identifierAA0B10IdentifierOSgvp">identifier</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A string or number that commonly identifies the feature in the context of a data set.</p>
+
+<p>Turf does not guarantee that the feature is unique; however, a data set may make such a guarantee.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">identifier</span><span class="p">:</span> <span class="kt"><a href="../Enums/FeatureIdentifier.html">FeatureIdentifier</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v2.4.0/Sources/Turf/Feature.swift#L15">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf7FeatureV10propertiesSDySSAA9JSONValueOSgGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/properties" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf7FeatureV10propertiesSDySSAA9JSONValueOSgGSgvp">properties</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Arbitrary, JSON-compatible attributes to associate with the feature.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">properties</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:4Turf10JSONObjecta">JSONObject</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v2.4.0/Sources/Turf/Feature.swift#L18">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf7FeatureV8geometryAA8GeometryOSgvp"></a>
+                    <a name="//apple_ref/swift/Property/geometry" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf7FeatureV8geometryAA8GeometryOSgvp">geometry</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The geometry at which the feature is located.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">geometry</span><span class="p">:</span> <span class="kt"><a href="../Enums/Geometry.html">Geometry</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v2.4.0/Sources/Turf/Feature.swift#L21">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf22ForeignMemberContainerP14foreignMembersSDySSAA9JSONValueOSgGvp"></a>
+                    <a name="//apple_ref/swift/Property/foreignMembers" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf22ForeignMemberContainerP14foreignMembersSDySSAA9JSONValueOSgGvp">foreignMembers</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">foreignMembers</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:4Turf10JSONObjecta">JSONObject</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v2.4.0/Sources/Turf/Feature.swift#L101">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf7FeatureV8geometryAcA8GeometryO_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(geometry:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf7FeatureV8geometryAcA8GeometryO_tcfc">init(geometry:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes a feature located at the given geometry.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">geometry</span><span class="p">:</span> <span class="kt"><a href="../Enums/Geometry.html">Geometry</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>geometry</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The geometry at which the feature is located.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v2.4.0/Sources/Turf/Feature.swift#L30-L32">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf7FeatureV8geometryAcA19GeometryConvertible_pSg_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(geometry:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf7FeatureV8geometryAcA19GeometryConvertible_pSg_tcfc">init(geometry:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes a feature defined by the given geometry-convertible instance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">geometry</span><span class="p">:</span> <span class="kt"><a href="../Protocols/GeometryConvertible.html">GeometryConvertible</a></span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>geometry</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The geometry-convertible instance that bounds the feature.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v2.4.0/Sources/Turf/Feature.swift#L39-L41">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Se4fromxs7Decoder_p_tKcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Se4fromxs7Decoder_p_tKcfc">init(from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">from</span> <span class="nv">decoder</span><span class="p">:</span> <span class="kt">Decoder</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v2.4.0/Sources/Turf/Feature.swift#L56-L63">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:SE6encode2toys7Encoder_p_tKF"></a>
+                    <a name="//apple_ref/swift/Method/encode(to:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:SE6encode2toys7Encoder_p_tKF">encode(to:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">encode</span><span class="p">(</span><span class="n">to</span> <span class="nv">encoder</span><span class="p">:</span> <span class="kt">Encoder</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v2.4.0/Sources/Turf/Feature.swift#L65-L72">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:4Turf24GeoJSONObjectConvertibleP03geoC0AA0bC0Ovp"></a>
+                    <a name="//apple_ref/swift/Property/geoJSONObject" class="dashAnchor"></a>
+                    <a class="token" href="#/s:4Turf24GeoJSONObjectConvertibleP03geoC0AA0bC0Ovp">geoJSONObject</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">geoJSONObject</span><span class="p">:</span> <span class="kt"><a href="../Enums/GeoJSONObject.html">GeoJSONObject</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/mapbox/mapbox-directions-swift/tree/v2.4.0/Sources/Turf/GeoJSON.swift#L75">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>© 2014–2022 <a class="link" href="https://www.mapbox.com/" target="_blank" rel="external noopener">Mapbox</a>. See <a class="link" href="https://github.com/mapbox/turf-swift/blob/main/LICENSE.md" target="_blank" rel="external noopener">license</a> for more details.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>
