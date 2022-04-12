@@ -221,7 +221,7 @@ class GeoJSONTests: XCTestCase {
         let today = ISO8601DateFormatter().string(from: Date())
         
         let encoder = JSONEncoder()
-        encoder.userInfo[.allowForeignMembersCoding] = true
+        encoder.userInfo[.includesForeignMembers] = true
         
         let data = try encoder.encode(object)
         guard var json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any?] else {
@@ -247,7 +247,7 @@ class GeoJSONTests: XCTestCase {
         ]
         
         let decoder = JSONDecoder()
-        decoder.userInfo[.allowForeignMembersCoding] = true
+        decoder.userInfo[.includesForeignMembers] = true
         
         let modifiedData = try JSONSerialization.data(withJSONObject: json, options: [])
         let modifiedObject = try decoder.decode(GeoJSONObject.self, from: modifiedData)
