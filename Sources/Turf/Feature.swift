@@ -12,7 +12,7 @@ public struct Feature: Equatable, ForeignMemberContainer {
      
      Turf does not guarantee that the feature is unique; however, a data set may make such a guarantee.
      */
-    internal var identifier: FeatureIdentifier?
+    public var identifier: FeatureIdentifier?
     
     /// Arbitrary, JSON-compatible attributes to associate with the feature.
     public var properties: JSONObject?
