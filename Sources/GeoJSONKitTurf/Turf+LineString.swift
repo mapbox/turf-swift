@@ -5,7 +5,7 @@ import GeoJSONKit
 extension GeoJSON.LineString {
   var coordinates: [GeoJSON.Position] { positions }
   
-  /// Returns a new `.LineString` based on bezier transformation of the input line.
+  /// Returns a new line string based on bezier transformation of the input line.
   ///
   /// ported from https://github.com/Turfjs/turf/blob/1ea264853e1be7469c8b7d2795651c9114a069aa/packages/turf-bezier-spline/index.ts
   public func bezier(resolution: Int = 10000, sharpness: Double = 0.85) -> GeoJSON.LineString? {
@@ -21,7 +21,65 @@ extension GeoJSON.LineString {
     return GeoJSON.LineString(positions: coords)
   }
   
-  /// Returns a `.LineString` along a `.LineString` within a distance from a coordinate.
+  /**
+   Returns the portion of the line string that begins at the given start distance and extends the given stop distance along the line string.
+   
+   This method is equivalent to the [turf-line-slice-along](https://turfjs.org/docs/#lineSliceAlong) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-line-slice-along/)).
+   */
+  public func trimmed(from startDistance: GeoJSON.Distance, to stopDistance: GeoJSON.Distance) -> GeoJSON.LineString? {
+    // The method is porting from https://github.com/Turfjs/turf/blob/5375941072b90d489389db22b43bfe809d5e451e/packages/turf-line-slice-along/index.js
+    guard startDistance >= 0.0 && stopDistance >= startDistance else { return nil }
+    let positions = self.coordinates
+    var traveled: GeoJSON.Distance = 0
+    var slice = [GeoJSON.Position]()
+    
+    for i in 0..<positions.endIndex {
+      if startDistance >= traveled && i == positions.endIndex - 1 {
+        break
+      } else if traveled > startDistance && slice.isEmpty {
+        let overshoot = startDistance - traveled
+        if overshoot == 0.0 {
+          slice.append(positions[i])
+          return GeoJSON.LineString(positions: slice)
+        }
+        let direction = positions[i].direction(to: positions[i - 1]) - 180
+        let interpolated = positions[i].coordinate(at: overshoot, facing: direction)
+        slice.append(interpolated)
+      }
+      
+      if traveled >= stopDistance {
+        let overshoot = stopDistance - traveled
+        if overshoot == 0.0 {
+          slice.append(positions[i])
+          return GeoJSON.LineString(positions: slice)
+        }
+        let direction = positions[i].direction(to: positions[i - 1]) - 180
+        let interpolated = positions[i].coordinate(at: overshoot, facing: direction)
+        slice.append(interpolated)
+        return GeoJSON.LineString(positions: slice)
+      }
+      
+      if traveled >= startDistance {
+        slice.append(positions[i])
+      }
+      
+      if i == positions.count - 1 {
+        return GeoJSON.LineString(positions: slice)
+      }
+      
+      traveled += distance(from: positions[i], to: positions[i + 1]) ?? 0.0
+    }
+    
+    if traveled < startDistance { return nil }
+    
+    if let last = positions.last {
+      return GeoJSON.LineString(positions: [last, last])
+    }
+    
+    return nil
+  }
+  
+  /// Returns the portion of the line string that begins at the given coordinate and extends the given distance along the line string.
   public func trimmed(from coordinate: GeoJSON.Position, distance: GeoJSON.Distance) -> GeoJSON.LineString? {
     let startVertex = closestCoordinate(to: coordinate)
     guard startVertex != nil && distance != 0 else {
