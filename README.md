@@ -1,6 +1,8 @@
 # GeoJSONKit+Turf
 
 [![Swift](https://github.com/maparoni/GeoJSONKit-Turf/actions/workflows/swift.yml/badge.svg)](https://github.com/maparoni/GeoJSONKit-Turf/actions/workflows/swift.yml)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fmaparoni%2FGeoJSONKit-Turf%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/maparoni/GeoJSONKit-Turf)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fmaparoni%2FGeoJSONKit-Turf%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/maparoni/GeoJSONKit-Turf)
 
 This package provides various geospatial extensions for [GeoJSONKit](https://github.com/maparoni/geojsonkit). It is a fork of [turf-swift](https://github.com/mapbox/turf-swift.git), which is ported from [Turf.js](https://github.com/Turfjs/turf/).
 
