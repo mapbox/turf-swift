@@ -7,6 +7,8 @@
 
 import Foundation
 
+#if os(macOS)
+
 import ArgumentParser
 
 import GeoJSONKit
@@ -40,3 +42,5 @@ struct Simplify: ParsableCommand {
 }
 
 GeoKitten.main()
+
+#endif
