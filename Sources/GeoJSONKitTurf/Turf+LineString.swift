@@ -5,6 +5,13 @@ import GeoJSONKit
 extension GeoJSON.LineString {
   var coordinates: [GeoJSON.Position] { positions }
   
+  /**
+    Representation of current `LineString` as an array of `LineSegment`s.
+    */
+   var segments: [LineSegment] {
+     return zip(coordinates.dropLast(), coordinates.dropFirst()).map { LineSegment($0.0, $0.1) }
+   }
+  
   /// Returns a new line string based on bezier transformation of the input line.
   ///
   /// ported from https://github.com/Turfjs/turf/blob/1ea264853e1be7469c8b7d2795651c9114a069aa/packages/turf-bezier-spline/index.ts
@@ -260,6 +267,25 @@ extension GeoJSON.LineString {
     }
     
     return closestCoordinate
+  }
+  
+
+  /**
+   Returns all intersections with another `LineString`.
+   
+   This function is roughly equivalent to the [turf-line-intersect](https://turfjs.org/docs/#lineIntersect) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-line-intersect/)). Order of found intersections is not determined.
+   */
+  public func intersections(with line: GeoJSON.LineString) -> Set<GeoJSON.Position> {
+    var intersections = Set<GeoJSON.Position>()
+    for segment1 in segments {
+      for segment2 in line.segments {
+        if let intersection = intersection(LineSegment(segment1.0, segment1.1),
+                                           LineSegment(segment2.0, segment2.1)) {
+          intersections.insert(intersection)
+        }
+      }
+    }
+    return intersections
   }
 
 }

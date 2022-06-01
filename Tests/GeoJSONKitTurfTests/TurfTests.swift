@@ -32,6 +32,13 @@ class TurfTests: XCTestCase {
     XCTAssertEqual(a, coord1)
   }
   
+  func testIntersectionOnEnd() {
+    let coord1 = GeoJSON.Position(latitude: 20, longitude: 20)
+    let a = intersection((GeoJSON.Position(latitude: 20, longitude: 20), GeoJSON.Position(latitude: 40, longitude: 40)),
+                         (GeoJSON.Position(latitude: 20, longitude: 20), GeoJSON.Position(latitude: 40, longitude: 20)))
+    XCTAssertEqual(a, coord1)
+  }
+  
   func testDegreeesToRadians() {
     let degree: GeoJSON.Degrees = 100
     let a = degree.toRadians()

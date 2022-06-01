@@ -392,4 +392,34 @@ class LineStringTests: XCTestCase {
     sliced = line1.trimmed(from: startDistance, to: stopDistance)
     XCTAssertNil(sliced, "should return nil")
   }
+  
+  func testIntersections() {
+    let lineString = GeoJSON.LineString(positions: [.init(latitude: 2, longitude: 1),
+                                                    .init(latitude: 2, longitude: 5),
+                                                    .init(latitude: 2, longitude: 9)])
+    
+    let intersectingLineString = GeoJSON.LineString(positions: [.init(latitude: 4, longitude: 1),
+                                                                .init(latitude: 0, longitude: 5),
+                                                                .init(latitude: 2, longitude: 9)])
+    
+    var intersections = lineString.intersections(with: intersectingLineString)
+    
+    XCTAssertEqual(intersections.sorted(by: { $0.longitude < $1.longitude }),
+                   [.init(latitude: 2, longitude: 3),
+                    .init(latitude: 2, longitude: 9)], "LineString intersections are not correct.")
+    
+    let notIntersectingLineString = GeoJSON.LineString(positions: [.init(latitude: 1, longitude: 1),
+                                                                   .init(latitude: 1, longitude: 5),
+                                                                   .init(latitude: 1, longitude: 9)])
+    
+    intersections = lineString.intersections(with: notIntersectingLineString)
+    
+    XCTAssertTrue(intersections.isEmpty, "Found impossible LineString intersection(s).")
+    
+    let emptyLineString = GeoJSON.LineString(positions: [])
+    
+    intersections = lineString.intersections(with: emptyLineString)
+    
+    XCTAssertTrue(intersections.isEmpty, "Found impossible LineString intersection(s).")
+  }
 }
