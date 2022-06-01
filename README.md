@@ -1,5 +1,7 @@
 # GeoJSONKit+Turf
 
+[![Swift](https://github.com/maparoni/GeoJSONKit-Turf/actions/workflows/swift.yml/badge.svg)](https://github.com/maparoni/GeoJSONKit-Turf/actions/workflows/swift.yml)
+
 This package provides various geospatial extensions for [GeoJSONKit](https://github.com/maparoni/geojsonkit). It is a fork of [turf-swift](https://github.com/mapbox/turf-swift.git), which is ported from [Turf.js](https://github.com/Turfjs/turf/).
 
 ## Requirements
