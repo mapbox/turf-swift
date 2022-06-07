@@ -74,7 +74,7 @@ extension GeoJSON.LineString {
         return GeoJSON.LineString(positions: slice)
       }
       
-      traveled += distance(from: positions[i], to: positions[i + 1]) ?? 0.0
+      traveled += positions[i].distance(to: positions[i + 1])
     }
     
     if traveled < startDistance { return nil }
