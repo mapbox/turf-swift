@@ -27,7 +27,7 @@ To install GeoJSONKitTurf using the [Swift Package Manager](https://swift.org/pa
 .package(name: "GeoJSONKitTurf", url: "https://github.com/maparoni/geojsonkit-turf", from: "0.1.0")
 ```
 
-Then usen: 
+Then use: 
 
 ```swift
 import GeoJSONKitTurf
