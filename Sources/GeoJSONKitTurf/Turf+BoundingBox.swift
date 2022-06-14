@@ -113,30 +113,3 @@ extension GeoJSON.BoundingBox {
   }
 
 }
-
-extension GeoJSON.GeometryObject {
-  public var geometries: [GeoJSON.Geometry] {
-    switch self {
-    case .single(let geo): return [geo]
-    case .multi(let geos): return geos
-    case .collection(let geoObjects): return geoObjects.flatMap(\.geometries)
-    }
-  }
-  
-  public var positions: [GeoJSON.Position] {
-    geometries.flatMap(\.positions)
-  }
-}
-
-extension GeoJSON.Geometry {
-  public var positions: [GeoJSON.Position] {
-    switch self {
-    case .point(let position): return [position]
-    case .lineString(let line): return line.positions
-    case .polygon(let polygon):
-      // Ignore the interior positions as the purpose of this is getting
-      // bounding boxes or alike
-      return polygon.exterior.positions
-    }
-  }
-}

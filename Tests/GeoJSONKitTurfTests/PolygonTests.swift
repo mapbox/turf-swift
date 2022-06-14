@@ -570,7 +570,7 @@ class PolygonTests: XCTestCase {
   }
   
   func testSimplify() throws {
-    try Fixture.fixtures(folder: "simplify") { name, input, output in
+    try Fixture.fixtures(folder: "simplify") { name, input, expected in
       let properties: [String: AnyHashable]?
       switch input.object {
       case .feature(let feature): properties = feature.properties
@@ -579,21 +579,20 @@ class PolygonTests: XCTestCase {
       
       let tolerance = properties?["tolerance"] as? Double ?? 0.01
       let highQuality = properties?["highQuality"] as? Bool ?? false
-      let simplified = input.simplified(options: .init(algorithm: .RamerDouglasPeucker(tolerance: tolerance), highestQuality: highQuality))
-//      XCTAssertEqual(simplified, output, "Fixture check failed for \(name)")
+      let actual = input.simplified(options: .init(algorithm: .RamerDouglasPeucker(tolerance: tolerance), highestQuality: highQuality))
 
-      if simplified != output {
+      if actual != expected {
         // Give it another chance on the data-level, too
         do {
           var options: JSONSerialization.WritingOptions = [.prettyPrinted]
           if #available(iOS 11.0, OSX 10.13, *) {
             options.insert(.sortedKeys)
           }
-          let newData = try simplified.toData(options: options)
-          let oldData = try output.toData(options: options)
+          let newData = try actual.toData(options: options)
+          let oldData = try expected.toData(options: options)
           if newData != oldData {
             if true {
-              try Self.save(newData, filename: "out_simplified", extension: "geojson")
+              try Self.save(newData, filename: "out_actual", extension: "geojson")
               try Self.save(oldData, filename: "out_expected", extension: "geojson")
             }
             XCTFail("Fixture check failed for \(name)!")
@@ -606,16 +605,4 @@ class PolygonTests: XCTestCase {
       
     }
   }
-}
-
-extension XCTest {
-  static func save(_ data: Data, filename: String, extension fileExtension: String) throws {
-    let thisSourceFile = URL(fileURLWithPath: #file)
-    let thisDirectory = thisSourceFile.deletingLastPathComponent()
-    let path = thisDirectory
-      .appendingPathComponent(filename)
-      .appendingPathExtension(fileExtension)
-    return try data.write(to: path)
-  }
-
 }

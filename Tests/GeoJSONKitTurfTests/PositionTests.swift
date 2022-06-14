@@ -34,4 +34,40 @@ class PositionTests: XCTestCase {
     XCTAssertEqual(endCoordinate.latitude, 79, accuracy: 0.1)
     XCTAssertEqual(endCoordinate.longitude, 215, accuracy: 0.1)
   }
+  
+  func testConvexHull() throws {
+    try Fixture.fixtures(folder: "convex") { name, input, expected in
+      let actual = input.convexHull()
+      
+      guard
+        case .featureCollection(let features) = expected.object,
+        case .single(.polygon(let expectedPolygon)) = features.last?.geometry
+      else {
+        return XCTFail("Unexpected expected output. Should have a polygon last.")
+      }
+
+      if actual != expectedPolygon {
+        // Give it another chance on the data-level, too
+        do {
+          var options: JSONSerialization.WritingOptions = [.prettyPrinted]
+          if #available(iOS 11.0, OSX 10.13, *) {
+            options.insert(.sortedKeys)
+          }
+          let newData = try GeoJSON(geometry: .single(.polygon(actual))).toData(options: options)
+          let oldData = try GeoJSON(geometry: .single(.polygon(expectedPolygon))).toData(options: options)
+          if newData != oldData {
+            if true {
+              try Self.save(newData, filename: "out_actual", extension: "geojson")
+              try Self.save(oldData, filename: "out_expected", extension: "geojson")
+            }
+            XCTFail("Fixture check failed for \(name)!")
+          }
+          
+        } catch {
+          XCTFail("Fixture check failed for \(name)! Also: Generating JSON failed with: \(error)")
+        }
+      }
+      
+    }
+  }
 }

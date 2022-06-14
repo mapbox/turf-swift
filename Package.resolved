@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/maparoni/geojsonkit.git",
         "state": {
           "branch": null,
-          "revision": "a37addb9dcfe634dedece856e5f4d098d5290d1b",
-          "version": "0.4.8"
+          "revision": "8f1e5094a8ab8cbb020074cd4848a5804c17bab0",
+          "version": "0.5.2"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/apple/swift-argument-parser",
         "state": {
           "branch": null,
-          "revision": "e394bf350e38cb100b6bc4172834770ede1b7232",
-          "version": "1.0.3"
+          "revision": "f3c9084a71ef4376f2fabbdf1d3d90a49f1fabdb",
+          "version": "1.1.2"
         }
       }
     ]
