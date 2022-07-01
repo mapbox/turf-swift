@@ -86,6 +86,18 @@ extension GeoJSON.Geometry {
       longitude: center.longitude + areaFactor * sum.longitude
     ).normalized
   }
+  
+  /// Finds the nearest position on the geometry that's closest to the provided position.
+  public func nearestPoint(to position: GeoJSON.Position) -> GeoJSON.Position? {
+    switch self {
+    case .point(let point):
+      return point
+    case .lineString(let line):
+      return line.closestCoordinate(to: position)?.coordinate
+    case .polygon(let polygon):
+      return polygon.nearestPoint(to: position)
+    }
+  }
 }
 
 extension GeoJSON.GeometryObject {

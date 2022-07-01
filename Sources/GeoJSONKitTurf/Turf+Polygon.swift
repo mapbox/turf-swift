@@ -42,12 +42,12 @@ extension GeoJSON.Polygon {
   /// lies on the boundary line of the polygon or its interior rings.
   ///
   ///Ported from: https://github.com/Turfjs/turf/blob/e53677b0931da9e38bb947da448ee7404adc369d/packages/turf-boolean-point-in-polygon/index.ts#L31-L75
-  public func contains(_ coordinate: GeoJSON.Position, ignoreBoundary: Bool = false) -> Bool {
-    guard exterior.contains(coordinate, ignoreBoundary: ignoreBoundary) else {
+  public func contains(_ position: GeoJSON.Position, ignoreBoundary: Bool = false) -> Bool {
+    guard exterior.contains(position, ignoreBoundary: ignoreBoundary) else {
       return false
     }
     for ring in interiors {
-      if ring.contains(coordinate, ignoreBoundary: !ignoreBoundary) {
+      if ring.contains(position, ignoreBoundary: !ignoreBoundary) {
         return false
       }
     }
@@ -75,6 +75,23 @@ extension GeoJSON.Polygon {
     })
     
     return GeoJSON.Polygon(outCoords);
+  }
+  
+  /// Finds the nearest position on the polygon that's closest to the provided position.
+  ///
+  /// If the provided point is contained by the polygon
+  public func nearestPoint(to position: GeoJSON.Position) -> GeoJSON.Position? {
+    if !exterior.contains(position, ignoreBoundary: false) {
+      return exterior.closestPosition(to: position)
+    }
+    
+    if let inner = interiors.first(where: { $0.contains(position, ignoreBoundary: false) }) {
+      return inner.closestPosition(to: position)
+    }
+
+    // The exterior contains it, but none of the interiors do
+    // => The point is within the polygon
+    return position
   }
   
   private func processPolygon(_ poly: GeoJSON.Polygon, _ tempOutput: inout [[GeoJSON.Position]]) {

@@ -120,4 +120,9 @@ extension GeoJSON.Polygon.LinearRing {
     }
     return isInside
   }
+  
+  func closestPosition(to coordinate: GeoJSON.Position) -> GeoJSON.Position? {
+    GeoJSON.LineString.IndexedCoordinate.findClosest(to: coordinate, on: positions)?.coordinate
+  }
+
 }

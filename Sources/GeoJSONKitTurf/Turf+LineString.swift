@@ -129,18 +129,6 @@ extension GeoJSON.LineString {
     return GeoJSON.LineString(positions: vertices)
   }
   
-  /// `IndexedCoordinate` is a coordinate with additional information such as
-  /// the index from its position in the polyline and distance from the start
-  /// of the polyline.
-  public struct IndexedCoordinate {
-    /// The coordinate
-    public let coordinate: Array<GeoJSON.Position>.Element
-    /// The index of the coordinate
-    public let index: Array<GeoJSON.Position>.Index
-    /// The coordinate’s distance from the start of the polyline
-    public let distance: GeoJSON.Distance
-  }
-  
   /// Returns a coordinate along a `.LineString` at a certain distance from the start of the polyline.
   public func coordinateFromStart(distance: GeoJSON.Distance) -> GeoJSON.Position? {
     return indexedCoordinateFromStart(distance: distance)?.coordinate
@@ -200,10 +188,11 @@ extension GeoJSON.LineString {
   ///
   /// Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-line-slice/index.js
   public func sliced(from start: GeoJSON.Position? = nil, to end: GeoJSON.Position? = nil) -> GeoJSON.LineString? {
-    guard !coordinates.isEmpty else { return nil }
+    guard let first = coordinates.first, let last = coordinates.last else { return nil }
     
-    let startVertex = (start != nil ? closestCoordinate(to: start!) : nil) ?? IndexedCoordinate(coordinate: coordinates.first!, index: 0, distance: 0)
-    let endVertex = (end != nil ? closestCoordinate(to: end!) : nil) ?? IndexedCoordinate(coordinate: coordinates.last!, index: coordinates.indices.last!, distance: 0)
+    let startVertex = start.flatMap(closestCoordinate(to:)) ?? IndexedCoordinate(coordinate: first, index: 0, distance: 0)
+    let endVertex = end.flatMap(closestCoordinate(to:)) ?? IndexedCoordinate(coordinate: last, index: coordinates.indices.last!, distance: 0)
+    
     let ends: (IndexedCoordinate, IndexedCoordinate)
     if startVertex.index <= endVertex.index {
       ends = (startVertex, endVertex)
@@ -226,49 +215,8 @@ extension GeoJSON.LineString {
   /// Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-point-on-line/index.js
   
   public func closestCoordinate(to coordinate: GeoJSON.Position) -> IndexedCoordinate? {
-    guard let startCoordinate = coordinates.first else { return nil }
-    
-    guard coordinates.count > 1 else {
-      return IndexedCoordinate(coordinate: startCoordinate, index: 0, distance: coordinate.distance(to: startCoordinate))
-    }
-    
-    var closestCoordinate: IndexedCoordinate?
-    var closestDistance: GeoJSON.Distance?
-    
-    for index in 0..<coordinates.count - 1 {
-      let segment = (coordinates[index], coordinates[index + 1])
-      let distances = (coordinate.distance(to: segment.0), coordinate.distance(to: segment.1))
-      
-      let maxDistance = max(distances.0, distances.1)
-      let direction = segment.0.direction(to: segment.1)
-      let perpendicularPoint1 = coordinate.coordinate(at: maxDistance, facing: direction + 90)
-      let perpendicularPoint2 = coordinate.coordinate(at: maxDistance, facing: direction - 90)
-      let intersectionPoint = intersection((perpendicularPoint1, perpendicularPoint2), segment)
-      let intersectionDistance: GeoJSON.Distance? = intersectionPoint != nil ? coordinate.distance(to: intersectionPoint!) : nil
-      
-      if distances.0 < closestDistance ?? .greatestFiniteMagnitude {
-        closestCoordinate = IndexedCoordinate(coordinate: segment.0,
-                                              index: index,
-                                              distance: startCoordinate.distance(to: segment.0))
-        closestDistance = distances.0
-      }
-      if distances.1 < closestDistance ?? .greatestFiniteMagnitude {
-        closestCoordinate = IndexedCoordinate(coordinate: segment.1,
-                                              index: index+1,
-                                              distance: startCoordinate.distance(to: segment.1))
-        closestDistance = distances.1
-      }
-      if intersectionDistance != nil && intersectionDistance! < closestDistance ?? .greatestFiniteMagnitude {
-        closestCoordinate = IndexedCoordinate(coordinate: intersectionPoint!,
-                                              index: index,
-                                              distance: startCoordinate.distance(to: intersectionPoint!))
-        closestDistance = intersectionDistance!
-      }
-    }
-    
-    return closestCoordinate
+    .findClosest(to: coordinate, on: positions)
   }
-  
 
   /**
    Returns all intersections with another `LineString`.
