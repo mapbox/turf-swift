@@ -134,7 +134,7 @@ extension LineString {
                 return LineString(slice)
             }
             
-            traveled += distance(from: coordinates[i], to: coordinates[i + 1]) ?? 0.0
+            traveled += coordinates[i].distance(to: coordinates[i + 1])
         }
         
         if traveled < startDistance { return nil }
