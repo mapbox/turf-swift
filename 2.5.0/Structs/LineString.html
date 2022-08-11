@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>LineString Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/LineString" class="dashAnchor"></a>
+    <a title="LineString Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">Turf for Swift</a> (0% documented)</p>
+        <p class="header-right"><a href="https://github.com/mapbox/turf-swift"><img src="../img/gh.png" alt="GitHub"/>View on GitHub</a></p>
+        <p class="header-right"><a href="dash-feed://https%3A%2F%2Fmapbox.github.io%2Fturf-swift%2F2.5.0%2Fdocsets%2FTurf.xml"><img src="../img/dash.png" alt="Dash"/>Install in Dash</a></p>
+        <div class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </div>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">Turf Reference</a>
+        <img id="carat" src="../img/carat.png" alt=""/>
+        LineString Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/FeatureIdentifier.html">FeatureIdentifier</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GeoJSONObject.html">GeoJSONObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Geometry.html">Geometry</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/JSONValue.html">JSONValue</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/CodingUserInfoKey.html">CodingUserInfoKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/JSONArray.html">JSONArray</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/JSONObject.html">JSONObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/LocationCoordinate2D.html">LocationCoordinate2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/LocationDegrees.html">LocationDegrees</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/LocationDirection.html">LocationDirection</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/intersection(_:_:)">intersection(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/mid(_:_:)">mid(_:_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/ForeignMemberContainer.html">ForeignMemberContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/GeoJSONObjectConvertible.html">GeoJSONObjectConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/GeometryConvertible.html">GeometryConvertible</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/BoundingBox.html">BoundingBox</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Feature.html">Feature</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FeatureCollection.html">FeatureCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GeometryCollection.html">GeometryCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LineString.html">LineString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LineString/IndexedCoordinate.html">– IndexedCoordinate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MultiLineString.html">MultiLineString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MultiPoint.html">MultiPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MultiPolygon.html">MultiPolygon</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Point.html">Point</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Polygon.html">Polygon</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RadianCoordinate2D.html">RadianCoordinate2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Ring.html">Ring</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/JSONArray">JSONArray</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/JSONObject">JSONObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/LineSegment">LineSegment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases/LocationCoordinate2D.html">LocationCoordinate2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/LocationDegrees">LocationDegrees</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/LocationDirection">LocationDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/LocationDistance">LocationDistance</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/LocationRadians">LocationRadians</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/RadianDistance">RadianDistance</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>LineString</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  
+                </div>
+              </div>
+            <p>A <a href="https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.4">LineString geometry</a> is a collection of two or more positions, each position connected to the next position linearly.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Property/coordinates" class="dashAnchor"></a>
+                    <a class="token" href="#/">coordinates</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The positions at which the line string is located.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Property/foreignMembers" class="dashAnchor"></a>
+                    <a class="token" href="#/">foreignMembers</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">init(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes a line string defined by given positions.</p>
+
+<p>This initializer is equivalent to the <a href="https://turfjs.org/docs/#lineString"><code>lineString</code></a> function in the turf-helpers package of Turf.js (<a href="https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/">source code</a>).</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/init(from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">init(from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/encode(to:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">encode(to:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/bezier(resolution:sharpness:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">bezier(resolution:<wbr>sharpness:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the line string transformed into an approximation of a curve by applying a Bézier spline algorithm.</p>
+
+<p>This method is equivalent to the <a href="https://turfjs.org/docs/#bezierSpline">turf-bezier-spline</a> package of Turf.js (<a href="https://github.com/Turfjs/turf/tree/master/packages/turf-bezier-spline/">source code</a>).</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/trimmed(from:to:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">trimmed(from:<wbr>to:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the portion of the line string that begins at the given start distance and extends the given stop distance along the line string.</p>
+
+<p>This method is equivalent to the <a href="https://turfjs.org/docs/#lineSliceAlong">turf-line-slice-along</a> package of Turf.js (<a href="https://github.com/Turfjs/turf/tree/master/packages/turf-line-slice-along/">source code</a>).</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/trimmed(from:distance:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">trimmed(from:<wbr>distance:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the portion of the line string that begins at the given coordinate and extends the given distance along the line string.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Struct/IndexedCoordinate" class="dashAnchor"></a>
+                    <a class="token" href="#/">IndexedCoordinate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>IndexedCoordinate</code> is a coordinate with additional information such as the index from its position in the polyline and distance from the start of the polyline.</p>
+
+                        <a href="../Structs/LineString/IndexedCoordinate.html" class="slightly-smaller">See more</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/coordinateFromStart(distance:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">coordinateFromStart(distance:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a coordinate along a line string at a certain distance from the start of the polyline.</p>
+
+<p>This method is equivalent to the <a href="https://turfjs.org/docs/#along">turf-along</a> package of Turf.js (<a href="https://github.com/Turfjs/turf/tree/master/packages/turf-along/">source code</a>).</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/indexedCoordinateFromStart(distance:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">indexedCoordinateFromStart(distance:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns an indexed coordinate along a line string at a certain distance from the start of the polyline.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/distance(from:to:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">distance(from:<wbr>to:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the distance along a slice of the line string with the given endpoints.</p>
+
+<p>If the <code>start</code> and <code>end</code> arguments are unspecified, this method is equivalent to the <a href="https://turfjs.org/docs/#length">turf-length</a> package of Turf.js (<a href="https://github.com/Turfjs/turf/tree/master/packages/turf-length/">source code</a>).</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/sliced(from:to:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">sliced(from:<wbr>to:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a subset of the line string between two given coordinates.</p>
+
+<p>This method is equivalent to the <a href="https://turfjs.org/docs/#lineSlice">turf-line-slice</a> package of Turf.js (<a href="https://github.com/Turfjs/turf/tree/master/packages/turf-line-slice/">source code</a>).</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/closestCoordinate(to:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">closestCoordinate(to:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the geographic coordinate along the line string that is closest to the given coordinate as the crow flies.</p>
+
+<p>The returned coordinate may not correspond to one of the polyline’s vertices, but it always lies along the polyline.</p>
+
+<p>This method is equivalent to the <a href="https://turfjs.org/docs/#nearestPointOnLine">turf-nearest-point-on-line</a> package of Turf.js (<a href="https://github.com/Turfjs/turf/tree/master/packages/turf-nearest-point-on-line/">source code</a>).</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/simplified(tolerance:highestQuality:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">simplified(tolerance:<wbr>highestQuality:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a copy of the line string simplified using the Ramer–Douglas–Peucker algorithm.</p>
+
+<p>This method is equivalent to the <a href="https://turfjs.org/docs/#simplify">turf-simplify</a> package of Turf.js (<a href="https://github.com/Turfjs/turf/tree/master/packages/turf-simplify/">source code</a>).</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/simplify(tolerance:highestQuality:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">simplify(tolerance:<wbr>highestQuality:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Simplifies the line string in place using the Ramer–Douglas–Peucker algorithm.</p>
+
+<p>This method is nearly equivalent to the <a href="https://turfjs.org/docs/#simplify">turf-simplify</a> package of Turf.js (<a href="https://github.com/Turfjs/turf/tree/master/packages/turf-simplify/">source code</a>), except that it mutates the line string it is called on.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/intersections(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">intersections(with:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns all intersections with another <code>LineString</code>.</p>
+
+<p>This function is roughly equivalent to the <a href="https://turfjs.org/docs/#lineIntersect">turf-line-intersect</a> package of Turf.js (<a href="https://github.com/Turfjs/turf/tree/master/packages/turf-line-intersect/">source code</a>). Order of found intersections is not determined.</p>
+
+<p>You can also use <code>Turf.intersection(_:, _:)</code> if you need to find intersection of individual <code><a href="../Typealiases.html#/LineSegment">LineSegment</a></code>s.</p>
+<div class="aside aside-seealso">
+    <p class="aside-title">Seealso</p>
+    <code>Turf.intersection(_:, _:)</code>
+
+</div>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Property/geometry" class="dashAnchor"></a>
+                    <a class="token" href="#/">geometry</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>© 2014–2022 <a class="link" href="https://www.mapbox.com/" target="_blank" rel="external noopener">Mapbox</a>. See <a class="link" href="https://github.com/mapbox/turf-swift/blob/main/LICENSE.md" target="_blank" rel="external noopener">license</a> for more details.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>

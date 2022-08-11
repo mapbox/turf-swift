@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Polygon Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/Polygon" class="dashAnchor"></a>
+    <a title="Polygon Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">Turf for Swift</a> (0% documented)</p>
+        <p class="header-right"><a href="https://github.com/mapbox/turf-swift"><img src="../img/gh.png" alt="GitHub"/>View on GitHub</a></p>
+        <p class="header-right"><a href="dash-feed://https%3A%2F%2Fmapbox.github.io%2Fturf-swift%2F2.5.0%2Fdocsets%2FTurf.xml"><img src="../img/dash.png" alt="Dash"/>Install in Dash</a></p>
+        <div class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </div>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">Turf Reference</a>
+        <img id="carat" src="../img/carat.png" alt=""/>
+        Polygon Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/FeatureIdentifier.html">FeatureIdentifier</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GeoJSONObject.html">GeoJSONObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Geometry.html">Geometry</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/JSONValue.html">JSONValue</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/CodingUserInfoKey.html">CodingUserInfoKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/JSONArray.html">JSONArray</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/JSONObject.html">JSONObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/LocationCoordinate2D.html">LocationCoordinate2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/LocationDegrees.html">LocationDegrees</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/LocationDirection.html">LocationDirection</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/intersection(_:_:)">intersection(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/mid(_:_:)">mid(_:_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/ForeignMemberContainer.html">ForeignMemberContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/GeoJSONObjectConvertible.html">GeoJSONObjectConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/GeometryConvertible.html">GeometryConvertible</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/BoundingBox.html">BoundingBox</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Feature.html">Feature</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FeatureCollection.html">FeatureCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GeometryCollection.html">GeometryCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LineString.html">LineString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LineString/IndexedCoordinate.html">– IndexedCoordinate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MultiLineString.html">MultiLineString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MultiPoint.html">MultiPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MultiPolygon.html">MultiPolygon</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Point.html">Point</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Polygon.html">Polygon</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RadianCoordinate2D.html">RadianCoordinate2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Ring.html">Ring</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/JSONArray">JSONArray</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/JSONObject">JSONObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/LineSegment">LineSegment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases/LocationCoordinate2D.html">LocationCoordinate2D</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/LocationDegrees">LocationDegrees</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/LocationDirection">LocationDirection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/LocationDistance">LocationDistance</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/LocationRadians">LocationRadians</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/RadianDistance">RadianDistance</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Polygon</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  
+                </div>
+              </div>
+            <p>A <a href="https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.6">Polygon geometry</a> is conceptually a collection of <code><a href="../Structs/Ring.html">Ring</a></code>s that form a single connected geometry.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Property/coordinates" class="dashAnchor"></a>
+                    <a class="token" href="#/">coordinates</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The positions at which the polygon is located. Each nested array corresponds to one linear ring.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Property/foreignMembers" class="dashAnchor"></a>
+                    <a class="token" href="#/">foreignMembers</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">init(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes a polygon defined by the given positions.</p>
+
+<p>This initializer is equivalent to the <a href="https://turfjs.org/docs/#polygon"><code>polygon</code></a> function in the turf-helpers package of Turf.js (<a href="https://github.com/Turfjs/turf/tree/master/packages/turf-helpers/">source code</a>).</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/init(outerRing:innerRings:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">init(outerRing:<wbr>innerRings:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes a polygon defined by the given linear rings.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/init(center:radius:vertices:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">init(center:<wbr>radius:<wbr>vertices:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes a polygon as a given center coordinate with a given number of
+vertices, as a means to approximate a circle.</p>
+
+<p>This initializer is equivalent to the <a href="https://turfjs.org/docs/#circle">turf-circle</a> package of Turf.js (<a href="https://github.com/Turfjs/turf/tree/master/packages/turf-circle/">source code</a>).</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/init(from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">init(from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/encode(to:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">encode(to:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Property/innerRings" class="dashAnchor"></a>
+                    <a class="token" href="#/">innerRings</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Representation of <code>Polygon</code>s coordinates of inner rings</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Property/outerRing" class="dashAnchor"></a>
+                    <a class="token" href="#/">outerRing</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Representation of <code>Polygon</code>s coordinates of outer ring</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Property/area" class="dashAnchor"></a>
+                    <a class="token" href="#/">area</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The polygon’s area.</p>
+
+<p>This property is equivalent to the <a href="https://turfjs.org/docs/#area">turf-area</a> package of Turf.js (<a href="https://github.com/Turfjs/turf/tree/master/packages/turf-area/">source code</a>).</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/contains(_:ignoreBoundary:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">contains(_:<wbr>ignoreBoundary:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns whether the given coordinate falls within the polygon and outside of its interior rings.</p>
+
+<p>This method is equivalent to the <a href="https://turfjs.org/docs/#booleanPointInPolygon">turf-boolean-point-in-polygon</a> package of Turf.js (<a href="https://github.com/Turfjs/turf/tree/master/packages/turf-boolean-point-in-polygon/">source code</a>).</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/smooth(iterations:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">smooth(iterations:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the polygon with corners smoothed out using <a href="https://www.cs.unc.edu/%7Edm/UNC/COMP258/LECTURES/Chaikins-Algorithm.pdf">Chaikin’s algorithm</a>.</p>
+
+<p>This method is equivalent to the <a href="https://turfjs.org/docs/#polygonSmooth">turf-polygon-smooth</a> package of Turf.js (<a href="https://github.com/Turfjs/turf/tree/master/packages/turf-polygon-smooth/">source code</a>).</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    The returned polygon may be a degenerate polygon.
+
+</div>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/simplified(tolerance:highestQuality:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">simplified(tolerance:<wbr>highestQuality:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a copy of the polygon simplified using the Ramer–Douglas–Peucker algorithm.</p>
+
+<p>This method is equivalent to the <a href="https://turfjs.org/docs/#simplify">turf-simplify</a> package of Turf.js (<a href="https://github.com/Turfjs/turf/tree/master/packages/turf-simplify/">source code</a>).</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/simplify(tolerance:highestQuality:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">simplify(tolerance:<wbr>highestQuality:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Simplifies the polygon in place using the Ramer–Douglas–Peucker algorithm.</p>
+
+<p>This method is nearly equivalent to the <a href="https://turfjs.org/docs/#simplify">turf-simplify</a> package of Turf.js (<a href="https://github.com/Turfjs/turf/tree/master/packages/turf-simplify/">source code</a>), except that it mutates the polygon it is called on.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Property/center" class="dashAnchor"></a>
+                    <a class="token" href="#/">center</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Calculates the absolute center of the bounding box.</p>
+
+<p>This property is equivalent to the <a href="https://turfjs.org/docs/#center">turf-center</a> package of Turf.js (<a href="https://github.com/Turfjs/turf/tree/master/packages/turf-center/">source code</a>).</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Property/centroid" class="dashAnchor"></a>
+                    <a class="token" href="#/">centroid</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Calculates the centroid using the mean of all vertices.</p>
+
+<p>Compared to <code><a href="../Structs/Polygon.html#/center">center</a></code> and <code><a href="../Structs/Polygon.html#/centerOfMass">centerOfMass</a></code>, the centroid is less affected by small islands and artifacts.</p>
+
+<p>This property is equivalent to the <a href="https://turfjs.org/docs/#centroid">turf-centroid</a> package of Turf.js (<a href="https://github.com/Turfjs/turf/tree/master/packages/turf-centroid/">source code</a>).</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Property/centerOfMass" class="dashAnchor"></a>
+                    <a class="token" href="#/">centerOfMass</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Calculates the <a href="https://en.wikipedia.org/wiki/Center_of_mass">center of mass</a> using the <a href="https://en.wikipedia.org/wiki/Centroid#Centroid_of_polygon">centroid of polygon</a> formula.</p>
+
+<p>This property is equivalent to the <a href="https://turfjs.org/docs/#centerOfMass">turf-center-of-mass</a> package of Turf.js (<a href="https://github.com/Turfjs/turf/tree/master/packages/turf-center-of-mass/">source code</a>).</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Property/geometry" class="dashAnchor"></a>
+                    <a class="token" href="#/">geometry</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>© 2014–2022 <a class="link" href="https://www.mapbox.com/" target="_blank" rel="external noopener">Mapbox</a>. See <a class="link" href="https://github.com/mapbox/turf-swift/blob/main/LICENSE.md" target="_blank" rel="external noopener">license</a> for more details.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>
