@@ -276,9 +276,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 35650B041F150DC500B5C158 /* Build configuration list for PBXNativeTarget "Turf" */;
 			buildPhases = (
+				35650AED1F150DC500B5C158 /* Headers */,
 				35650AEB1F150DC500B5C158 /* Sources */,
 				35650AEC1F150DC500B5C158 /* Frameworks */,
-				35650AED1F150DC500B5C158 /* Headers */,
 				35650AEE1F150DC500B5C158 /* Resources */,
 			);
 			buildRules = (
