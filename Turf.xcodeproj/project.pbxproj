@@ -481,9 +481,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 353E9B181F3E093A007CFA23 /* Build configuration list for PBXNativeTarget "TurfMac" */;
 			buildPhases = (
+				353E9B041F3E093A007CFA23 /* Headers */,
 				353E9B021F3E093A007CFA23 /* Sources */,
 				353E9B031F3E093A007CFA23 /* Frameworks */,
-				353E9B041F3E093A007CFA23 /* Headers */,
 				353E9B051F3E093A007CFA23 /* Resources */,
 			);
 			buildRules = (
@@ -517,9 +517,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 35650B041F150DC500B5C158 /* Build configuration list for PBXNativeTarget "Turf" */;
 			buildPhases = (
+				35650AED1F150DC500B5C158 /* Headers */,
 				35650AEB1F150DC500B5C158 /* Sources */,
 				35650AEC1F150DC500B5C158 /* Frameworks */,
-				35650AED1F150DC500B5C158 /* Headers */,
 				35650AEE1F150DC500B5C158 /* Resources */,
 			);
 			buildRules = (
@@ -553,9 +553,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA39EB7A20101F99004D87F7 /* Build configuration list for PBXNativeTarget "TurfTV" */;
 			buildPhases = (
+				DA39EB6220101F98004D87F7 /* Headers */,
 				DA39EB6020101F98004D87F7 /* Sources */,
 				DA39EB6120101F98004D87F7 /* Frameworks */,
-				DA39EB6220101F98004D87F7 /* Headers */,
 				DA39EB6320101F98004D87F7 /* Resources */,
 			);
 			buildRules = (
@@ -589,9 +589,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA9424A02010283A00CDB4E6 /* Build configuration list for PBXNativeTarget "TurfWatch" */;
 			buildPhases = (
+				DA9424982010283900CDB4E6 /* Headers */,
 				DA9424962010283900CDB4E6 /* Sources */,
 				DA9424972010283900CDB4E6 /* Frameworks */,
-				DA9424982010283900CDB4E6 /* Headers */,
 				DA9424992010283900CDB4E6 /* Resources */,
 			);
 			buildRules = (
