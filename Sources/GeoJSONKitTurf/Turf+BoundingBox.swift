@@ -41,14 +41,15 @@ extension GeoJSON.BoundingBox {
   }
   
   public init(positions: [GeoJSON.Position], allowSpanningAntimeridian: Bool) {
-    guard allowSpanningAntimeridian, let first = positions.first else {
+    guard allowSpanningAntimeridian, !positions.isEmpty else {
       self.init(positions: positions)
       return
     }
     
-    self = positions.dropFirst()
-      .sorted { $0.longitude < $1.longitude }
-      .reduce(into: GeoJSON.BoundingBox(positions: [first])) { box, next in
+    let sorted = positions.sorted { $0.longitude < $1.longitude }
+    
+    self = sorted.dropFirst()
+      .reduce(into: GeoJSON.BoundingBox(positions: Array(sorted.prefix(1)))) { box, next in
         box.append(next, allowSpanningAntimeridian: allowSpanningAntimeridian)
       }
   }
