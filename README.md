@@ -38,7 +38,7 @@ import GeoJSONKitTurf
 
 This is a partial port of [Turf.js](https://github.com/Turfjs/turf/), which adds the following functionality to [GeoJSONKit](https://github.com/maparoni/geojsonkit)'s `GeoJSON`:
 
-Turf.js | Turf-swift
+Turf.js | GeoJSONKit-Turf
 ----|----
 [turf-along](https://github.com/Turfjs/turf/tree/master/packages/turf-along/) | `GeoJSON.LineString.coordinateFromStart(distance:)`
 [turf-area](https://github.com/Turfjs/turf/blob/master/packages/turf-area/) | `GeoJSON.Polygon.area`
