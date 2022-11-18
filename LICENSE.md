@@ -1,4 +1,5 @@
 Copyright © 2021-2022, Corporoni Pty Ltd
+
 Copyright © 2014–2021, Mapbox (turf-swift)
 
 Permission to use, copy, modify, and/or distribute this software for any
