@@ -6,12 +6,26 @@ import Turf
 class WKTTests: XCTestCase {
     
     func testEmpty() {
-        let wktString = "POINT EMPTY"
+        var wktString = "GEOMETRYCOLLECTION EMPTY"
         
-        let point = Point(fromWKT: wktString)
-        let geometry = Geometry(fromWKT: wktString)
+        var geometry = GeometryCollection(fromWKT: wktString)
+        
+        XCTAssertNil(geometry)
         
         
+        wktString = "GEOMETRYCOLLECTION (POINT EMPTY)"
+        
+        geometry = GeometryCollection(fromWKT: wktString)
+        
+        XCTAssertNil(geometry)
+        
+        
+        wktString = "GEOMETRYCOLLECTION (POINT EMPTY, POINT(1 2))"
+        
+        geometry = GeometryCollection(fromWKT: wktString)
+        
+        XCTAssertNotNil(geometry)
+        XCTAssertEqual(geometry?.geometries.count, 1)
     }
     
     func testPoint() {

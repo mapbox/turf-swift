@@ -1,5 +1,8 @@
 import Foundation
 
+/**
+ Entity which can be encoded to and decoded from 'Well Known Text'.
+ */
 public protocol WKTCodable {
     var WKTString: String { get }
     init?(fromWKT wkt: String)
@@ -11,11 +14,16 @@ extension Point: WKTCodable {
     }
     
     public init?(fromWKT wkt: String) {
-        guard let data = try? parseWKT(wkt), // catch and log message
-              let object = (data as? [Point])?.first else {
+        do {
+            let data = try WKTParser.parse(wkt)
+            guard let object = (data as? [Point])?.first else {
+                return nil
+            }
+            self = object
+        } catch {
+            print("error: Failed to init 'Point' from WKT with error: \(error)")
             return nil
         }
-        self = object
     }
 }
 
@@ -25,11 +33,16 @@ extension MultiPoint: WKTCodable {
     }
     
     public init?(fromWKT wkt: String) {
-        guard let data = try? parseWKT(wkt), // catch and log message
-              let object = (data as? [MultiPoint])?.first else {
+        do {
+            let data = try WKTParser.parse(wkt)
+            guard let object = (data as? [MultiPoint])?.first else {
+                return nil
+            }
+            self = object
+        } catch {
+            print("error: Failed to init 'MultiPoint' from WKT with error: \(error)")
             return nil
         }
-        self = object
     }
 }
 
@@ -39,11 +52,16 @@ extension LineString: WKTCodable {
     }
     
     public init?(fromWKT wkt: String) {
-        guard let data = try? parseWKT(wkt), // catch and log message
-              let object = (data as? [LineString])?.first else {
+        do {
+            let data = try WKTParser.parse(wkt)
+            guard let object = (data as? [LineString])?.first else {
+                return nil
+            }
+            self = object
+        } catch {
+            print("error: Failed to init 'LineString' from WKT with error: \(error)")
             return nil
         }
-        self = object
     }
 }
 
@@ -53,11 +71,16 @@ extension MultiLineString: WKTCodable {
     }
     
     public init?(fromWKT wkt: String) {
-        guard let data = try? parseWKT(wkt), // catch and log message
-              let object = (data as? [MultiLineString])?.first else {
+        do {
+            let data = try WKTParser.parse(wkt)
+            guard let object = (data as? [MultiLineString])?.first else {
+                return nil
+            }
+            self = object
+        } catch {
+            print("error: Failed to init 'MultiLineString' from WKT with error: \(error)")
             return nil
         }
-        self = object
     }
 }
 
@@ -67,11 +90,16 @@ extension Polygon: WKTCodable {
     }
     
     public init?(fromWKT wkt: String) {
-        guard let data = try? parseWKT(wkt), // catch and log message
-              let object = (data as? [Polygon])?.first else {
+        do {
+            let data = try WKTParser.parse(wkt)
+            guard let object = (data as? [Polygon])?.first else {
+                return nil
+            }
+            self = object
+        } catch {
+            print("error: Failed to init 'Polygon' from WKT with error: \(error)")
             return nil
         }
-        self = object
     }
 }
 
@@ -81,11 +109,16 @@ extension MultiPolygon: WKTCodable {
     }
     
     public init?(fromWKT wkt: String) {
-        guard let data = try? parseWKT(wkt), // catch and log message
-              let object = (data as? [MultiPolygon])?.first else {
+        do {
+            let data = try WKTParser.parse(wkt)
+            guard let object = (data as? [MultiPolygon])?.first else {
+                return nil
+            }
+            self = object
+        } catch {
+            print("error: Failed to init 'MultiPolygon' from WKT with error: \(error)")
             return nil
         }
-        self = object
     }
 }
 
@@ -110,11 +143,16 @@ extension Geometry: WKTCodable {
     }
     
     public init?(fromWKT wkt: String) {
-        guard let data = try? parseWKT(wkt), // catch and log message
-              let object = (data as? [GeometryConvertible])?.first else {
+        do {
+            let data = try WKTParser.parse(wkt)
+            guard let object = (data as? [GeometryConvertible])?.first else {
+                return nil
+            }
+            self = object.geometry
+        } catch {
+            print("error: Failed to init 'Geometry' from WKT with error: \(error)")
             return nil
         }
-        self = object.geometry
     }
 }
 
@@ -142,11 +180,16 @@ extension GeometryCollection: WKTCodable {
     }
     
     public init?(fromWKT wkt: String) {
-        guard let data = try? parseWKT(wkt), // catch and log message
-              let object = (data as? [GeometryCollection])?.first else {
+        do {
+            let data = try WKTParser.parse(wkt)
+            guard let object = (data as? [GeometryCollection])?.first else {
+                return nil
+            }
+            self = object
+        } catch {
+            print("error: Failed to init 'GeometryCollection' from WKT with error: \(error)")
             return nil
         }
-        self = object
     }
 }
 
