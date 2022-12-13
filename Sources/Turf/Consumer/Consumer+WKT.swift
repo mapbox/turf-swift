@@ -1,5 +1,7 @@
 import Foundation
+#if !os(Linux)
 import CoreLocation
+#endif
 
 
 struct WKTParser {
@@ -221,57 +223,57 @@ struct WKTParser {
             guard let coords = values as? [Double] else {
                 throw WKTError.coordinatesParsingFailed(values)
             }
-            return CLLocationCoordinate2D(latitude: coords[1],
+            return LocationCoordinate2D(latitude: coords[1],
                                           longitude: coords[0])
         case .coordinatesArray:
-            guard let coords = values as? [CLLocationCoordinate2D] else {
+            guard let coords = values as? [LocationCoordinate2D] else {
                 throw WKTError.coordinatesParsingFailed(values)
             }
             return coords
         case .coordinatesArray2D:
-            guard let coords = values as? [[CLLocationCoordinate2D]] else {
+            guard let coords = values as? [[LocationCoordinate2D]] else {
                 throw WKTError.coordinatesParsingFailed(values)
             }
             return coords
         case .coordinatesArray3D:
-            guard let coords = values as? [[[CLLocationCoordinate2D]]] else {
+            guard let coords = values as? [[[LocationCoordinate2D]]] else {
                 throw WKTError.coordinatesParsingFailed(values)
             }
             return coords
         case .point:
             guard values.count > 1 else { return nil }
-            guard let coords = values[1] as? CLLocationCoordinate2D else {
+            guard let coords = values[1] as? LocationCoordinate2D else {
                 throw WKTError.coordinatesParsingFailed(values)
             }
             return Point(coords)
         case .multiPoint:
             guard values.count > 1 else { return nil }
-            let coords = values[1..<values.endIndex].compactMap { $0 as? CLLocationCoordinate2D }
+            let coords = values[1..<values.endIndex].compactMap { $0 as? LocationCoordinate2D }
             guard coords.count == values.count - 1 else {
                 throw WKTError.coordinatesParsingFailed(values)
             }
             return MultiPoint(coords)
         case .lineString:
             guard values.count > 1 else { return nil }
-            guard let coords = values[1] as? [CLLocationCoordinate2D] else {
+            guard let coords = values[1] as? [LocationCoordinate2D] else {
                 throw WKTError.coordinatesParsingFailed(values)
             }
             return LineString(coords)
         case .multiLineString:
             guard values.count > 1 else { return nil }
-            guard let coords = values[1] as? [[CLLocationCoordinate2D]] else {
+            guard let coords = values[1] as? [[LocationCoordinate2D]] else {
                 throw WKTError.coordinatesParsingFailed(values)
             }
             return MultiLineString(coords)
         case .polygon:
             guard values.count > 1 else { return nil }
-            guard let coords = values[1] as? [[CLLocationCoordinate2D]] else {
+            guard let coords = values[1] as? [[LocationCoordinate2D]] else {
                 throw WKTError.coordinatesParsingFailed(values)
             }
             return Polygon(coords)
         case .multiPolygon:
             guard values.count > 1 else { return nil }
-            guard let coords = values[1] as? [[[CLLocationCoordinate2D]]] else {
+            guard let coords = values[1] as? [[[LocationCoordinate2D]]] else {
                 throw WKTError.coordinatesParsingFailed(values)
             }
             return MultiPolygon(coords)

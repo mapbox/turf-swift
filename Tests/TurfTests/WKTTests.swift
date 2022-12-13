@@ -1,5 +1,7 @@
 import XCTest
+#if !os(Linux)
 import CoreLocation
+#endif
 import Turf
 
 
@@ -36,7 +38,7 @@ class WKTTests: XCTestCase {
         
         XCTAssertNotNil(point)
         XCTAssertNotNil(geometry)
-        XCTAssertEqual(point?.coordinates, CLLocationCoordinate2D(latitude: -12.12, longitude: 123.53))
+        XCTAssertEqual(point?.coordinates, .init(latitude: -12.12, longitude: 123.53))
         
         guard case let .point(geometryPoint) = geometry else { XCTFail(); return }
         
