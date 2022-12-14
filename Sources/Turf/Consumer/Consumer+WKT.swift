@@ -199,9 +199,13 @@ struct WKTParser {
         ])
     ])
     
-    private lazy var object: Consumer<WKTLabel> = .label(.object, [
-        empty | geometryCollection | number | coordinate | coordinatesArray | coordinatesArray2D | coordinatesArray3D | space | point | multiPoint | lineString | multiLineString | polygon | multiPolygon
-    ])
+    private lazy var object: Consumer<WKTLabel> = {
+        let primitives = empty | number | coordinate | coordinatesArray | coordinatesArray2D | coordinatesArray3D | space
+        let geometries = geometryCollection | point | multiPoint | lineString | multiLineString | polygon | multiPolygon
+        return .label(.object, [
+             primitives | geometries
+        ])
+    } ()
     
     private lazy var wktConsumer: Consumer<WKTLabel> = .interleaved([
         .spaced(object)
