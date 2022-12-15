@@ -233,4 +233,46 @@ MULTIPOLYGON(((123.53 -12.12,10.0 20.0),(-11.12 13.14)),((-15.16 -17.18))))
         
         XCTAssertEqual(serializedString, wktString.replacingOccurrences(of: "\n", with: ""))
     }
+    
+    func testUnrecognizedToken() {
+        let wktString = "UNRECOGNIZEDGEOMETRY (1 2)"
+        let geometry = Geometry(fromWKT: wktString)
+        
+        XCTAssertNil(geometry, "Unknown token not detected.")
+    }
+    
+    func testIncorrectCoordinatesCount() {
+        let  wktString = "POINT (1 2 3)"
+        let geometry = Geometry(fromWKT: wktString)
+        
+        XCTAssertNil(geometry, "Incorrect coordinates count not detected.")
+    }
+     
+    func testIncorrectCoordinateTypes() {
+        let wktString = "POINT (here there)"
+        let geometry = Geometry(fromWKT: wktString)
+        
+        XCTAssertNil(geometry, "Incorrect coordinates types not detected.")
+    }
+     
+    func testEmptyInput() {
+        let wktString = ""
+        let geometry = Geometry(fromWKT: wktString)
+        
+        XCTAssertNil(geometry, "Empty input not detected.")
+    }
+     
+    func testInsufficientNesting() {
+        let wktString = "MULTIPOLYGON((123.53 -12.12,10.0 20.0),(-11.12 13.14)),((-15.16 -17.18))"
+        let geometry = Geometry(fromWKT: wktString)
+        
+        XCTAssertNil(geometry, "Insufficient nesting not detected.")
+    }
+     
+    func testExcessiveNesting() {
+        let wktString = "MULTIPOLYGON((((123.53 -12.12,10.0 20.0),(-11.12 13.14)),((-15.16 -17.18)))"
+        let geometry = Geometry(fromWKT: wktString)
+        
+        XCTAssertNil(geometry, "Excessive nesting not detected.")
+    }
 }

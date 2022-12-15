@@ -135,3 +135,24 @@ print(json)
 */
 
 ```
+
+## Well Known Text (WKT)
+
+turf-swift contains a minimal WKT encoding/decoding support for geometries implementing `WKTCodable` protocol.
+
+```swift
+let wktString = "POINT(123.53 -12.12)"
+
+// Decoding is done using an init method
+let point = Point(fromWKT: wktString)
+let geometry = Geometry(fromWKT: wktString)
+
+print(point.coordinates)
+
+// ...
+
+// Geometries then can be serialized using a property getter
+let serializedWKTString = point?.WKTString
+print(serializedWKTString)
+
+```

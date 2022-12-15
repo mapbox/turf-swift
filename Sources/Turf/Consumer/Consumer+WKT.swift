@@ -9,7 +9,10 @@ struct WKTParser {
     
     mutating func parse(_ input: String) throws -> Any {
         let match = try wktConsumer.match(input.uppercased())
-        return try match.transform(wktTransform)!
+        guard let output = try match.transform(wktTransform) else {
+            throw WKTError.emptyOutput
+        }
+        return output
     }
     
     static func parse(_ input: String) throws -> Any {
@@ -18,6 +21,7 @@ struct WKTParser {
     }
     
     enum WKTError: Error {
+        case emptyOutput
         case numberParsingFailed(Any)
         case coordinatesParsingFailed(Any)
         case geometriesParsingFailed(Any)
@@ -203,7 +207,7 @@ struct WKTParser {
         let primitives = empty | number | coordinate | coordinatesArray | coordinatesArray2D | coordinatesArray3D | space
         let geometries = geometryCollection | point | multiPoint | lineString | multiLineString | polygon | multiPolygon
         return .label(.object, [
-             primitives | geometries
+            primitives | geometries
         ])
     } ()
     
@@ -224,11 +228,12 @@ struct WKTParser {
             }
             return number
         case .coordinate:
-            guard let coords = values as? [Double] else {
+            guard let coords = values as? [Double],
+                  coords.count == 2 else {
                 throw WKTError.coordinatesParsingFailed(values)
             }
             return LocationCoordinate2D(latitude: coords[1],
-                                          longitude: coords[0])
+                                        longitude: coords[0])
         case .coordinatesArray:
             guard let coords = values as? [LocationCoordinate2D] else {
                 throw WKTError.coordinatesParsingFailed(values)
