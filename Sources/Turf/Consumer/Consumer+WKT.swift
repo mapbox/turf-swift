@@ -7,24 +7,46 @@ import CoreLocation
 struct WKTParser {
     init() {}
     
-    mutating func parse(_ input: String) throws -> Any {
+    mutating func parse<T>(_ input: String) throws -> T {
         let match = try wktConsumer.match(input.uppercased())
         guard let output = try match.transform(wktTransform) else {
             throw WKTError.emptyOutput
         }
-        return output
+        guard let castOutput = output as? [T] else {
+            throw WKTError.castFailed(T.self)
+        }
+        guard let object = castOutput.first else {
+            throw WKTError.emptyOutput
+        }
+        return object
     }
     
-    static func parse(_ input: String) throws -> Any {
+    static func parse<T>(_ input: String) throws -> T {
         var parser = WKTParser()
         return try parser.parse(input)
     }
     
-    enum WKTError: Error {
+    enum WKTError: Error, CustomStringConvertible {
         case emptyOutput
         case numberParsingFailed(Any)
         case coordinatesParsingFailed(Any)
         case geometriesParsingFailed(Any)
+        case castFailed(Any.Type)
+        
+        public var description: String {
+            switch self {
+            case .emptyOutput:
+                return "Parsing result did not yield any object."
+            case .numberParsingFailed(let values):
+                return "Could not convert input into a valid numbers array: \(values)."
+            case .coordinatesParsingFailed(let values):
+                return "Could not convert input into a valid coordinates array: \(values)."
+            case .geometriesParsingFailed(let values):
+                return "Could not convert input into a geometries: \(values)."
+            case .castFailed(let type):
+                return "Could not cast resulting object into suggested type '\(type)'."
+            }
+        }
     }
     
     fileprivate enum WKTLabel: String {
@@ -46,8 +68,7 @@ struct WKTParser {
     }
     
     // Consumers
-    private let spaceCharacters = " \t\n\r"
-    fileprivate lazy var space: Consumer<WKTLabel> = .discard(.zeroOrMore(.character(in: spaceCharacters)))
+    fileprivate lazy var space: Consumer<WKTLabel> = .discard(.zeroOrMore(.character(in: CharacterSet.whitespacesAndNewlines)))
     private let empty: Consumer<WKTLabel> = .label(.empty, .string("EMPTY"))
     private let digit: Consumer<WKTLabel> = .character(in: "0" ... "9")
     private lazy var number: Consumer<WKTLabel> = .label(.number, .flatten([
@@ -257,7 +278,7 @@ struct WKTParser {
             return Point(coords)
         case .multiPoint:
             guard values.count > 1 else { return nil }
-            let coords = values[1..<values.endIndex].compactMap { $0 as? LocationCoordinate2D }
+            let coords = values.suffix(from: 1).compactMap { $0 as? LocationCoordinate2D }
             guard coords.count == values.count - 1 else {
                 throw WKTError.coordinatesParsingFailed(values)
             }
@@ -288,7 +309,7 @@ struct WKTParser {
             return MultiPolygon(coords)
         case .geometryCollection:
             guard values.count > 1 else { return nil }
-            let geometries = values[1..<values.endIndex].compactMap { ($0 as? GeometryConvertible)?.geometry }
+            let geometries = values.suffix(from: 1).compactMap { ($0 as? GeometryConvertible)?.geometry }
             guard geometries.count == values.count - 1 else {
                 throw WKTError.geometriesParsingFailed(values)
             }
