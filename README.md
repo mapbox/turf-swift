@@ -144,15 +144,15 @@ turf-swift contains a minimal WKT encoding/decoding support for geometries imple
 let wktString = "POINT(123.53 -12.12)"
 
 // Decoding is done using an init method
-let point = Point(fromWKT: wktString)
-let geometry = Geometry(fromWKT: wktString)
+let point = try? Point(wkt: wktString)
+let geometry = try? Geometry(wkt: wktString)
 
-print(point.coordinates)
+print(point?.coordinates)
 
 // ...
 
 // Geometries then can be serialized using a property getter
-let serializedWKTString = point?.WKTString
+let serializedWKTString = point?.wkt
 print(serializedWKTString)
 
 ```
