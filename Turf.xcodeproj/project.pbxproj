@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		11E726FA26247D3900C1890B /* LocationCoordinate2DTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E726F926247D3900C1890B /* LocationCoordinate2DTests.swift */; };
 		11E7270C2624840900C1890B /* RadianCoordinate2DTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E7270B2624840900C1890B /* RadianCoordinate2DTests.swift */; };
+		2B0BA0472947700A00402F81 /* Consumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0BA0462947700A00402F81 /* Consumer.swift */; };
+		2B0BA0492947709200402F81 /* Consumer+WKT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0BA0482947709200402F81 /* Consumer+WKT.swift */; };
+		2B0BA04B29487A0400402F81 /* WKTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0BA04A29487A0400402F81 /* WKTTests.swift */; };
+		2B3757562943887A00D52D0F /* WKT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3757552943887A00D52D0F /* WKT.swift */; };
 		2B5FABFD24066EB7008A285F /* geometry-collection.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 2B5FABFB24066EA5008A285F /* geometry-collection.geojson */; };
 		2B5FAC0124067051008A285F /* GeometryCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5FAC0024067051008A285F /* GeometryCollectionTests.swift */; };
 		2B5FAC0A2406B8B7008A285F /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5FAC092406B8B7008A285F /* Feature.swift */; };
@@ -71,6 +75,10 @@
 /* Begin PBXFileReference section */
 		11E726F926247D3900C1890B /* LocationCoordinate2DTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCoordinate2DTests.swift; sourceTree = "<group>"; };
 		11E7270B2624840900C1890B /* RadianCoordinate2DTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadianCoordinate2DTests.swift; sourceTree = "<group>"; };
+		2B0BA0462947700A00402F81 /* Consumer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Consumer.swift; path = Consumer/Consumer.swift; sourceTree = "<group>"; };
+		2B0BA0482947709200402F81 /* Consumer+WKT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Consumer+WKT.swift"; path = "Consumer/Consumer+WKT.swift"; sourceTree = "<group>"; };
+		2B0BA04A29487A0400402F81 /* WKTTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKTTests.swift; sourceTree = "<group>"; };
+		2B3757552943887A00D52D0F /* WKT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKT.swift; sourceTree = "<group>"; };
 		2B5FABFB24066EA5008A285F /* geometry-collection.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = "geometry-collection.geojson"; sourceTree = "<group>"; };
 		2B5FAC0024067051008A285F /* GeometryCollectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryCollectionTests.swift; sourceTree = "<group>"; };
 		2B5FAC092406B8B7008A285F /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
@@ -143,6 +151,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B0BA04529476FA800402F81 /* Consumer */ = {
+			isa = PBXGroup;
+			children = (
+				2B0BA0462947700A00402F81 /* Consumer.swift */,
+				2B0BA0482947709200402F81 /* Consumer+WKT.swift */,
+			);
+			name = Consumer;
+			sourceTree = "<group>";
+		};
 		2B74CD90248538E500EE6693 /* Geometries */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +177,7 @@
 		3547ECED200C3C78009DA062 /* Turf */ = {
 			isa = PBXGroup;
 			children = (
+				2B0BA04529476FA800402F81 /* Consumer */,
 				3547ECEF200C3C78009DA062 /* Turf.h */,
 				3547ECF2200C3C78009DA062 /* Info.plist */,
 				CE2EB997214C246A00915A30 /* BoundingBox.swift */,
@@ -172,6 +190,7 @@
 				35ECAF2E20974A1800DC3BC3 /* Geometry.swift */,
 				2B74CD90248538E500EE6693 /* Geometries */,
 				DA972D922702763B009F5615 /* JSON.swift */,
+				2B3757552943887A00D52D0F /* WKT.swift */,
 				35B56E6920DAF3C500C4923D /* RadianCoordinate2D.swift */,
 				35B56E6E20DAF41F00C4923D /* Ring.swift */,
 				3A40B38126E48262004457C4 /* Simplifier.swift */,
@@ -201,6 +220,7 @@
 				3547ECFA200C3C82009DA062 /* Fixtures */,
 				11E726F926247D3900C1890B /* LocationCoordinate2DTests.swift */,
 				11E7270B2624840900C1890B /* RadianCoordinate2DTests.swift */,
+				2B0BA04A29487A0400402F81 /* WKTTests.swift */,
 			);
 			path = TurfTests;
 			sourceTree = "<group>";
@@ -398,8 +418,11 @@
 				DA972D932702763B009F5615 /* JSON.swift in Sources */,
 				CE2EB998214C246A00915A30 /* BoundingBox.swift in Sources */,
 				2B74CD782485372800EE6693 /* Point.swift in Sources */,
+				2B0BA0492947709200402F81 /* Consumer+WKT.swift in Sources */,
 				35B56E6F20DAF41F00C4923D /* Ring.swift in Sources */,
 				3502F796201F53FC00399EFE /* Codable.swift in Sources */,
+				2B3757562943887A00D52D0F /* WKT.swift in Sources */,
+				2B0BA0472947700A00402F81 /* Consumer.swift in Sources */,
 				3502F791201F507500399EFE /* GeoJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -410,6 +433,7 @@
 			files = (
 				35B56E9F20DAF88C00C4923D /* PolygonTests.swift in Sources */,
 				2B5FAC122406BADF008A285F /* GeoJSONTests.swift in Sources */,
+				2B0BA04B29487A0400402F81 /* WKTTests.swift in Sources */,
 				11E7270C2624840900C1890B /* RadianCoordinate2DTests.swift in Sources */,
 				11E726FA26247D3900C1890B /* LocationCoordinate2DTests.swift in Sources */,
 				DA972DA6270289C5009F5615 /* JSONTests.swift in Sources */,
