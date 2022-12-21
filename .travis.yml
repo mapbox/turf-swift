@@ -8,4 +8,4 @@ env:
 install:
   - ./scripts/install_swiftenv.sh
 script:
-  - swift test --enable-test-discovery
+  - swift test
