@@ -58,7 +58,7 @@ class TurfTests: XCTestCase {
     }
     
     func testPolygonArea() {
-        let json = Fixture.JSONFromFileNamed(name: "polygon")
+        let json = Fixture.JSONFromGEOJSONFileNamed(name: "polygon")
         let geometry = json["geometry"] as! [String: Any]
         let geoJSONCoordinates = geometry["coordinates"] as! [[[Double]]]
         let coordinates = geoJSONCoordinates.map {

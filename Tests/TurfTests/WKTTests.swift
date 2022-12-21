@@ -201,7 +201,7 @@ class WKTTests: XCTestCase {
         case .none:
             XCTAssertNil(rhs)
             return
-        @unknown default:
+        case .some(_):
             XCTFail("Unknown geometry type coded.")
         }
     }

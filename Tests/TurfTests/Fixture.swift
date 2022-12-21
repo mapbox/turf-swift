@@ -2,6 +2,13 @@ import XCTest
 import Foundation
 
 class Fixture {
+    class func moduleBundle() -> Bundle {
+        #if SPM_TESTING
+        return Bundle.module
+        #else
+        return Bundle(for: self)
+        #endif
+    }
     class func stringFromFileNamed(name: String) -> String {
         guard let path = Bundle(for: self).path(forResource: name, ofType: "json") ?? Bundle(for: self).path(forResource: name, ofType: "geojson") else {
             XCTAssert(false, "Fixture \(name) not found.")
@@ -16,7 +23,7 @@ class Fixture {
     }
     
     class func geojsonData(from name: String) throws -> Data? {
-        guard let path = Bundle(for: self).path(forResource: name, ofType: "geojson") else {
+        guard let path = moduleBundle().path(forResource: name, ofType: "geojson") else {
             XCTAssert(false, "Fixture \(name) not found.")
             return nil
         }
@@ -25,7 +32,24 @@ class Fixture {
     }
     
     class func JSONFromFileNamed(name: String) -> [String: Any] {
-        guard let path = Bundle(for: self).path(forResource: name, ofType: "json") ?? Bundle(for: self).path(forResource: name, ofType: "geojson") else {
+        guard let path = moduleBundle().path(forResource: name, ofType: "json") ?? Bundle(for: self).path(forResource: name, ofType: "geojson") else {
+            XCTAssert(false, "Fixture \(name) not found.")
+            return [:]
+        }
+        guard let data = NSData(contentsOfFile: path) else {
+            XCTAssert(false, "No data found at \(path).")
+            return [:]
+        }
+        do {
+            return try JSONSerialization.jsonObject(with: data as Data, options: []) as! [String: AnyObject]
+        } catch {
+            XCTAssert(false, "Unable to decode JSON fixture at \(path): \(error).")
+            return [:]
+        }
+    }
+    
+    class func JSONFromGEOJSONFileNamed(name: String) -> [String: Any] {
+        guard let path = moduleBundle().path(forResource: name, ofType: "geojson") ?? Bundle(for: self).path(forResource: name, ofType: "geojson") else {
             XCTAssert(false, "Fixture \(name) not found.")
             return [:]
         }
