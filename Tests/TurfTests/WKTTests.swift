@@ -222,7 +222,7 @@ MULTIPOLYGON(((123.53 -12.12,10.0 20.0),(-11.12 13.14)),((-15.16 -17.18))))
         XCTAssertNotNil(geometryCollection)
         XCTAssertEqual(geometryCollection?.geometries.count, 6)
         
-        assertGeometryTypesEqual(geometryCollection?.geometries[0], .point(Point(.init())))
+        assertGeometryTypesEqual(geometryCollection?.geometries[0], .point(Point(LocationCoordinate2D(latitude: 0, longitude: 0))))
         assertGeometryTypesEqual(geometryCollection?.geometries[1], .multiPoint(MultiPoint([])))
         assertGeometryTypesEqual(geometryCollection?.geometries[2], .lineString(LineString([])))
         assertGeometryTypesEqual(geometryCollection?.geometries[3], .multiLineString(MultiLineString([])))

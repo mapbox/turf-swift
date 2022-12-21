@@ -371,7 +371,7 @@ class LineStringTests: XCTestCase {
             [122.82714843749999, 37.37015718405753]
           ]
         let line1 = LineString(coordinates.map{
-            CLLocationCoordinate2D(latitude: $0.last!, longitude: $0.first!)
+            LocationCoordinate2D(latitude: $0.last!, longitude: $0.first!)
         })
         
         var startDistance = 804672.0
