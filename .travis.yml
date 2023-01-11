@@ -2,10 +2,10 @@ os:
   - linux
 language: generic
 sudo: required
-dist: trusty
+dist: xenial
 env:
-  - SWIFT_VERSION=5.0 SWIFTENV_ROOT="$HOME/.swiftenv" PATH="$SWIFTENV_ROOT/bin:$SWIFTENV_ROOT/shims:$PATH"
+  - SWIFT_VERSION=5.4 SWIFTENV_ROOT="$HOME/.swiftenv" PATH="$SWIFTENV_ROOT/bin:$SWIFTENV_ROOT/shims:$PATH"
 install:
   - ./scripts/install_swiftenv.sh
 script:
-  - swift build
+  - swift test

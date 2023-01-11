@@ -47,8 +47,8 @@ class TurfTests: XCTestCase {
         XCTAssertEqual(a, coord1)
     }
     
-    func testCLLocationDegrees() {
-        let degree: CLLocationDegrees = 100
+    func testLocationDegrees() {
+        let degree: LocationDegrees = 100
         let a = degree.toRadians()
         XCTAssertEqual(a, 2, accuracy: 1)
         
@@ -58,7 +58,7 @@ class TurfTests: XCTestCase {
     }
     
     func testPolygonArea() {
-        let json = Fixture.JSONFromFileNamed(name: "polygon")
+        let json = Fixture.JSONFromGEOJSONFileNamed(name: "polygon")
         let geometry = json["geometry"] as! [String: Any]
         let geoJSONCoordinates = geometry["coordinates"] as! [[[Double]]]
         let coordinates = geoJSONCoordinates.map {
@@ -225,7 +225,7 @@ extension GeoJSONObject {
     }
 }
 
-func XCTAssertEqual(_ expected: [[LocationCoordinate2D]], _ actual: [[LocationCoordinate2D]], accuracy: CLLocationDegrees, _ message: @autoclosure () -> String = "", file: StaticString = #filePath, line: UInt = #line) {
+func XCTAssertEqual(_ expected: [[LocationCoordinate2D]], _ actual: [[LocationCoordinate2D]], accuracy: LocationDegrees, _ message: @autoclosure () -> String = "", file: StaticString = #filePath, line: UInt = #line) {
     XCTAssertEqual(expected.count, actual.count, message(), file: file, line: line)
     guard expected.count == actual.count else { return }
     
@@ -234,7 +234,7 @@ func XCTAssertEqual(_ expected: [[LocationCoordinate2D]], _ actual: [[LocationCo
     }
 }
 
-func XCTAssertEqual(_ expected: [LocationCoordinate2D], _ actual: [LocationCoordinate2D], accuracy: CLLocationDegrees, _ message: @autoclosure () -> String = "", file: StaticString = #filePath, line: UInt = #line) {
+func XCTAssertEqual(_ expected: [LocationCoordinate2D], _ actual: [LocationCoordinate2D], accuracy: LocationDegrees, _ message: @autoclosure () -> String = "", file: StaticString = #filePath, line: UInt = #line) {
     XCTAssertEqual(expected.count, actual.count, message(), file: file, line: line)
     guard expected.count == actual.count else { return }
     

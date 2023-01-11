@@ -245,7 +245,7 @@ class LineStringTests: XCTestCase {
     func testCoordinateFromStart() {
         // Ported from https://github.com/Turfjs/turf/blob/142e137ce0c758e2825a260ab32b24db0aa19439/packages/turf-along/test.js
         
-        let json = Fixture.JSONFromFileNamed(name: "dc-line")
+        let json = Fixture.JSONFromGEOJSONFileNamed(name: "dc-line")
         let line = ((json["geometry"] as! [String: Any])["coordinates"] as! [[Double]]).map { LocationCoordinate2D(latitude: $0[0], longitude: $0[1]) }
         
         let pointsAlong = [
@@ -371,7 +371,7 @@ class LineStringTests: XCTestCase {
             [122.82714843749999, 37.37015718405753]
           ]
         let line1 = LineString(coordinates.map{
-            CLLocationCoordinate2D(latitude: $0.last!, longitude: $0.first!)
+            LocationCoordinate2D(latitude: $0.last!, longitude: $0.first!)
         })
         
         var startDistance = 804672.0

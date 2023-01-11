@@ -103,7 +103,6 @@
 		3547ECFC200C3C82009DA062 /* polygon.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = polygon.geojson; sourceTree = "<group>"; };
 		3547ECFD200C3C82009DA062 /* Fixture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fixture.swift; sourceTree = "<group>"; };
 		3547ECFE200C3C82009DA062 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3547ED09200C3C8A009DA062 /* LinuxMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinuxMain.swift; sourceTree = "<group>"; };
 		35650AF01F150DC500B5C158 /* Turf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Turf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		35650AF91F150DC500B5C158 /* TurfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3573EA6C215A393F009899D7 /* GeoJSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJSONTests.swift; sourceTree = "<group>"; };
@@ -272,7 +271,6 @@
 		35650AFD1F150DC500B5C158 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				3547ED09200C3C8A009DA062 /* LinuxMain.swift */,
 				3547ECF8200C3C82009DA062 /* TurfTests */,
 			);
 			path = Tests;

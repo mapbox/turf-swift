@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.4
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -28,6 +28,11 @@ let package = Package(
         .testTarget(
             name: "TurfTests",
             dependencies: ["Turf"],
-            exclude: ["Info.plist"]),
+            exclude: ["Info.plist", "Fixtures/simplify"],
+            resources: [
+                .process("Fixtures"),
+            ],
+            swiftSettings: [.define("SPM_TESTING")]
+        ),
     ]
 )
