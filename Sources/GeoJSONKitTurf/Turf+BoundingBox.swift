@@ -32,7 +32,7 @@ extension GeoJSON.BoundingBox {
   public var center: GeoJSON.Position {
     .init(
       latitude: (southWesterlyLatitude + northEasterlyLatitude) / 2,
-      longitude: (southWesterlyLongitude + northEasterlyLongitude) / 2
+      longitude: (southWesterlyLongitude + northEasterlyLongitude) / 2 + (spansAntimeridian ? 180 : 0)
     )
   }
   
