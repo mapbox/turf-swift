@@ -7,7 +7,7 @@ import CoreLocation
 struct WKTParser {
     init() {}
     
-    mutating func parse<T>(_ input: String) throws -> T {
+    mutating func parse<T: Sendable>(_ input: String) throws -> T {
         let match = try wktConsumer.match(input.uppercased())
         guard let output = try match.transform(wktTransform) else {
             throw WKTError.emptyOutput
@@ -21,16 +21,16 @@ struct WKTParser {
         return object
     }
     
-    static func parse<T>(_ input: String) throws -> T {
+    static func parse<T: Sendable>(_ input: String) throws -> T {
         var parser = WKTParser()
         return try parser.parse(input)
     }
     
     enum WKTError: Error, CustomStringConvertible {
         case emptyOutput
-        case numberParsingFailed(Any)
-        case coordinatesParsingFailed(Any)
-        case geometriesParsingFailed(Any)
+        case numberParsingFailed(Sendable)
+        case coordinatesParsingFailed(Sendable)
+        case geometriesParsingFailed(Sendable)
         case castFailed(Any.Type)
         
         public var description: String {

@@ -6,7 +6,7 @@ import CoreLocation
 /**
  A [bounding box](https://datatracker.ietf.org/doc/html/rfc7946#section-5) indicates the extremes of a `GeoJSONObject` along the x- and y-axes (longitude and latitude, respectively).
  */
-public struct BoundingBox {
+public struct BoundingBox: Sendable {
     /// The southwesternmost position contained in the bounding box.
     public var southWest: LocationCoordinate2D
     

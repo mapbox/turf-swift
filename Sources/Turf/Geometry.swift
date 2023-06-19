@@ -6,7 +6,7 @@ import CoreLocation
 /**
  A [Geometry object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1) represents points, curves, and surfaces in coordinate space. Use an instance of this enumeration whenever a value could be any kind of Geometry object.
  */
-public enum Geometry: Equatable {
+public enum Geometry: Equatable, Sendable {
     /// A single position.
     case point(_ geometry: Point)
     
@@ -94,7 +94,7 @@ extension Geometry: Codable {
 /**
  A type that can be represented as a `Geometry` instance.
  */
-public protocol GeometryConvertible {
+public protocol GeometryConvertible: Sendable {
     /// The instance wrapped in a `Geometry` instance.
     var geometry: Geometry { get }
 }

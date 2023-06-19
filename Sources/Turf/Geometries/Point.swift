@@ -6,7 +6,7 @@ import CoreLocation
 /**
  A [Point geometry](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.2) represents a single position.
  */
-public struct Point: Equatable, ForeignMemberContainer {
+public struct Point: Equatable, ForeignMemberContainer, Sendable {
     /**
      The position at which the point is located.
      

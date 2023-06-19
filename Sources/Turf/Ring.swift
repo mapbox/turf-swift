@@ -6,7 +6,8 @@ import CoreLocation
 /**
  A [linear ring](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.6) is a closed figure bounded by three or more straight line segments.
  */
-public struct Ring {
+
+public struct Ring: Sendable {
     /// The positions at which the linear ring is located.
     public var coordinates: [LocationCoordinate2D]
     

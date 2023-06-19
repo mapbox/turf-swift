@@ -5,7 +5,7 @@ import Foundation
  
  This type does not represent the `null` value in JSON. Use `Optional<JSONValue>` wherever `null` is accepted.
  */
-public enum JSONValue: Hashable {
+public enum JSONValue: Hashable, Sendable {
     // case null would be redundant to Optional.none
     
     /// A string.

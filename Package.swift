@@ -1,4 +1,4 @@
-// swift-tools-version:5.4
+// swift-tools-version:5.5
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -36,3 +36,14 @@ let package = Package(
         ),
     ]
 )
+
+//for target in package.targets {
+//  target.swiftSettings = target.swiftSettings ?? []
+//  target.swiftSettings?.append(
+//    .unsafeFlags([
+//      "-Xfrontend", "-warn-concurrency",
+//      "-Xfrontend", "-enable-actor-data-race-checks",
+//      "-Xfrontend", "-require-explicit-sendable",
+//    ])
+//  )
+//}

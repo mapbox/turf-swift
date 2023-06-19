@@ -194,7 +194,7 @@ extension LineString {
     /**
      `IndexedCoordinate` is a coordinate with additional information such as the index from its position in the polyline and distance from the start of the polyline.
      */
-    public struct IndexedCoordinate {
+    public struct IndexedCoordinate: Sendable {
         /// The coordinate
         public let coordinate: Array<LocationCoordinate2D>.Element
         /// The index of the coordinate

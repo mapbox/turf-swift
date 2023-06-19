@@ -8,7 +8,7 @@ import CoreLocation
  
  - Note: [Foreign members](https://datatracker.ietf.org/doc/html/rfc7946#section-6.1) which may be present inside are coded only if used `JSONEncoder` or `JSONDecoder` has `userInfo[.includesForeignMembers] = true`.
  */
-public enum GeoJSONObject: Equatable {
+public enum GeoJSONObject: Equatable, Sendable {
     /**
      A [Geometry object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1) represents points, curves, and surfaces in coordinate space.
      
@@ -94,7 +94,7 @@ extension FeatureCollection: GeoJSONObjectConvertible {
 /**
  A GeoJSON object that can contain [foreign members](https://datatracker.ietf.org/doc/html/rfc7946#section-6.1) in arbitrary keys.
  */
-public protocol ForeignMemberContainer {
+public protocol ForeignMemberContainer: Sendable {
     /// [Foreign members](https://datatracker.ietf.org/doc/html/rfc7946#section-6.1) to round-trip to JSON.
     ///
     /// Members are coded only if used `JSONEncoder` or `JSONDecoder` has `userInfo[.includesForeignMembers] = true`.
