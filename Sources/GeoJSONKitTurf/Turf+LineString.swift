@@ -35,15 +35,15 @@ extension GeoJSON.LineString {
    */
   public func trimmed(from startDistance: GeoJSON.Distance, to stopDistance: GeoJSON.Distance) -> GeoJSON.LineString? {
     // The method is porting from https://github.com/Turfjs/turf/blob/5375941072b90d489389db22b43bfe809d5e451e/packages/turf-line-slice-along/index.js
-    guard startDistance >= 0.0 && stopDistance >= startDistance else { return nil }
+    guard startDistance >= 0, stopDistance >= startDistance else { return nil }
     let positions = self.coordinates
     var traveled: GeoJSON.Distance = 0
     var slice = [GeoJSON.Position]()
     
     for i in 0..<positions.endIndex {
-      if startDistance >= traveled && i == positions.endIndex - 1 {
+      if startDistance >= traveled, i == positions.endIndex - 1 {
         break
-      } else if traveled > startDistance && slice.isEmpty {
+      } else if traveled > startDistance, slice.isEmpty {
         let overshoot = startDistance - traveled
         if overshoot == 0.0 {
           slice.append(positions[i])
@@ -77,7 +77,9 @@ extension GeoJSON.LineString {
       traveled += positions[i].distance(to: positions[i + 1])
     }
     
-    if traveled < startDistance { return nil }
+    if traveled < startDistance {
+      return nil
+    }
     
     if let last = positions.last {
       return GeoJSON.LineString(positions: [last, last])

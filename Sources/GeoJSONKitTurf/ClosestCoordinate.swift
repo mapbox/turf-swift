@@ -17,9 +17,11 @@ extension GeoJSON.LineString {
   public struct IndexedCoordinate {
     /// The coordinate
     public let coordinate: Array<GeoJSON.Position>.Element
+    
     /// The index of the coordinate
     public let index: Array<GeoJSON.Position>.Index
-    /// The coordinate’s distance from the start of the polyline
+    
+    /// The coordinate’s distance along the polyline from the start of the polyline
     public let distance: GeoJSON.Distance
   }
   
@@ -36,37 +38,47 @@ extension GeoJSON.LineString.IndexedCoordinate {
     }
     
     var closestCoordinate: GeoJSON.LineString.IndexedCoordinate?
-    var closestDistance: GeoJSON.Distance?
+    var closestDistance: GeoJSON.Distance = .greatestFiniteMagnitude
+    var cumulativeDistance: GeoJSON.Distance = 0
     
     for index in 0..<coordinates.count - 1 {
       let segment = (coordinates[index], coordinates[index + 1])
+      let segmentDistance = segment.0.distance(to: segment.1)
       let distances = (coordinate.distance(to: segment.0), coordinate.distance(to: segment.1))
       
       let maxDistance = max(distances.0, distances.1)
       let direction = segment.0.direction(to: segment.1)
       let perpendicularPoint1 = coordinate.coordinate(at: maxDistance, facing: direction + 90)
       let perpendicularPoint2 = coordinate.coordinate(at: maxDistance, facing: direction - 90)
-      let intersectionPoint = intersection((perpendicularPoint1, perpendicularPoint2), segment)
-      let intersectionDistance: GeoJSON.Distance? = intersectionPoint != nil ? coordinate.distance(to: intersectionPoint!) : nil
+     
       
-      if distances.0 < closestDistance ?? .greatestFiniteMagnitude {
-        closestCoordinate = GeoJSON.LineString.IndexedCoordinate(coordinate: segment.0,
-                                                                 index: index,
-                                                                 distance: startCoordinate.distance(to: segment.0))
+      
+      if distances.0 < closestDistance {
+        closestCoordinate = GeoJSON.LineString.IndexedCoordinate(
+          coordinate: segment.0,
+          index: index,
+          distance: cumulativeDistance)
         closestDistance = distances.0
       }
-      if distances.1 < closestDistance ?? .greatestFiniteMagnitude {
-        closestCoordinate = GeoJSON.LineString.IndexedCoordinate(coordinate: segment.1,
-                                                                 index: index + 1,
-                                                                 distance: startCoordinate.distance(to: segment.1))
+      if distances.1 < closestDistance {
+        closestCoordinate = GeoJSON.LineString.IndexedCoordinate(
+          coordinate: segment.1,
+          index: index + 1,
+          distance: cumulativeDistance + segmentDistance)
         closestDistance = distances.1
       }
-      if intersectionDistance != nil && intersectionDistance! < closestDistance ?? .greatestFiniteMagnitude {
-        closestCoordinate = GeoJSON.LineString.IndexedCoordinate(coordinate: intersectionPoint!,
-                                                                 index: index,
-                                                                 distance: startCoordinate.distance(to: intersectionPoint!))
-        closestDistance = intersectionDistance!
+      if let intersectionPoint = intersection((perpendicularPoint1, perpendicularPoint2), segment) {
+        let intersectionDistance = coordinate.distance(to: intersectionPoint)
+        if intersectionDistance < closestDistance {
+          closestCoordinate = GeoJSON.LineString.IndexedCoordinate(
+            coordinate: intersectionPoint,
+            index: index,
+            distance: cumulativeDistance + intersectionDistance)
+          closestDistance = intersectionDistance
+        }
       }
+      
+      cumulativeDistance += segmentDistance
     }
     
     return closestCoordinate
