@@ -237,5 +237,39 @@ extension GeoJSON.LineString {
     }
     return intersections
   }
+  
+  // MARK: - Fretched Distance
 
+  /// Frechet distance to another line, which is a measure of how similar the the lines are
+  ///
+  /// See https://en.wikipedia.org/wiki/Fréchet_distance
+  ///
+  /// - Parameter other: Another line to calculate the distance to
+  /// - Returns: Frechet distance
+  public func frechetDistance(to other: GeoJSON.LineString) -> Double {
+    let path1 = self.positions
+    let path2 = other.positions
+    var matrix = Array(repeating: Array(repeating: -1.0, count: path2.count), count: path1.count)
+    
+    func c(i: Int, j: Int) -> Double {
+      if matrix[i][j] > -1 {
+        return matrix[i][j]
+      } else if i == 0, j == 0 {
+        matrix[i][j] = path1[i].distance(to: path2[j])
+      } else if i > 0, j == 0 {
+        matrix[i][j] = max(c(i: i-1, j: 0), path1[i].distance(to: path2[j]))
+      } else if i == 0, j > 0 {
+        matrix[i][j] = max(c(i: 0, j: j-1), path1[i].distance(to: path2[j]))
+      } else if i > 0, j > 0 {
+        matrix[i][j] = max(min(min(c(i: i-1, j: j), c(i: i-1, j: j-1)), c(i: i, j: j-1)), path1[i].distance(to: path2[j]))
+      } else {
+        matrix[i][j] = Double.infinity
+      }
+      return matrix[i][j]
+    }
+    
+    return c(i: path1.count - 1, j: path2.count - 1)
+  }
+
+  
 }
