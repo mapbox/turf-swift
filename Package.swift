@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.7
 
 import PackageDescription
 
@@ -6,6 +6,7 @@ let package = Package(
   name: "GeoJSONKitTurf",
   platforms: [
     .macOS(.v10_12), .iOS(.v10), .watchOS(.v3), .tvOS(.v12),
+    .custom("xros", versionString: "1.0")
   ],
   products: [
     .library(
@@ -24,7 +25,7 @@ let package = Package(
     .target(
       name: "GeoJSONKitTurf",
       dependencies: ["GeoJSONKit"]),
-    .target(
+    .executableTarget(
       name: "GeoKitten",
       dependencies: [
         "GeoJSONKitTurf",
