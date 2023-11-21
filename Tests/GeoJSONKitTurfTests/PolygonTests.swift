@@ -569,6 +569,13 @@ class PolygonTests: XCTestCase {
     XCTAssertEqual(smoothed.coordinates, expected)
   }
   
+  func testSimplifyLarge() throws {
+    let data = try Fixture.loadData(folder: "simplify/in", filename: "countries-coastline-1km", extension: "geojson")
+    let geoJSON = try GeoJSON(data: data)
+    let simplified = geoJSON.simplified(options: .init(algorithm: .RamerDouglasPeucker(tolerance: 0.001)))
+    XCTAssertNotNil(simplified)
+  }
+  
   func testSimplify() throws {
     try Fixture.fixtures(folder: "simplify") { name, input, expected in
       let properties: [String: AnyHashable]?
@@ -584,10 +591,8 @@ class PolygonTests: XCTestCase {
       if actual != expected {
         // Give it another chance on the data-level, too
         do {
-          var options: JSONSerialization.WritingOptions = [.prettyPrinted]
-          if #available(iOS 11.0, OSX 10.13, *) {
-            options.insert(.sortedKeys)
-          }
+          var options: JSONSerialization.WritingOptions = []
+          options.insert(.sortedKeys)
           let newData = try actual.toData(options: options)
           let oldData = try expected.toData(options: options)
           if newData != oldData {
