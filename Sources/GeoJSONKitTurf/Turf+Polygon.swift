@@ -42,12 +42,12 @@ extension GeoJSON.Polygon {
   /// lies on the boundary line of the polygon or its interior rings.
   ///
   ///Ported from: https://github.com/Turfjs/turf/blob/e53677b0931da9e38bb947da448ee7404adc369d/packages/turf-boolean-point-in-polygon/index.ts#L31-L75
-  public func contains(_ position: GeoJSON.Position, ignoreBoundary: Bool = false) -> Bool {
-    guard exterior.contains(position, ignoreBoundary: ignoreBoundary) else {
+  public func contains(_ position: GeoJSON.Position, ignoreBoundary: Bool = false, checkBoundingBox: Bool = true) -> Bool {
+    guard exterior.contains(position, ignoreBoundary: ignoreBoundary, checkBoundingBox: checkBoundingBox) else {
       return false
     }
     for ring in interiors {
-      if ring.contains(position, ignoreBoundary: !ignoreBoundary) {
+      if ring.contains(position, ignoreBoundary: !ignoreBoundary, checkBoundingBox: false) {
         return false
       }
     }

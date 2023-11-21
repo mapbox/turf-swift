@@ -8,14 +8,14 @@ This package provides various geospatial extensions for [GeoJSONKit](https://git
 
 ## Requirements
 
-GeoJSONKitTurf requires Xcode 12.x and supports the following minimum deployment targets:
+GeoJSONKitTurf requires Xcode 14.x and supports the following minimum deployment targets:
 
-* iOS 10.0 and above
-* macOS 10.12 (Sierra) and above
-* tvOS 10.0 and above
-* watchOS 3.0 and above
+- iOS 15 and above
+- macOS 12 and above
+- tvOS 15 and above
+- watchOS 8.0 and above
 
-It's also compatible with Linux (and possibly other platforms), as long as you have [Swift](https://swift.org/download/) 5.3 (or above) installed.
+It's also compatible with Linux (and possibly other platforms), as long as you have [Swift](https://swift.org/download/) 5.7 (or above) installed.
 
 ## Installation
 
@@ -27,7 +27,7 @@ To install GeoJSONKitTurf using the [Swift Package Manager](https://swift.org/pa
 .package(name: "GeoJSONKitTurf", url: "https://github.com/maparoni/geojsonkit-turf", from: "0.1.0")
 ```
 
-Then use: 
+Then use:
 
 ```swift
 import GeoJSONKitTurf
@@ -85,6 +85,7 @@ First clone or download the repository, then run this:
 swift build -c release
 sudo cp .build/release/geokitten /usr/local/bin/geokitten
 ```
+
 </details>
 
 <details>
@@ -95,4 +96,5 @@ mint install maparoni/GeoJSONKit-Turf@main
 ```
 
 If you get a permissions error, check [this Mint issue](https://github.com/yonaskolb/Mint/issues/188).
+
 </details>

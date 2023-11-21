@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
   name: "GeoJSONKitTurf",
   platforms: [
-    .macOS(.v10_12), .iOS(.v10), .watchOS(.v3), .tvOS(.v12),
+    .macOS(.v12), .iOS(.v15), .watchOS(.v8), .tvOS(.v15),
     .custom("xros", versionString: "1.0")
   ],
   products: [
@@ -17,14 +17,16 @@ let package = Package(
       targets: ["GeoKitten"]),
   ],
   dependencies: [
-    .package(name: "GeoJSONKit", url: "https://github.com/maparoni/geojsonkit.git", from: "0.5.2"),
+    .package(url: "https://github.com/maparoni/geojsonkit.git", from: "0.5.2"),
 //    .package(name: "GeoJSONKit", path: "../GeoJSONKit"),
     .package(url: "https://github.com/apple/swift-argument-parser", .upToNextMajor(from: "1.0.0")),
   ],
   targets: [
     .target(
       name: "GeoJSONKitTurf",
-      dependencies: ["GeoJSONKit"]),
+      dependencies: [
+        .product(name: "GeoJSONKit", package: "geojsonkit"),
+      ]),
     .executableTarget(
       name: "GeoKitten",
       dependencies: [

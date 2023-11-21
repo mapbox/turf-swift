@@ -55,7 +55,7 @@ extension GeoJSON.Polygon.LinearRing {
    *
    * Ported from: https://github.com/Turfjs/turf/blob/e53677b0931da9e38bb947da448ee7404adc369d/packages/turf-boolean-point-in-polygon/index.ts#L77-L108
    */
-  public func contains(_ coordinate: GeoJSON.Position, ignoreBoundary: Bool = false) -> Bool {
+  public func contains(_ coordinate: GeoJSON.Position, ignoreBoundary: Bool = false, checkBoundingBox: Bool = true) -> Bool {
     
     // Optimization for triangles, using barycentric method
     guard positions.count > 3 else {
@@ -83,10 +83,12 @@ extension GeoJSON.Polygon.LinearRing {
             : (s >= 0 && s + t <= a)
     }
     
-    
-    let bbox = GeoJSON.BoundingBox(positions: positions)
-    guard bbox.contains(coordinate, ignoreBoundary: ignoreBoundary) else {
-      return false
+
+    if checkBoundingBox {
+      let bbox = GeoJSON.BoundingBox(positions: positions)
+      guard bbox.contains(coordinate, ignoreBoundary: ignoreBoundary) else {
+        return false
+      }
     }
     
     let coordinates = positions

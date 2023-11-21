@@ -3,10 +3,10 @@ import Foundation
 import GeoJSONKit
 
 extension GeoJSON.Geometry {
-  public func contains(_ coordinate: GeoJSON.Position, ignoreBoundary: Bool = false) -> Bool {
+  public func contains(_ coordinate: GeoJSON.Position, ignoreBoundary: Bool = false, checkBoundingBox: Bool = true) -> Bool {
     switch self {
     case .polygon(let polygon):
-      return polygon.contains(coordinate, ignoreBoundary: ignoreBoundary)
+      return polygon.contains(coordinate, ignoreBoundary: ignoreBoundary, checkBoundingBox: checkBoundingBox)
     case .lineString, .point:
       return false
     }
@@ -109,14 +109,14 @@ extension GeoJSON.GeometryObject {
    *
    * Calls contains function for each contained polygon
    */
-  public func contains(_ coordinate: GeoJSON.Position, ignoreBoundary: Bool = false) -> Bool {
+  public func contains(_ coordinate: GeoJSON.Position, ignoreBoundary: Bool = false, checkBoundingBox: Bool = true) -> Bool {
     switch self {
     case .single(let geometry):
-      return geometry.contains(coordinate, ignoreBoundary: ignoreBoundary)
+      return geometry.contains(coordinate, ignoreBoundary: ignoreBoundary, checkBoundingBox: checkBoundingBox)
     case .multi(let geometries):
-      return geometries.contains(where: { $0.contains(coordinate, ignoreBoundary: ignoreBoundary) })
+      return geometries.contains(where: { $0.contains(coordinate, ignoreBoundary: ignoreBoundary, checkBoundingBox: checkBoundingBox) })
     case .collection(let objects):
-      return objects.contains(where: { $0.contains(coordinate, ignoreBoundary: ignoreBoundary) })
+      return objects.contains(where: { $0.contains(coordinate, ignoreBoundary: ignoreBoundary, checkBoundingBox: checkBoundingBox) })
     }
   }
 }
