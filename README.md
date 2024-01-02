@@ -27,7 +27,7 @@ If your project is written in Objective-C, you’ll need to write a compatibilit
 
 ## Installation
 
-Although a stable release of this library is not yet available, prereleases are available for installation using any of the popular Swift dependency managers.
+Releases are available for installation using any of the popular Swift dependency managers.
 
 ### CocoaPods
 
