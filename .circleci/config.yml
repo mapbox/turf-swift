@@ -1,7 +1,18 @@
 version: 2.1
 
 jobs:
-  build_and_test:
+  build_and_test_linux:
+    docker:
+      - image: swift:latest
+    steps:
+      - checkout
+      - run:
+          name: "Build"
+          command: swift build
+      - run:
+          name: "Test"
+          command: swift test
+  build_and_test_macos:
     parameters:
       xcode_version:
         type: string
@@ -20,7 +31,8 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - build_and_test:
+      - build_and_test_linux
+      - build_and_test_macos:
           matrix:
             parameters:
               xcode_version: [13.4.1, 14.3.1, 15.1.0]
