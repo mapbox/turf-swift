@@ -40,6 +40,6 @@ Pod::Spec.new do |s|
 
   s.frameworks = 'CoreLocation'
 
-  s.swift_version = "5.0"
+  s.swift_version = "5.5"
 
 end
