@@ -1,62 +1,26 @@
 version: 2.1
 
 jobs:
-  xcode_13_2:
+  build_and_test:
+    parameters:
+      xcode_version:
+        type: string
     macos:
-      xcode: 13.2
+      xcode: << parameters.xcode_version >>
     steps:
       - checkout
       - run:
           name: "Build"
-          command: "swift build"
-  xcode_13_3:
-    macos:
-      xcode: 13.3
-    steps:
-      - checkout
-      - run:
-          name: "Build"
-          command: "swift build"
-  xcode_13_4:
-    macos:
-      xcode: 13.4
-    steps:
-      - checkout
-      - run:
-          name: "Build"
-          command: "swift build"
+          command: swift build
       - run:
           name: "Test"
-          command: "swift test"
-  xcode_14_1:
-    macos:
-      xcode: 14.1
-    steps:
-      - checkout
-      - run:
-          name: "Build"
-          command: "swift build"
-      - run:
-          name: "Test"
-          command: "swift test"
-  xcode_14_2:
-    macos:
-      xcode: 14.2
-    steps:
-      - checkout
-      - run:
-          name: "Build"
-          command: "swift build"
-      - run:
-          name: "Test"
-          command: "swift test"
+          command: swift test
 
 
 workflows:
   build-and-test:
     jobs:
-      - xcode_13_2
-      - xcode_13_3
-      - xcode_13_4
-      - xcode_14_1
-      - xcode_14_2
+      - build_and_test:
+          matrix:
+            parameters:
+              xcode_version: [13.4.1, 14.3.1, 15.1.0]
