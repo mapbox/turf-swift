@@ -26,7 +26,18 @@ jobs:
       - run:
           name: "Test"
           command: swift test
-
+  build_for_library_evolution:
+    macos:
+      xcode: latest
+    steps:
+      - checkout
+      - run:
+          name: "Build for library evolution"
+          command: |
+           swift build \
+             -c release \
+             -Xswiftc -emit-module-interface \
+             -Xswiftc -enable-library-evolution
 
 workflows:
   build-and-test:
