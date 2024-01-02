@@ -9,22 +9,17 @@ let package = Package(
         .macOS(.v10_13), .iOS(.v11), .watchOS(.v4), .tvOS(.v11),
     ],
     products: [
-        // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
             name: "Turf",
-            targets: ["Turf"]),
-    ],
-    dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
+            targets: ["Turf"]
+        ),
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "Turf",
             dependencies: [],
-            exclude: ["Info.plist"]),
+            exclude: ["Info.plist"]
+        ),
         .testTarget(
             name: "TurfTests",
             dependencies: ["Turf"],
@@ -37,10 +32,11 @@ let package = Package(
     ]
 )
 
-//for target in package.targets {
+//for target in package.targets where target.type != .system {
 //  target.swiftSettings = target.swiftSettings ?? []
 //  target.swiftSettings?.append(
 //    .unsafeFlags([
+//      "-emit-module-interface", "-enable-library-evolution",
 //      "-Xfrontend", "-warn-concurrency",
 //      "-Xfrontend", "-enable-actor-data-race-checks",
 //      "-Xfrontend", "-require-explicit-sendable",
