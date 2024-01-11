@@ -28,7 +28,7 @@ jobs:
           command: swift test
   build_for_library_evolution:
     macos:
-      xcode: latest
+      xcode: 15.1.0
     steps:
       - checkout
       - run:
