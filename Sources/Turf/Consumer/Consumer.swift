@@ -33,7 +33,7 @@ import Foundation
 
 // MARK: Consumer
 
-public indirect enum Consumer<Label: Hashable>: Equatable {
+public indirect enum Consumer<Label: Hashable & Sendable>: Equatable, Sendable {
     /// Primitives
     case string(String)
     case charset(Charset)
@@ -67,14 +67,14 @@ public extension Consumer {
     var isOptional: Bool { return _isOptional }
 
     /// Source location
-    struct Location: Equatable {
+    struct Location: Equatable, Sendable {
         fileprivate var source: String.UnicodeScalarView
         public let range: Range<String.Index>
         public var offset: (line: Int, column: Int) { return _offset }
     }
 
     /// Abstract syntax tree returned by consumer
-    indirect enum Match: Equatable {
+    indirect enum Match: Equatable, Sendable {
         case token(String, Location)
         case node(Label?, [Match])
 
@@ -82,23 +82,23 @@ public extension Consumer {
         public var location: Location? { return _location }
 
         /// Transform generic AST to application-specific form
-        public func transform(_ fn: Transform) rethrows -> Any? {
+        public func transform(_ fn: Transform) rethrows -> Sendable? {
             return try _transform(fn)
         }
     }
 
     /// Opaque type used for efficient character matching
-    struct Charset: Hashable {
+    struct Charset: Hashable, Sendable {
         fileprivate let characterSet: CharacterSet
         let inverted: Bool
     }
 
     /// Closure for transforming a Match to an application-specific data type
-    typealias Transform = (_ name: Label, _ values: [Any]) throws -> Any?
+    typealias Transform = (_ name: Label, _ values: [Sendable]) throws -> (Sendable)?
 
     /// A Parsing error
     struct Error: Swift.Error {
-        public indirect enum Kind {
+        public indirect enum Kind: Sendable {
             case expected(Consumer)
             case unexpectedToken
             case custom(Swift.Error)
@@ -784,7 +784,7 @@ private extension Consumer.Match {
         }
     }
 
-    func _transform(_ fn: Consumer.Transform) rethrows -> Any? {
+    func _transform(_ fn: Consumer.Transform) rethrows -> Sendable? {
         // TODO: warn if no matches are labelled, as transform won't work
         do {
             switch self {
@@ -885,3 +885,7 @@ private func escapeString<T: StringProtocol>(_ string: T) -> String {
     }
     return result + "'"
 }
+
+#if swift(<5.6)
+extension CharacterSet: @unchecked Sendable {}
+#endif

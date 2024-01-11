@@ -3,7 +3,7 @@ import Foundation
 /**
  A [feature identifier](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2) identifies a `Feature` object.
  */
-public enum FeatureIdentifier: Hashable {
+public enum FeatureIdentifier: Hashable, Sendable {
     /// A string.
     case string(_ string: String)
     

@@ -1,0 +1,50 @@
+version: 2.1
+
+jobs:
+  build_and_test_linux:
+    docker:
+      - image: swift:latest
+    steps:
+      - checkout
+      - run:
+          name: "Build"
+          command: swift build
+      - run:
+          name: "Test"
+          command: swift test
+  build_and_test_macos:
+    parameters:
+      xcode_version:
+        type: string
+    macos:
+      xcode: << parameters.xcode_version >>
+    steps:
+      - checkout
+      - run:
+          name: "Build"
+          command: swift build
+      - run:
+          name: "Test"
+          command: swift test
+  build_for_library_evolution:
+    macos:
+      xcode: 15.1.0
+    steps:
+      - checkout
+      - run:
+          name: "Build for library evolution"
+          command: |
+           swift build \
+             -c release \
+             -Xswiftc -emit-module-interface \
+             -Xswiftc -enable-library-evolution
+
+workflows:
+  build-and-test:
+    jobs:
+      - build_for_library_evolution
+      - build_and_test_linux
+      - build_and_test_macos:
+          matrix:
+            parameters:
+              xcode_version: [13.4.1, 14.3.1, 15.1.0]

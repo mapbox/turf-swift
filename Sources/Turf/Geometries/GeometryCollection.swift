@@ -6,7 +6,7 @@ import CoreLocation
 /**
  A [GeometryCollection geometry](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.8) is a heterogeneous collection of `Geometry` objects that are related.
  */
-public struct GeometryCollection: Equatable, ForeignMemberContainer {
+public struct GeometryCollection: Equatable, ForeignMemberContainer, Sendable {
     /// The geometries contained by the geometry collection.
     public var geometries: [Geometry]
     

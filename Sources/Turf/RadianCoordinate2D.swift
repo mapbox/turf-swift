@@ -12,7 +12,7 @@ public typealias RadianDistance = Double
 /**
  A coordinate pair measured in radians, as opposed to `LocationCoordinate2D`, which is measured in degrees of arc.
  */
-public struct RadianCoordinate2D {
+public struct RadianCoordinate2D: Sendable {
     /// The latitude measured in radians.
     private(set) var latitude: LocationRadians
     
