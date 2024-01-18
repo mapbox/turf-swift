@@ -26,6 +26,23 @@ jobs:
       - run:
           name: "Test"
           command: swift test
+  test_simulator:
+    parameters:
+      destination:
+        type: string
+    macos:
+      xcode: 15.2.0
+    resource_class: macos.m1.medium.gen1
+    steps:
+      - checkout
+      - run:
+          name: "Test << parameters.destination >>"
+          command: |
+            xcodebuild test \
+              -scheme Turf \
+              -destination "<< parameters.destination >>" \
+              -derivedDataPath build
+
   build_for_library_evolution:
     macos:
       xcode: 15.1.0
@@ -47,4 +64,10 @@ workflows:
       - build_and_test_macos:
           matrix:
             parameters:
-              xcode_version: [13.4.1, 14.3.1, 15.1.0]
+              xcode_version: [14.3.1, 15.1.0]
+      - test_simulator:
+          matrix:
+            parameters:
+              destination:
+                - "platform=visionOS Simulator,OS=1.0,name=Apple Vision Pro"
+                - "platform=iOS Simulator,OS=17.2,name=iPhone 15"
