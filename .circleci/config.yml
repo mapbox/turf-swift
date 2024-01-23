@@ -42,6 +42,14 @@ jobs:
               -scheme Turf \
               -destination "<< parameters.destination >>" \
               -derivedDataPath build
+  pod_spec_lint:
+    macos:
+      xcode: 15.2.0
+    steps:
+    - checkout
+    - run:
+        name: "Lint podspec"
+        command: pod spec lint
 
   build_for_library_evolution:
     macos:
@@ -71,3 +79,4 @@ workflows:
               destination:
                 - "platform=visionOS Simulator,OS=1.0,name=Apple Vision Pro"
                 - "platform=iOS Simulator,OS=17.2,name=iPhone 15"
+      - pod_spec_lint
