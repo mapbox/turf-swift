@@ -10,7 +10,7 @@
 [![CocoaPods](https://img.shields.io/cocoapods/v/Turf.svg)](https://cocoapods.org/pods/Turf/) &nbsp;&nbsp;&nbsp;
 [![SPM compatible](https://img.shields.io/badge/SPM-compatible-4BC51D.svg?style=flat)](https://swift.org/package-manager/) &nbsp;&nbsp;&nbsp;
 
-A [spatial analysis](http://en.wikipedia.org/wiki/Spatial_analysis) library written in Swift for native iOS, macOS, tvOS, watchOS, and Linux applications, ported from [Turf.js](https://github.com/Turfjs/turf/).
+A [spatial analysis](http://en.wikipedia.org/wiki/Spatial_analysis) library written in Swift for native iOS, macOS, tvOS, watchOS, visionOS, and Linux applications, ported from [Turf.js](https://github.com/Turfjs/turf/).
 
 ## Requirements
 
@@ -20,7 +20,7 @@ Turf requires Xcode 14.1 or above and supports the following minimum deployment 
 * macOS 10.13 (High Sierra) and above
 * tvOS 11.0 and above
 * watchOS 4.0 and above
-* visionOS 1.0 and above
+* visionOS 1.0 and above (not supported via CocoaPods)
 
 Alternatively, you can incorporate Turf into a command line tool without Xcode on any platform that [Swift](https://swift.org/download/) supports, including Linux.
 
