@@ -30,7 +30,7 @@ jazzy \
     --config docs/jazzy.yml \
     --sdk macosx \
     --module-version ${SHORT_VERSION} \
-    --github-file-prefix "https://github.com/mapbox/mapbox-directions-swift/tree/${BRANCH}" \
+    --github-file-prefix "https://github.com/mapbox/turf-swift/tree/${BRANCH}" \
     --readme README.md \
     --root-url "https://mapbox.github.io/turf-swift/${RELEASE_VERSION}/" \
     --output ${OUTPUT} \
