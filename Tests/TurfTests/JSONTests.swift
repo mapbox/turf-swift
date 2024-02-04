@@ -48,6 +48,24 @@ class JSONTests: XCTestCase {
         XCTAssertEqual(JSONObject(rawValue: ["set": Set(["Get"])]), ["set": nil])
     }
     
+    func testConversion() {
+        XCTAssertEqual(JSONValue(String("Jason")), .string("Jason"))
+        XCTAssertEqual(JSONValue(Int32.max), .number(Double(Int32.max)))
+        XCTAssertEqual(JSONValue(Float(0.0).nextUp), .number(Double(Float(0.0).nextUp)))
+        XCTAssertEqual(JSONValue(0.0.nextUp), .number(0.0.nextUp))
+        XCTAssertEqual(JSONValue(Bool(true)), .boolean(true))
+        XCTAssertEqual(JSONValue(Bool(false)), .boolean(false))
+        
+        let array = "Jason".map(String.init) + [nil]
+        XCTAssertEqual(JSONValue(array), .array(["J", "a", "s", "o", "n", nil]))
+        let dictionary = ["string": "Jason", "null": nil]
+        XCTAssertEqual(JSONValue(dictionary), .object(["string": "Jason", "null": nil]))
+        
+        XCTAssertEqual(JSONArray("Jason".map(\.description)), ["J", "a", "s", "o", "n"])
+        XCTAssertEqual(JSONArray(array), ["J", "a", "s", "o", "n", nil])
+        XCTAssertEqual(JSONObject(dictionary), ["string": "Jason", "null": nil])
+    }
+    
     func testLiterals() throws {
         if case let JSONValue.string(string) = "Jason" {
             XCTAssertEqual(string, "Jason")
