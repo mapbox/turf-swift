@@ -37,15 +37,15 @@ class JSONTests: XCTestCase {
         
         XCTAssertNil(JSONValue(rawValue: NSNull()))
         XCTAssertEqual(JSONValue(rawValue: [NSNull()]), .array([nil]))
-        XCTAssertEqual(JSONArray(rawValue: [NSNull()]), [nil])
+        XCTAssertEqual(JSONArray(turfRawValue: [NSNull()]), [nil])
         XCTAssertEqual(JSONValue(rawValue: ["NSNull": NSNull()]), .object(["NSNull": nil]))
-        XCTAssertEqual(JSONObject(rawValue: ["NSNull": NSNull()]), ["NSNull": nil])
+        XCTAssertEqual(JSONObject(turfRawValue: ["NSNull": NSNull()]), ["NSNull": nil])
         
         XCTAssertNil(JSONValue(rawValue: Set(["Get"])))
         XCTAssertEqual(JSONValue(rawValue: [Set(["Get"])]), .array([nil]))
-        XCTAssertEqual(JSONArray(rawValue: [Set(["Get"])]), [nil])
+        XCTAssertEqual(JSONArray(turfRawValue: [Set(["Get"])]), [nil])
         XCTAssertEqual(JSONValue(rawValue: ["set": Set(["Get"])]), .object(["set": nil]))
-        XCTAssertEqual(JSONObject(rawValue: ["set": Set(["Get"])]), ["set": nil])
+        XCTAssertEqual(JSONObject(turfRawValue: ["set": Set(["Get"])]), ["set": nil])
     }
     
     func testLiterals() throws {
