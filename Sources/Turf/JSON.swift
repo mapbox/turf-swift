@@ -103,11 +103,11 @@ extension JSONValue: RawRepresentable {
             /// can succeed when the NSNumber's value is 0 or 1 even
             /// when its objCType is not 'c'.
             self = .boolean(boolean)
-        } else if let rawArray = rawValue as? JSONArray.RawValue,
-                  let array = JSONArray(rawValue: rawArray) {
+        } else if let rawArray = rawValue as? JSONArray.TurfRawValue,
+                  let array = JSONArray(turfRawValue: rawArray) {
             self = .array(array)
-        } else if let rawObject = rawValue as? JSONObject.RawValue,
-                  let object = JSONObject(rawValue: rawObject) {
+        } else if let rawObject = rawValue as? JSONObject.TurfRawValue,
+                  let object = JSONObject(turfRawValue: rawObject) {
             self = .object(object)
         } else {
             return nil
@@ -123,9 +123,9 @@ extension JSONValue: RawRepresentable {
         case let .number(value):
             return value
         case let .object(value):
-            return value.rawValue
+            return value.turfRawValue
         case let .array(value):
-            return value.rawValue
+            return value.turfRawValue
         }
     }
 }
@@ -135,14 +135,14 @@ extension JSONValue: RawRepresentable {
  */
 public typealias JSONArray = [JSONValue?]
 
-extension JSONArray: RawRepresentable {
-    public typealias RawValue = [Any?]
-    
-    public init?(rawValue values: RawValue) {
+extension JSONArray {
+    public typealias TurfRawValue = [Any?]
+
+    public init?(turfRawValue values: TurfRawValue) {
         self = values.map(JSONValue.init(rawValue:))
     }
-    
-    public var rawValue: RawValue {
+
+    public var turfRawValue: TurfRawValue {
         return map { $0?.rawValue }
     }
 }
@@ -152,14 +152,14 @@ extension JSONArray: RawRepresentable {
  */
 public typealias JSONObject = [String: JSONValue?]
 
-extension JSONObject: RawRepresentable {
-    public typealias RawValue = [String: Any?]
+extension JSONObject {
+    public typealias TurfRawValue = [String: Any?]
     
-    public init?(rawValue: RawValue) {
-        self = rawValue.mapValues { $0.flatMap(JSONValue.init(rawValue:)) }
+    public init?(turfRawValue: TurfRawValue) {
+        self = turfRawValue.mapValues { $0.flatMap(JSONValue.init(rawValue:)) }
     }
     
-    public var rawValue: RawValue {
+    public var turfRawValue: TurfRawValue {
         return mapValues { $0?.rawValue }
     }
 }
