@@ -8,8 +8,17 @@ import CoreLocation
  */
 public struct LineString: Equatable, ForeignMemberContainer {
     /// The positions at which the line string is located.
-    public var coordinates: [LocationCoordinate2D]
-    
+    public var coordinates: [LocationCoordinate2D] {
+        get {
+            codableCoordinates.decodedCoordinates
+        }
+        set {
+            codableCoordinates = newValue.codableCoordinates
+        }
+    }
+
+    private var codableCoordinates: [LocationCoordinate2DCodable]
+
     public var foreignMembers: JSONObject = [:]
     
     /**
@@ -20,7 +29,7 @@ public struct LineString: Equatable, ForeignMemberContainer {
      - parameter coordinates: The positions at which the line string is located.
      */
     public init(_ coordinates: [LocationCoordinate2D]) {
-        self.coordinates = coordinates
+        self.codableCoordinates = coordinates.codableCoordinates
     }
     
     /**
@@ -31,7 +40,7 @@ public struct LineString: Equatable, ForeignMemberContainer {
      - parameter ring: The linear ring coincident to the line string.
      */
     public init(_ ring: Ring) {
-        self.coordinates = ring.coordinates
+        self.init(ring.coordinates)
     }
     
     /**
@@ -286,9 +295,9 @@ extension LineString {
         
         var coords = ends.0.index == ends.1.index ? [] : Array(coordinates[ends.0.index + 1...ends.1.index])
         coords.insert(ends.0.coordinate, at: 0)
-        if coords.last != ends.1.coordinate {
-            coords.append(ends.1.coordinate)
-        }
+//        if coords.last != ends.1.coordinate {
+//            coords.append(ends.1.coordinate)
+//        }
         
         return LineString(coords)
     }

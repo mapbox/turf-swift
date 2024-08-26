@@ -124,7 +124,7 @@ extension LocationDegrees {
     }
 }
 
-struct LocationCoordinate2DCodable: Codable {
+struct LocationCoordinate2DCodable: Codable, Equatable {
     var latitude: LocationDegrees
     var longitude: LocationDegrees
     var decodedCoordinates: LocationCoordinate2D {
@@ -191,17 +191,13 @@ extension Array where Element == [[LocationCoordinate2D]] {
     }
 }
 
-extension LocationCoordinate2D: Equatable {
+extension LocationCoordinate2D {
     
     /// Instantiates a LocationCoordinate2D from a RadianCoordinate2D
     public init(_ radianCoordinate: RadianCoordinate2D) {
         self.init(latitude: radianCoordinate.latitude.toDegrees(), longitude: radianCoordinate.longitude.toDegrees())
     }
-    
-    public static func ==(lhs: LocationCoordinate2D, rhs: LocationCoordinate2D) -> Bool {
-        return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
-    }
-    
+
     /**
      Returns the direction from the receiver to the given coordinate.
      

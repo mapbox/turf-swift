@@ -8,8 +8,18 @@ import CoreLocation
  */
 public struct MultiLineString: Equatable, ForeignMemberContainer {
     /// The positions at which the multi–line string is located. Each nested array corresponds to one line string.
-    public var coordinates: [[LocationCoordinate2D]]
-    
+    public var coordinates: [[LocationCoordinate2D]] {
+        get {
+            codableCoordinates.decodedCoordinates
+        }
+        set {
+            codableCoordinates = newValue.codableCoordinates
+        }
+    }
+
+    private var codableCoordinates: [[LocationCoordinate2DCodable]]
+
+
     public var foreignMembers: JSONObject = [:]
     
     /**
@@ -18,7 +28,7 @@ public struct MultiLineString: Equatable, ForeignMemberContainer {
      - parameter coordinates: The positions at which the multi–line string is located. Each nested array corresponds to one line string.
      */
     public init(_ coordinates: [[LocationCoordinate2D]]) {
-        self.coordinates = coordinates
+        self.codableCoordinates = coordinates.codableCoordinates
     }
     
     /**
@@ -29,7 +39,7 @@ public struct MultiLineString: Equatable, ForeignMemberContainer {
      - parameter polygon: The polygon whose linear rings are coincident to the multi–line string.
      */
     public init(_ polygon: Polygon) {
-        self.coordinates = polygon.coordinates
+        self.init(polygon.coordinates)
     }
 }
 

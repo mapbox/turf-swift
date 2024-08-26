@@ -8,7 +8,16 @@ import CoreLocation
  */
 public struct MultiPoint: Equatable, ForeignMemberContainer {
     /// The positions at which the multipoint is located.
-    public var coordinates: [LocationCoordinate2D]
+    public var coordinates: [LocationCoordinate2D] {
+        get {
+            codableCoordinates.decodedCoordinates
+        }
+        set {
+            codableCoordinates = newValue.codableCoordinates
+        }
+    }
+
+    private var codableCoordinates: [LocationCoordinate2DCodable]
     
     public var foreignMembers: JSONObject = [:]
     
@@ -18,7 +27,7 @@ public struct MultiPoint: Equatable, ForeignMemberContainer {
      - parameter coordinates: The positions at which the multipoint is located.
      */
     public init(_ coordinates: [LocationCoordinate2D]) {
-        self.coordinates = coordinates
+        self.codableCoordinates = coordinates.codableCoordinates
     }
 }
 
