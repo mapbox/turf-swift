@@ -58,6 +58,24 @@ extension FeatureIdentifier: RawRepresentable {
     }
 }
 
+extension FeatureIdentifier {
+    /// A string.
+    public var string: String? {
+        if case let .string(value) = self {
+            return value
+        }
+        return nil
+    }
+    
+    /// A floating-point number.
+    public var number: Double? {
+        if case let .number(value) = self {
+            return value
+        }
+        return nil
+    }
+}
+
 extension FeatureIdentifier: ExpressibleByStringLiteral {
     public init(stringLiteral value: StringLiteralType) {
         self = .init(value)

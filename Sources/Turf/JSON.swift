@@ -62,6 +62,48 @@ public enum JSONValue: Hashable, Sendable {
     }
 }
 
+extension JSONValue {
+    /// A string value, if the JSON value represents a string.
+    public var string: String? {
+        if case let .string(value) = self {
+            return value
+        }
+        return nil
+    }
+    
+    /// A floating-point number value, if the JSON value represents a number.
+    public var number: Double? {
+        if case let .number(value) = self {
+            return value
+        }
+        return nil
+    }
+    
+    /// A Boolean value, if the JSON value represents a Boolean.
+    public var boolean: Bool? {
+        if case let .boolean(value) = self {
+            return value
+        }
+        return nil
+    }
+    
+    /// An array of JSON values, if the JSON value represents an array.
+    public var array: JSONArray? {
+        if case let .array(value) = self {
+            return value
+        }
+        return nil
+    }
+    
+    /// An object containing JSON values keyed by strings, if the JSON value represents an object.
+    public var object: JSONObject? {
+        if case let .object(value) = self {
+            return value
+        }
+        return nil
+    }
+}
+
 extension JSONValue: RawRepresentable {
     public typealias RawValue = Any
     

@@ -36,6 +36,32 @@ public enum GeoJSONObject: Equatable, Sendable {
     }
 }
 
+extension GeoJSONObject {
+    /// A geometry object.
+    public var geometry: Geometry? {
+        if case let .geometry(geometry) = self {
+            return geometry
+        }
+        return nil
+    }
+    
+    /// A feature object.
+    public var feature: Feature? {
+        if case let .feature(feature) = self {
+            return feature
+        }
+        return nil
+    }
+    
+    /// A feature collection object.
+    public var featureCollection: FeatureCollection? {
+        if case let .featureCollection(featureCollection) = self {
+            return featureCollection
+        }
+        return nil
+    }
+}
+
 extension GeoJSONObject: Codable {
     private enum CodingKeys: String, CodingKey {
         case kind = "type"

@@ -270,4 +270,18 @@ class GeoJSONTests: XCTestCase {
         try testForeignMemberCoding(in: .feature(.init(geometry: nil)))
         try testForeignMemberCoding(in: .featureCollection(.init(features: [])))
     }
+
+    func testConvenienceAccessors() {
+        let point = Point(LocationCoordinate2D(latitude: 0, longitude: 1))
+        XCTAssertEqual(GeoJSONObject.geometry(point.geometry).geometry, point.geometry)
+        XCTAssertEqual(GeoJSONObject.geometry(point.geometry).feature, nil)
+     
+        let feature = Feature(geometry: point)
+        XCTAssertEqual(GeoJSONObject.feature(feature).feature, feature)
+        XCTAssertEqual(GeoJSONObject.feature(feature).geometry, nil)
+        
+        let featureCollection = FeatureCollection(features: [feature])
+        XCTAssertEqual(GeoJSONObject.featureCollection(featureCollection).featureCollection, featureCollection)   
+        XCTAssertEqual(GeoJSONObject.featureCollection(featureCollection).geometry, nil)
+    }
 }
