@@ -91,6 +91,78 @@ extension Geometry: Codable {
     }
 }
 
+extension Geometry {
+    /// A single position.
+    public var point: Point? {
+        if case let .point(point) = self {
+            return point
+        } else {
+            return nil
+        }
+
+    }
+
+    /// A collection of two or more positions, each position connected to the next position linearly.
+    public var lineString: LineString? {
+        if case let .lineString(lineString) = self {
+            return lineString
+        } else {
+            return nil
+        }
+
+    }
+
+    /// Conceptually, a collection of `Ring`s that form a single connected geometry.
+    public var polygon: Polygon? {
+        if case let .polygon(polygon) = self {
+            return polygon
+        } else {
+            return nil
+        }
+
+    }
+
+    /// A collection of positions that are disconnected but related.
+    public var multiPoint: MultiPoint? {
+        if case let .multiPoint(multiPoint) = self {
+            return multiPoint
+        } else {
+            return nil
+        }
+
+    }
+
+    /// A collection of `LineString` geometries that are disconnected but related.
+    public var multiLineString: MultiLineString? {
+        if case let .multiLineString(multiLineString) = self {
+            return multiLineString
+        } else {
+            return nil
+        }
+
+    }
+
+    /// A collection of `Polygon` geometries that are disconnected but related.
+    public var multiPolygon: MultiPolygon? {
+        if case let .multiPolygon(multiPolygon) = self {
+            return multiPolygon
+        } else {
+            return nil
+        }
+
+    }
+
+    /// A heterogeneous collection of geometries that are related.
+    public var geometryCollection: GeometryCollection? {
+        if case let .geometryCollection(geometryCollection) = self {
+            return geometryCollection
+        } else {
+            return nil
+        }
+
+    }
+}
+
 /**
  A type that can be represented as a `Geometry` instance.
  */
