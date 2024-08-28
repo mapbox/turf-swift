@@ -1,0 +1,362 @@
+{
+  "warnings": [
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 36,
+      "symbol": "Consumer",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 39,
+      "symbol": "Consumer.charset(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 43,
+      "symbol": "Consumer.sequence(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 44,
+      "symbol": "Consumer.optional(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 45,
+      "symbol": "Consumer.oneOrMore(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 46,
+      "symbol": "Consumer.not(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 50,
+      "symbol": "Consumer.discard(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 51,
+      "symbol": "Consumer.replace(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 55,
+      "symbol": "Consumer.reference(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 60,
+      "symbol": "Consumer",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 72,
+      "symbol": "Consumer.Location.range",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 73,
+      "symbol": "Consumer.Location.offset",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 78,
+      "symbol": "Consumer.Match.token(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 79,
+      "symbol": "Consumer.Match.node(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 101,
+      "symbol": "Consumer.Error.Kind",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 102,
+      "symbol": "Consumer.Error.Kind.expected(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 103,
+      "symbol": "Consumer.Error.Kind.unexpectedToken",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 104,
+      "symbol": "Consumer.Error.Kind.custom(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 107,
+      "symbol": "Consumer.Error.kind",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 108,
+      "symbol": "Consumer.Error.location",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 109,
+      "symbol": "Consumer.Error.remaining",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 117,
+      "symbol": "Consumer",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 156,
+      "symbol": "Consumer",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 191,
+      "symbol": "Consumer",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 213,
+      "symbol": "Consumer",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 655,
+      "symbol": "Consumer.Location.at(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/Consumer/Consumer.swift",
+      "line": 687,
+      "symbol": "Consumer.Charset.ranges",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/JSON.swift",
+      "line": 181,
+      "symbol": "JSONArray.TurfRawValue",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/JSON.swift",
+      "line": 183,
+      "symbol": "JSONArray.init(turfRawValue:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/JSON.swift",
+      "line": 187,
+      "symbol": "JSONArray.turfRawValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/JSON.swift",
+      "line": 198,
+      "symbol": "JSONObject.TurfRawValue",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/JSON.swift",
+      "line": 200,
+      "symbol": "JSONObject.init(turfRawValue:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/JSON.swift",
+      "line": 204,
+      "symbol": "JSONObject.turfRawValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/WKT.swift",
+      "line": 7,
+      "symbol": "WKTConvertible.wkt",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/WKT.swift",
+      "line": 8,
+      "symbol": "WKTConvertible.init(wkt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/WKT.swift",
+      "line": 12,
+      "symbol": "Point.wkt",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/WKT.swift",
+      "line": 16,
+      "symbol": "Point.init(wkt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/WKT.swift",
+      "line": 22,
+      "symbol": "MultiPoint.wkt",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/WKT.swift",
+      "line": 26,
+      "symbol": "MultiPoint.init(wkt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/WKT.swift",
+      "line": 32,
+      "symbol": "LineString.wkt",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/WKT.swift",
+      "line": 36,
+      "symbol": "LineString.init(wkt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/WKT.swift",
+      "line": 42,
+      "symbol": "MultiLineString.wkt",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/WKT.swift",
+      "line": 46,
+      "symbol": "MultiLineString.init(wkt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/WKT.swift",
+      "line": 52,
+      "symbol": "Polygon.wkt",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/WKT.swift",
+      "line": 56,
+      "symbol": "Polygon.init(wkt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/WKT.swift",
+      "line": 62,
+      "symbol": "MultiPolygon.wkt",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/WKT.swift",
+      "line": 66,
+      "symbol": "MultiPolygon.init(wkt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/WKT.swift",
+      "line": 72,
+      "symbol": "Geometry.wkt",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/WKT.swift",
+      "line": 91,
+      "symbol": "Geometry.init(wkt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/WKT.swift",
+      "line": 98,
+      "symbol": "GeometryCollection.wkt",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Volumes/mapbox/turf-swift/Sources/Turf/WKT.swift",
+      "line": 120,
+      "symbol": "GeometryCollection.init(wkt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Volumes/mapbox/turf-swift"
+}
