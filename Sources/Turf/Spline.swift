@@ -3,13 +3,12 @@ import Foundation
 import CoreLocation
 #endif
 
-
 struct SplinePoint {
     let x: LocationDegrees
     let y: LocationDegrees
     let z: LocationDegrees
     
-    init(coordinate: LocationCoordinate2D) {
+    init(coordinate: TurfLocationCoordinate2D) {
         x = coordinate.longitude
         y = coordinate.latitude
         z = 0
@@ -21,8 +20,8 @@ struct SplinePoint {
         self.z = z
     }
     
-    var coordinate: LocationCoordinate2D {
-        return LocationCoordinate2D(latitude: y, longitude: x)
+    var coordinate: TurfLocationCoordinate2D {
+        return TurfLocationCoordinate2D(latitude: y, longitude: x)
     }
 }
 

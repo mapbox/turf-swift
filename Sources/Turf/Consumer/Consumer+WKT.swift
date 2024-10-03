@@ -253,67 +253,67 @@ struct WKTParser {
                   coords.count == 2 else {
                 throw WKTError.coordinatesParsingFailed(values)
             }
-            return LocationCoordinate2D(latitude: coords[1],
+            return TurfLocationCoordinate2D(latitude: coords[1],
                                         longitude: coords[0])
         case .coordinatesArray:
-            guard let coords = values as? [LocationCoordinate2D] else {
+            guard let coords = values as? [TurfLocationCoordinate2D] else {
                 throw WKTError.coordinatesParsingFailed(values)
             }
             return coords
         case .coordinatesArray2D:
-            guard let coords = values as? [[LocationCoordinate2D]] else {
+            guard let coords = values as? [[TurfLocationCoordinate2D]] else {
                 throw WKTError.coordinatesParsingFailed(values)
             }
             return coords
         case .coordinatesArray3D:
-            guard let coords = values as? [[[LocationCoordinate2D]]] else {
+            guard let coords = values as? [[[TurfLocationCoordinate2D]]] else {
                 throw WKTError.coordinatesParsingFailed(values)
             }
             return coords
         case .point:
             guard values.count > 1 else { return nil }
-            guard let coords = values[1] as? LocationCoordinate2D else {
+            guard let coords = values[1] as? TurfLocationCoordinate2D else {
                 throw WKTError.coordinatesParsingFailed(values)
             }
-            return Point(coords)
+            return TurfPoint(coords)
         case .multiPoint:
             guard values.count > 1 else { return nil }
-            let coords = values.suffix(from: 1).compactMap { $0 as? LocationCoordinate2D }
+            let coords = values.suffix(from: 1).compactMap { $0 as? TurfLocationCoordinate2D }
             guard coords.count == values.count - 1 else {
                 throw WKTError.coordinatesParsingFailed(values)
             }
-            return MultiPoint(coords)
+            return TurfMultiPoint(coords)
         case .lineString:
             guard values.count > 1 else { return nil }
-            guard let coords = values[1] as? [LocationCoordinate2D] else {
+            guard let coords = values[1] as? [TurfLocationCoordinate2D] else {
                 throw WKTError.coordinatesParsingFailed(values)
             }
-            return LineString(coords)
+            return TurfLineString(coords)
         case .multiLineString:
             guard values.count > 1 else { return nil }
-            guard let coords = values[1] as? [[LocationCoordinate2D]] else {
+            guard let coords = values[1] as? [[TurfLocationCoordinate2D]] else {
                 throw WKTError.coordinatesParsingFailed(values)
             }
-            return MultiLineString(coords)
+            return TurfMultiLineString(coords)
         case .polygon:
             guard values.count > 1 else { return nil }
-            guard let coords = values[1] as? [[LocationCoordinate2D]] else {
+            guard let coords = values[1] as? [[TurfLocationCoordinate2D]] else {
                 throw WKTError.coordinatesParsingFailed(values)
             }
-            return Polygon(coords)
+            return TurfPolygon(coords)
         case .multiPolygon:
             guard values.count > 1 else { return nil }
-            guard let coords = values[1] as? [[[LocationCoordinate2D]]] else {
+            guard let coords = values[1] as? [[[TurfLocationCoordinate2D]]] else {
                 throw WKTError.coordinatesParsingFailed(values)
             }
-            return MultiPolygon(coords)
+            return TurfMultiPolygon(coords)
         case .geometryCollection:
             guard values.count > 1 else { return nil }
             let geometries = values.suffix(from: 1).compactMap { ($0 as? GeometryConvertible)?.geometry }
             guard geometries.count == values.count - 1 else {
                 throw WKTError.geometriesParsingFailed(values)
             }
-            return GeometryCollection(geometries: geometries)
+            return TurfGeometryCollection(geometries: geometries)
         case .object:
             return values.first
         }

@@ -3,12 +3,16 @@ import Foundation
 import CoreLocation
 #endif
 
+#if !MAPBOX_COMMON_WITH_TURF_SWIFT_LIBRARY
+public typealias Polygon = TurfPolygon
+#endif
+
 /**
- A [Polygon geometry](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.6) is conceptually a collection of `Ring`s that form a single connected geometry.
+ A [TurfPolygon geometry](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.6) is conceptually a collection of `TurfRing`s that form a single connected geometry.
  */
-public struct Polygon: Equatable, ForeignMemberContainer {
+public struct TurfPolygon: Equatable, ForeignMemberContainer {
     /// The positions at which the polygon is located. Each nested array corresponds to one linear ring.
-    public var coordinates: [[LocationCoordinate2D]]
+    public var coordinates: [[TurfLocationCoordinate2D]]
     
     public var foreignMembers: JSONObject = [:]
     
@@ -19,7 +23,7 @@ public struct Polygon: Equatable, ForeignMemberContainer {
      
      - parameter coordinates: The positions at which the polygon is located. Each nested array corresponds to one linear ring.
      */
-    public init(_ coordinates: [[LocationCoordinate2D]]) {
+    public init(_ coordinates: [[TurfLocationCoordinate2D]]) {
         self.coordinates = coordinates
     }
     
@@ -29,7 +33,7 @@ public struct Polygon: Equatable, ForeignMemberContainer {
      - parameter outerRing: The outer linear ring.
      - parameter innerRings: The inner linear rings that define “holes” in the polygon.
      */
-    public init(outerRing: Ring, innerRings: [Ring] = []) {
+    public init(outerRing: TurfRing, innerRings: [TurfRing] = []) {
         self.coordinates = ([outerRing] + innerRings).map { $0.coordinates }
     }
 
@@ -45,11 +49,11 @@ public struct Polygon: Equatable, ForeignMemberContainer {
                            The recommended amount is 64.
      - Returns: A polygon shape which approximates a circle.
      */
-    public init(center: LocationCoordinate2D, radius: LocationDistance, vertices: Int) {
+    public init(center: TurfLocationCoordinate2D, radius: LocationDistance, vertices: Int) {
         // The first and last coordinates in a polygon must be identical,
         // which is why we're using the inclusive range operator in this case.
         // Ported from https://github.com/Turfjs/turf/blob/17002ccd57e04e84ddb38d7e3ac8ede35b019c58/packages/turf-circle/index.ts
-        let coordinates = (0...vertices).map { ( step ) -> LocationCoordinate2D in
+        let coordinates = (0...vertices).map { ( step ) -> TurfLocationCoordinate2D in
             let bearing = fabs(LocationDirection(step * -360 / vertices))
             return center.coordinate(at: radius, facing: bearing)
         }
@@ -58,7 +62,7 @@ public struct Polygon: Equatable, ForeignMemberContainer {
     }
 }
 
-extension Polygon: Codable {
+extension TurfPolygon: Codable {
     enum CodingKeys: String, CodingKey {
         case kind = "type"
         case coordinates
@@ -84,16 +88,16 @@ extension Polygon: Codable {
     }
 }
 
-extension Polygon {
-    /// Representation of `Polygon`s coordinates of inner rings
-    public var innerRings: [Ring] {
-        return Array(coordinates.suffix(from: 1)).map { Ring(coordinates: $0) }
+extension TurfPolygon {
+    /// Representation of `TurfPolygon`s coordinates of inner rings
+    public var innerRings: [TurfRing] {
+        return Array(coordinates.suffix(from: 1)).map { TurfRing(coordinates: $0) }
     }
     
-    /// Representation of `Polygon`s coordinates of outer ring
-    public var outerRing: Ring {
+    /// Representation of `TurfPolygon`s coordinates of outer ring
+    public var outerRing: TurfRing {
         get {
-            return Ring(coordinates: coordinates.first! )
+            return TurfRing(coordinates: coordinates.first! )
         }
     }
     
@@ -118,7 +122,7 @@ extension Polygon {
      - parameter ignoreBoundary: Consider the coordinate to fall within the polygon even if it lies directly on one of the polygon’s linear rings.
      - returns: True if the coordinate falls within the polygon; false otherwise.
      */
-    public func contains(_ coordinate: LocationCoordinate2D, ignoreBoundary: Bool = false) -> Bool {
+    public func contains(_ coordinate: TurfLocationCoordinate2D, ignoreBoundary: Bool = false) -> Bool {
         // Ported from  https://github.com/Turfjs/turf/blob/e53677b0931da9e38bb947da448ee7404adc369d/packages/turf-boolean-point-in-polygon/index.ts#L31-L75
         guard outerRing.contains(coordinate, ignoreBoundary: ignoreBoundary) else {
             return false
@@ -138,27 +142,27 @@ extension Polygon {
      
      - note: The returned polygon may be a degenerate polygon.
      */
-    public func smooth(iterations: Int = 3) -> Polygon {
+    public func smooth(iterations: Int = 3) -> TurfPolygon {
         // Ported from https://github.com/Turfjs/turf/blob/402716a29f6ae16bf3d0220e213e5380cc5a50c4/packages/turf-polygon-smooth/index.js
         var poly = self
-        var tempOutput: [[LocationCoordinate2D]] = [[]];
-        var outCoords: [[LocationCoordinate2D]] = [[]];
+        var tempOutput: [[TurfLocationCoordinate2D]] = [[]];
+        var outCoords: [[TurfLocationCoordinate2D]] = [[]];
 
         (0..<iterations).forEach({ i in
             tempOutput = [[]]
             
             if (i > 0) {
-                poly = Polygon(outCoords);
+                poly = TurfPolygon(outCoords);
             }
 
             processPolygon(poly, &tempOutput);
             outCoords = tempOutput
         })
 
-        return Polygon(outCoords);
+        return TurfPolygon(outCoords);
     }
 
-    private func processPolygon(_ poly: Polygon, _ tempOutput: inout [[LocationCoordinate2D]]) {
+    private func processPolygon(_ poly: TurfPolygon, _ tempOutput: inout [[TurfLocationCoordinate2D]]) {
         var coordIndex = 0
         var prevGeomIndex = 0;
         var geometryIndex = 0;
@@ -179,11 +183,11 @@ extension Polygon {
                 let p0y = currentCoord.longitude;
                 let p1x = p1.latitude;
                 let p1y = p1.longitude;
-                tempOutput[geometryIndex].append(LocationCoordinate2D(
+                tempOutput[geometryIndex].append(TurfLocationCoordinate2D(
                     latitude: 0.75 * p0x + 0.25 * p1x,
                     longitude: 0.75 * p0y + 0.25 * p1y
                 ));
-                tempOutput[geometryIndex].append(LocationCoordinate2D(
+                tempOutput[geometryIndex].append(TurfLocationCoordinate2D(
                     latitude: 0.25 * p0x + 0.75 * p1x,
                     longitude: 0.25 * p0y + 0.75 * p1y
                 ));
@@ -208,9 +212,9 @@ extension Polygon {
      - parameter highestQuality: Excludes the distance-based preprocessing step that leads to highest-quality simplification. High-quality simplification runs considerably slower, so consider how much precision is needed in your application.
      - returns: A simplified polygon.
      */
-    public func simplified(tolerance: Double = 1.0, highestQuality: Bool = false) -> Polygon {
+    public func simplified(tolerance: Double = 1.0, highestQuality: Bool = false) -> TurfPolygon {
         // Ported from https://github.com/Turfjs/turf/blob/89505bf5df83dfde95a96de7c9abcdfd22ce5f63/packages/turf-simplify/lib/simplify.js
-        var copy = Polygon(coordinates)
+        var copy = TurfPolygon(coordinates)
         copy.simplify(tolerance: tolerance, highestQuality: highestQuality)
         return copy
     }
@@ -229,7 +233,7 @@ extension Polygon {
             guard ring.count > 3 else { return ring }
             
             var tolerance = tolerance
-            var simpleRing: [LocationCoordinate2D]
+            var simpleRing: [TurfLocationCoordinate2D]
             repeat {
                 simpleRing = Simplifier.simplify(ring, tolerance: tolerance, highestQuality: highestQuality)
                 
@@ -254,7 +258,7 @@ extension Polygon {
     ///
     /// - Parameter ring: Array of coordinates to be checked
     /// - Returns: true if valid
-    private func checkValidity(ring: [LocationCoordinate2D]) -> Bool {
+    private func checkValidity(ring: [TurfLocationCoordinate2D]) -> Bool {
         guard ring.count >= 3 else { return false }
         // if the last point is the same as the first, it's not a triangle
         return !(
@@ -269,9 +273,9 @@ extension Polygon {
      
      This property is equivalent to the [turf-center](https://turfjs.org/docs/#center) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-center/)).
      */
-    public var center: LocationCoordinate2D? {
+    public var center: TurfLocationCoordinate2D? {
         // This implementation is a port of: https://github.com/Turfjs/turf/blob/89505bf5df83dfde95a96de7c9abcdfd22ce5f63/packages/turf-center/index.ts
-        return BoundingBox(from: outerRing.coordinates)
+        return TurfBoundingBox(from: outerRing.coordinates)
             .map { .init(
                 latitude: ($0.southWest.latitude + $0.northEast.latitude) / 2,
                 longitude: ($0.southWest.longitude + $0.northEast.longitude) / 2
@@ -285,18 +289,18 @@ extension Polygon {
      
      This property is equivalent to the [turf-centroid](https://turfjs.org/docs/#centroid) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-centroid/)).
      */
-    public var centroid: LocationCoordinate2D? {
+    public var centroid: TurfLocationCoordinate2D? {
         // Ported from https://github.com/Turfjs/turf/blob/89505bf5df83dfde95a96de7c9abcdfd22ce5f63/packages/turf-centroid/index.ts
         
         let coordinates = outerRing.coordinates.dropLast()
         guard coordinates.count > 0 else { return nil }
         
         let summed = coordinates
-            .reduce(into: LocationCoordinate2D(latitude: 0, longitude: 0)) { acc, next in
+            .reduce(into: TurfLocationCoordinate2D(latitude: 0, longitude: 0)) { acc, next in
                 acc.latitude += next.latitude
                 acc.longitude += next.longitude
             }
-        return LocationCoordinate2D(
+        return TurfLocationCoordinate2D(
             latitude: summed.latitude / Double(coordinates.count),
             longitude: summed.longitude / Double(coordinates.count)
         ).normalized
@@ -307,7 +311,7 @@ extension Polygon {
      
      This property is equivalent to the [turf-center-of-mass](https://turfjs.org/docs/#centerOfMass) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-center-of-mass/)).
      */
-    public var centerOfMass: LocationCoordinate2D? {
+    public var centerOfMass: TurfLocationCoordinate2D? {
         // Ported from https://github.com/Turfjs/turf/blob/89505bf5df83dfde95a96de7c9abcdfd22ce5f63/packages/turf-center-of-mass/index.ts
         
         // First, we neutralize the feature (set it around coordinates [0,0]) to prevent rounding errors
@@ -315,11 +319,11 @@ extension Polygon {
         guard let center = centroid else { return nil }
         let coordinates = outerRing.coordinates
         let neutralized = coordinates.map {
-            LocationCoordinate2D(latitude: $0.latitude - center.latitude, longitude: $0.longitude - center.longitude)
+            TurfLocationCoordinate2D(latitude: $0.latitude - center.latitude, longitude: $0.longitude - center.longitude)
         }
         
         var signedArea: Double = 0
-        var sum = LocationCoordinate2D(latitude: 0, longitude: 0)
+        var sum = TurfLocationCoordinate2D(latitude: 0, longitude: 0)
         let zipped = zip(neutralized.prefix(upTo: neutralized.count - 1), neutralized.suffix(from: 1))
         for (pi, pj) in zipped {
             let (xi, yi) = (pi.longitude, pi.latitude)
@@ -338,7 +342,7 @@ extension Polygon {
         let areaFactor = 1 / (6 * area)
         
         // final coordinates, adding back values that have been neutralized
-        return LocationCoordinate2D(
+        return TurfLocationCoordinate2D(
             latitude: center.latitude + areaFactor * sum.latitude,
             longitude: center.longitude + areaFactor * sum.longitude
         ).normalized

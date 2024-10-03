@@ -1,53 +1,53 @@
 import XCTest
 import Turf
 #if os(macOS)
-import struct Turf.Polygon
+import struct Turf.TurfPolygon
 #endif
 
 class GeoJSONTests: XCTestCase {
     func testConversion() {
-        let nullIsland = LocationCoordinate2D(latitude: 0, longitude: 0)
-        XCTAssertEqual(Geometry(Point(nullIsland)),
-                       .point(Point(nullIsland)))
-        XCTAssertEqual(Geometry(LineString([nullIsland, nullIsland])),
-                       .lineString(LineString([nullIsland, nullIsland])))
-        XCTAssertEqual(Geometry(Polygon([[nullIsland, nullIsland, nullIsland]])),
-                       .polygon(Polygon([[nullIsland, nullIsland, nullIsland]])))
-        XCTAssertEqual(Geometry(MultiPoint([nullIsland, nullIsland, nullIsland])),
-                       .multiPoint(MultiPoint([nullIsland, nullIsland, nullIsland])))
-        XCTAssertEqual(Geometry(MultiLineString([[nullIsland, nullIsland, nullIsland]])),
-                       .multiLineString(MultiLineString([[nullIsland, nullIsland, nullIsland]])))
-        XCTAssertEqual(Geometry(MultiPolygon([[[nullIsland, nullIsland, nullIsland]]])),
-                       .multiPolygon(MultiPolygon([[[nullIsland, nullIsland, nullIsland]]])))
-        XCTAssertEqual(Geometry(GeometryCollection(geometries: [])),
-                       .geometryCollection(GeometryCollection(geometries: [])))
+        let nullIsland = TurfLocationCoordinate2D(latitude: 0, longitude: 0)
+        XCTAssertEqual(TurfGeometry(TurfPoint(nullIsland)),
+                       .point(TurfPoint(nullIsland)))
+        XCTAssertEqual(TurfGeometry(TurfLineString([nullIsland, nullIsland])),
+                       .lineString(TurfLineString([nullIsland, nullIsland])))
+        XCTAssertEqual(TurfGeometry(TurfPolygon([[nullIsland, nullIsland, nullIsland]])),
+                       .polygon(TurfPolygon([[nullIsland, nullIsland, nullIsland]])))
+        XCTAssertEqual(TurfGeometry(TurfMultiPoint([nullIsland, nullIsland, nullIsland])),
+                       .multiPoint(TurfMultiPoint([nullIsland, nullIsland, nullIsland])))
+        XCTAssertEqual(TurfGeometry(TurfMultiLineString([[nullIsland, nullIsland, nullIsland]])),
+                       .multiLineString(TurfMultiLineString([[nullIsland, nullIsland, nullIsland]])))
+        XCTAssertEqual(TurfGeometry(TurfMultiPolygon([[[nullIsland, nullIsland, nullIsland]]])),
+                       .multiPolygon(TurfMultiPolygon([[[nullIsland, nullIsland, nullIsland]]])))
+        XCTAssertEqual(TurfGeometry(TurfGeometryCollection(geometries: [])),
+                       .geometryCollection(TurfGeometryCollection(geometries: [])))
         
-        XCTAssertEqual(Geometry(Geometry(Geometry(Geometry(Point(nullIsland))))), .point(.init(nullIsland)))
+        XCTAssertEqual(TurfGeometry(TurfGeometry(TurfGeometry(TurfGeometry(TurfPoint(nullIsland))))), .point(.init(nullIsland)))
         
-        XCTAssertEqual(GeoJSONObject(Geometry(Point(nullIsland))), .geometry(.point(.init(nullIsland))))
-        XCTAssertEqual(GeoJSONObject(Feature(geometry: nil)), .feature(.init(geometry: nil)))
-        let nullGeometry: Geometry? = nil
-        XCTAssertEqual(GeoJSONObject(Feature(geometry: nullGeometry)), .feature(.init(geometry: nil)))
-        XCTAssertEqual(GeoJSONObject(FeatureCollection(features: [])), .featureCollection(.init(features: [])))
+        XCTAssertEqual(TurfGeoJSONObject(TurfGeometry(TurfPoint(nullIsland))), .geometry(.point(.init(nullIsland))))
+        XCTAssertEqual(TurfGeoJSONObject(TurfFeature(geometry: nil)), .feature(.init(geometry: nil)))
+        let nullGeometry: TurfGeometry? = nil
+        XCTAssertEqual(TurfGeoJSONObject(TurfFeature(geometry: nullGeometry)), .feature(.init(geometry: nil)))
+        XCTAssertEqual(TurfGeoJSONObject(TurfFeatureCollection(features: [])), .featureCollection(.init(features: [])))
         
-        XCTAssertEqual(GeoJSONObject(GeoJSONObject(GeoJSONObject(GeoJSONObject(Geometry(Point(nullIsland)))))),
+        XCTAssertEqual(TurfGeoJSONObject(TurfGeoJSONObject(TurfGeoJSONObject(TurfGeoJSONObject(TurfGeometry(TurfPoint(nullIsland)))))),
                        .geometry(.point(.init(nullIsland))))
     }
     
     func testPoint() {
-        let coordinate = LocationCoordinate2D(latitude: 10, longitude: 30)
-        let feature = Feature(geometry: .point(.init(coordinate)))
+        let coordinate = TurfLocationCoordinate2D(latitude: 10, longitude: 30)
+        let feature = TurfFeature(geometry: .point(.init(coordinate)))
         
         guard case let .point(point) = feature.geometry else { return XCTFail() }
         XCTAssertEqual(point.coordinates, coordinate)
     }
     
     func testLineString() {
-        let coordinates = [LocationCoordinate2D(latitude: 10, longitude: 30),
-                           LocationCoordinate2D(latitude: 30, longitude: 10),
-                           LocationCoordinate2D(latitude: 40, longitude: 40)]
+        let coordinates = [TurfLocationCoordinate2D(latitude: 10, longitude: 30),
+                           TurfLocationCoordinate2D(latitude: 30, longitude: 10),
+                           TurfLocationCoordinate2D(latitude: 40, longitude: 40)]
         
-        let feature = Feature(geometry: .lineString(.init(coordinates)))
+        let feature = TurfFeature(geometry: .lineString(.init(coordinates)))
         
         guard case let .lineString(lineString) = feature.geometry else { return XCTFail() }
         XCTAssertEqual(lineString.coordinates, coordinates)
@@ -56,33 +56,33 @@ class GeoJSONTests: XCTestCase {
     func testPolygon() {
         let coordinates = [
             [
-                LocationCoordinate2D(latitude: 10, longitude: 30),
-                LocationCoordinate2D(latitude: 40, longitude: 40),
-                LocationCoordinate2D(latitude: 40, longitude: 20),
-                LocationCoordinate2D(latitude: 20, longitude: 10),
-                LocationCoordinate2D(latitude: 10, longitude: 30)
+                TurfLocationCoordinate2D(latitude: 10, longitude: 30),
+                TurfLocationCoordinate2D(latitude: 40, longitude: 40),
+                TurfLocationCoordinate2D(latitude: 40, longitude: 20),
+                TurfLocationCoordinate2D(latitude: 20, longitude: 10),
+                TurfLocationCoordinate2D(latitude: 10, longitude: 30)
             ],
             [
-                LocationCoordinate2D(latitude: 30, longitude: 20),
-                LocationCoordinate2D(latitude: 35, longitude: 35),
-                LocationCoordinate2D(latitude: 20, longitude: 30),
-                LocationCoordinate2D(latitude: 30, longitude: 20)
+                TurfLocationCoordinate2D(latitude: 30, longitude: 20),
+                TurfLocationCoordinate2D(latitude: 35, longitude: 35),
+                TurfLocationCoordinate2D(latitude: 20, longitude: 30),
+                TurfLocationCoordinate2D(latitude: 30, longitude: 20)
             ]
         ]
         
-        let feature = Feature(geometry: .polygon(.init(coordinates)))
+        let feature = TurfFeature(geometry: .polygon(.init(coordinates)))
         
         guard case let .polygon(polygon) = feature.geometry else { return XCTFail() }
         XCTAssertEqual(polygon.coordinates, coordinates)
     }
     
     func testMultiPoint() {
-        let coordinates = [LocationCoordinate2D(latitude: 40, longitude: 10),
-                           LocationCoordinate2D(latitude: 30, longitude: 40),
-                           LocationCoordinate2D(latitude: 20, longitude: 20),
-                           LocationCoordinate2D(latitude: 10, longitude: 30)]
+        let coordinates = [TurfLocationCoordinate2D(latitude: 40, longitude: 10),
+                           TurfLocationCoordinate2D(latitude: 30, longitude: 40),
+                           TurfLocationCoordinate2D(latitude: 20, longitude: 20),
+                           TurfLocationCoordinate2D(latitude: 10, longitude: 30)]
         
-        let feature = Feature(geometry: .multiPoint(.init(coordinates)))
+        let feature = TurfFeature(geometry: .multiPoint(.init(coordinates)))
         
         guard case let .multiPoint(multiPoint) = feature.geometry else { return XCTFail() }
         XCTAssertEqual(multiPoint.coordinates, coordinates)
@@ -91,19 +91,19 @@ class GeoJSONTests: XCTestCase {
     func testMultiLineString() {
         let coordinates = [
             [
-                LocationCoordinate2D(latitude: 10, longitude: 10),
-                LocationCoordinate2D(latitude: 20, longitude: 20),
-                LocationCoordinate2D(latitude: 40, longitude: 10)
+                TurfLocationCoordinate2D(latitude: 10, longitude: 10),
+                TurfLocationCoordinate2D(latitude: 20, longitude: 20),
+                TurfLocationCoordinate2D(latitude: 40, longitude: 10)
             ],
             [
-                LocationCoordinate2D(latitude: 40, longitude: 40),
-                LocationCoordinate2D(latitude: 30, longitude: 30),
-                LocationCoordinate2D(latitude: 20, longitude: 40),
-                LocationCoordinate2D(latitude: 10, longitude: 30)
+                TurfLocationCoordinate2D(latitude: 40, longitude: 40),
+                TurfLocationCoordinate2D(latitude: 30, longitude: 30),
+                TurfLocationCoordinate2D(latitude: 20, longitude: 40),
+                TurfLocationCoordinate2D(latitude: 10, longitude: 30)
             ]
         ]
         
-        let feature = Feature(geometry: .multiLineString(.init(coordinates)))
+        let feature = TurfFeature(geometry: .multiLineString(.init(coordinates)))
         
         guard case let .multiLineString(multiLineString) = feature.geometry else { return XCTFail() }
         XCTAssertEqual(multiLineString.coordinates, coordinates)
@@ -113,56 +113,56 @@ class GeoJSONTests: XCTestCase {
         let coordinates = [
             [
                 [
-                    LocationCoordinate2D(latitude: 40, longitude: 40),
-                    LocationCoordinate2D(latitude: 45, longitude: 20),
-                    LocationCoordinate2D(latitude: 45, longitude: 30),
-                    LocationCoordinate2D(latitude: 40, longitude: 40)
+                    TurfLocationCoordinate2D(latitude: 40, longitude: 40),
+                    TurfLocationCoordinate2D(latitude: 45, longitude: 20),
+                    TurfLocationCoordinate2D(latitude: 45, longitude: 30),
+                    TurfLocationCoordinate2D(latitude: 40, longitude: 40)
                 ]
             ],
             [
                 [
-                    LocationCoordinate2D(latitude: 35, longitude: 20),
-                    LocationCoordinate2D(latitude: 30, longitude: 10),
-                    LocationCoordinate2D(latitude: 10, longitude: 10),
-                    LocationCoordinate2D(latitude: 5, longitude: 30),
-                    LocationCoordinate2D(latitude: 20, longitude: 45),
-                    LocationCoordinate2D(latitude: 35, longitude: 20)
+                    TurfLocationCoordinate2D(latitude: 35, longitude: 20),
+                    TurfLocationCoordinate2D(latitude: 30, longitude: 10),
+                    TurfLocationCoordinate2D(latitude: 10, longitude: 10),
+                    TurfLocationCoordinate2D(latitude: 5, longitude: 30),
+                    TurfLocationCoordinate2D(latitude: 20, longitude: 45),
+                    TurfLocationCoordinate2D(latitude: 35, longitude: 20)
                 ],
                 [
-                    LocationCoordinate2D(latitude: 20, longitude: 30),
-                    LocationCoordinate2D(latitude: 15, longitude: 20),
-                    LocationCoordinate2D(latitude: 25, longitude: 25),
-                    LocationCoordinate2D(latitude: 20, longitude: 30)
+                    TurfLocationCoordinate2D(latitude: 20, longitude: 30),
+                    TurfLocationCoordinate2D(latitude: 15, longitude: 20),
+                    TurfLocationCoordinate2D(latitude: 25, longitude: 25),
+                    TurfLocationCoordinate2D(latitude: 20, longitude: 30)
                 ]
             ]
         ]
         
-        let feature = Feature(geometry: .multiPolygon(.init(coordinates)))
+        let feature = TurfFeature(geometry: .multiPolygon(.init(coordinates)))
         
         guard case let .multiPolygon(multiPolygon) = feature.geometry else { return XCTFail() }
         XCTAssertEqual(multiPolygon.coordinates, coordinates)
     }
     
     func testRawFeatureIdentifierValues() {
-        XCTAssertEqual(FeatureIdentifier(rawValue: "Jason" as NSString)?.rawValue as? String, "Jason")
-        XCTAssertEqual(FeatureIdentifier(rawValue: 42 as NSNumber)?.rawValue as? Double, 42)
-        XCTAssertEqual(FeatureIdentifier(rawValue: 3.1415 as NSNumber)?.rawValue as? Double, 3.1415)
+        XCTAssertEqual(TurfFeatureIdentifier(rawValue: "Jason" as NSString)?.rawValue as? String, "Jason")
+        XCTAssertEqual(TurfFeatureIdentifier(rawValue: 42 as NSNumber)?.rawValue as? Double, 42)
+        XCTAssertEqual(TurfFeatureIdentifier(rawValue: 3.1415 as NSNumber)?.rawValue as? Double, 3.1415)
     }
     
     func testFeatureIdentifierLiterals() {
-        if case let FeatureIdentifier.string(string) = "Jason" {
+        if case let TurfFeatureIdentifier.string(string) = "Jason" {
             XCTAssertEqual(string, "Jason")
         } else {
             XCTFail()
         }
         
-        if case let FeatureIdentifier.number(number) = 42 {
+        if case let TurfFeatureIdentifier.number(number) = 42 {
             XCTAssertEqual(number, 42)
         } else {
             XCTFail()
         }
         
-        if case let FeatureIdentifier.number(number) = 3.1415 {
+        if case let TurfFeatureIdentifier.number(number) = 3.1415 {
             XCTAssertEqual(number, 3.1415)
         } else {
             XCTFail()
@@ -170,7 +170,7 @@ class GeoJSONTests: XCTestCase {
     }
     
     func testFeatureCoding() {
-        let feature = Feature(geometry: nil)
+        let feature = TurfFeature(geometry: nil)
         XCTAssertNil(feature.geometry)
         
         var encodedFeature: Data?
@@ -183,8 +183,8 @@ class GeoJSONTests: XCTestCase {
             XCTAssertNil(geometry)
         }
         
-        var decodedFeature: Feature?
-        XCTAssertNoThrow(decodedFeature = try JSONDecoder().decode(Feature.self, from: encodedData))
+        var decodedFeature: TurfFeature?
+        XCTAssertNoThrow(decodedFeature = try JSONDecoder().decode(TurfFeature.self, from: encodedData))
         XCTAssertNotNil(decodedFeature)
         
         XCTAssertNil(feature.geometry)
@@ -192,8 +192,8 @@ class GeoJSONTests: XCTestCase {
     }
     
     func testPropertiesCoding() {
-        let coordinate = LocationCoordinate2D(latitude: 10, longitude: 30)
-        var feature = Feature(geometry: .point(.init(coordinate)))
+        let coordinate = TurfLocationCoordinate2D(latitude: 10, longitude: 30)
+        var feature = TurfFeature(geometry: .point(.init(coordinate)))
         feature.properties = [
             "string": "Jason",
             "integer": 42,
@@ -209,14 +209,14 @@ class GeoJSONTests: XCTestCase {
         XCTAssertNoThrow(encodedFeature = try JSONEncoder().encode(feature))
         guard let encodedData = encodedFeature else { return XCTFail() }
         
-        var decodedFeature: Feature?
-        XCTAssertNoThrow(decodedFeature = try JSONDecoder().decode(Feature.self, from: encodedData))
+        var decodedFeature: TurfFeature?
+        XCTAssertNoThrow(decodedFeature = try JSONDecoder().decode(TurfFeature.self, from: encodedData))
         XCTAssertNotNil(decodedFeature)
         
         XCTAssertEqual(decodedFeature, feature)
     }
     
-    func testForeignMemberCoding(in object: GeoJSONObject) throws {
+    func testForeignMemberCoding(in object: TurfGeoJSONObject) throws {
         let today = ISO8601DateFormatter().string(from: Date())
         
         let encoder = JSONEncoder()
@@ -249,7 +249,7 @@ class GeoJSONTests: XCTestCase {
         decoder.userInfo[.includesForeignMembers] = true
         
         let modifiedData = try JSONSerialization.data(withJSONObject: json, options: [])
-        let modifiedObject = try decoder.decode(GeoJSONObject.self, from: modifiedData)
+        let modifiedObject = try decoder.decode(TurfGeoJSONObject.self, from: modifiedData)
         
         let roundTrippedData = try encoder.encode(modifiedObject)
         let roundTrippedJSON = try JSONSerialization.jsonObject(with: roundTrippedData, options: []) as? [String: Any?]
@@ -259,29 +259,29 @@ class GeoJSONTests: XCTestCase {
     }
     
     func testForeignMemberCoding() throws {
-        let nullIsland = LocationCoordinate2D(latitude: 0, longitude: 0)
-        try testForeignMemberCoding(in: .geometry(.point(Point(nullIsland))))
-        try testForeignMemberCoding(in: .geometry(.lineString(LineString([nullIsland, nullIsland]))))
-        try testForeignMemberCoding(in: .geometry(.polygon(Polygon([[nullIsland, nullIsland, nullIsland]]))))
-        try testForeignMemberCoding(in: .geometry(.multiPoint(MultiPoint([nullIsland, nullIsland, nullIsland]))))
-        try testForeignMemberCoding(in: .geometry(.multiLineString(MultiLineString([[nullIsland, nullIsland, nullIsland]]))))
-        try testForeignMemberCoding(in: .geometry(.multiPolygon(MultiPolygon([[[nullIsland, nullIsland, nullIsland]]]))))
-        try testForeignMemberCoding(in: .geometry(.geometryCollection(GeometryCollection(geometries: []))))
+        let nullIsland = TurfLocationCoordinate2D(latitude: 0, longitude: 0)
+        try testForeignMemberCoding(in: .geometry(.point(TurfPoint(nullIsland))))
+        try testForeignMemberCoding(in: .geometry(.lineString(TurfLineString([nullIsland, nullIsland]))))
+        try testForeignMemberCoding(in: .geometry(.polygon(TurfPolygon([[nullIsland, nullIsland, nullIsland]]))))
+        try testForeignMemberCoding(in: .geometry(.multiPoint(TurfMultiPoint([nullIsland, nullIsland, nullIsland]))))
+        try testForeignMemberCoding(in: .geometry(.multiLineString(TurfMultiLineString([[nullIsland, nullIsland, nullIsland]]))))
+        try testForeignMemberCoding(in: .geometry(.multiPolygon(TurfMultiPolygon([[[nullIsland, nullIsland, nullIsland]]]))))
+        try testForeignMemberCoding(in: .geometry(.geometryCollection(TurfGeometryCollection(geometries: []))))
         try testForeignMemberCoding(in: .feature(.init(geometry: nil)))
         try testForeignMemberCoding(in: .featureCollection(.init(features: [])))
     }
 
     func testConvenienceAccessors() {
-        let point = Point(LocationCoordinate2D(latitude: 0, longitude: 1))
-        XCTAssertEqual(GeoJSONObject.geometry(point.geometry).geometry, point.geometry)
-        XCTAssertEqual(GeoJSONObject.geometry(point.geometry).feature, nil)
+        let point = TurfPoint(TurfLocationCoordinate2D(latitude: 0, longitude: 1))
+        XCTAssertEqual(TurfGeoJSONObject.geometry(point.geometry).geometry, point.geometry)
+        XCTAssertEqual(TurfGeoJSONObject.geometry(point.geometry).feature, nil)
      
-        let feature = Feature(geometry: point)
-        XCTAssertEqual(GeoJSONObject.feature(feature).feature, feature)
-        XCTAssertEqual(GeoJSONObject.feature(feature).geometry, nil)
+        let feature = TurfFeature(geometry: point)
+        XCTAssertEqual(TurfGeoJSONObject.feature(feature).feature, feature)
+        XCTAssertEqual(TurfGeoJSONObject.feature(feature).geometry, nil)
         
-        let featureCollection = FeatureCollection(features: [feature])
-        XCTAssertEqual(GeoJSONObject.featureCollection(featureCollection).featureCollection, featureCollection)   
-        XCTAssertEqual(GeoJSONObject.featureCollection(featureCollection).geometry, nil)
+        let featureCollection = TurfFeatureCollection(features: [feature])
+        XCTAssertEqual(TurfGeoJSONObject.featureCollection(featureCollection).featureCollection, featureCollection)   
+        XCTAssertEqual(TurfGeoJSONObject.featureCollection(featureCollection).geometry, nil)
     }
 }

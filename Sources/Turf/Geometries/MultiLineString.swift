@@ -3,12 +3,16 @@ import Foundation
 import CoreLocation
 #endif
 
+#if !MAPBOX_COMMON_WITH_TURF_SWIFT_LIBRARY
+public typealias MultiLineString = TurfMultiLineString
+#endif
+
 /**
- A [MultiLineString geometry](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.5) is a collection of `LineString` geometries that are disconnected but related.
+ A [TurfMultiLineString geometry](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.5) is a collection of `TurfLineString` geometries that are disconnected but related.
  */
-public struct MultiLineString: Equatable, ForeignMemberContainer {
+public struct TurfMultiLineString: Equatable, ForeignMemberContainer {
     /// The positions at which the multi–line string is located. Each nested array corresponds to one line string.
-    public var coordinates: [[LocationCoordinate2D]]
+    public var coordinates: [[TurfLocationCoordinate2D]]
     
     public var foreignMembers: JSONObject = [:]
     
@@ -17,7 +21,7 @@ public struct MultiLineString: Equatable, ForeignMemberContainer {
      
      - parameter coordinates: The positions at which the multi–line string is located. Each nested array corresponds to one line string.
      */
-    public init(_ coordinates: [[LocationCoordinate2D]]) {
+    public init(_ coordinates: [[TurfLocationCoordinate2D]]) {
         self.coordinates = coordinates
     }
     
@@ -28,12 +32,12 @@ public struct MultiLineString: Equatable, ForeignMemberContainer {
      
      - parameter polygon: The polygon whose linear rings are coincident to the multi–line string.
      */
-    public init(_ polygon: Polygon) {
+    public init(_ polygon: TurfPolygon) {
         self.coordinates = polygon.coordinates
     }
 }
 
-extension MultiLineString: Codable {
+extension TurfMultiLineString: Codable {
     enum CodingKeys: String, CodingKey {
         case kind = "type"
         case coordinates

@@ -2,7 +2,7 @@ import Foundation
 
 enum Simplifier {
     
-    static func simplify(_ coordinates: [LocationCoordinate2D], tolerance: Double, highestQuality: Bool) -> [LocationCoordinate2D] {
+    static func simplify(_ coordinates: [TurfLocationCoordinate2D], tolerance: Double, highestQuality: Bool) -> [TurfLocationCoordinate2D] {
         guard coordinates.count > 2 else { return coordinates }
 
         let squareTolerance = tolerance * tolerance
@@ -14,7 +14,7 @@ enum Simplifier {
     
     // MARK: - Douglas-Peucker
     
-    private static func squareSegmentDistance(_ coordinate: LocationCoordinate2D, segmentStart: LocationCoordinate2D, segmentEnd: LocationCoordinate2D) -> LocationDistance {
+    private static func squareSegmentDistance(_ coordinate: TurfLocationCoordinate2D, segmentStart: TurfLocationCoordinate2D, segmentEnd: TurfLocationCoordinate2D) -> LocationDistance {
 
         var x = segmentStart.latitude
         var y = segmentStart.longitude
@@ -38,7 +38,7 @@ enum Simplifier {
         return dx * dx + dy * dy
     }
 
-    private static func simplifyDouglasPeuckerStep(_ coordinates: [LocationCoordinate2D], first: Int, last: Int, tolerance: Double, simplified: inout [LocationCoordinate2D]) {
+    private static func simplifyDouglasPeuckerStep(_ coordinates: [TurfLocationCoordinate2D], first: Int, last: Int, tolerance: Double, simplified: inout [TurfLocationCoordinate2D]) {
 
         var maxSquareDistance = tolerance
         var index = 0
@@ -63,7 +63,7 @@ enum Simplifier {
         }
     }
 
-    private static func simplifyDouglasPeucker(_ coordinates: [LocationCoordinate2D], tolerance: Double) -> [LocationCoordinate2D] {
+    private static func simplifyDouglasPeucker(_ coordinates: [TurfLocationCoordinate2D], tolerance: Double) -> [TurfLocationCoordinate2D] {
         if coordinates.count <= 2 {
             return coordinates
         }
@@ -77,13 +77,13 @@ enum Simplifier {
     
     //MARK: - Radial simplification
     
-    private static func squareDistance(from origin: LocationCoordinate2D, to destination: LocationCoordinate2D) -> Double {
+    private static func squareDistance(from origin: TurfLocationCoordinate2D, to destination: TurfLocationCoordinate2D) -> Double {
         let dx = origin.longitude - destination.longitude
         let dy = origin.latitude - destination.latitude
         return dx * dx + dy * dy
     }
     
-    private static func simplifyRadial(_ coordinates: [LocationCoordinate2D], squareTolerance: Double) -> [LocationCoordinate2D] {
+    private static func simplifyRadial(_ coordinates: [TurfLocationCoordinate2D], squareTolerance: Double) -> [TurfLocationCoordinate2D] {
         guard coordinates.count > 2 else { return coordinates }
 
         var prevCoordinate = coordinates[0]

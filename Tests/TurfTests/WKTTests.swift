@@ -10,21 +10,21 @@ class WKTTests: XCTestCase {
     func testEmpty() {
         var wktString = "GEOMETRYCOLLECTION EMPTY"
         
-        var geometry = try? GeometryCollection(wkt: wktString)
+        var geometry = try? TurfGeometryCollection(wkt: wktString)
         
         XCTAssertNil(geometry)
         
         
         wktString = "GEOMETRYCOLLECTION (POINT EMPTY)"
         
-        geometry = try? GeometryCollection(wkt: wktString)
+        geometry = try? TurfGeometryCollection(wkt: wktString)
         
         XCTAssertNil(geometry)
         
         
         wktString = "GEOMETRYCOLLECTION (POINT EMPTY, POINT(1 2))"
         
-        geometry = try? GeometryCollection(wkt: wktString)
+        geometry = try? TurfGeometryCollection(wkt: wktString)
         
         XCTAssertNotNil(geometry)
         XCTAssertEqual(geometry?.geometries.count, 1)
@@ -33,8 +33,8 @@ class WKTTests: XCTestCase {
     func testPoint() {
         let wktString = "POINT(123.53 -12.12)"
         
-        let point = try? Point(wkt: wktString)
-        let geometry = try? Geometry(wkt: wktString)
+        let point = try? TurfPoint(wkt: wktString)
+        let geometry = try? TurfGeometry(wkt: wktString)
         
         XCTAssertNotNil(point)
         XCTAssertNotNil(geometry)
@@ -53,9 +53,9 @@ class WKTTests: XCTestCase {
         let wktString = "MULTIPOINT(123.53 -12.12,10.0 20.0,-11.12 13.14)"
         let wktString2 = "MULTIPOINT ((123.53 -12.12), ( 10 20 ), (-11.12 13.14))"
         
-        let multiPoint = try? MultiPoint(wkt: wktString)
-        let multiPoint2 = try? MultiPoint(wkt: wktString2)
-        let geometry = try? Geometry(wkt: wktString)
+        let multiPoint = try? TurfMultiPoint(wkt: wktString)
+        let multiPoint2 = try? TurfMultiPoint(wkt: wktString2)
+        let geometry = try? TurfGeometry(wkt: wktString)
         
         XCTAssertNotNil(multiPoint)
         XCTAssertNotNil(multiPoint2)
@@ -77,8 +77,8 @@ class WKTTests: XCTestCase {
     func testLineString() {
         let wktString = "LINESTRING(123.53 -12.12,10.0 20.0,-11.12 13.14)"
         
-        let lineString = try? LineString(wkt: wktString)
-        let geometry = try? Geometry(wkt: wktString)
+        let lineString = try? TurfLineString(wkt: wktString)
+        let geometry = try? TurfGeometry(wkt: wktString)
         
         XCTAssertNotNil(lineString)
         XCTAssertNotNil(geometry)
@@ -98,8 +98,8 @@ class WKTTests: XCTestCase {
     func testMultiLineString() {
         let wktString = "MULTILINESTRING((123.53 -12.12,10.0 20.0),(-11.12 13.14))"
         
-        let multiLineString = try? MultiLineString(wkt: wktString)
-        let geometry = try? Geometry(wkt: wktString)
+        let multiLineString = try? TurfMultiLineString(wkt: wktString)
+        let geometry = try? TurfGeometry(wkt: wktString)
         
         XCTAssertNotNil(multiLineString)
         XCTAssertNotNil(geometry)
@@ -119,8 +119,8 @@ class WKTTests: XCTestCase {
     func testPolygon() {
         let wktString = "POLYGON((123.53 -12.12,10.0 20.0),(-11.12 13.14))"
         
-        let polygon = try? Polygon(wkt: wktString)
-        let geometry = try? Geometry(wkt: wktString)
+        let polygon = try? TurfPolygon(wkt: wktString)
+        let geometry = try? TurfGeometry(wkt: wktString)
         
         XCTAssertNotNil(polygon)
         XCTAssertNotNil(geometry)
@@ -146,8 +146,8 @@ class WKTTests: XCTestCase {
     func testMultiPolygon() {
         let wktString = "MULTIPOLYGON(((123.53 -12.12,10.0 20.0),(-11.12 13.14)),((-15.16 -17.18)))"
         
-        let multiPolygon = try? MultiPolygon(wkt: wktString)
-        let geometry = try? Geometry(wkt: wktString)
+        let multiPolygon = try? TurfMultiPolygon(wkt: wktString)
+        let geometry = try? TurfGeometry(wkt: wktString)
         
         XCTAssertNotNil(multiPolygon)
         XCTAssertNotNil(geometry)
@@ -175,7 +175,7 @@ class WKTTests: XCTestCase {
         XCTAssertEqual(serializedString, wktString)
     }
     
-    func assertGeometryTypesEqual(_ lhs: Geometry?, _ rhs: Geometry?) {
+    func assertGeometryTypesEqual(_ lhs: TurfGeometry?, _ rhs: TurfGeometry?) {
         switch lhs {
         case .point(_):
             guard case .point(_) = rhs else { XCTFail(); return }
@@ -217,17 +217,17 @@ POLYGON((123.53 -12.12,10.0 20.0),(-11.12 13.14)),
 MULTIPOLYGON(((123.53 -12.12,10.0 20.0),(-11.12 13.14)),((-15.16 -17.18))))
 """
         
-        let geometryCollection = try? GeometryCollection(wkt: wktString)
+        let geometryCollection = try? TurfGeometryCollection(wkt: wktString)
         
         XCTAssertNotNil(geometryCollection)
         XCTAssertEqual(geometryCollection?.geometries.count, 6)
         
-        assertGeometryTypesEqual(geometryCollection?.geometries[0], .point(Point(LocationCoordinate2D(latitude: 0, longitude: 0))))
-        assertGeometryTypesEqual(geometryCollection?.geometries[1], .multiPoint(MultiPoint([])))
-        assertGeometryTypesEqual(geometryCollection?.geometries[2], .lineString(LineString([])))
-        assertGeometryTypesEqual(geometryCollection?.geometries[3], .multiLineString(MultiLineString([])))
-        assertGeometryTypesEqual(geometryCollection?.geometries[4], .polygon(Polygon([])))
-        assertGeometryTypesEqual(geometryCollection?.geometries[5], .multiPolygon(MultiPolygon([Polygon([])])))
+        assertGeometryTypesEqual(geometryCollection?.geometries[0], .point(TurfPoint(TurfLocationCoordinate2D(latitude: 0, longitude: 0))))
+        assertGeometryTypesEqual(geometryCollection?.geometries[1], .multiPoint(TurfMultiPoint([])))
+        assertGeometryTypesEqual(geometryCollection?.geometries[2], .lineString(TurfLineString([])))
+        assertGeometryTypesEqual(geometryCollection?.geometries[3], .multiLineString(TurfMultiLineString([])))
+        assertGeometryTypesEqual(geometryCollection?.geometries[4], .polygon(TurfPolygon([])))
+        assertGeometryTypesEqual(geometryCollection?.geometries[5], .multiPolygon(TurfMultiPolygon([TurfPolygon([])])))
         
         let serializedString = geometryCollection?.wkt
         
@@ -237,7 +237,7 @@ MULTIPOLYGON(((123.53 -12.12,10.0 20.0),(-11.12 13.14)),((-15.16 -17.18))))
     func testUnrecognizedToken() {
         let wktString = "UNRECOGNIZEDGEOMETRY (1 2)"
         do {
-            _ = try Geometry(wkt: wktString)
+            _ = try TurfGeometry(wkt: wktString)
             
             XCTFail("Unknown token not detected.")
         }
@@ -247,7 +247,7 @@ MULTIPOLYGON(((123.53 -12.12,10.0 20.0),(-11.12 13.14)),((-15.16 -17.18))))
     func testIncorrectCoordinatesCount() {
         let  wktString = "POINT (1 2 3)"
         do {
-            _ = try Geometry(wkt: wktString)
+            _ = try TurfGeometry(wkt: wktString)
             
             XCTFail("Incorrect coordinates count not detected.")
         } catch {}
@@ -256,7 +256,7 @@ MULTIPOLYGON(((123.53 -12.12,10.0 20.0),(-11.12 13.14)),((-15.16 -17.18))))
     func testIncorrectCoordinateTypes() {
         let wktString = "POINT (here there)"
         do {
-            _ = try Geometry(wkt: wktString)
+            _ = try TurfGeometry(wkt: wktString)
             
             XCTFail("Incorrect coordinates types not detected.")
         } catch {}
@@ -265,7 +265,7 @@ MULTIPOLYGON(((123.53 -12.12,10.0 20.0),(-11.12 13.14)),((-15.16 -17.18))))
     func testEmptyInput() { // empty output
         let wktString = ""
         do {
-            _ = try Geometry(wkt: wktString)
+            _ = try TurfGeometry(wkt: wktString)
             
             XCTFail("Empty input not detected.")
         } catch {}
@@ -274,7 +274,7 @@ MULTIPOLYGON(((123.53 -12.12,10.0 20.0),(-11.12 13.14)),((-15.16 -17.18))))
     func testInsufficientNesting() {
         let wktString = "MULTIPOLYGON((123.53 -12.12,10.0 20.0),(-11.12 13.14)),((-15.16 -17.18))"
         do {
-            _ = try Geometry(wkt: wktString)
+            _ = try TurfGeometry(wkt: wktString)
             
             XCTFail("Insufficient nesting not detected.")
         } catch {}
@@ -283,7 +283,7 @@ MULTIPOLYGON(((123.53 -12.12,10.0 20.0),(-11.12 13.14)),((-15.16 -17.18))))
     func testExcessiveNesting() {
         let wktString = "MULTIPOLYGON((((123.53 -12.12,10.0 20.0),(-11.12 13.14)),((-15.16 -17.18)))"
         do {
-            _ = try Geometry(wkt: wktString)
+            _ = try TurfGeometry(wkt: wktString)
             
             XCTFail("Excessive nesting not detected.")
         } catch {}

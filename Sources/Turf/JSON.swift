@@ -1,11 +1,16 @@
 import Foundation
 
+
+#if !MAPBOX_COMMON_WITH_TURF_SWIFT_LIBRARY
+public typealias JSONValue = TurfJSONValue
+#endif
+
 /**
  A JSON value represents an object, array, or fragment.
  
- This type does not represent the `null` value in JSON. Use `Optional<JSONValue>` wherever `null` is accepted.
+ This type does not represent the `null` value in JSON. Use `Optional<TurfJSONValue>` wherever `null` is accepted.
  */
-public enum JSONValue: Hashable, Sendable {
+public enum TurfJSONValue: Hashable, Sendable {
     // case null would be redundant to Optional.none
     
     /// A string.
@@ -62,7 +67,7 @@ public enum JSONValue: Hashable, Sendable {
     }
 }
 
-extension JSONValue {
+extension TurfJSONValue {
     /// A string value, if the JSON value represents a string.
     public var string: String? {
         if case let .string(value) = self {
@@ -104,7 +109,7 @@ extension JSONValue {
     }
 }
 
-extension JSONValue: RawRepresentable {
+extension TurfJSONValue: RawRepresentable {
     public typealias RawValue = Any
     
     public init?(rawValue: Any) {
@@ -122,7 +127,7 @@ extension JSONValue: RawRepresentable {
             /// by the initializer that's used to create it.
             ///
             /// This means that when these values are encountered, it is ambiguous whether to
-            /// decode to JSONValue.number or JSONValue.boolean.
+            /// decode to TurfJSONValue.number or TurfJSONValue.boolean.
             ///
             /// In practice, choosing .boolean yields the desired result more often since it is more
             /// common to work with Bool than it is Int8.
@@ -173,15 +178,15 @@ extension JSONValue: RawRepresentable {
 }
 
 /**
- A JSON array of `JSONValue` instances.
+ A JSON array of `TurfJSONValue` instances.
  */
-public typealias JSONArray = [JSONValue?]
+public typealias JSONArray = [TurfJSONValue?]
 
 extension JSONArray {
     public typealias TurfRawValue = [Any?]
 
     public init?(turfRawValue values: TurfRawValue) {
-        self = values.map(JSONValue.init(rawValue:))
+        self = values.map(TurfJSONValue.init(rawValue:))
     }
 
     public var turfRawValue: TurfRawValue {
@@ -190,15 +195,15 @@ extension JSONArray {
 }
 
 /**
- A JSON object represented in memory by a dictionary with strings as keys and `JSONValue` instances as values.
+ A JSON object represented in memory by a dictionary with strings as keys and `TurfJSONValue` instances as values.
  */
-public typealias JSONObject = [String: JSONValue?]
+public typealias JSONObject = [String: TurfJSONValue?]
 
 extension JSONObject {
     public typealias TurfRawValue = [String: Any?]
     
     public init?(turfRawValue: TurfRawValue) {
-        self = turfRawValue.mapValues { $0.flatMap(JSONValue.init(rawValue:)) }
+        self = turfRawValue.mapValues { $0.flatMap(TurfJSONValue.init(rawValue:)) }
     }
     
     public var turfRawValue: TurfRawValue {
@@ -206,48 +211,48 @@ extension JSONObject {
     }
 }
 
-extension JSONValue: ExpressibleByStringLiteral {
+extension TurfJSONValue: ExpressibleByStringLiteral {
     public init(stringLiteral value: StringLiteralType) {
         self = .init(value)
     }
 }
 
-extension JSONValue: ExpressibleByIntegerLiteral {
+extension TurfJSONValue: ExpressibleByIntegerLiteral {
     public init(integerLiteral value: IntegerLiteralType) {
         self = .init(value)
     }
 }
 
-extension JSONValue: ExpressibleByFloatLiteral {
+extension TurfJSONValue: ExpressibleByFloatLiteral {
     public init(floatLiteral value: FloatLiteralType) {
         self = .init(value)
     }
 }
 
-extension JSONValue: ExpressibleByBooleanLiteral {
+extension TurfJSONValue: ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: BooleanLiteralType) {
         self = .init(value)
     }
 }
 
-extension JSONValue: ExpressibleByArrayLiteral {
-    public typealias ArrayLiteralElement = JSONValue?
+extension TurfJSONValue: ExpressibleByArrayLiteral {
+    public typealias ArrayLiteralElement = TurfJSONValue?
     
     public init(arrayLiteral elements: ArrayLiteralElement...) {
         self = .init(elements)
     }
 }
 
-extension JSONValue: ExpressibleByDictionaryLiteral {
+extension TurfJSONValue: ExpressibleByDictionaryLiteral {
     public typealias Key = String
-    public typealias Value = JSONValue?
+    public typealias Value = TurfJSONValue?
     
     public init(dictionaryLiteral elements: (Key, Value)...) {
         self = .init(.init(uniqueKeysWithValues: elements))
     }
 }
 
-extension JSONValue: Codable {
+extension TurfJSONValue: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let boolean = try? container.decode(Bool.self) {
@@ -261,7 +266,7 @@ extension JSONValue: Codable {
         } else if let array = try? container.decode(JSONArray.self) {
             self = .array(array)
         } else {
-            throw DecodingError.typeMismatch(JSONValue.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Unable to decode as a JSONValue."))
+            throw DecodingError.typeMismatch(TurfJSONValue.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Unable to decode as a TurfJSONValue."))
         }
     }
     

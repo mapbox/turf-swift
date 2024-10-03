@@ -3,12 +3,16 @@ import Foundation
 import CoreLocation
 #endif
 
+#if !MAPBOX_COMMON_WITH_TURF_SWIFT_LIBRARY
+public typealias MultiPoint = TurfMultiPoint
+#endif
+
 /**
- A [MultiPoint geometry](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.3) represents a collection of disconnected but related positions.
+ A [TurfMultiPoint geometry](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.3) represents a collection of disconnected but related positions.
  */
-public struct MultiPoint: Equatable, ForeignMemberContainer {
+public struct TurfMultiPoint: Equatable, ForeignMemberContainer {
     /// The positions at which the multipoint is located.
-    public var coordinates: [LocationCoordinate2D]
+    public var coordinates: [TurfLocationCoordinate2D]
     
     public var foreignMembers: JSONObject = [:]
     
@@ -17,12 +21,12 @@ public struct MultiPoint: Equatable, ForeignMemberContainer {
      
      - parameter coordinates: The positions at which the multipoint is located.
      */
-    public init(_ coordinates: [LocationCoordinate2D]) {
+    public init(_ coordinates: [TurfLocationCoordinate2D]) {
         self.coordinates = coordinates
     }
 }
 
-extension MultiPoint: Codable {
+extension TurfMultiPoint: Codable {
     enum CodingKeys: String, CodingKey {
         case kind = "type"
         case coordinates

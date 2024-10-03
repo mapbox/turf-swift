@@ -3,10 +3,10 @@ import XCTest
 
 final class FeatureIdentifierTests: XCTestCase {
     func testConvenienceAccessors() {
-        XCTAssertEqual(FeatureIdentifier("foo").string, "foo")
-        XCTAssertEqual(FeatureIdentifier("foo").number, nil)
+        XCTAssertEqual(TurfFeatureIdentifier("foo").string, "foo")
+        XCTAssertEqual(TurfFeatureIdentifier("foo").number, nil)
 
-        XCTAssertEqual(FeatureIdentifier(3.14).string, nil)
-        XCTAssertEqual(FeatureIdentifier(3.14).number, 3.14)
+        XCTAssertEqual(TurfFeatureIdentifier(3.14).string, nil)
+        XCTAssertEqual(TurfFeatureIdentifier(3.14).number, 3.14)
     }
 }

@@ -1,9 +1,13 @@
 import Foundation
 
+#if !MAPBOX_COMMON_WITH_TURF_SWIFT_LIBRARY
+public typealias FeatureIdentifier = TurfFeatureIdentifier
+#endif
+
 /**
- A [feature identifier](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2) identifies a `Feature` object.
+ A [feature identifier](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2) identifies a `TurfFeature` object.
  */
-public enum FeatureIdentifier: Hashable, Sendable {
+public enum TurfFeatureIdentifier: Hashable, Sendable {
     /// A string.
     case string(_ string: String)
     
@@ -34,7 +38,7 @@ public enum FeatureIdentifier: Hashable, Sendable {
     }
 }
 
-extension FeatureIdentifier: RawRepresentable {
+extension TurfFeatureIdentifier: RawRepresentable {
     public typealias RawValue = Any
     
     public init?(rawValue: Any) {
@@ -58,7 +62,7 @@ extension FeatureIdentifier: RawRepresentable {
     }
 }
 
-extension FeatureIdentifier {
+extension TurfFeatureIdentifier {
     /// A string.
     public var string: String? {
         if case let .string(value) = self {
@@ -76,25 +80,25 @@ extension FeatureIdentifier {
     }
 }
 
-extension FeatureIdentifier: ExpressibleByStringLiteral {
+extension TurfFeatureIdentifier: ExpressibleByStringLiteral {
     public init(stringLiteral value: StringLiteralType) {
         self = .init(value)
     }
 }
 
-extension FeatureIdentifier: ExpressibleByIntegerLiteral {
+extension TurfFeatureIdentifier: ExpressibleByIntegerLiteral {
     public init(integerLiteral value: IntegerLiteralType) {
         self = .init(value)
     }
 }
 
-extension FeatureIdentifier: ExpressibleByFloatLiteral {
+extension TurfFeatureIdentifier: ExpressibleByFloatLiteral {
     public init(floatLiteral value: FloatLiteralType) {
         self = .number(value)
     }
 }
 
-extension FeatureIdentifier: Codable {
+extension TurfFeatureIdentifier: Codable {
     enum CodingKeys: String, CodingKey {
         case string, number
     }

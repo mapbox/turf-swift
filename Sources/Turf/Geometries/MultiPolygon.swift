@@ -3,19 +3,23 @@ import Foundation
 import CoreLocation
 #endif
 
+#if !MAPBOX_COMMON_WITH_TURF_SWIFT_LIBRARY
+public typealias MultiPolygon = TurfMultiPolygon
+#endif
+
 /**
- A [MultiPolygon geometry](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.7) is a collection of `Polygon` geometries that are disconnected but related.
+ A [TurfMultiPolygon geometry](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.7) is a collection of `TurfPolygon` geometries that are disconnected but related.
  */
-public struct MultiPolygon: Equatable, ForeignMemberContainer {
+public struct TurfMultiPolygon: Equatable, ForeignMemberContainer {
     /// The positions at which the multipolygon is located. Each nested array corresponds to one polygon.
-    public var coordinates: [[[LocationCoordinate2D]]]
+    public var coordinates: [[[TurfLocationCoordinate2D]]]
     
     public var foreignMembers: JSONObject = [:]
     
     /// The polygon geometries that conceptually form the multipolygon.
-    public var polygons: [Polygon] {
-        return coordinates.map { (coordinates) -> Polygon in
-            return Polygon(coordinates)
+    public var polygons: [TurfPolygon] {
+        return coordinates.map { (coordinates) -> TurfPolygon in
+            return TurfPolygon(coordinates)
         }
     }
     
@@ -24,7 +28,7 @@ public struct MultiPolygon: Equatable, ForeignMemberContainer {
      
      - parameter coordinates: The positions at which the multipolygon is located. Each nested array corresponds to one polygon.
      */
-    public init(_ coordinates: [[[LocationCoordinate2D]]]) {
+    public init(_ coordinates: [[[TurfLocationCoordinate2D]]]) {
         self.coordinates = coordinates
     }
     
@@ -33,14 +37,14 @@ public struct MultiPolygon: Equatable, ForeignMemberContainer {
      
      - parameter polygons: The polygons that together are coincident to the multipolygon.
      */
-    public init(_ polygons: [Polygon]) {
-        self.coordinates = polygons.map { (polygon) -> [[LocationCoordinate2D]] in
+    public init(_ polygons: [TurfPolygon]) {
+        self.coordinates = polygons.map { (polygon) -> [[TurfLocationCoordinate2D]] in
             return polygon.coordinates
         }
     }
 }
 
-extension MultiPolygon: Codable {
+extension TurfMultiPolygon: Codable {
     enum CodingKeys: String, CodingKey {
         case kind = "type"
         case coordinates
@@ -66,7 +70,7 @@ extension MultiPolygon: Codable {
     }
 }
 
-extension MultiPolygon {
+extension TurfMultiPolygon {
     /**
      * Determines if the given coordinate falls within any of the polygons.
      * The optional parameter `ignoreBoundary` will result in the method returning true if the given coordinate
@@ -74,7 +78,7 @@ extension MultiPolygon {
      *
      * Calls contains function for each contained polygon
      */
-    public func contains(_ coordinate: LocationCoordinate2D, ignoreBoundary: Bool = false) -> Bool {
+    public func contains(_ coordinate: TurfLocationCoordinate2D, ignoreBoundary: Bool = false) -> Bool {
         return polygons.contains {
             $0.contains(coordinate, ignoreBoundary: ignoreBoundary)
         }

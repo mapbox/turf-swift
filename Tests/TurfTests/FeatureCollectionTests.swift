@@ -8,7 +8,7 @@ class FeatureCollectionTests: XCTestCase {
 
     func testFeatureCollection() {
         let data = try! Fixture.geojsonData(from: "featurecollection")!
-        let geojson = try! JSONDecoder().decode(GeoJSONObject.self, from: data)
+        let geojson = try! JSONDecoder().decode(TurfGeoJSONObject.self, from: data)
         guard case let .featureCollection(featureCollection) = geojson else { return XCTFail() }
         
         if case .lineString = featureCollection.features[0].geometry {} else { XCTFail() }
@@ -58,7 +58,7 @@ class FeatureCollectionTests: XCTestCase {
         XCTAssert(pointCoordinates.coordinates.longitude == 27.95642852783203)
         
         let encodedData = try! JSONEncoder().encode(geojson)
-        let decoded = try! JSONDecoder().decode(GeoJSONObject.self, from: encodedData)
+        let decoded = try! JSONDecoder().decode(TurfGeoJSONObject.self, from: encodedData)
         guard case let .featureCollection(decodedFeatureCollection) = decoded else { return XCTFail() }
         
         if case .lineString = decodedFeatureCollection.features[0].geometry {} else { XCTFail() }
@@ -110,13 +110,13 @@ class FeatureCollectionTests: XCTestCase {
     
     func testFeatureCollectionDecodeWithoutProperties() {
         let data = try! Fixture.geojsonData(from: "featurecollection-no-properties")!
-        let geojson = try! JSONDecoder().decode(GeoJSONObject.self, from: data)
+        let geojson = try! JSONDecoder().decode(TurfGeoJSONObject.self, from: data)
         guard case .featureCollection = geojson else { return XCTFail() }
     }
     
     func testUnkownFeatureCollection() {
         let data = try! Fixture.geojsonData(from: "featurecollection")!
-        let geojson = try! JSONDecoder().decode(GeoJSONObject.self, from: data)
+        let geojson = try! JSONDecoder().decode(TurfGeoJSONObject.self, from: data)
         guard case .featureCollection = geojson else { return XCTFail() }
     }
     
@@ -125,14 +125,14 @@ class FeatureCollectionTests: XCTestCase {
         
         measure {
             for _ in 0...100 {
-                _ = try! JSONDecoder().decode(FeatureCollection.self, from: data)
+                _ = try! JSONDecoder().decode(TurfFeatureCollection.self, from: data)
             }
         }
     }
     
     func testPerformanceEncodeFeatureCollection() {
         let data = try! Fixture.geojsonData(from: "featurecollection")!
-        let decoded = try! JSONDecoder().decode(FeatureCollection.self, from: data)
+        let decoded = try! JSONDecoder().decode(TurfFeatureCollection.self, from: data)
         
         measure {
             for _ in 0...100 {
@@ -146,7 +146,7 @@ class FeatureCollectionTests: XCTestCase {
         
         measure {
             for _ in 0...100 {
-                let decoded = try! JSONDecoder().decode(FeatureCollection.self, from: data)
+                let decoded = try! JSONDecoder().decode(TurfFeatureCollection.self, from: data)
                 _ = try! JSONEncoder().encode(decoded)
             }
         }
@@ -154,7 +154,7 @@ class FeatureCollectionTests: XCTestCase {
     
     func testDecodedFeatureCollection() {
         let data = try! Fixture.geojsonData(from: "featurecollection")!
-        let geojson = try! JSONDecoder().decode(GeoJSONObject.self, from: data)
+        let geojson = try! JSONDecoder().decode(TurfGeoJSONObject.self, from: data)
         
         guard case let .featureCollection(featureCollection) = geojson else { return XCTFail() }
         XCTAssertEqual(featureCollection.features.count, 4)

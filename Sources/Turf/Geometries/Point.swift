@@ -3,16 +3,20 @@ import Foundation
 import CoreLocation
 #endif
 
+#if !MAPBOX_COMMON_WITH_TURF_SWIFT_LIBRARY
+public typealias Point = TurfPoint
+#endif
+
 /**
- A [Point geometry](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.2) represents a single position.
+ A [TurfPoint geometry](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.2) represents a single position.
  */
-public struct Point: Equatable, ForeignMemberContainer, Sendable {
+public struct TurfPoint: Equatable, ForeignMemberContainer, Sendable {
     /**
      The position at which the point is located.
      
-     This property has a plural name for consistency with [RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.2). For convenience, it is represented by a `LocationCoordinate2D` instead of a dedicated `Position` type.
+     This property has a plural name for consistency with [RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.2). For convenience, it is represented by a `TurfLocationCoordinate2D` instead of a dedicated `Position` type.
      */
-    public var coordinates: LocationCoordinate2D
+    public var coordinates: TurfLocationCoordinate2D
     
     public var foreignMembers: JSONObject = [:]
     
@@ -21,12 +25,12 @@ public struct Point: Equatable, ForeignMemberContainer, Sendable {
      
      - parameter coordinates: The position at which the point is located.
      */
-    public init(_ coordinates: LocationCoordinate2D) {
+    public init(_ coordinates: TurfLocationCoordinate2D) {
         self.coordinates = coordinates
     }
 }
 
-extension Point: Codable {
+extension TurfPoint: Codable {
     enum CodingKeys: String, CodingKey {
         case kind = "type"
         case coordinates

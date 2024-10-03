@@ -3,20 +3,24 @@ import Foundation
 import CoreLocation
 #endif
 
+#if !MAPBOX_COMMON_WITH_TURF_SWIFT_LIBRARY
+public typealias Ring = TurfRing
+#endif
+
 /**
  A [linear ring](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.6) is a closed figure bounded by three or more straight line segments.
  */
 
-public struct Ring: Sendable {
+public struct TurfRing: Sendable {
     /// The positions at which the linear ring is located.
-    public var coordinates: [LocationCoordinate2D]
+    public var coordinates: [TurfLocationCoordinate2D]
     
     /**
      Initializes a linear ring defined by the given positions.
      
      - parameter coordinates: The positions at which the linear ring is located.
      */
-    public init(coordinates: [LocationCoordinate2D]) {
+    public init(coordinates: [TurfLocationCoordinate2D]) {
         self.coordinates = coordinates
     }
     
@@ -36,7 +40,7 @@ public struct Ring: Sendable {
         if coordinatesCount > 2 {
             for index in 0..<coordinatesCount {
                 
-                let controlPoints: (LocationCoordinate2D, LocationCoordinate2D, LocationCoordinate2D)
+                let controlPoints: (TurfLocationCoordinate2D, TurfLocationCoordinate2D, TurfLocationCoordinate2D)
                 
                 if index == coordinatesCount - 2 {
                     controlPoints = (coordinates[coordinatesCount - 2],
@@ -67,13 +71,13 @@ public struct Ring: Sendable {
      *
      * Ported from: https://github.com/Turfjs/turf/blob/e53677b0931da9e38bb947da448ee7404adc369d/packages/turf-boolean-point-in-polygon/index.ts#L77-L108
      */
-    public func contains(_ coordinate: LocationCoordinate2D, ignoreBoundary: Bool = false) -> Bool {
-        let bbox = BoundingBox(from: coordinates)
+    public func contains(_ coordinate: TurfLocationCoordinate2D, ignoreBoundary: Bool = false) -> Bool {
+        let bbox = TurfBoundingBox(from: coordinates)
         guard bbox?.contains(coordinate, ignoreBoundary: ignoreBoundary) ?? false else {
             return false
         }
 
-        var ring: ArraySlice<LocationCoordinate2D>!
+        var ring: ArraySlice<TurfLocationCoordinate2D>!
         var isInside = false
         if coordinates.first == coordinates.last {
             ring = coordinates.prefix(coordinates.count - 1)
@@ -105,10 +109,10 @@ public struct Ring: Sendable {
     }
 }
 
-extension Ring: Codable {
+extension TurfRing: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self = Ring(coordinates: try container.decode([LocationCoordinate2DCodable].self).decodedCoordinates)
+        self = TurfRing(coordinates: try container.decode([LocationCoordinate2DCodable].self).decodedCoordinates)
     }
     
     public func encode(to encoder: Encoder) throws {

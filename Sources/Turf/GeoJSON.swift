@@ -3,42 +3,46 @@ import Foundation
 import CoreLocation
 #endif
 
+#if !MAPBOX_COMMON_WITH_TURF_SWIFT_LIBRARY
+public typealias GeoJSONObject = TurfGeoJSONObject
+#endif
+
 /**
- A [GeoJSON object](https://datatracker.ietf.org/doc/html/rfc7946#section-3) represents a Geometry, Feature, or collection of Features.
+ A [GeoJSON object](https://datatracker.ietf.org/doc/html/rfc7946#section-3) represents a TurfGeometry, TurfFeature, or collection of Features.
  
  - Note: [Foreign members](https://datatracker.ietf.org/doc/html/rfc7946#section-6.1) which may be present inside are coded only if used `JSONEncoder` or `JSONDecoder` has `userInfo[.includesForeignMembers] = true`.
  */
-public enum GeoJSONObject: Equatable, Sendable {
+public enum TurfGeoJSONObject: Equatable, Sendable {
     /**
-     A [Geometry object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1) represents points, curves, and surfaces in coordinate space.
+     A [TurfGeometry object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1) represents points, curves, and surfaces in coordinate space.
      
-     - parameter geometry: The GeoJSON object as a Geometry object.
+     - parameter geometry: The GeoJSON object as a TurfGeometry object.
      */
-    case geometry(_ geometry: Geometry)
+    case geometry(_ geometry: TurfGeometry)
     
     /**
-     A [Feature object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2) represents a spatially bounded thing.
+     A [TurfFeature object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2) represents a spatially bounded thing.
      
-     - parameter feature: The GeoJSON object as a Feature object.
+     - parameter feature: The GeoJSON object as a TurfFeature object.
      */
-    case feature(_ feature: Feature)
-    
+    case feature(_ feature: TurfFeature)
+
     /**
-     A [FeatureCollection object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.3) is a collection of Feature objects.
+     A [TurfFeatureCollection object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.3) is a collection of TurfFeature objects.
      
-     - parameter featureCollection: The GeoJSON object as a FeatureCollection object.
+     - parameter TurfFeatureCollection: The GeoJSON object as a TurfFeatureCollection object.
      */
-    case featureCollection(_ featureCollection: FeatureCollection)
-    
+    case featureCollection(_ featureCollection: TurfFeatureCollection)
+
     /// Initializes a GeoJSON object representing the given GeoJSON object–convertible instance.
     public init(_ object: GeoJSONObjectConvertible) {
         self = object.geoJSONObject
     }
 }
 
-extension GeoJSONObject {
+extension TurfGeoJSONObject {
     /// A geometry object.
-    public var geometry: Geometry? {
+    public var geometry: TurfGeometry? {
         if case let .geometry(geometry) = self {
             return geometry
         }
@@ -46,7 +50,7 @@ extension GeoJSONObject {
     }
     
     /// A feature object.
-    public var feature: Feature? {
+    public var feature: TurfFeature? {
         if case let .feature(feature) = self {
             return feature
         }
@@ -54,7 +58,7 @@ extension GeoJSONObject {
     }
     
     /// A feature collection object.
-    public var featureCollection: FeatureCollection? {
+    public var featureCollection: TurfFeatureCollection? {
         if case let .featureCollection(featureCollection) = self {
             return featureCollection
         }
@@ -62,7 +66,7 @@ extension GeoJSONObject {
     }
 }
 
-extension GeoJSONObject: Codable {
+extension TurfGeoJSONObject: Codable {
     private enum CodingKeys: String, CodingKey {
         case kind = "type"
     }
@@ -71,12 +75,12 @@ extension GeoJSONObject: Codable {
         let kindContainer = try decoder.container(keyedBy: CodingKeys.self)
         let container = try decoder.singleValueContainer()
         switch try kindContainer.decode(String.self, forKey: .kind) {
-        case Feature.Kind.Feature.rawValue:
-            self = .feature(try container.decode(Feature.self))
-        case FeatureCollection.Kind.FeatureCollection.rawValue:
-            self = .featureCollection(try container.decode(FeatureCollection.self))
+        case TurfFeature.Kind.Feature.rawValue:
+            self = .feature(try container.decode(TurfFeature.self))
+        case TurfFeatureCollection.Kind.FeatureCollection.rawValue:
+            self = .featureCollection(try container.decode(TurfFeatureCollection.self))
         default:
-            self = .geometry(try container.decode(Geometry.self))
+            self = .geometry(try container.decode(TurfGeometry.self))
         }
     }
     
@@ -94,27 +98,27 @@ extension GeoJSONObject: Codable {
 }
 
 /**
- A type that can be represented as a `GeoJSONObject` instance.
+ A type that can be represented as a `TurfGeoJSONObject` instance.
  */
 public protocol GeoJSONObjectConvertible {
-    /// The instance wrapped in a `GeoJSONObject` instance.
-    var geoJSONObject: GeoJSONObject { get }
+    /// The instance wrapped in a `TurfGeoJSONObject` instance.
+    var geoJSONObject: TurfGeoJSONObject { get }
 }
 
-extension GeoJSONObject: GeoJSONObjectConvertible {
-    public var geoJSONObject: GeoJSONObject { return self }
+extension TurfGeoJSONObject: GeoJSONObjectConvertible {
+    public var geoJSONObject: TurfGeoJSONObject { return self }
 }
 
-extension Geometry: GeoJSONObjectConvertible {
-    public var geoJSONObject: GeoJSONObject { return .geometry(self) }
+extension TurfGeometry: GeoJSONObjectConvertible {
+    public var geoJSONObject: TurfGeoJSONObject { return .geometry(self) }
 }
 
-extension Feature: GeoJSONObjectConvertible {
-    public var geoJSONObject: GeoJSONObject { return .feature(self) }
+extension TurfFeature: GeoJSONObjectConvertible {
+    public var geoJSONObject: TurfGeoJSONObject { return .feature(self) }
 }
 
-extension FeatureCollection: GeoJSONObjectConvertible {
-    public var geoJSONObject: GeoJSONObject { return .featureCollection(self) }
+extension TurfFeatureCollection: GeoJSONObjectConvertible {
+    public var geoJSONObject: TurfGeoJSONObject { return .featureCollection(self) }
 }
 
 /**
@@ -150,7 +154,7 @@ extension ForeignMemberContainer {
         let foreignMemberContainer = try decoder.container(keyedBy: AnyCodingKey.self)
         for key in foreignMemberContainer.allKeys {
             if WellKnownCodingKeys(stringValue: key.stringValue) == nil {
-                foreignMembers[key.stringValue] = try foreignMemberContainer.decode(JSONValue?.self, forKey: key)
+                foreignMembers[key.stringValue] = try foreignMemberContainer.decode(TurfJSONValue?.self, forKey: key)
             }
         }
     }

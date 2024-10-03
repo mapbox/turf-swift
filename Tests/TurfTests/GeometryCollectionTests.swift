@@ -9,10 +9,10 @@ class GeometryCollectionTests: XCTestCase {
     func testGeometryCollectionFeatureDeserialization() {
         // Arrange
         let data = try! Fixture.geojsonData(from: "geometry-collection")!
-        let multiPolygonCoordinate = LocationCoordinate2D(latitude: 8.5, longitude: 1)
+        let multiPolygonCoordinate = TurfLocationCoordinate2D(latitude: 8.5, longitude: 1)
         
         // Act
-        let geoJSON = try! JSONDecoder().decode(GeoJSONObject.self, from: data)
+        let geoJSON = try! JSONDecoder().decode(TurfGeoJSONObject.self, from: data)
         
         // Assert
         guard case let .feature(geometryCollectionFeature) = geoJSON else {
@@ -34,13 +34,13 @@ class GeometryCollectionTests: XCTestCase {
     
     func testGeometryCollectionFeatureSerialization() {
         // Arrange
-        let multiPolygonCoordinate = LocationCoordinate2D(latitude: 8.5, longitude: 1)
+        let multiPolygonCoordinate = TurfLocationCoordinate2D(latitude: 8.5, longitude: 1)
         let data = try! Fixture.geojsonData(from: "geometry-collection")!
-        let geoJSON = try! JSONDecoder().decode(GeoJSONObject.self, from: data)
+        let geoJSON = try! JSONDecoder().decode(TurfGeoJSONObject.self, from: data)
         
         // Act
         let encodedData = try! JSONEncoder().encode(geoJSON)
-        let encodedJSON = try! JSONDecoder().decode(GeoJSONObject.self, from: encodedData)
+        let encodedJSON = try! JSONDecoder().decode(TurfGeoJSONObject.self, from: encodedData)
         
         // Assert
         guard case let .feature(geometryCollectionFeature) = encodedJSON else {

@@ -8,8 +8,8 @@ class PointTests: XCTestCase {
 
     func testPointFeature() {
         let data = try! Fixture.geojsonData(from: "point")!
-        let geojson = try! JSONDecoder().decode(GeoJSONObject.self, from: data)
-        let coordinate = LocationCoordinate2D(latitude: 26.194876675795218, longitude: 14.765625)
+        let geojson = try! JSONDecoder().decode(TurfGeoJSONObject.self, from: data)
+        let coordinate = TurfLocationCoordinate2D(latitude: 26.194876675795218, longitude: 14.765625)
 
         guard case let .feature(feature) = geojson,
               case let .point(point) = feature.geometry else {
@@ -24,7 +24,7 @@ class PointTests: XCTestCase {
         }
 
         let encodedData = try! JSONEncoder().encode(geojson)
-        let decoded = try! JSONDecoder().decode(GeoJSONObject.self, from: encodedData)
+        let decoded = try! JSONDecoder().decode(TurfGeoJSONObject.self, from: encodedData)
         
         guard case let .feature(decodedFeature) = decoded,
               case let .point(decodedPoint) = decodedFeature.geometry else {
@@ -43,7 +43,7 @@ class PointTests: XCTestCase {
     
     func testUnkownPointFeature() {
         let data = try! Fixture.geojsonData(from: "point")!
-        let geojson = try! JSONDecoder().decode(GeoJSONObject.self, from: data)
+        let geojson = try! JSONDecoder().decode(TurfGeoJSONObject.self, from: data)
         
         guard case let .feature(feature) = geojson,
               case let .point(point) = feature.geometry else {
@@ -51,11 +51,11 @@ class PointTests: XCTestCase {
         }
         
         var encodedData: Data?
-        XCTAssertNoThrow(encodedData = try JSONEncoder().encode(GeoJSONObject.geometry(XCTUnwrap(feature.geometry))))
+        XCTAssertNoThrow(encodedData = try JSONEncoder().encode(TurfGeoJSONObject.geometry(XCTUnwrap(feature.geometry))))
         XCTAssertNotNil(encodedData)
         
-        var decoded: GeoJSONObject?
-        XCTAssertNoThrow(decoded = try JSONDecoder().decode(GeoJSONObject.self, from: encodedData!))
+        var decoded: TurfGeoJSONObject?
+        XCTAssertNoThrow(decoded = try JSONDecoder().decode(TurfGeoJSONObject.self, from: encodedData!))
         XCTAssertNotNil(decoded)
         
         guard case let .geometry(.point(decodedPoint)) = decoded else { return XCTFail() }

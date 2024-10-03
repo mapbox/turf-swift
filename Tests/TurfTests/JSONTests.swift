@@ -3,18 +3,18 @@ import Turf
 
 class JSONTests: XCTestCase {
     func testRawValues() {
-        XCTAssertEqual(JSONValue(rawValue: "Jason" as NSString), .string("Jason"))
-        XCTAssertEqual(JSONValue(rawValue: 42 as NSNumber), .number(42))
-        XCTAssertEqual(JSONValue(rawValue: 3.1415 as NSNumber), .number(3.1415))
-        XCTAssertEqual(JSONValue(rawValue: false as NSNumber), .boolean(false))
-        XCTAssertEqual(JSONValue(rawValue: true as NSNumber), .boolean(true))
-        XCTAssertEqual(JSONValue(rawValue: false), .boolean(false))
-        XCTAssertEqual(JSONValue(rawValue: true), .boolean(true))
-        XCTAssertEqual(JSONValue(rawValue: 0 as NSNumber), .number(0))
-        XCTAssertEqual(JSONValue(rawValue: 1 as NSNumber), .number(1))
-        XCTAssertEqual(JSONValue(rawValue: ["Jason", 42, 3.1415, false, true, nil, [], [:]] as NSArray),
+        XCTAssertEqual(TurfJSONValue(rawValue: "Jason" as NSString), .string("Jason"))
+        XCTAssertEqual(TurfJSONValue(rawValue: 42 as NSNumber), .number(42))
+        XCTAssertEqual(TurfJSONValue(rawValue: 3.1415 as NSNumber), .number(3.1415))
+        XCTAssertEqual(TurfJSONValue(rawValue: false as NSNumber), .boolean(false))
+        XCTAssertEqual(TurfJSONValue(rawValue: true as NSNumber), .boolean(true))
+        XCTAssertEqual(TurfJSONValue(rawValue: false), .boolean(false))
+        XCTAssertEqual(TurfJSONValue(rawValue: true), .boolean(true))
+        XCTAssertEqual(TurfJSONValue(rawValue: 0 as NSNumber), .number(0))
+        XCTAssertEqual(TurfJSONValue(rawValue: 1 as NSNumber), .number(1))
+        XCTAssertEqual(TurfJSONValue(rawValue: ["Jason", 42, 3.1415, false, true, nil, [], [:]] as NSArray),
                        .array(["Jason", 42, 3.1415, false, true, nil, [], [:]]))
-        XCTAssertEqual(JSONValue(rawValue: [
+        XCTAssertEqual(TurfJSONValue(rawValue: [
             "string": "Jason",
             "integer": 42,
             "float": 3.1415,
@@ -35,67 +35,67 @@ class JSONTests: XCTestCase {
             "dictionary": [:],
         ]))
         
-        XCTAssertNil(JSONValue(rawValue: NSNull()))
-        XCTAssertEqual(JSONValue(rawValue: [NSNull()]), .array([nil]))
+        XCTAssertNil(TurfJSONValue(rawValue: NSNull()))
+        XCTAssertEqual(TurfJSONValue(rawValue: [NSNull()]), .array([nil]))
         XCTAssertEqual(JSONArray(turfRawValue: [NSNull()]), [nil])
-        XCTAssertEqual(JSONValue(rawValue: ["NSNull": NSNull()]), .object(["NSNull": nil]))
+        XCTAssertEqual(TurfJSONValue(rawValue: ["NSNull": NSNull()]), .object(["NSNull": nil]))
         XCTAssertEqual(JSONObject(turfRawValue: ["NSNull": NSNull()]), ["NSNull": nil])
         
-        XCTAssertNil(JSONValue(rawValue: Set(["Get"])))
-        XCTAssertEqual(JSONValue(rawValue: [Set(["Get"])]), .array([nil]))
+        XCTAssertNil(TurfJSONValue(rawValue: Set(["Get"])))
+        XCTAssertEqual(TurfJSONValue(rawValue: [Set(["Get"])]), .array([nil]))
         XCTAssertEqual(JSONArray(turfRawValue: [Set(["Get"])]), [nil])
-        XCTAssertEqual(JSONValue(rawValue: ["set": Set(["Get"])]), .object(["set": nil]))
+        XCTAssertEqual(TurfJSONValue(rawValue: ["set": Set(["Get"])]), .object(["set": nil]))
         XCTAssertEqual(JSONObject(turfRawValue: ["set": Set(["Get"])]), ["set": nil])
     }
     
     func testLiterals() throws {
-        if case let JSONValue.string(string) = "Jason" {
+        if case let TurfJSONValue.string(string) = "Jason" {
             XCTAssertEqual(string, "Jason")
         } else {
             XCTFail()
         }
         
-        if case let JSONValue.number(number) = 42 {
+        if case let TurfJSONValue.number(number) = 42 {
             XCTAssertEqual(number, 42)
         } else {
             XCTFail()
         }
         
-        if case let JSONValue.number(number) = 3.1415 {
+        if case let TurfJSONValue.number(number) = 3.1415 {
             XCTAssertEqual(number, 3.1415)
         } else {
             XCTFail()
         }
         
-        if case let JSONValue.boolean(boolean) = false {
+        if case let TurfJSONValue.boolean(boolean) = false {
             XCTAssertFalse(boolean)
         } else {
             XCTFail()
         }
         
-        if case let JSONValue.boolean(boolean) = true {
+        if case let TurfJSONValue.boolean(boolean) = true {
             XCTAssertTrue(boolean)
         } else {
             XCTFail()
         }
         
-        if case JSONValue.boolean = 0 {
+        if case TurfJSONValue.boolean = 0 {
             XCTFail()
         }
         
-        if case JSONValue.boolean = 1 {
+        if case TurfJSONValue.boolean = 1 {
             XCTFail()
         }
         
-        if case JSONValue.number = false {
+        if case TurfJSONValue.number = false {
             XCTFail()
         }
         
-        if case JSONValue.number = true {
+        if case TurfJSONValue.number = true {
             XCTFail()
         }
         
-        if case let JSONValue.array(array) = ["Jason", 42, 3.1415, false, true, nil, [], [:]],
+        if case let TurfJSONValue.array(array) = ["Jason", 42, 3.1415, false, true, nil, [], [:]],
            array.count == 8 {
             if case let .string(string) = array[0] {
                 XCTAssertEqual(string, "Jason")
@@ -146,7 +146,7 @@ class JSONTests: XCTestCase {
             XCTFail()
         }
         
-        if case let JSONValue.object(object) = [
+        if case let TurfJSONValue.object(object) = [
             "string": "Jason",
             "integer": 42,
             "float": 3.1415,
@@ -210,8 +210,8 @@ class JSONTests: XCTestCase {
     func testCoding() {
         let rawArray = ["Jason", 42, 3.1415, false, true, nil, [], [:]] as [Any?]
         let serializedArray = try! JSONSerialization.data(withJSONObject: rawArray, options: [])
-        var decodedValue: JSONValue?
-        XCTAssertNoThrow(decodedValue = try JSONDecoder().decode(JSONValue.self, from: serializedArray))
+        var decodedValue: TurfJSONValue?
+        XCTAssertNoThrow(decodedValue = try JSONDecoder().decode(TurfJSONValue.self, from: serializedArray))
         XCTAssertNotNil(decodedValue)
         
         if case let .array(array) = decodedValue,
@@ -236,7 +236,7 @@ class JSONTests: XCTestCase {
             "dictionary": [:],
         ] as [String: Any?]
         let serializedObject = try! JSONSerialization.data(withJSONObject: rawObject, options: [])
-        XCTAssertNoThrow(decodedValue = try JSONDecoder().decode(JSONValue.self, from: serializedObject))
+        XCTAssertNoThrow(decodedValue = try JSONDecoder().decode(TurfJSONValue.self, from: serializedObject))
         XCTAssertNotNil(decodedValue)
         
         if case let .object(object) = decodedValue,
@@ -254,25 +254,25 @@ class JSONTests: XCTestCase {
         let rawString = "[0, 1, true, false]"
         // force-unwrap is safe since we control the input
         let serializedArrayFromString = rawString.data(using: .utf8)!
-        XCTAssertNoThrow(decodedValue = try JSONDecoder().decode(JSONValue.self, from: serializedArrayFromString))
+        XCTAssertNoThrow(decodedValue = try JSONDecoder().decode(TurfJSONValue.self, from: serializedArrayFromString))
         XCTAssertNotNil(decodedValue)
         XCTAssertEqual(.array([.number(0), .number(1), .boolean(true), .boolean(false)]), decodedValue)
     }
     
     func testConvenienceAccessors() {
-        XCTAssertEqual(JSONValue.string("Jason").string, "Jason")
-        XCTAssertEqual(JSONValue.string("Jason").number, nil)
+        XCTAssertEqual(TurfJSONValue.string("Jason").string, "Jason")
+        XCTAssertEqual(TurfJSONValue.string("Jason").number, nil)
 
-        XCTAssertEqual(JSONValue.number(42).number, 42)
-        XCTAssertEqual(JSONValue.number(42).string, nil)
+        XCTAssertEqual(TurfJSONValue.number(42).number, 42)
+        XCTAssertEqual(TurfJSONValue.number(42).string, nil)
 
-        XCTAssertEqual(JSONValue.boolean(true).boolean, true)
-        XCTAssertEqual(JSONValue.boolean(true).string, nil)
+        XCTAssertEqual(TurfJSONValue.boolean(true).boolean, true)
+        XCTAssertEqual(TurfJSONValue.boolean(true).string, nil)
 
-        XCTAssertEqual(JSONValue.array(["Jason", 42, 3.1415, false, true, nil, [], [:]]).array, ["Jason", 42, 3.1415, false, true, nil, [], [:]])
-        XCTAssertEqual(JSONValue.array(["Jason", 42, 3.1415, false, true, nil, [], [:]]).string, nil)
+        XCTAssertEqual(TurfJSONValue.array(["Jason", 42, 3.1415, false, true, nil, [], [:]]).array, ["Jason", 42, 3.1415, false, true, nil, [], [:]])
+        XCTAssertEqual(TurfJSONValue.array(["Jason", 42, 3.1415, false, true, nil, [], [:]]).string, nil)
 
-        XCTAssertEqual(JSONValue.object([
+        XCTAssertEqual(TurfJSONValue.object([
             "string": "Jason",
             "integer": 42,
             "float": 3.1415,
@@ -291,7 +291,7 @@ class JSONTests: XCTestCase {
             "array": [],
             "dictionary": [:],
         ])
-        XCTAssertEqual(JSONValue.object([
+        XCTAssertEqual(TurfJSONValue.object([
             "string": "Jason",
             "integer": 42,
             "float": 3.1415,

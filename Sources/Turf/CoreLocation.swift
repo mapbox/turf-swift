@@ -30,7 +30,7 @@ public typealias LocationDegrees = CLLocationDegrees
  
  This is a compatibility shim to keep the library’s public interface consistent between Apple and non-Apple platforms that lack Core Location. On Apple platforms, you can use `CLLocationCoordinate2D` anywhere you see this type.
  */
-public typealias LocationCoordinate2D = CLLocationCoordinate2D
+public typealias TurfLocationCoordinate2D = CLLocationCoordinate2D
 #else
 /**
  An azimuth measured in degrees clockwise from true north.
@@ -47,10 +47,14 @@ public typealias LocationDistance = Double
  */
 public typealias LocationDegrees = Double
 
+#if !MAPBOX_COMMON_WITH_TURF_SWIFT_LIBRARY
+public typealias LocationCoordinate2D = TurfLocationCoordinate2D
+#endif
+
 /**
  A geographic coordinate with its components measured in degrees.
  */
-public struct LocationCoordinate2D: Sendable {
+public struct TurfLocationCoordinate2D: Sendable {
     /**
      The latitude in degrees.
      */
@@ -71,11 +75,11 @@ public struct LocationCoordinate2D: Sendable {
 }
 #endif
 
-extension LocationCoordinate2D {
+extension TurfLocationCoordinate2D {
     /**
         Returns a normalized coordinate, wrapped to -180 and 180 degrees latitude
      */
-    var normalized: LocationCoordinate2D {
+    var normalized: TurfLocationCoordinate2D {
         return .init(
             latitude: latitude,
             longitude: longitude.wrap(min: -180, max: 180)
@@ -127,8 +131,8 @@ extension LocationDegrees {
 struct LocationCoordinate2DCodable: Codable {
     var latitude: LocationDegrees
     var longitude: LocationDegrees
-    var decodedCoordinates: LocationCoordinate2D {
-        return LocationCoordinate2D(latitude: latitude, longitude: longitude)
+    var decodedCoordinates: TurfLocationCoordinate2D {
+        return TurfLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -143,76 +147,86 @@ struct LocationCoordinate2DCodable: Codable {
         latitude = try container.decode(LocationDegrees.self)
     }
     
-    init(_ coordinate: LocationCoordinate2D) {
+    init(_ coordinate: TurfLocationCoordinate2D) {
         latitude = coordinate.latitude
         longitude = coordinate.longitude
     }
 }
 
-extension LocationCoordinate2D {
+extension TurfLocationCoordinate2D {
     var codableCoordinates: LocationCoordinate2DCodable {
         return LocationCoordinate2DCodable(self)
     }
 }
 
 extension Array where Element == LocationCoordinate2DCodable {
-    var decodedCoordinates: [LocationCoordinate2D] {
+    var decodedCoordinates: [TurfLocationCoordinate2D] {
         return map { $0.decodedCoordinates }
     }
 }
 
 extension Array where Element == [LocationCoordinate2DCodable] {
-    var decodedCoordinates: [[LocationCoordinate2D]] {
+    var decodedCoordinates: [[TurfLocationCoordinate2D]] {
         return map { $0.decodedCoordinates }
     }
 }
 
 extension Array where Element == [[LocationCoordinate2DCodable]] {
-    var decodedCoordinates: [[[LocationCoordinate2D]]] {
+    var decodedCoordinates: [[[TurfLocationCoordinate2D]]] {
         return map { $0.decodedCoordinates }
     }
 }
 
-extension Array where Element == LocationCoordinate2D {
+extension Array where Element == TurfLocationCoordinate2D {
     var codableCoordinates: [LocationCoordinate2DCodable] {
         return map { $0.codableCoordinates }
     }
 }
 
-extension Array where Element == [LocationCoordinate2D] {
+extension Array where Element == [TurfLocationCoordinate2D] {
     var codableCoordinates: [[LocationCoordinate2DCodable]] {
         return map { $0.codableCoordinates }
     }
 }
 
-extension Array where Element == [[LocationCoordinate2D]] {
+extension Array where Element == [[TurfLocationCoordinate2D]] {
     var codableCoordinates: [[[LocationCoordinate2DCodable]]] {
         return map { $0.codableCoordinates }
     }
 }
 
-extension LocationCoordinate2D: Equatable {
-    
-    /// Instantiates a LocationCoordinate2D from a RadianCoordinate2D
-    public init(_ radianCoordinate: RadianCoordinate2D) {
-        self.init(latitude: radianCoordinate.latitude.toDegrees(), longitude: radianCoordinate.longitude.toDegrees())
-    }
-    
-    public static func ==(lhs: LocationCoordinate2D, rhs: LocationCoordinate2D) -> Bool {
+#if swift(>=6.0)
+extension TurfLocationCoordinate2D: @retroactive Equatable {
+    public static func ==(lhs: TurfLocationCoordinate2D, rhs: TurfLocationCoordinate2D) -> Bool {
         return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
     }
-    
+}
+#else
+extension TurfLocationCoordinate2D: Equatable {
+    public static func ==(lhs: TurfLocationCoordinate2D, rhs: TurfLocationCoordinate2D) -> Bool {
+        return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
+    }
+}
+#endif
+
+extension TurfLocationCoordinate2D {
+
+    /// Instantiates a TurfLocationCoordinate2D from a TurfRadianCoordinate2D
+    public init(_ radianCoordinate: TurfRadianCoordinate2D) {
+        self.init(latitude: radianCoordinate.latitude.toDegrees(), longitude: radianCoordinate.longitude.toDegrees())
+    }
+
     /**
      Returns the direction from the receiver to the given coordinate.
      
      This method is equivalent to the [turf-bearing](https://turfjs.org/docs/#bearing) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-bearing/)).
      */
-    public func direction(to coordinate: LocationCoordinate2D) -> LocationDirection {
-        return RadianCoordinate2D(self).direction(to: RadianCoordinate2D(coordinate)).converted(to: .degrees).value
+    public func direction(to coordinate: TurfLocationCoordinate2D) -> LocationDirection {
+        return TurfRadianCoordinate2D(self).direction(to: TurfRadianCoordinate2D(coordinate)).converted(to: .degrees).value
     }
     
     /// Returns a coordinate a certain Haversine distance away in the given direction.
-    public func coordinate(at distance: LocationDistance, facing direction: LocationDirection) -> LocationCoordinate2D {
+    public func coordinate(at distance: LocationDistance, facing direction: LocationDirection) -> TurfLocationCoordinate2D {
         let angle = Measurement(value: direction, unit: UnitAngle.degrees)
         return coordinate(at: distance, facing: angle)
     }
@@ -222,9 +236,9 @@ extension LocationCoordinate2D: Equatable {
      
      This method is equivalent to the [turf-destination](https://turfjs.org/docs/#destination) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-destination/)).
      */
-    public func coordinate(at distance: LocationDistance, facing direction: Measurement<UnitAngle>) -> LocationCoordinate2D {
-        let radianCoordinate = RadianCoordinate2D(self).coordinate(at: distance / metersPerRadian, facing: direction)
-        return LocationCoordinate2D(radianCoordinate)
+    public func coordinate(at distance: LocationDistance, facing direction: Measurement<UnitAngle>) -> TurfLocationCoordinate2D {
+        let radianCoordinate = TurfRadianCoordinate2D(self).coordinate(at: distance / metersPerRadian, facing: direction)
+        return TurfLocationCoordinate2D(radianCoordinate)
     }
     
     /**
@@ -232,8 +246,8 @@ extension LocationCoordinate2D: Equatable {
      
      This method is equivalent to the [turf-distance](https://turfjs.org/docs/#distance) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-distance/)).
      */
-    public func distance(to coordinate: LocationCoordinate2D) -> LocationDistance {
-        return RadianCoordinate2D(self).distance(to: RadianCoordinate2D(coordinate)) * metersPerRadian
+    public func distance(to coordinate: TurfLocationCoordinate2D) -> LocationDistance {
+        return TurfRadianCoordinate2D(self).distance(to: TurfRadianCoordinate2D(coordinate)) * metersPerRadian
     }
 }
 

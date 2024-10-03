@@ -1,11 +1,16 @@
 import Foundation
 
+
+#if !MAPBOX_COMMON_WITH_TURF_SWIFT_LIBRARY
+public typealias FeatureCollection = TurfFeatureCollection
+#endif
+
 /**
- A [FeatureCollection object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.3) is a collection of Feature objects.
+ A [TurfFeatureCollection object](https://datatracker.ietf.org/doc/html/rfc7946#section-3.3) is a collection of TurfFeature objects.
  */
-public struct FeatureCollection: Equatable, ForeignMemberContainer {
+public struct TurfFeatureCollection: Equatable, ForeignMemberContainer {
     /// The features that the collection contains.
-    public var features: [Feature] = []
+    public var features: [TurfFeature] = []
     
     public var foreignMembers: JSONObject = [:]
     
@@ -14,12 +19,12 @@ public struct FeatureCollection: Equatable, ForeignMemberContainer {
      
      - parameter features: The features that the collection contains.
      */
-    public init(features: [Feature]) {
+    public init(features: [TurfFeature]) {
         self.features = features
     }
 }
 
-extension FeatureCollection: Codable {
+extension TurfFeatureCollection: Codable {
     private enum CodingKeys: String, CodingKey {
         case kind = "type"
         case features
@@ -32,7 +37,7 @@ extension FeatureCollection: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         _ = try container.decode(Kind.self, forKey: .kind)
-        features = try container.decode([Feature].self, forKey: .features)
+        features = try container.decode([TurfFeature].self, forKey: .features)
         try decodeForeignMembers(notKeyedBy: CodingKeys.self, with: decoder)
     }
     
