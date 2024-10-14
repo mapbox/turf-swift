@@ -3,697 +3,1523 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		03728076308F43DBB980238A /* install */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 97974B2031B645DBB13D0138 /* Build configuration list for PBXAggregateTarget "install" */;
+			buildPhases = (
+				93426DA6A4AC2C2AC9CE883C /* CMake PostBuild Rules */,
+			);
+			dependencies = (
+				6C3C53FA00034426A2D02DD0 /* PBXTargetDependency */,
+			);
+			name = install;
+			productName = install;
+		};
+		1097E08171F745ADA77ACE5C /* RUN_TESTS */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 17CF07CBA1ED4047BDDB2E19 /* Build configuration list for PBXAggregateTarget "RUN_TESTS" */;
+			buildPhases = (
+				003C8D08B0008F35F218E126 /* CMake PostBuild Rules */,
+			);
+			dependencies = (
+			);
+			name = RUN_TESTS;
+			productName = RUN_TESTS;
+		};
+		51542EF74E69486F9388FE64 /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 555A6A4756A54E129DD0156E /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				F0E362A4674E1434EB6C5FF5 /* Generate CMakeFiles/ALL_BUILD */,
+			);
+			dependencies = (
+				1600898F5E2940BF89671986 /* PBXTargetDependency */,
+				CFE7F696A09140A584E74C09 /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+		E88B33A18E3D4A1DBDCF9BEC /* ZERO_CHECK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 5538B9087B894E7F96DD5CBC /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildPhases = (
+				3E905B8775A2823E46D95101 /* Generate CMakeFiles/ZERO_CHECK */,
+			);
+			dependencies = (
+			);
+			name = ZERO_CHECK;
+			productName = ZERO_CHECK;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
-		11E726FA26247D3900C1890B /* LocationCoordinate2DTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E726F926247D3900C1890B /* LocationCoordinate2DTests.swift */; };
-		11E7270C2624840900C1890B /* RadianCoordinate2DTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E7270B2624840900C1890B /* RadianCoordinate2DTests.swift */; };
-		2B0BA0472947700A00402F81 /* Consumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0BA0462947700A00402F81 /* Consumer.swift */; };
-		2B0BA0492947709200402F81 /* Consumer+WKT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0BA0482947709200402F81 /* Consumer+WKT.swift */; };
-		2B0BA04B29487A0400402F81 /* WKTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0BA04A29487A0400402F81 /* WKTTests.swift */; };
-		2B3757562943887A00D52D0F /* WKT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3757552943887A00D52D0F /* WKT.swift */; };
-		2B5FABFD24066EB7008A285F /* geometry-collection.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 2B5FABFB24066EA5008A285F /* geometry-collection.geojson */; };
-		2B5FAC0124067051008A285F /* GeometryCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5FAC0024067051008A285F /* GeometryCollectionTests.swift */; };
-		2B5FAC0A2406B8B7008A285F /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5FAC092406B8B7008A285F /* Feature.swift */; };
-		2B5FAC122406BADF008A285F /* GeoJSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573EA6C215A393F009899D7 /* GeoJSONTests.swift */; };
-		2B64F7AC2407ECD300C2559B /* LineString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E7D20DAF4E700C4923D /* LineString.swift */; };
-		2B74CD782485372800EE6693 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B74CD772485372800EE6693 /* Point.swift */; };
-		2B74CD7D2485375C00EE6693 /* MultiPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B74CD7C2485375C00EE6693 /* MultiPoint.swift */; };
-		2B74CD822485377900EE6693 /* MultiLineString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B74CD812485377900EE6693 /* MultiLineString.swift */; };
-		2B74CD872485388C00EE6693 /* MultiPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B74CD862485388C00EE6693 /* MultiPolygon.swift */; };
-		2B74CD8C248538A600EE6693 /* GeometryCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B74CD8B248538A600EE6693 /* GeometryCollection.swift */; };
-		3502F791201F507500399EFE /* GeoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502F790201F507500399EFE /* GeoJSON.swift */; };
-		3502F796201F53FC00399EFE /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502F795201F53FC00399EFE /* Codable.swift */; };
-		3502F7A3201F568000399EFE /* point.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3502F7A2201F568000399EFE /* point.geojson */; };
-		3502F7A7201F616E00399EFE /* simple-line.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3502F7A6201F616E00399EFE /* simple-line.geojson */; };
-		35166856202E6CEE0032A97E /* multipoint.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 35166855202E6CEE0032A97E /* multipoint.geojson */; };
-		3516685A202EFE690032A97E /* multiline.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 35166859202EFE680032A97E /* multiline.geojson */; };
-		3516685E202EFF130032A97E /* multipolygon.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3516685D202EFF130032A97E /* multipolygon.geojson */; };
-		3534C3B8200C419100F93581 /* dc-line.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3547ECFB200C3C82009DA062 /* dc-line.geojson */; };
-		3534C3B9200C419100F93581 /* polygon.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 3547ECFC200C3C82009DA062 /* polygon.geojson */; };
-		3547ECF4200C3C78009DA062 /* Turf.h in Headers */ = {isa = PBXBuildFile; fileRef = 3547ECEF200C3C78009DA062 /* Turf.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3547ECF5200C3C78009DA062 /* CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3547ECF0200C3C78009DA062 /* CoreLocation.swift */; };
-		3547ECF6200C3C78009DA062 /* Turf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3547ECF1200C3C78009DA062 /* Turf.swift */; };
-		3547ED0E200C3E00009DA062 /* TurfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3547ECF9200C3C82009DA062 /* TurfTests.swift */; };
-		3547ED10200C3E0B009DA062 /* Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3547ECFD200C3C82009DA062 /* Fixture.swift */; };
-		35650AFA1F150DC500B5C158 /* Turf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35650AF01F150DC500B5C158 /* Turf.framework */; };
-		357495BE208E3432007D7477 /* featurecollection.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 357495BD208E3432007D7477 /* featurecollection.geojson */; };
-		35B56E6A20DAF3C500C4923D /* RadianCoordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E6920DAF3C500C4923D /* RadianCoordinate2D.swift */; };
-		35B56E6F20DAF41F00C4923D /* Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E6E20DAF41F00C4923D /* Ring.swift */; };
-		35B56E7420DAF47D00C4923D /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E7320DAF47D00C4923D /* Polygon.swift */; };
-		35B56E9220DAF66A00C4923D /* FeatureCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E9120DAF66A00C4923D /* FeatureCollection.swift */; };
-		35B56E9720DAF82F00C4923D /* PointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E9620DAF82F00C4923D /* PointTests.swift */; };
-		35B56E9B20DAF86000C4923D /* LineStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E9A20DAF86000C4923D /* LineStringTests.swift */; };
-		35B56E9F20DAF88C00C4923D /* PolygonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56E9E20DAF88C00C4923D /* PolygonTests.swift */; };
-		35B56EA320DAF89F00C4923D /* MultiPointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56EA220DAF89F00C4923D /* MultiPointTests.swift */; };
-		35B56EA720DAF8BB00C4923D /* MultiLineStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56EA620DAF8BB00C4923D /* MultiLineStringTests.swift */; };
-		35B56EAB20DAF8CB00C4923D /* MultiPolygonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56EAA20DAF8CB00C4923D /* MultiPolygonTests.swift */; };
-		35B56EAF20DAF8DE00C4923D /* FeatureCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B56EAE20DAF8DE00C4923D /* FeatureCollectionTests.swift */; };
-		35ECAF2F20974A1800DC3BC3 /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ECAF2E20974A1800DC3BC3 /* Geometry.swift */; };
-		35ECAF362099EC0700DC3BC3 /* FeatureIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ECAF352099EC0700DC3BC3 /* FeatureIdentifier.swift */; };
-		3A40B38226E48262004457C4 /* Simplifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A40B38126E48262004457C4 /* Simplifier.swift */; };
-		7AA969AC21B98F8F009C57FE /* Spline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA969AB21B98F8F009C57FE /* Spline.swift */; };
-		C46809D721241B5100BAD5E1 /* featurecollection-no-properties.geojson in Resources */ = {isa = PBXBuildFile; fileRef = C46809D52124199500BAD5E1 /* featurecollection-no-properties.geojson */; };
-		CE2EB998214C246A00915A30 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2EB997214C246A00915A30 /* BoundingBox.swift */; };
-		CE7F8164215182FF00A9D221 /* BoundingBoxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7F8163215182FF00A9D221 /* BoundingBoxTests.swift */; };
-		DA972D7A26FEB9DC009F5615 /* simplify in Resources */ = {isa = PBXBuildFile; fileRef = DA972D7926FEB9DC009F5615 /* simplify */; };
-		DA972D932702763B009F5615 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA972D922702763B009F5615 /* JSON.swift */; };
-		DA972DA6270289C5009F5615 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA972DA5270289C5009F5615 /* JSONTests.swift */; };
+		01363AD5CA3C4946A1708F36 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/featurecollection-no-properties.geojson */ = {isa = PBXBuildFile; fileRef = E1A07FAB56D54E37BFE6785E /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/featurecollection-no-properties.geojson */; };
+		069E9281DD8D4737861C427E /* /Users/aleks/Developer/turf-swift/Sources/Turf/Codable.swift */ = {isa = PBXBuildFile; fileRef = 5390DAB1605A43C68BAE7F0F /* /Users/aleks/Developer/turf-swift/Sources/Turf/Codable.swift */; };
+		0A8D2697EBA841F1B4034F65 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/PointTests.swift */ = {isa = PBXBuildFile; fileRef = 54F3CCA2186849949FD3BD32 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/PointTests.swift */; };
+		0F5E1BBFA06C4BFF9AC9FCFA /* /Users/aleks/Developer/turf-swift/Sources/Turf/BoundingBox.swift */ = {isa = PBXBuildFile; fileRef = EE6A3983DC6D4E52AD76B9A5 /* /Users/aleks/Developer/turf-swift/Sources/Turf/BoundingBox.swift */; };
+		12C24873A68641278294128E /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/BoundingBoxTests.swift */ = {isa = PBXBuildFile; fileRef = 37D8EDA9057B4FD9AA8429B5 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/BoundingBoxTests.swift */; };
+		1423D1845C504814B404B439 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/simple-line.geojson */ = {isa = PBXBuildFile; fileRef = 44E53818CDFF409C8010EF76 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/simple-line.geojson */; };
+		1543AEE6ED984FA18D99DBB0 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/MultiPolygonTests.swift */ = {isa = PBXBuildFile; fileRef = BE691F71480A44A0948FF0F5 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/MultiPolygonTests.swift */; };
+		160CC55B7DB049F98C2D69FA /* /Users/aleks/Developer/turf-swift/Sources/Turf/Spline.swift */ = {isa = PBXBuildFile; fileRef = 4F257AFD0BC945819ADF259F /* /Users/aleks/Developer/turf-swift/Sources/Turf/Spline.swift */; };
+		1E032F831A314648A5F401B1 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/WKTTests.swift */ = {isa = PBXBuildFile; fileRef = DBE5866CC9C9437486D79C32 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/WKTTests.swift */; };
+		26D38ADDAAF0449D938DACDE /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/MultiLineStringTests.swift */ = {isa = PBXBuildFile; fileRef = AB286451D372433F99ED31AC /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/MultiLineStringTests.swift */; };
+		26F4118C275645E789CC1651 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Consumer/Consumer.swift */ = {isa = PBXBuildFile; fileRef = 0D055F73618B4957BAEAB292 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Consumer/Consumer.swift */; };
+		28488D054844436FB452F729 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/TurfTests.swift */ = {isa = PBXBuildFile; fileRef = 7457FE10BBAA42EFBF97B08F /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/TurfTests.swift */; };
+		39975EAD2C46493FBFA2C71E /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/dc-line.geojson */ = {isa = PBXBuildFile; fileRef = A42E9ED99C934A06A57BFB77 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/dc-line.geojson */; };
+		3D1C297C3E3E4979AEC91826 /* /Users/aleks/Developer/turf-swift/Sources/Turf/JSON.swift */ = {isa = PBXBuildFile; fileRef = EDEFAC1BEF284D7792D75FC7 /* /Users/aleks/Developer/turf-swift/Sources/Turf/JSON.swift */; };
+		488CA364D7374911B57BF63B /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/multipolygon.geojson */ = {isa = PBXBuildFile; fileRef = A952D2DC12A9438E8987DB9B /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/multipolygon.geojson */; };
+		4F7D776A682F465C8E064562 /* /Users/aleks/Developer/turf-swift/Sources/Turf/FeatureIdentifier.swift */ = {isa = PBXBuildFile; fileRef = 0E23F9B956AF424EAD5B46B1 /* /Users/aleks/Developer/turf-swift/Sources/Turf/FeatureIdentifier.swift */; };
+		50E0AE3CD9A64B0290D7E20A /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/GeometryCollectionTests.swift */ = {isa = PBXBuildFile; fileRef = 6D19F32BEE3348E4BD4D4A2C /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/GeometryCollectionTests.swift */; };
+		53343D146453482B86CFA6CD /* /Users/aleks/Developer/turf-swift/Sources/Turf/FeatureCollection.swift */ = {isa = PBXBuildFile; fileRef = 6E95374FB79B46C187B14698 /* /Users/aleks/Developer/turf-swift/Sources/Turf/FeatureCollection.swift */; };
+		54AE0D797492424F8F94C69D /* /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework */ = {isa = PBXBuildFile; fileRef = D3534E1CFA37419B8AE6F501 /* /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework */; };
+		563BE1723A704A91B0C27EB3 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/Polygon.swift */ = {isa = PBXBuildFile; fileRef = 5A7CA35152E54DF9AFF069B2 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/Polygon.swift */; };
+		5781C0F4781244B19BB96492 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/LineStringTests.swift */ = {isa = PBXBuildFile; fileRef = C4726B7B7824434D9D5F81FA /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/LineStringTests.swift */; };
+		594219724B8440439A48B9A2 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/LineString.swift */ = {isa = PBXBuildFile; fileRef = 1A9186B25EB849AAB2EF7B8B /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/LineString.swift */; };
+		5A53BF8B72D14C86B040A2FE /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/FeatureCollectionTests.swift */ = {isa = PBXBuildFile; fileRef = BCE2FD3272E04923A7F6E2ED /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/FeatureCollectionTests.swift */; };
+		698766083ED747F0A3B8E870 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Consumer/Consumer+WKT.swift */ = {isa = PBXBuildFile; fileRef = B07A3D2185994D78A091351F /* /Users/aleks/Developer/turf-swift/Sources/Turf/Consumer/Consumer+WKT.swift */; };
+		6AE78F70005C42ABA207A0EC /* /Users/aleks/Developer/turf-swift/build/Sources/CMakeFiles/Turf.dir/Info.plist */ = {isa = PBXBuildFile; fileRef = 14F0658B1FAD457588E50348 /* /Users/aleks/Developer/turf-swift/build/Sources/CMakeFiles/Turf.dir/Info.plist */; };
+		6BDE091797B84C3DB9E4C9E1 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/geometry-collection.geojson */ = {isa = PBXBuildFile; fileRef = 2438267A0FE84EB3A926AE0A /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/geometry-collection.geojson */; };
+		6C4EBFFCA7F143A09600E1BE /* /Users/aleks/Developer/turf-swift/Sources/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 4EE6C7B6E4954CC7B1AF8E48 /* /Users/aleks/Developer/turf-swift/Sources/CMakeLists.txt */; };
+		6E199F9B1EF6466DA6D333B6 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/GeoJSONTests.swift */ = {isa = PBXBuildFile; fileRef = 19322361AE594C539724BC74 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/GeoJSONTests.swift */; };
+		7A49A7146EC740A8884956D0 /* /Users/aleks/Developer/turf-swift/Tests/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 2F3D10134C4B4AAA9DE7D362 /* /Users/aleks/Developer/turf-swift/Tests/CMakeLists.txt */; };
+		812C2288602E484D96FC31F7 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/MultiPointTests.swift */ = {isa = PBXBuildFile; fileRef = 35DD115737C8461F96DAC8CB /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/MultiPointTests.swift */; };
+		82C8CCB1D79B4C8292945ADA /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/Point.swift */ = {isa = PBXBuildFile; fileRef = 6CC3D0CD272A4936A3147123 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/Point.swift */; };
+		891866475CEC4530AB51C155 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/simplify */ = {isa = PBXBuildFile; fileRef = E1947DF3BFF34D928A564E08 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/simplify */; };
+		8AE8AECE9A1844158B7B0B08 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/polygon.geojson */ = {isa = PBXBuildFile; fileRef = D34BB88DC558468AA95DDC13 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/polygon.geojson */; };
+		8BFE43DB08F64511A4097A71 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/MultiPolygon.swift */ = {isa = PBXBuildFile; fileRef = 1F08BAEAF692483E9970B565 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/MultiPolygon.swift */; };
+		8DE875A9BAE44434827E8DE6 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/RadianCoordinate2DTests.swift */ = {isa = PBXBuildFile; fileRef = AA3D039731604DFA82143D97 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/RadianCoordinate2DTests.swift */; };
+		95BDF07F5C154DD2A5A36C67 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometry.swift */ = {isa = PBXBuildFile; fileRef = D210A861A1F644BBA6827DE7 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometry.swift */; };
+		9AB181A7846747158DC319BC /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/MultiPoint.swift */ = {isa = PBXBuildFile; fileRef = F6B5EB871843493290EF9D07 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/MultiPoint.swift */; };
+		A3CED4135B7748B6AFEA1D48 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Feature.swift */ = {isa = PBXBuildFile; fileRef = 06A9EE39B6A644E49CB173D5 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Feature.swift */; };
+		C3B28AF9CB69462995F36BA3 /* /Users/aleks/Developer/turf-swift/build/Tests/CMakeFiles/TurfTests.dir/Info.plist */ = {isa = PBXBuildFile; fileRef = ECF194D7882048A0844FC0D2 /* /Users/aleks/Developer/turf-swift/build/Tests/CMakeFiles/TurfTests.dir/Info.plist */; };
+		C4DDC224B41C4A8082C0D9EE /* /Users/aleks/Developer/turf-swift/Sources/Turf/Turf.swift */ = {isa = PBXBuildFile; fileRef = 1BB85FEDBB5F455ABE3AC15D /* /Users/aleks/Developer/turf-swift/Sources/Turf/Turf.swift */; };
+		C622A2F983B94B35A56CFE48 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Ring.swift */ = {isa = PBXBuildFile; fileRef = 78508046DD7A4B3BA05E7E1E /* /Users/aleks/Developer/turf-swift/Sources/Turf/Ring.swift */; };
+		D13E52FE2061461C87E5FA7A /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/point.geojson */ = {isa = PBXBuildFile; fileRef = 0B876CB9DA7C4B87BE12B43F /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/point.geojson */; };
+		D241C8D0BAC14FA599861C15 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/GeometryCollection.swift */ = {isa = PBXBuildFile; fileRef = 4D7584B473C34A6FB9C9FC8C /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/GeometryCollection.swift */; };
+		D265F076AAC14F2CB18EC1CF /* /Users/aleks/Developer/turf-swift/Sources/Turf/Turf.h */ = {isa = PBXBuildFile; fileRef = 5DBCE1B893EE4108A2D3682F /* /Users/aleks/Developer/turf-swift/Sources/Turf/Turf.h */; };
+		DDC659F44A8E469285FEC81D /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/JSONTests.swift */ = {isa = PBXBuildFile; fileRef = 7B39A4AC033240D3B4F27E50 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/JSONTests.swift */; };
+		E1A9F4FC18B54EAD9D992EF2 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixture.swift */ = {isa = PBXBuildFile; fileRef = 90EB1A26A73642109F84DD1E /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixture.swift */; };
+		E55F78D304E6487DB90787B9 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/MultiLineString.swift */ = {isa = PBXBuildFile; fileRef = C0F1FE50992946B7A00B3B4A /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/MultiLineString.swift */; };
+		EAA3ECF3505C4928BD31455E /* /Users/aleks/Developer/turf-swift/Sources/Turf/CoreLocation.swift */ = {isa = PBXBuildFile; fileRef = 83391AB9F51646539C4F6A84 /* /Users/aleks/Developer/turf-swift/Sources/Turf/CoreLocation.swift */; };
+		EDB6A195B926451CBA52F481 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/multipoint.geojson */ = {isa = PBXBuildFile; fileRef = 19059C2A8E47405DBD3E7A22 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/multipoint.geojson */; };
+		EF8BC7DD7B9A468EA42D8472 /* /Users/aleks/Developer/turf-swift/Sources/Turf/WKT.swift */ = {isa = PBXBuildFile; fileRef = 2875886879FF475C864747CA /* /Users/aleks/Developer/turf-swift/Sources/Turf/WKT.swift */; };
+		F0A1F48E38444EDE86CD2C1B /* /Users/aleks/Developer/turf-swift/Sources/Turf/Simplifier.swift */ = {isa = PBXBuildFile; fileRef = F2CB52610F864A9A8864030A /* /Users/aleks/Developer/turf-swift/Sources/Turf/Simplifier.swift */; };
+		F5C234A3CC0444E997B2A4CE /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/featurecollection.geojson */ = {isa = PBXBuildFile; fileRef = 3C343066CD524074ABBB3690 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/featurecollection.geojson */; };
+		F7B5F73177244F1BAAF61122 /* /Users/aleks/Developer/turf-swift/Sources/Turf/GeoJSON.swift */ = {isa = PBXBuildFile; fileRef = 40806446BB3642E5B69B75CB /* /Users/aleks/Developer/turf-swift/Sources/Turf/GeoJSON.swift */; };
+		F8598256DF4A4DC4BA2B3AA5 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/PolygonTests.swift */ = {isa = PBXBuildFile; fileRef = 44FE506266294755AA2CFD85 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/PolygonTests.swift */; };
+		FABFC56340FE46DDB048B1D2 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/LocationCoordinate2DTests.swift */ = {isa = PBXBuildFile; fileRef = 2E530E5A4F2046798C9CA639 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/LocationCoordinate2DTests.swift */; };
+		FBBFAC7CEB8C48ABBCBBD95A /* /Users/aleks/Developer/turf-swift/Sources/Turf/RadianCoordinate2D.swift */ = {isa = PBXBuildFile; fileRef = BEDCB1BCEF5F493783A57015 /* /Users/aleks/Developer/turf-swift/Sources/Turf/RadianCoordinate2D.swift */; };
+		FE424F202FF4400D9B619F64 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/multiline.geojson */ = {isa = PBXBuildFile; fileRef = 6B7BABC466C84C64A43CF141 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/multiline.geojson */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildStyle section */
+		12CB9ACD75404FC9A31E7042 /* MinSizeRel */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = MinSizeRel;
+		};
+		2688EEC57D5C4B15AF7C6153 /* Debug */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
+		2BE658994DAC40688CCFE531 /* RelWithDebInfo */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = RelWithDebInfo;
+		};
+		4BCC5BE018944EC1AA173487 /* Release */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Release;
+		};
+/* End PBXBuildStyle section */
+
 /* Begin PBXContainerItemProxy section */
-		35650AFB1F150DC500B5C158 /* PBXContainerItemProxy */ = {
+		30EBF052DC674108BDA19054 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 35650AE71F150DC500B5C158 /* Project object */;
+			containerPortal = 8C825D0A66C048F2AE6D4041 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 35650AEF1F150DC500B5C158;
+			remoteGlobalIDString = E88B33A18E3D4A1DBDCF9BEC;
+			remoteInfo = ZERO_CHECK;
+		};
+		560DEAF314E5433CBAA1E911 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8C825D0A66C048F2AE6D4041 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E88B33A18E3D4A1DBDCF9BEC;
+			remoteInfo = ZERO_CHECK;
+		};
+		6B3F72C3BEAE48A1A596D698 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8C825D0A66C048F2AE6D4041 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 40713DBDCEC144EBA811E9E5;
 			remoteInfo = Turf;
+		};
+		AC70E82FE6D0421794BC483A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8C825D0A66C048F2AE6D4041 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 40713DBDCEC144EBA811E9E5;
+			remoteInfo = Turf;
+		};
+		C64CDAA6408F4572A95DC3F5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8C825D0A66C048F2AE6D4041 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 51542EF74E69486F9388FE64;
+			remoteInfo = ALL_BUILD;
+		};
+		DF696AFF8991442AA78EA054 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8C825D0A66C048F2AE6D4041 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E88B33A18E3D4A1DBDCF9BEC;
+			remoteInfo = ZERO_CHECK;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		11E726F926247D3900C1890B /* LocationCoordinate2DTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCoordinate2DTests.swift; sourceTree = "<group>"; };
-		11E7270B2624840900C1890B /* RadianCoordinate2DTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadianCoordinate2DTests.swift; sourceTree = "<group>"; };
-		2B0BA0462947700A00402F81 /* Consumer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Consumer.swift; path = Consumer/Consumer.swift; sourceTree = "<group>"; };
-		2B0BA0482947709200402F81 /* Consumer+WKT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Consumer+WKT.swift"; path = "Consumer/Consumer+WKT.swift"; sourceTree = "<group>"; };
-		2B0BA04A29487A0400402F81 /* WKTTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKTTests.swift; sourceTree = "<group>"; };
-		2B3757552943887A00D52D0F /* WKT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKT.swift; sourceTree = "<group>"; };
-		2B5FABFB24066EA5008A285F /* geometry-collection.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = "geometry-collection.geojson"; sourceTree = "<group>"; };
-		2B5FAC0024067051008A285F /* GeometryCollectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryCollectionTests.swift; sourceTree = "<group>"; };
-		2B5FAC092406B8B7008A285F /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
-		2B74CD772485372800EE6693 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
-		2B74CD7C2485375C00EE6693 /* MultiPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPoint.swift; sourceTree = "<group>"; };
-		2B74CD812485377900EE6693 /* MultiLineString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiLineString.swift; sourceTree = "<group>"; };
-		2B74CD862485388C00EE6693 /* MultiPolygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPolygon.swift; sourceTree = "<group>"; };
-		2B74CD8B248538A600EE6693 /* GeometryCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryCollection.swift; sourceTree = "<group>"; };
-		3502F790201F507500399EFE /* GeoJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJSON.swift; sourceTree = "<group>"; };
-		3502F795201F53FC00399EFE /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
-		3502F7A2201F568000399EFE /* point.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = point.geojson; sourceTree = "<group>"; };
-		3502F7A6201F616E00399EFE /* simple-line.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "simple-line.geojson"; sourceTree = "<group>"; };
-		35166855202E6CEE0032A97E /* multipoint.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = multipoint.geojson; sourceTree = "<group>"; };
-		35166859202EFE680032A97E /* multiline.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = multiline.geojson; sourceTree = "<group>"; };
-		3516685D202EFF130032A97E /* multipolygon.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = multipolygon.geojson; sourceTree = "<group>"; };
-		3547ECEF200C3C78009DA062 /* Turf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Turf.h; sourceTree = "<group>"; };
-		3547ECF0200C3C78009DA062 /* CoreLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLocation.swift; sourceTree = "<group>"; };
-		3547ECF1200C3C78009DA062 /* Turf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Turf.swift; sourceTree = "<group>"; };
-		3547ECF2200C3C78009DA062 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3547ECF9200C3C82009DA062 /* TurfTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurfTests.swift; sourceTree = "<group>"; };
-		3547ECFB200C3C82009DA062 /* dc-line.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "dc-line.geojson"; sourceTree = "<group>"; };
-		3547ECFC200C3C82009DA062 /* polygon.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = polygon.geojson; sourceTree = "<group>"; };
-		3547ECFD200C3C82009DA062 /* Fixture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fixture.swift; sourceTree = "<group>"; };
-		3547ECFE200C3C82009DA062 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		35650AF01F150DC500B5C158 /* Turf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Turf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		35650AF91F150DC500B5C158 /* TurfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3573EA6C215A393F009899D7 /* GeoJSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJSONTests.swift; sourceTree = "<group>"; };
-		357495BD208E3432007D7477 /* featurecollection.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = featurecollection.geojson; sourceTree = "<group>"; };
-		35B56E6920DAF3C500C4923D /* RadianCoordinate2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadianCoordinate2D.swift; sourceTree = "<group>"; };
-		35B56E6E20DAF41F00C4923D /* Ring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ring.swift; sourceTree = "<group>"; };
-		35B56E7320DAF47D00C4923D /* Polygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polygon.swift; sourceTree = "<group>"; };
-		35B56E7D20DAF4E700C4923D /* LineString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineString.swift; sourceTree = "<group>"; };
-		35B56E9120DAF66A00C4923D /* FeatureCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureCollection.swift; sourceTree = "<group>"; };
-		35B56E9620DAF82F00C4923D /* PointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointTests.swift; sourceTree = "<group>"; };
-		35B56E9A20DAF86000C4923D /* LineStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineStringTests.swift; sourceTree = "<group>"; };
-		35B56E9E20DAF88C00C4923D /* PolygonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonTests.swift; sourceTree = "<group>"; };
-		35B56EA220DAF89F00C4923D /* MultiPointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPointTests.swift; sourceTree = "<group>"; };
-		35B56EA620DAF8BB00C4923D /* MultiLineStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiLineStringTests.swift; sourceTree = "<group>"; };
-		35B56EAA20DAF8CB00C4923D /* MultiPolygonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPolygonTests.swift; sourceTree = "<group>"; };
-		35B56EAE20DAF8DE00C4923D /* FeatureCollectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureCollectionTests.swift; sourceTree = "<group>"; };
-		35ECAF2E20974A1800DC3BC3 /* Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
-		35ECAF352099EC0700DC3BC3 /* FeatureIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureIdentifier.swift; sourceTree = "<group>"; };
-		3A40B38126E48262004457C4 /* Simplifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Simplifier.swift; sourceTree = "<group>"; };
-		7AA969AB21B98F8F009C57FE /* Spline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spline.swift; sourceTree = "<group>"; };
-		C46809D52124199500BAD5E1 /* featurecollection-no-properties.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = "featurecollection-no-properties.geojson"; sourceTree = "<group>"; };
-		CE2EB997214C246A00915A30 /* BoundingBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
-		CE7F8163215182FF00A9D221 /* BoundingBoxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBoxTests.swift; sourceTree = "<group>"; };
-		DA972D7926FEB9DC009F5615 /* simplify */ = {isa = PBXFileReference; lastKnownFileType = folder; path = simplify; sourceTree = "<group>"; };
-		DA972D922702763B009F5615 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
-		DA972DA5270289C5009F5615 /* JSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
+		06A9EE39B6A644E49CB173D5 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Feature.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = Feature.swift; path = Sources/Turf/Feature.swift; sourceTree = SOURCE_ROOT; };
+		0B876CB9DA7C4B87BE12B43F /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/point.geojson */ = {isa = PBXFileReference; explicitFileType = sourcecode; fileEncoding = 4; name = point.geojson; path = Tests/TurfTests/Fixtures/point.geojson; sourceTree = SOURCE_ROOT; };
+		0D055F73618B4957BAEAB292 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Consumer/Consumer.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = Consumer.swift; path = Sources/Turf/Consumer/Consumer.swift; sourceTree = SOURCE_ROOT; };
+		0E23F9B956AF424EAD5B46B1 /* /Users/aleks/Developer/turf-swift/Sources/Turf/FeatureIdentifier.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = FeatureIdentifier.swift; path = Sources/Turf/FeatureIdentifier.swift; sourceTree = SOURCE_ROOT; };
+		14F0658B1FAD457588E50348 /* /Users/aleks/Developer/turf-swift/build/Sources/CMakeFiles/Turf.dir/Info.plist */ = {isa = PBXFileReference; explicitFileType = sourcecode.text.plist; fileEncoding = 4; name = Info.plist; path = build/Sources/CMakeFiles/Turf.dir/Info.plist; sourceTree = SOURCE_ROOT; };
+		19059C2A8E47405DBD3E7A22 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/multipoint.geojson */ = {isa = PBXFileReference; explicitFileType = sourcecode; fileEncoding = 4; name = multipoint.geojson; path = Tests/TurfTests/Fixtures/multipoint.geojson; sourceTree = SOURCE_ROOT; };
+		19322361AE594C539724BC74 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/GeoJSONTests.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = GeoJSONTests.swift; path = Tests/TurfTests/GeoJSONTests.swift; sourceTree = SOURCE_ROOT; };
+		1A9186B25EB849AAB2EF7B8B /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/LineString.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = LineString.swift; path = Sources/Turf/Geometries/LineString.swift; sourceTree = SOURCE_ROOT; };
+		1BB85FEDBB5F455ABE3AC15D /* /Users/aleks/Developer/turf-swift/Sources/Turf/Turf.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = Turf.swift; path = Sources/Turf/Turf.swift; sourceTree = SOURCE_ROOT; };
+		1F08BAEAF692483E9970B565 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/MultiPolygon.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = MultiPolygon.swift; path = Sources/Turf/Geometries/MultiPolygon.swift; sourceTree = SOURCE_ROOT; };
+		2438267A0FE84EB3A926AE0A /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/geometry-collection.geojson */ = {isa = PBXFileReference; explicitFileType = sourcecode; fileEncoding = 4; name = "geometry-collection.geojson"; path = "Tests/TurfTests/Fixtures/geometry-collection.geojson"; sourceTree = SOURCE_ROOT; };
+		265C40D04EB84EE99D0AF035 /* Turf */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Turf.framework/Turf; sourceTree = BUILT_PRODUCTS_DIR; };
+		2875886879FF475C864747CA /* /Users/aleks/Developer/turf-swift/Sources/Turf/WKT.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = WKT.swift; path = Sources/Turf/WKT.swift; sourceTree = SOURCE_ROOT; };
+		2E530E5A4F2046798C9CA639 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/LocationCoordinate2DTests.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = LocationCoordinate2DTests.swift; path = Tests/TurfTests/LocationCoordinate2DTests.swift; sourceTree = SOURCE_ROOT; };
+		2F3D10134C4B4AAA9DE7D362 /* /Users/aleks/Developer/turf-swift/Tests/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = Tests/CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		33978F8A01974247B8FD11F2 /* /Users/aleks/Developer/turf-swift/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		35DD115737C8461F96DAC8CB /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/MultiPointTests.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = MultiPointTests.swift; path = Tests/TurfTests/MultiPointTests.swift; sourceTree = SOURCE_ROOT; };
+		37D8EDA9057B4FD9AA8429B5 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/BoundingBoxTests.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = BoundingBoxTests.swift; path = Tests/TurfTests/BoundingBoxTests.swift; sourceTree = SOURCE_ROOT; };
+		3C343066CD524074ABBB3690 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/featurecollection.geojson */ = {isa = PBXFileReference; explicitFileType = sourcecode; fileEncoding = 4; name = featurecollection.geojson; path = Tests/TurfTests/Fixtures/featurecollection.geojson; sourceTree = SOURCE_ROOT; };
+		40806446BB3642E5B69B75CB /* /Users/aleks/Developer/turf-swift/Sources/Turf/GeoJSON.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = GeoJSON.swift; path = Sources/Turf/GeoJSON.swift; sourceTree = SOURCE_ROOT; };
+		44E53818CDFF409C8010EF76 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/simple-line.geojson */ = {isa = PBXFileReference; explicitFileType = sourcecode; fileEncoding = 4; name = "simple-line.geojson"; path = "Tests/TurfTests/Fixtures/simple-line.geojson"; sourceTree = SOURCE_ROOT; };
+		44FE506266294755AA2CFD85 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/PolygonTests.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = PolygonTests.swift; path = Tests/TurfTests/PolygonTests.swift; sourceTree = SOURCE_ROOT; };
+		4D7584B473C34A6FB9C9FC8C /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/GeometryCollection.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = GeometryCollection.swift; path = Sources/Turf/Geometries/GeometryCollection.swift; sourceTree = SOURCE_ROOT; };
+		4EE6C7B6E4954CC7B1AF8E48 /* /Users/aleks/Developer/turf-swift/Sources/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = Sources/CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		4F257AFD0BC945819ADF259F /* /Users/aleks/Developer/turf-swift/Sources/Turf/Spline.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = Spline.swift; path = Sources/Turf/Spline.swift; sourceTree = SOURCE_ROOT; };
+		5390DAB1605A43C68BAE7F0F /* /Users/aleks/Developer/turf-swift/Sources/Turf/Codable.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = Codable.swift; path = Sources/Turf/Codable.swift; sourceTree = SOURCE_ROOT; };
+		54F3CCA2186849949FD3BD32 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/PointTests.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = PointTests.swift; path = Tests/TurfTests/PointTests.swift; sourceTree = SOURCE_ROOT; };
+		5A7CA35152E54DF9AFF069B2 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/Polygon.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = Polygon.swift; path = Sources/Turf/Geometries/Polygon.swift; sourceTree = SOURCE_ROOT; };
+		5DBCE1B893EE4108A2D3682F /* /Users/aleks/Developer/turf-swift/Sources/Turf/Turf.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = Turf.h; path = Sources/Turf/Turf.h; sourceTree = SOURCE_ROOT; };
+		6B7BABC466C84C64A43CF141 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/multiline.geojson */ = {isa = PBXFileReference; explicitFileType = sourcecode; fileEncoding = 4; name = multiline.geojson; path = Tests/TurfTests/Fixtures/multiline.geojson; sourceTree = SOURCE_ROOT; };
+		6CC3D0CD272A4936A3147123 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/Point.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = Point.swift; path = Sources/Turf/Geometries/Point.swift; sourceTree = SOURCE_ROOT; };
+		6D19F32BEE3348E4BD4D4A2C /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/GeometryCollectionTests.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = GeometryCollectionTests.swift; path = Tests/TurfTests/GeometryCollectionTests.swift; sourceTree = SOURCE_ROOT; };
+		6E95374FB79B46C187B14698 /* /Users/aleks/Developer/turf-swift/Sources/Turf/FeatureCollection.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = FeatureCollection.swift; path = Sources/Turf/FeatureCollection.swift; sourceTree = SOURCE_ROOT; };
+		7457FE10BBAA42EFBF97B08F /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/TurfTests.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = TurfTests.swift; path = Tests/TurfTests/TurfTests.swift; sourceTree = SOURCE_ROOT; };
+		762FC1D903D54BD897A9E874 /* TurfTests */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = TurfTests.xctest/TurfTests; sourceTree = BUILT_PRODUCTS_DIR; };
+		78508046DD7A4B3BA05E7E1E /* /Users/aleks/Developer/turf-swift/Sources/Turf/Ring.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = Ring.swift; path = Sources/Turf/Ring.swift; sourceTree = SOURCE_ROOT; };
+		7B39A4AC033240D3B4F27E50 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/JSONTests.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = JSONTests.swift; path = Tests/TurfTests/JSONTests.swift; sourceTree = SOURCE_ROOT; };
+		83391AB9F51646539C4F6A84 /* /Users/aleks/Developer/turf-swift/Sources/Turf/CoreLocation.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = CoreLocation.swift; path = Sources/Turf/CoreLocation.swift; sourceTree = SOURCE_ROOT; };
+		90EB1A26A73642109F84DD1E /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixture.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = Fixture.swift; path = Tests/TurfTests/Fixture.swift; sourceTree = SOURCE_ROOT; };
+		A42E9ED99C934A06A57BFB77 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/dc-line.geojson */ = {isa = PBXFileReference; explicitFileType = sourcecode; fileEncoding = 4; name = "dc-line.geojson"; path = "Tests/TurfTests/Fixtures/dc-line.geojson"; sourceTree = SOURCE_ROOT; };
+		A952D2DC12A9438E8987DB9B /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/multipolygon.geojson */ = {isa = PBXFileReference; explicitFileType = sourcecode; fileEncoding = 4; name = multipolygon.geojson; path = Tests/TurfTests/Fixtures/multipolygon.geojson; sourceTree = SOURCE_ROOT; };
+		AA3D039731604DFA82143D97 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/RadianCoordinate2DTests.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = RadianCoordinate2DTests.swift; path = Tests/TurfTests/RadianCoordinate2DTests.swift; sourceTree = SOURCE_ROOT; };
+		AB286451D372433F99ED31AC /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/MultiLineStringTests.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = MultiLineStringTests.swift; path = Tests/TurfTests/MultiLineStringTests.swift; sourceTree = SOURCE_ROOT; };
+		B07A3D2185994D78A091351F /* /Users/aleks/Developer/turf-swift/Sources/Turf/Consumer/Consumer+WKT.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = "Consumer+WKT.swift"; path = "Sources/Turf/Consumer/Consumer+WKT.swift"; sourceTree = SOURCE_ROOT; };
+		BCE2FD3272E04923A7F6E2ED /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/FeatureCollectionTests.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = FeatureCollectionTests.swift; path = Tests/TurfTests/FeatureCollectionTests.swift; sourceTree = SOURCE_ROOT; };
+		BE691F71480A44A0948FF0F5 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/MultiPolygonTests.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = MultiPolygonTests.swift; path = Tests/TurfTests/MultiPolygonTests.swift; sourceTree = SOURCE_ROOT; };
+		BEDCB1BCEF5F493783A57015 /* /Users/aleks/Developer/turf-swift/Sources/Turf/RadianCoordinate2D.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = RadianCoordinate2D.swift; path = Sources/Turf/RadianCoordinate2D.swift; sourceTree = SOURCE_ROOT; };
+		C0F1FE50992946B7A00B3B4A /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/MultiLineString.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = MultiLineString.swift; path = Sources/Turf/Geometries/MultiLineString.swift; sourceTree = SOURCE_ROOT; };
+		C4726B7B7824434D9D5F81FA /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/LineStringTests.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = LineStringTests.swift; path = Tests/TurfTests/LineStringTests.swift; sourceTree = SOURCE_ROOT; };
+		D210A861A1F644BBA6827DE7 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometry.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = Geometry.swift; path = Sources/Turf/Geometry.swift; sourceTree = SOURCE_ROOT; };
+		D34BB88DC558468AA95DDC13 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/polygon.geojson */ = {isa = PBXFileReference; explicitFileType = sourcecode; fileEncoding = 4; name = polygon.geojson; path = Tests/TurfTests/Fixtures/polygon.geojson; sourceTree = SOURCE_ROOT; };
+		D3534E1CFA37419B8AE6F501 /* /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = "<absolute>"; };
+		DBE5866CC9C9437486D79C32 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/WKTTests.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = WKTTests.swift; path = Tests/TurfTests/WKTTests.swift; sourceTree = SOURCE_ROOT; };
+		E1947DF3BFF34D928A564E08 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/simplify */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = folder; name = simplify; path = Tests/TurfTests/Fixtures/simplify; sourceTree = SOURCE_ROOT; };
+		E1A07FAB56D54E37BFE6785E /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/featurecollection-no-properties.geojson */ = {isa = PBXFileReference; explicitFileType = sourcecode; fileEncoding = 4; name = "featurecollection-no-properties.geojson"; path = "Tests/TurfTests/Fixtures/featurecollection-no-properties.geojson"; sourceTree = SOURCE_ROOT; };
+		ECF194D7882048A0844FC0D2 /* /Users/aleks/Developer/turf-swift/build/Tests/CMakeFiles/TurfTests.dir/Info.plist */ = {isa = PBXFileReference; explicitFileType = sourcecode.text.plist; fileEncoding = 4; name = Info.plist; path = build/Tests/CMakeFiles/TurfTests.dir/Info.plist; sourceTree = SOURCE_ROOT; };
+		EDEFAC1BEF284D7792D75FC7 /* /Users/aleks/Developer/turf-swift/Sources/Turf/JSON.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = JSON.swift; path = Sources/Turf/JSON.swift; sourceTree = SOURCE_ROOT; };
+		EE6A3983DC6D4E52AD76B9A5 /* /Users/aleks/Developer/turf-swift/Sources/Turf/BoundingBox.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = BoundingBox.swift; path = Sources/Turf/BoundingBox.swift; sourceTree = SOURCE_ROOT; };
+		F2CB52610F864A9A8864030A /* /Users/aleks/Developer/turf-swift/Sources/Turf/Simplifier.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = Simplifier.swift; path = Sources/Turf/Simplifier.swift; sourceTree = SOURCE_ROOT; };
+		F6B5EB871843493290EF9D07 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/MultiPoint.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = MultiPoint.swift; path = Sources/Turf/Geometries/MultiPoint.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		35650AEC1F150DC500B5C158 /* Frameworks */ = {
+		1B4BADAC92B741C693EFC782 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		35650AF61F150DC500B5C158 /* Frameworks */ = {
+		80DFB014A9D647679992D629 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35650AFA1F150DC500B5C158 /* Turf.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2B0BA04529476FA800402F81 /* Consumer */ = {
+		5044DFC411464CE9884C243E = {
 			isa = PBXGroup;
 			children = (
-				2B0BA0462947700A00402F81 /* Consumer.swift */,
-				2B0BA0482947709200402F81 /* Consumer+WKT.swift */,
-			);
-			name = Consumer;
-			sourceTree = "<group>";
-		};
-		2B74CD90248538E500EE6693 /* Geometries */ = {
-			isa = PBXGroup;
-			children = (
-				2B74CD772485372800EE6693 /* Point.swift */,
-				35B56E7D20DAF4E700C4923D /* LineString.swift */,
-				35B56E7320DAF47D00C4923D /* Polygon.swift */,
-				2B74CD7C2485375C00EE6693 /* MultiPoint.swift */,
-				2B74CD812485377900EE6693 /* MultiLineString.swift */,
-				2B74CD862485388C00EE6693 /* MultiPolygon.swift */,
-				2B74CD8B248538A600EE6693 /* GeometryCollection.swift */,
-			);
-			path = Geometries;
-			sourceTree = "<group>";
-		};
-		3547ECED200C3C78009DA062 /* Turf */ = {
-			isa = PBXGroup;
-			children = (
-				2B0BA04529476FA800402F81 /* Consumer */,
-				3547ECEF200C3C78009DA062 /* Turf.h */,
-				3547ECF2200C3C78009DA062 /* Info.plist */,
-				CE2EB997214C246A00915A30 /* BoundingBox.swift */,
-				3502F795201F53FC00399EFE /* Codable.swift */,
-				3547ECF0200C3C78009DA062 /* CoreLocation.swift */,
-				35B56E9120DAF66A00C4923D /* FeatureCollection.swift */,
-				2B5FAC092406B8B7008A285F /* Feature.swift */,
-				35ECAF352099EC0700DC3BC3 /* FeatureIdentifier.swift */,
-				3502F790201F507500399EFE /* GeoJSON.swift */,
-				35ECAF2E20974A1800DC3BC3 /* Geometry.swift */,
-				2B74CD90248538E500EE6693 /* Geometries */,
-				DA972D922702763B009F5615 /* JSON.swift */,
-				2B3757552943887A00D52D0F /* WKT.swift */,
-				35B56E6920DAF3C500C4923D /* RadianCoordinate2D.swift */,
-				35B56E6E20DAF41F00C4923D /* Ring.swift */,
-				3A40B38126E48262004457C4 /* Simplifier.swift */,
-				7AA969AB21B98F8F009C57FE /* Spline.swift */,
-				3547ECF1200C3C78009DA062 /* Turf.swift */,
-			);
-			path = Turf;
-			sourceTree = "<group>";
-		};
-		3547ECF8200C3C82009DA062 /* TurfTests */ = {
-			isa = PBXGroup;
-			children = (
-				3547ECFE200C3C82009DA062 /* Info.plist */,
-				CE7F8163215182FF00A9D221 /* BoundingBoxTests.swift */,
-				35B56EAE20DAF8DE00C4923D /* FeatureCollectionTests.swift */,
-				3547ECFD200C3C82009DA062 /* Fixture.swift */,
-				3573EA6C215A393F009899D7 /* GeoJSONTests.swift */,
-				35B56E9A20DAF86000C4923D /* LineStringTests.swift */,
-				35B56EA620DAF8BB00C4923D /* MultiLineStringTests.swift */,
-				35B56EA220DAF89F00C4923D /* MultiPointTests.swift */,
-				35B56EAA20DAF8CB00C4923D /* MultiPolygonTests.swift */,
-				35B56E9620DAF82F00C4923D /* PointTests.swift */,
-				35B56E9E20DAF88C00C4923D /* PolygonTests.swift */,
-				2B5FAC0024067051008A285F /* GeometryCollectionTests.swift */,
-				DA972DA5270289C5009F5615 /* JSONTests.swift */,
-				3547ECF9200C3C82009DA062 /* TurfTests.swift */,
-				3547ECFA200C3C82009DA062 /* Fixtures */,
-				11E726F926247D3900C1890B /* LocationCoordinate2DTests.swift */,
-				11E7270B2624840900C1890B /* RadianCoordinate2DTests.swift */,
-				2B0BA04A29487A0400402F81 /* WKTTests.swift */,
-			);
-			path = TurfTests;
-			sourceTree = "<group>";
-		};
-		3547ECFA200C3C82009DA062 /* Fixtures */ = {
-			isa = PBXGroup;
-			children = (
-				DA972D7926FEB9DC009F5615 /* simplify */,
-				35166859202EFE680032A97E /* multiline.geojson */,
-				3516685D202EFF130032A97E /* multipolygon.geojson */,
-				3502F7A6201F616E00399EFE /* simple-line.geojson */,
-				3502F7A2201F568000399EFE /* point.geojson */,
-				3547ECFB200C3C82009DA062 /* dc-line.geojson */,
-				3547ECFC200C3C82009DA062 /* polygon.geojson */,
-				35166855202E6CEE0032A97E /* multipoint.geojson */,
-				2B5FABFB24066EA5008A285F /* geometry-collection.geojson */,
-				357495BD208E3432007D7477 /* featurecollection.geojson */,
-				C46809D52124199500BAD5E1 /* featurecollection-no-properties.geojson */,
-			);
-			path = Fixtures;
-			sourceTree = "<group>";
-		};
-		35650AE61F150DC500B5C158 = {
-			isa = PBXGroup;
-			children = (
-				35650AF21F150DC500B5C158 /* Sources */,
-				35650AFD1F150DC500B5C158 /* Tests */,
-				35650AF11F150DC500B5C158 /* Products */,
+				5666FFBC28AE4227875C91DA /* ALL_BUILD */,
+				C359EF243AB741FB9386DA63 /* Turf */,
+				ED84EB048BD3416695932190 /* TurfTests */,
+				C29869579E1E44B7A7846CB8 /* Products */,
+				BB6FA3A17FF049AB8F5073BB /* Frameworks */,
+				CD8576286DD04512A8BEDF26 /* Resources */,
 			);
 			sourceTree = "<group>";
 		};
-		35650AF11F150DC500B5C158 /* Products */ = {
+		5666FFBC28AE4227875C91DA /* ALL_BUILD */ = {
 			isa = PBXGroup;
 			children = (
-				35650AF01F150DC500B5C158 /* Turf.framework */,
-				35650AF91F150DC500B5C158 /* TurfTests.xctest */,
+				E79061CE69E8463E935AFB6E /* CMake Rules */,
+				33978F8A01974247B8FD11F2 /* /Users/aleks/Developer/turf-swift/CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		906E183E7AC84B0FBDD28711 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				14F0658B1FAD457588E50348 /* /Users/aleks/Developer/turf-swift/build/Sources/CMakeFiles/Turf.dir/Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		BB6FA3A17FF049AB8F5073BB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D3534E1CFA37419B8AE6F501 /* /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C29869579E1E44B7A7846CB8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				265C40D04EB84EE99D0AF035 /* Turf */,
+				762FC1D903D54BD897A9E874 /* TurfTests */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		35650AF21F150DC500B5C158 /* Sources */ = {
+		C359EF243AB741FB9386DA63 /* Turf */ = {
 			isa = PBXGroup;
 			children = (
-				3547ECED200C3C78009DA062 /* Turf */,
+				D1D25E4F0EC9494BAE4E9558 /* Header Files */,
+				906E183E7AC84B0FBDD28711 /* Resources */,
+				4EE6C7B6E4954CC7B1AF8E48 /* /Users/aleks/Developer/turf-swift/Sources/CMakeLists.txt */,
+				EE6A3983DC6D4E52AD76B9A5 /* /Users/aleks/Developer/turf-swift/Sources/Turf/BoundingBox.swift */,
+				5390DAB1605A43C68BAE7F0F /* /Users/aleks/Developer/turf-swift/Sources/Turf/Codable.swift */,
+				B07A3D2185994D78A091351F /* /Users/aleks/Developer/turf-swift/Sources/Turf/Consumer/Consumer+WKT.swift */,
+				0D055F73618B4957BAEAB292 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Consumer/Consumer.swift */,
+				83391AB9F51646539C4F6A84 /* /Users/aleks/Developer/turf-swift/Sources/Turf/CoreLocation.swift */,
+				06A9EE39B6A644E49CB173D5 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Feature.swift */,
+				6E95374FB79B46C187B14698 /* /Users/aleks/Developer/turf-swift/Sources/Turf/FeatureCollection.swift */,
+				0E23F9B956AF424EAD5B46B1 /* /Users/aleks/Developer/turf-swift/Sources/Turf/FeatureIdentifier.swift */,
+				40806446BB3642E5B69B75CB /* /Users/aleks/Developer/turf-swift/Sources/Turf/GeoJSON.swift */,
+				4D7584B473C34A6FB9C9FC8C /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/GeometryCollection.swift */,
+				1A9186B25EB849AAB2EF7B8B /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/LineString.swift */,
+				C0F1FE50992946B7A00B3B4A /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/MultiLineString.swift */,
+				F6B5EB871843493290EF9D07 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/MultiPoint.swift */,
+				1F08BAEAF692483E9970B565 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/MultiPolygon.swift */,
+				6CC3D0CD272A4936A3147123 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/Point.swift */,
+				5A7CA35152E54DF9AFF069B2 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/Polygon.swift */,
+				D210A861A1F644BBA6827DE7 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometry.swift */,
+				EDEFAC1BEF284D7792D75FC7 /* /Users/aleks/Developer/turf-swift/Sources/Turf/JSON.swift */,
+				BEDCB1BCEF5F493783A57015 /* /Users/aleks/Developer/turf-swift/Sources/Turf/RadianCoordinate2D.swift */,
+				78508046DD7A4B3BA05E7E1E /* /Users/aleks/Developer/turf-swift/Sources/Turf/Ring.swift */,
+				F2CB52610F864A9A8864030A /* /Users/aleks/Developer/turf-swift/Sources/Turf/Simplifier.swift */,
+				4F257AFD0BC945819ADF259F /* /Users/aleks/Developer/turf-swift/Sources/Turf/Spline.swift */,
+				1BB85FEDBB5F455ABE3AC15D /* /Users/aleks/Developer/turf-swift/Sources/Turf/Turf.swift */,
+				2875886879FF475C864747CA /* /Users/aleks/Developer/turf-swift/Sources/Turf/WKT.swift */,
 			);
-			path = Sources;
+			name = Turf;
 			sourceTree = "<group>";
 		};
-		35650AFD1F150DC500B5C158 /* Tests */ = {
+		CD8576286DD04512A8BEDF26 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3547ECF8200C3C82009DA062 /* TurfTests */,
 			);
-			path = Tests;
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		D1D25E4F0EC9494BAE4E9558 /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				5DBCE1B893EE4108A2D3682F /* /Users/aleks/Developer/turf-swift/Sources/Turf/Turf.h */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		E79061CE69E8463E935AFB6E /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		ED3F5440060A45D59020C6CF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ECF194D7882048A0844FC0D2 /* /Users/aleks/Developer/turf-swift/build/Tests/CMakeFiles/TurfTests.dir/Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		ED84EB048BD3416695932190 /* TurfTests */ = {
+			isa = PBXGroup;
+			children = (
+				ED3F5440060A45D59020C6CF /* Resources */,
+				2F3D10134C4B4AAA9DE7D362 /* /Users/aleks/Developer/turf-swift/Tests/CMakeLists.txt */,
+				37D8EDA9057B4FD9AA8429B5 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/BoundingBoxTests.swift */,
+				BCE2FD3272E04923A7F6E2ED /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/FeatureCollectionTests.swift */,
+				90EB1A26A73642109F84DD1E /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixture.swift */,
+				A42E9ED99C934A06A57BFB77 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/dc-line.geojson */,
+				E1A07FAB56D54E37BFE6785E /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/featurecollection-no-properties.geojson */,
+				3C343066CD524074ABBB3690 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/featurecollection.geojson */,
+				2438267A0FE84EB3A926AE0A /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/geometry-collection.geojson */,
+				6B7BABC466C84C64A43CF141 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/multiline.geojson */,
+				19059C2A8E47405DBD3E7A22 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/multipoint.geojson */,
+				A952D2DC12A9438E8987DB9B /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/multipolygon.geojson */,
+				0B876CB9DA7C4B87BE12B43F /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/point.geojson */,
+				D34BB88DC558468AA95DDC13 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/polygon.geojson */,
+				44E53818CDFF409C8010EF76 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/simple-line.geojson */,
+				E1947DF3BFF34D928A564E08 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/simplify */,
+				19322361AE594C539724BC74 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/GeoJSONTests.swift */,
+				6D19F32BEE3348E4BD4D4A2C /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/GeometryCollectionTests.swift */,
+				7B39A4AC033240D3B4F27E50 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/JSONTests.swift */,
+				C4726B7B7824434D9D5F81FA /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/LineStringTests.swift */,
+				2E530E5A4F2046798C9CA639 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/LocationCoordinate2DTests.swift */,
+				AB286451D372433F99ED31AC /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/MultiLineStringTests.swift */,
+				35DD115737C8461F96DAC8CB /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/MultiPointTests.swift */,
+				BE691F71480A44A0948FF0F5 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/MultiPolygonTests.swift */,
+				54F3CCA2186849949FD3BD32 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/PointTests.swift */,
+				44FE506266294755AA2CFD85 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/PolygonTests.swift */,
+				AA3D039731604DFA82143D97 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/RadianCoordinate2DTests.swift */,
+				7457FE10BBAA42EFBF97B08F /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/TurfTests.swift */,
+				DBE5866CC9C9437486D79C32 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/WKTTests.swift */,
+			);
+			name = TurfTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		35650AED1F150DC500B5C158 /* Headers */ = {
+		7D48C015585049959CBC18E0 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3547ECF4200C3C78009DA062 /* Turf.h in Headers */,
+				D265F076AAC14F2CB18EC1CF /* /Users/aleks/Developer/turf-swift/Sources/Turf/Turf.h */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		35650AEF1F150DC500B5C158 /* Turf */ = {
+		40713DBDCEC144EBA811E9E5 /* Turf */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 35650B041F150DC500B5C158 /* Build configuration list for PBXNativeTarget "Turf" */;
+			buildConfigurationList = C272EAD41B8744388506D9AB /* Build configuration list for PBXNativeTarget "Turf" */;
 			buildPhases = (
-				35650AED1F150DC500B5C158 /* Headers */,
-				35650AEB1F150DC500B5C158 /* Sources */,
-				35650AEC1F150DC500B5C158 /* Frameworks */,
-				35650AEE1F150DC500B5C158 /* Resources */,
+				7D48C015585049959CBC18E0 /* Headers */,
+				A305E497923747CCA4E795A7 /* Sources */,
+				1B4BADAC92B741C693EFC782 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A078FA48AC634C46BF938D52 /* PBXTargetDependency */,
 			);
 			name = Turf;
 			productName = Turf;
-			productReference = 35650AF01F150DC500B5C158 /* Turf.framework */;
+			productReference = 265C40D04EB84EE99D0AF035 /* Turf */;
 			productType = "com.apple.product-type.framework";
 		};
-		35650AF81F150DC500B5C158 /* TurfTests */ = {
+		70130B5A25AD47E38DBBF7DF /* TurfTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 35650B071F150DC500B5C158 /* Build configuration list for PBXNativeTarget "TurfTests" */;
+			buildConfigurationList = 11B924D2598449DEB9F5CACA /* Build configuration list for PBXNativeTarget "TurfTests" */;
 			buildPhases = (
-				35650AF51F150DC500B5C158 /* Sources */,
-				35650AF61F150DC500B5C158 /* Frameworks */,
-				35650AF71F150DC500B5C158 /* Resources */,
+				AFF363B3BD694004BE6A662B /* Resources */,
+				992772CF43904134B129E918 /* Sources */,
+				80DFB014A9D647679992D629 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				35650AFC1F150DC500B5C158 /* PBXTargetDependency */,
+				F70A1F5C5667414EBC013FA1 /* PBXTargetDependency */,
+				5FCEACC3A7E44DCE923844C4 /* PBXTargetDependency */,
 			);
 			name = TurfTests;
 			productName = TurfTests;
-			productReference = 35650AF91F150DC500B5C158 /* TurfTests.xctest */;
+			productReference = 762FC1D903D54BD897A9E874 /* TurfTests */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		35650AE71F150DC500B5C158 /* Project object */ = {
+		8C825D0A66C048F2AE6D4041 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 1400;
-				ORGANIZATIONNAME = "";
-				TargetAttributes = {
-					35650AEF1F150DC500B5C158 = {
-						CreatedOnToolsVersion = 9.0;
-						LastSwiftMigration = 0910;
-					};
-					35650AF81F150DC500B5C158 = {
-						CreatedOnToolsVersion = 9.0;
-						LastSwiftMigration = 0910;
-					};
-				};
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
 			};
-			buildConfigurationList = 35650AEA1F150DC500B5C158 /* Build configuration list for PBXProject "Turf" */;
-			compatibilityVersion = "Xcode 8.0";
-			developmentRegion = en;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-				Base,
+			buildConfigurationList = F596A3B8C9D84A35941BD123 /* Build configuration list for PBXProject "Turf" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				2688EEC57D5C4B15AF7C6153 /* Debug */,
+				4BCC5BE018944EC1AA173487 /* Release */,
+				12CB9ACD75404FC9A31E7042 /* MinSizeRel */,
+				2BE658994DAC40688CCFE531 /* RelWithDebInfo */,
 			);
-			mainGroup = 35650AE61F150DC500B5C158;
-			productRefGroup = 35650AF11F150DC500B5C158 /* Products */;
-			projectDirPath = "";
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 0;
+			mainGroup = 5044DFC411464CE9884C243E;
+			projectDirPath = "/Users/aleks/Developer/turf-swift";
 			projectRoot = "";
 			targets = (
-				35650AEF1F150DC500B5C158 /* Turf */,
-				35650AF81F150DC500B5C158 /* TurfTests */,
+				51542EF74E69486F9388FE64 /* ALL_BUILD */,
+				1097E08171F745ADA77ACE5C /* RUN_TESTS */,
+				40713DBDCEC144EBA811E9E5 /* Turf */,
+				70130B5A25AD47E38DBBF7DF /* TurfTests */,
+				E88B33A18E3D4A1DBDCF9BEC /* ZERO_CHECK */,
+				03728076308F43DBB980238A /* install */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		35650AEE1F150DC500B5C158 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
+/* Begin PBXShellScriptBuildPhase section */
+		003C8D08B0008F35F218E126 /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
+			name = "CMake PostBuild Rules";
+			outputPaths = (
+			);
 			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/aleks/Developer/turf-swift/build
+  /opt/homebrew/Cellar/cmake/3.29.3/bin/ctest --force-new-ctest-process -C $CONFIGURATION$EFFECTIVE_PLATFORM_NAME
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/aleks/Developer/turf-swift/build
+  /opt/homebrew/Cellar/cmake/3.29.3/bin/ctest --force-new-ctest-process -C $CONFIGURATION$EFFECTIVE_PLATFORM_NAME
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/aleks/Developer/turf-swift/build
+  /opt/homebrew/Cellar/cmake/3.29.3/bin/ctest --force-new-ctest-process -C $CONFIGURATION$EFFECTIVE_PLATFORM_NAME
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/aleks/Developer/turf-swift/build
+  /opt/homebrew/Cellar/cmake/3.29.3/bin/ctest --force-new-ctest-process -C $CONFIGURATION$EFFECTIVE_PLATFORM_NAME
+fi
+";
+			showEnvVarsInLog = 0;
 		};
-		35650AF71F150DC500B5C158 /* Resources */ = {
+		3C0110FC8322DE7E50886E21 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		3E905B8775A2823E46D95101 /* Generate CMakeFiles/ZERO_CHECK */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/ZERO_CHECK";
+			outputPaths = (
+"/Users/aleks/Developer/turf-swift/build/CMakeFiles/ZERO_CHECK"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/aleks/Developer/turf-swift/build
+  make -f /Users/aleks/Developer/turf-swift/build/CMakeScripts/ReRunCMake.make
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/aleks/Developer/turf-swift/build
+  make -f /Users/aleks/Developer/turf-swift/build/CMakeScripts/ReRunCMake.make
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/aleks/Developer/turf-swift/build
+  make -f /Users/aleks/Developer/turf-swift/build/CMakeScripts/ReRunCMake.make
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/aleks/Developer/turf-swift/build
+  make -f /Users/aleks/Developer/turf-swift/build/CMakeScripts/ReRunCMake.make
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		87AF4882E018677E2624B544 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		910A41151295C5F9742C25BD = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		93426DA6A4AC2C2AC9CE883C /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/aleks/Developer/turf-swift/build
+  /opt/homebrew/Cellar/cmake/3.29.3/bin/cmake -DBUILD_TYPE=$CONFIGURATION -DEFFECTIVE_PLATFORM_NAME=$EFFECTIVE_PLATFORM_NAME -P cmake_install.cmake
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/aleks/Developer/turf-swift/build
+  /opt/homebrew/Cellar/cmake/3.29.3/bin/cmake -DBUILD_TYPE=$CONFIGURATION -DEFFECTIVE_PLATFORM_NAME=$EFFECTIVE_PLATFORM_NAME -P cmake_install.cmake
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/aleks/Developer/turf-swift/build
+  /opt/homebrew/Cellar/cmake/3.29.3/bin/cmake -DBUILD_TYPE=$CONFIGURATION -DEFFECTIVE_PLATFORM_NAME=$EFFECTIVE_PLATFORM_NAME -P cmake_install.cmake
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/aleks/Developer/turf-swift/build
+  /opt/homebrew/Cellar/cmake/3.29.3/bin/cmake -DBUILD_TYPE=$CONFIGURATION -DEFFECTIVE_PLATFORM_NAME=$EFFECTIVE_PLATFORM_NAME -P cmake_install.cmake
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		9B50530E35CC49C82C2FACCF = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		F0E362A4674E1434EB6C5FF5 /* Generate CMakeFiles/ALL_BUILD */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/ALL_BUILD";
+			outputPaths = (
+"/Users/aleks/Developer/turf-swift/build/CMakeFiles/ALL_BUILD"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/aleks/Developer/turf-swift/build
+  echo Build\\ all\\ projects
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/aleks/Developer/turf-swift/build
+  echo Build\\ all\\ projects
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/aleks/Developer/turf-swift/build
+  echo Build\\ all\\ projects
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/aleks/Developer/turf-swift/build
+  echo Build\\ all\\ projects
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AFF363B3BD694004BE6A662B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C46809D721241B5100BAD5E1 /* featurecollection-no-properties.geojson in Resources */,
-				3534C3B9200C419100F93581 /* polygon.geojson in Resources */,
-				DA972D7A26FEB9DC009F5615 /* simplify in Resources */,
-				3516685A202EFE690032A97E /* multiline.geojson in Resources */,
-				3502F7A7201F616E00399EFE /* simple-line.geojson in Resources */,
-				35166856202E6CEE0032A97E /* multipoint.geojson in Resources */,
-				357495BE208E3432007D7477 /* featurecollection.geojson in Resources */,
-				3502F7A3201F568000399EFE /* point.geojson in Resources */,
-				2B5FABFD24066EB7008A285F /* geometry-collection.geojson in Resources */,
-				3516685E202EFF130032A97E /* multipolygon.geojson in Resources */,
-				3534C3B8200C419100F93581 /* dc-line.geojson in Resources */,
+				39975EAD2C46493FBFA2C71E /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/dc-line.geojson */,
+				01363AD5CA3C4946A1708F36 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/featurecollection-no-properties.geojson */,
+				F5C234A3CC0444E997B2A4CE /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/featurecollection.geojson */,
+				6BDE091797B84C3DB9E4C9E1 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/geometry-collection.geojson */,
+				FE424F202FF4400D9B619F64 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/multiline.geojson */,
+				EDB6A195B926451CBA52F481 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/multipoint.geojson */,
+				488CA364D7374911B57BF63B /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/multipolygon.geojson */,
+				D13E52FE2061461C87E5FA7A /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/point.geojson */,
+				8AE8AECE9A1844158B7B0B08 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/polygon.geojson */,
+				1423D1845C504814B404B439 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/simple-line.geojson */,
+				891866475CEC4530AB51C155 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixtures/simplify */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		35650AEB1F150DC500B5C158 /* Sources */ = {
+		992772CF43904134B129E918 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B74CD7D2485375C00EE6693 /* MultiPoint.swift in Sources */,
-				3547ECF6200C3C78009DA062 /* Turf.swift in Sources */,
-				2B74CD822485377900EE6693 /* MultiLineString.swift in Sources */,
-				35ECAF362099EC0700DC3BC3 /* FeatureIdentifier.swift in Sources */,
-				3547ECF5200C3C78009DA062 /* CoreLocation.swift in Sources */,
-				2B74CD8C248538A600EE6693 /* GeometryCollection.swift in Sources */,
-				35B56E6A20DAF3C500C4923D /* RadianCoordinate2D.swift in Sources */,
-				2B5FAC0A2406B8B7008A285F /* Feature.swift in Sources */,
-				35B56E9220DAF66A00C4923D /* FeatureCollection.swift in Sources */,
-				2B74CD872485388C00EE6693 /* MultiPolygon.swift in Sources */,
-				2B64F7AC2407ECD300C2559B /* LineString.swift in Sources */,
-				3A40B38226E48262004457C4 /* Simplifier.swift in Sources */,
-				35ECAF2F20974A1800DC3BC3 /* Geometry.swift in Sources */,
-				35B56E7420DAF47D00C4923D /* Polygon.swift in Sources */,
-				7AA969AC21B98F8F009C57FE /* Spline.swift in Sources */,
-				DA972D932702763B009F5615 /* JSON.swift in Sources */,
-				CE2EB998214C246A00915A30 /* BoundingBox.swift in Sources */,
-				2B74CD782485372800EE6693 /* Point.swift in Sources */,
-				2B0BA0492947709200402F81 /* Consumer+WKT.swift in Sources */,
-				35B56E6F20DAF41F00C4923D /* Ring.swift in Sources */,
-				3502F796201F53FC00399EFE /* Codable.swift in Sources */,
-				2B3757562943887A00D52D0F /* WKT.swift in Sources */,
-				2B0BA0472947700A00402F81 /* Consumer.swift in Sources */,
-				3502F791201F507500399EFE /* GeoJSON.swift in Sources */,
+				12C24873A68641278294128E /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/BoundingBoxTests.swift */,
+				5A53BF8B72D14C86B040A2FE /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/FeatureCollectionTests.swift */,
+				E1A9F4FC18B54EAD9D992EF2 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/Fixture.swift */,
+				6E199F9B1EF6466DA6D333B6 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/GeoJSONTests.swift */,
+				50E0AE3CD9A64B0290D7E20A /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/GeometryCollectionTests.swift */,
+				DDC659F44A8E469285FEC81D /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/JSONTests.swift */,
+				5781C0F4781244B19BB96492 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/LineStringTests.swift */,
+				FABFC56340FE46DDB048B1D2 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/LocationCoordinate2DTests.swift */,
+				26D38ADDAAF0449D938DACDE /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/MultiLineStringTests.swift */,
+				812C2288602E484D96FC31F7 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/MultiPointTests.swift */,
+				1543AEE6ED984FA18D99DBB0 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/MultiPolygonTests.swift */,
+				0A8D2697EBA841F1B4034F65 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/PointTests.swift */,
+				F8598256DF4A4DC4BA2B3AA5 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/PolygonTests.swift */,
+				8DE875A9BAE44434827E8DE6 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/RadianCoordinate2DTests.swift */,
+				28488D054844436FB452F729 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/TurfTests.swift */,
+				1E032F831A314648A5F401B1 /* /Users/aleks/Developer/turf-swift/Tests/TurfTests/WKTTests.swift */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		35650AF51F150DC500B5C158 /* Sources */ = {
+		A305E497923747CCA4E795A7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35B56E9F20DAF88C00C4923D /* PolygonTests.swift in Sources */,
-				2B5FAC122406BADF008A285F /* GeoJSONTests.swift in Sources */,
-				2B0BA04B29487A0400402F81 /* WKTTests.swift in Sources */,
-				11E7270C2624840900C1890B /* RadianCoordinate2DTests.swift in Sources */,
-				11E726FA26247D3900C1890B /* LocationCoordinate2DTests.swift in Sources */,
-				DA972DA6270289C5009F5615 /* JSONTests.swift in Sources */,
-				35B56EAB20DAF8CB00C4923D /* MultiPolygonTests.swift in Sources */,
-				35B56E9720DAF82F00C4923D /* PointTests.swift in Sources */,
-				2B5FAC0124067051008A285F /* GeometryCollectionTests.swift in Sources */,
-				CE7F8164215182FF00A9D221 /* BoundingBoxTests.swift in Sources */,
-				35B56EA720DAF8BB00C4923D /* MultiLineStringTests.swift in Sources */,
-				35B56EAF20DAF8DE00C4923D /* FeatureCollectionTests.swift in Sources */,
-				3547ED0E200C3E00009DA062 /* TurfTests.swift in Sources */,
-				35B56E9B20DAF86000C4923D /* LineStringTests.swift in Sources */,
-				3547ED10200C3E0B009DA062 /* Fixture.swift in Sources */,
-				35B56EA320DAF89F00C4923D /* MultiPointTests.swift in Sources */,
+				0F5E1BBFA06C4BFF9AC9FCFA /* /Users/aleks/Developer/turf-swift/Sources/Turf/BoundingBox.swift */,
+				069E9281DD8D4737861C427E /* /Users/aleks/Developer/turf-swift/Sources/Turf/Codable.swift */,
+				698766083ED747F0A3B8E870 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Consumer/Consumer+WKT.swift */,
+				26F4118C275645E789CC1651 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Consumer/Consumer.swift */,
+				EAA3ECF3505C4928BD31455E /* /Users/aleks/Developer/turf-swift/Sources/Turf/CoreLocation.swift */,
+				A3CED4135B7748B6AFEA1D48 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Feature.swift */,
+				53343D146453482B86CFA6CD /* /Users/aleks/Developer/turf-swift/Sources/Turf/FeatureCollection.swift */,
+				4F7D776A682F465C8E064562 /* /Users/aleks/Developer/turf-swift/Sources/Turf/FeatureIdentifier.swift */,
+				F7B5F73177244F1BAAF61122 /* /Users/aleks/Developer/turf-swift/Sources/Turf/GeoJSON.swift */,
+				D241C8D0BAC14FA599861C15 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/GeometryCollection.swift */,
+				594219724B8440439A48B9A2 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/LineString.swift */,
+				E55F78D304E6487DB90787B9 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/MultiLineString.swift */,
+				9AB181A7846747158DC319BC /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/MultiPoint.swift */,
+				8BFE43DB08F64511A4097A71 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/MultiPolygon.swift */,
+				82C8CCB1D79B4C8292945ADA /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/Point.swift */,
+				563BE1723A704A91B0C27EB3 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometries/Polygon.swift */,
+				95BDF07F5C154DD2A5A36C67 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Geometry.swift */,
+				3D1C297C3E3E4979AEC91826 /* /Users/aleks/Developer/turf-swift/Sources/Turf/JSON.swift */,
+				FBBFAC7CEB8C48ABBCBBD95A /* /Users/aleks/Developer/turf-swift/Sources/Turf/RadianCoordinate2D.swift */,
+				C622A2F983B94B35A56CFE48 /* /Users/aleks/Developer/turf-swift/Sources/Turf/Ring.swift */,
+				F0A1F48E38444EDE86CD2C1B /* /Users/aleks/Developer/turf-swift/Sources/Turf/Simplifier.swift */,
+				160CC55B7DB049F98C2D69FA /* /Users/aleks/Developer/turf-swift/Sources/Turf/Spline.swift */,
+				C4DDC224B41C4A8082C0D9EE /* /Users/aleks/Developer/turf-swift/Sources/Turf/Turf.swift */,
+				EF8BC7DD7B9A468EA42D8472 /* /Users/aleks/Developer/turf-swift/Sources/Turf/WKT.swift */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		35650AFC1F150DC500B5C158 /* PBXTargetDependency */ = {
+		1600898F5E2940BF89671986 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 35650AEF1F150DC500B5C158 /* Turf */;
-			targetProxy = 35650AFB1F150DC500B5C158 /* PBXContainerItemProxy */;
+			target = E88B33A18E3D4A1DBDCF9BEC /* ZERO_CHECK */;
+			targetProxy = 30EBF052DC674108BDA19054 /* PBXContainerItemProxy */;
+		};
+		5FCEACC3A7E44DCE923844C4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 40713DBDCEC144EBA811E9E5 /* Turf */;
+			targetProxy = AC70E82FE6D0421794BC483A /* PBXContainerItemProxy */;
+		};
+		6C3C53FA00034426A2D02DD0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 51542EF74E69486F9388FE64 /* ALL_BUILD */;
+			targetProxy = C64CDAA6408F4572A95DC3F5 /* PBXContainerItemProxy */;
+		};
+		A078FA48AC634C46BF938D52 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E88B33A18E3D4A1DBDCF9BEC /* ZERO_CHECK */;
+			targetProxy = DF696AFF8991442AA78EA054 /* PBXContainerItemProxy */;
+		};
+		CFE7F696A09140A584E74C09 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 40713DBDCEC144EBA811E9E5 /* Turf */;
+			targetProxy = 6B3F72C3BEAE48A1A596D698 /* PBXContainerItemProxy */;
+		};
+		F70A1F5C5667414EBC013FA1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E88B33A18E3D4A1DBDCF9BEC /* ZERO_CHECK */;
+			targetProxy = 560DEAF314E5433CBAA1E911 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		35650B021F150DC500B5C158 /* Debug */ = {
+		050A5F0E12D444F19853DF29 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIESS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/aleks/Developer/turf-swift/build/Tests/RelWithDebInfo${EFFECTIVE_PLATFORM_NAME}";
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks,"/Users/aleks/Developer/turf-swift/build/Sources/RelWithDebInfo${EFFECTIVE_PLATFORM_NAME}","$(inherited)");
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 1;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",TurfTests_EXPORTS,"$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/aleks/Developer/turf-swift/build/Sources","$(inherited)");
+				INFOPLIST_FILE = "/Users/aleks/Developer/turf-swift/build/Tests/CMakeFiles/TurfTests.dir/Info.plist";
+				INSTALL_PATH = "";
+				LD_RUNPATH_SEARCH_PATHS = ("/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks /Users/aleks/Developer/turf-swift/build/Sources/RelWithDebInfo${EFFECTIVE_PLATFORM_NAME}","$(inherited)");
+				LIBRARY_STYLE = BUNDLE;
+				OTHER_LDFLAGS = (" -bundle","-framework Foundation","-Xlinker -framework -Xlinker XCTest","/Users/aleks/Developer/turf-swift/build/Sources/RelWithDebInfo${EFFECTIVE_PLATFORM_NAME}/Turf.framework/Turf","$(inherited)");
+				OTHER_REZFLAGS = "";
+				OTHER_SWIFT_FLAGS = ("      -swift-version 5.0 ","$(inherited)");
+				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.TurfTests;
+				PRODUCT_NAME = TurfTests;
+				SECTORDER_FLAGS = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ("$(inherited)");
+				SWIFT_INCLUDE_PATHS = ("/Users/aleks/Developer/turf-swift/build/Sources","$(inherited)");
+				TARGET_TEMP_DIR = "/Users/aleks/Developer/turf-swift/build/build/TurfTests.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = RelWithDebInfo;
+		};
+		08CB6F749E8F43C5B4A3B549 /* RelWithDebInfo */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 32;
-				DEAD_CODE_STRIPPING = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Sources/Turf/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx appletvos appletvsimulator watchsimulator watchos";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 5.0;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = RUN_TESTS;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
 			};
-			name = Debug;
+			name = RelWithDebInfo;
 		};
-		35650B031F150DC500B5C158 /* Release */ = {
+		0A913FE2C6E444498BBD2264 /* RelWithDebInfo */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 32;
-				DEAD_CODE_STRIPPING = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Sources/Turf/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx appletvos appletvsimulator watchsimulator watchos";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/aleks/Developer/turf-swift/build/Sources/RelWithDebInfo${EFFECTIVE_PLATFORM_NAME}";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 32;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_VERSION = 3.0.0;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 1;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",Turf_EXPORTS,"$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = "/Users/aleks/Developer/turf-swift/build/Sources/CMakeFiles/Turf.dir/Info.plist";
+				INSTALL_PATH = "@rpath";
+				LIBRARY_STYLE = DYNAMIC;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				OTHER_SWIFT_FLAGS = ("      -swift-version 5.0 ","$(inherited)");
+				PRODUCT_NAME = Turf;
+				SECTORDER_FLAGS = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ("$(inherited)");
+				TARGET_TEMP_DIR = "/Users/aleks/Developer/turf-swift/build/build/Turf.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		100841A5227D42F0B585488A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		102004ABFB254163ABEA91CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIESS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/aleks/Developer/turf-swift/build/Tests/Release${EFFECTIVE_PLATFORM_NAME}";
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks,"/Users/aleks/Developer/turf-swift/build/Sources/Release${EFFECTIVE_PLATFORM_NAME}","$(inherited)");
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 1;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",TurfTests_EXPORTS,"$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/aleks/Developer/turf-swift/build/Sources","$(inherited)");
+				INFOPLIST_FILE = "/Users/aleks/Developer/turf-swift/build/Tests/CMakeFiles/TurfTests.dir/Info.plist";
+				INSTALL_PATH = "";
+				LD_RUNPATH_SEARCH_PATHS = ("/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks /Users/aleks/Developer/turf-swift/build/Sources/Release${EFFECTIVE_PLATFORM_NAME}","$(inherited)");
+				LIBRARY_STYLE = BUNDLE;
+				OTHER_LDFLAGS = (" -bundle","-framework Foundation","-Xlinker -framework -Xlinker XCTest","/Users/aleks/Developer/turf-swift/build/Sources/Release${EFFECTIVE_PLATFORM_NAME}/Turf.framework/Turf","$(inherited)");
+				OTHER_REZFLAGS = "";
+				OTHER_SWIFT_FLAGS = ("   -swift-version 5.0 ","$(inherited)");
+				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.TurfTests;
+				PRODUCT_NAME = TurfTests;
+				SECTORDER_FLAGS = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ("$(inherited)");
+				SWIFT_INCLUDE_PATHS = ("/Users/aleks/Developer/turf-swift/build/Sources","$(inherited)");
+				TARGET_TEMP_DIR = "/Users/aleks/Developer/turf-swift/build/build/TurfTests.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		297B3026FD3C4C5D897DB177 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/aleks/Developer/turf-swift/build/Sources/Release${EFFECTIVE_PLATFORM_NAME}";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 32;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_VERSION = 3.0.0;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 1;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",Turf_EXPORTS,"$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = "/Users/aleks/Developer/turf-swift/build/Sources/CMakeFiles/Turf.dir/Info.plist";
+				INSTALL_PATH = "@rpath";
+				LIBRARY_STYLE = DYNAMIC;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				OTHER_SWIFT_FLAGS = ("   -swift-version 5.0 ","$(inherited)");
+				PRODUCT_NAME = Turf;
+				SECTORDER_FLAGS = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ("$(inherited)");
+				TARGET_TEMP_DIR = "/Users/aleks/Developer/turf-swift/build/build/Turf.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		30EC32A4C12E4A10B8B4C13C /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/aleks/Developer/turf-swift/build/Sources/MinSizeRel${EFFECTIVE_PLATFORM_NAME}";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 32;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_VERSION = 3.0.0;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",Turf_EXPORTS,"$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = "/Users/aleks/Developer/turf-swift/build/Sources/CMakeFiles/Turf.dir/Info.plist";
+				INSTALL_PATH = "@rpath";
+				LIBRARY_STYLE = DYNAMIC;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				OTHER_SWIFT_FLAGS = ("-Osize -swift-version 5.0 ","$(inherited)");
+				PRODUCT_NAME = Turf;
+				SECTORDER_FLAGS = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ("$(inherited)");
+				TARGET_TEMP_DIR = "/Users/aleks/Developer/turf-swift/build/build/Turf.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		34D581755F9E43CFBEB4CE0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		361EDEE2A94747E38FD1BA4C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		4D048EF7C6AC430EB400814B /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		4E42071782B54E1FA7A83987 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		5ABD363F46874306A3DEAA61 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphonesimulator;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 5.0;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+				SYMROOT = "/Users/aleks/Developer/turf-swift/build/build";
 			};
 			name = Release;
 		};
-		35650B051F150DC500B5C158 /* Debug */ = {
+		67C4C66850DE4D16B5953FA4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIESS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_IDENTITY = "";
-				DEAD_CODE_STRIPPING = YES;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 32;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Turf/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.turf;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx watchos watchsimulator xros xrsimulator";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/aleks/Developer/turf-swift/build/Tests/Debug${EFFECTIVE_PLATFORM_NAME}";
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks,"/Users/aleks/Developer/turf-swift/build/Sources/Debug${EFFECTIVE_PLATFORM_NAME}","$(inherited)");
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",TurfTests_EXPORTS,"$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/aleks/Developer/turf-swift/build/Sources","$(inherited)");
+				INFOPLIST_FILE = "/Users/aleks/Developer/turf-swift/build/Tests/CMakeFiles/TurfTests.dir/Info.plist";
+				INSTALL_PATH = "";
+				LD_RUNPATH_SEARCH_PATHS = ("/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks /Users/aleks/Developer/turf-swift/build/Sources/Debug${EFFECTIVE_PLATFORM_NAME}","$(inherited)");
+				LIBRARY_STYLE = BUNDLE;
+				OTHER_LDFLAGS = (" -bundle","-framework Foundation","-Xlinker -framework -Xlinker XCTest","/Users/aleks/Developer/turf-swift/build/Sources/Debug${EFFECTIVE_PLATFORM_NAME}/Turf.framework/Turf","$(inherited)");
+				OTHER_REZFLAGS = "";
+				OTHER_SWIFT_FLAGS = ("-Onone    -swift-version 5.0 ","$(inherited)");
+				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.TurfTests;
+				PRODUCT_NAME = TurfTests;
+				SECTORDER_FLAGS = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ("$(inherited)");
+				SWIFT_INCLUDE_PATHS = ("/Users/aleks/Developer/turf-swift/build/Sources","$(inherited)");
+				TARGET_TEMP_DIR = "/Users/aleks/Developer/turf-swift/build/build/TurfTests.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
 		};
-		35650B061F150DC500B5C158 /* Release */ = {
+		780508747D8C4AF8B4E7B26D /* MinSizeRel */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				DEAD_CODE_STRIPPING = YES;
-				DEFINES_MODULE = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		7EB116D496FF484FAB4329FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/aleks/Developer/turf-swift/build/Sources/Debug${EFFECTIVE_PLATFORM_NAME}";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 32;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Turf/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.turf;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx watchos watchsimulator xros xrsimulator";
-			};
-			name = Release;
-		};
-		35650B081F150DC500B5C158 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEAD_CODE_STRIPPING = YES;
-				INFOPLIST_FILE = Tests/TurfTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.TurfTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx watchos watchsimulator xros xrsimulator";
+				ENABLE_TESTABILITY = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_VERSION = 3.0.0;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",Turf_EXPORTS,"$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = "/Users/aleks/Developer/turf-swift/build/Sources/CMakeFiles/Turf.dir/Info.plist";
+				INSTALL_PATH = "@rpath";
+				LIBRARY_STYLE = DYNAMIC;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				OTHER_SWIFT_FLAGS = ("-Onone    -swift-version 5.0 ","$(inherited)");
+				PRODUCT_NAME = Turf;
+				SECTORDER_FLAGS = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ("$(inherited)");
+				TARGET_TEMP_DIR = "/Users/aleks/Developer/turf-swift/build/build/Turf.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
 			};
 			name = Debug;
 		};
-		35650B091F150DC500B5C158 /* Release */ = {
+		82017BBECCAE41E9A1009818 /* MinSizeRel */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEAD_CODE_STRIPPING = YES;
-				INFOPLIST_FILE = Tests/TurfTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.TurfTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx watchos watchsimulator xros xrsimulator";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphonesimulator;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "/Users/aleks/Developer/turf-swift/build/build";
+			};
+			name = MinSizeRel;
+		};
+		858006AFB3F1478B9FC585EF /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphonesimulator;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "/Users/aleks/Developer/turf-swift/build/build";
+			};
+			name = RelWithDebInfo;
+		};
+		8AEBFD3DD19C4EBF9780668A /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		97C12A0791B743DD8B46D314 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		B3B2746FDEA64D2BAF4940D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphonesimulator;
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "/Users/aleks/Developer/turf-swift/build/build";
+			};
+			name = Debug;
+		};
+		BD04EE97F7484687AFE11BC8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
 			};
 			name = Release;
+		};
+		C121AE82CB7E42C2A412A1E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = RUN_TESTS;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		C7186EFFD8A0409F8E740DCC /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		C92CD4C4E0AB4E1BA02B09E5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = RUN_TESTS;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		CA245DB101E24D54815E0890 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		CB8A4F13030547128CA81A88 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = RUN_TESTS;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		CDAA81BBF7534F2A98D840AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		EA99A30AF91C4AC480A416ED /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIESS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/aleks/Developer/turf-swift/build/Tests/MinSizeRel${EFFECTIVE_PLATFORM_NAME}";
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks,"/Users/aleks/Developer/turf-swift/build/Sources/MinSizeRel${EFFECTIVE_PLATFORM_NAME}","$(inherited)");
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",TurfTests_EXPORTS,"$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/aleks/Developer/turf-swift/build/Sources","$(inherited)");
+				INFOPLIST_FILE = "/Users/aleks/Developer/turf-swift/build/Tests/CMakeFiles/TurfTests.dir/Info.plist";
+				INSTALL_PATH = "";
+				LD_RUNPATH_SEARCH_PATHS = ("/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks /Users/aleks/Developer/turf-swift/build/Sources/MinSizeRel${EFFECTIVE_PLATFORM_NAME}","$(inherited)");
+				LIBRARY_STYLE = BUNDLE;
+				OTHER_LDFLAGS = (" -bundle","-framework Foundation","-Xlinker -framework -Xlinker XCTest","/Users/aleks/Developer/turf-swift/build/Sources/MinSizeRel${EFFECTIVE_PLATFORM_NAME}/Turf.framework/Turf","$(inherited)");
+				OTHER_REZFLAGS = "";
+				OTHER_SWIFT_FLAGS = ("-Osize -swift-version 5.0 ","$(inherited)");
+				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.TurfTests;
+				PRODUCT_NAME = TurfTests;
+				SECTORDER_FLAGS = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ("$(inherited)");
+				SWIFT_INCLUDE_PATHS = ("/Users/aleks/Developer/turf-swift/build/Sources","$(inherited)");
+				TARGET_TEMP_DIR = "/Users/aleks/Developer/turf-swift/build/build/TurfTests.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = MinSizeRel;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		35650AEA1F150DC500B5C158 /* Build configuration list for PBXProject "Turf" */ = {
+		11B924D2598449DEB9F5CACA /* Build configuration list for PBXNativeTarget "TurfTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				35650B021F150DC500B5C158 /* Debug */,
-				35650B031F150DC500B5C158 /* Release */,
+				67C4C66850DE4D16B5953FA4 /* Debug */,
+				102004ABFB254163ABEA91CD /* Release */,
+				EA99A30AF91C4AC480A416ED /* MinSizeRel */,
+				050A5F0E12D444F19853DF29 /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
-		35650B041F150DC500B5C158 /* Build configuration list for PBXNativeTarget "Turf" */ = {
+		17CF07CBA1ED4047BDDB2E19 /* Build configuration list for PBXAggregateTarget "RUN_TESTS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				35650B051F150DC500B5C158 /* Debug */,
-				35650B061F150DC500B5C158 /* Release */,
+				C121AE82CB7E42C2A412A1E7 /* Debug */,
+				C92CD4C4E0AB4E1BA02B09E5 /* Release */,
+				CB8A4F13030547128CA81A88 /* MinSizeRel */,
+				08CB6F749E8F43C5B4A3B549 /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
-		35650B071F150DC500B5C158 /* Build configuration list for PBXNativeTarget "TurfTests" */ = {
+		5538B9087B894E7F96DD5CBC /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				35650B081F150DC500B5C158 /* Debug */,
-				35650B091F150DC500B5C158 /* Release */,
+				34D581755F9E43CFBEB4CE0E /* Debug */,
+				100841A5227D42F0B585488A /* Release */,
+				4D048EF7C6AC430EB400814B /* MinSizeRel */,
+				8AEBFD3DD19C4EBF9780668A /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
+		};
+		555A6A4756A54E129DD0156E /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA245DB101E24D54815E0890 /* Debug */,
+				BD04EE97F7484687AFE11BC8 /* Release */,
+				C7186EFFD8A0409F8E740DCC /* MinSizeRel */,
+				4E42071782B54E1FA7A83987 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		97974B2031B645DBB13D0138 /* Build configuration list for PBXAggregateTarget "install" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				361EDEE2A94747E38FD1BA4C /* Debug */,
+				CDAA81BBF7534F2A98D840AF /* Release */,
+				780508747D8C4AF8B4E7B26D /* MinSizeRel */,
+				97C12A0791B743DD8B46D314 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C272EAD41B8744388506D9AB /* Build configuration list for PBXNativeTarget "Turf" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7EB116D496FF484FAB4329FF /* Debug */,
+				297B3026FD3C4C5D897DB177 /* Release */,
+				30EC32A4C12E4A10B8B4C13C /* MinSizeRel */,
+				0A913FE2C6E444498BBD2264 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F596A3B8C9D84A35941BD123 /* Build configuration list for PBXProject "Turf" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B3B2746FDEA64D2BAF4940D5 /* Debug */,
+				5ABD363F46874306A3DEAA61 /* Release */,
+				82017BBECCAE41E9A1009818 /* MinSizeRel */,
+				858006AFB3F1478B9FC585EF /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 35650AE71F150DC500B5C158 /* Project object */;
+	rootObject = 8C825D0A66C048F2AE6D4041 /* Project object */;
 }
