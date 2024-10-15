@@ -5,7 +5,7 @@ set -eou pipefail
 TEMPORARY_DIRECTORY=$(mktemp -d)
 echo "Temporary directory: $TEMPORARY_DIRECTORY"
 
-platforms=("iOS" "iOS Simulator" "macOS" "tvOS" "tvOS Simulator" "watchOS" "watchOS Simulator" "visionOS" "visionOS Simulator")
+platforms=("iOS" "iOS Simulator" "macOS" "macOS,variant=Mac Catalyst" "tvOS" "tvOS Simulator" "watchOS" "watchOS Simulator" "visionOS" "visionOS Simulator")
 
 # build Turf for each platform
 
@@ -17,7 +17,8 @@ do
     -archivePath "$TEMPORARY_DIRECTORY/archives/Turf-$platform.xcarchive" \
     -destination "generic/platform=$platform" \
     SKIP_INSTALL=NO \
-    BUILD_LIBRARY_FOR_DISTRIBUTION=YES
+    BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
+    SUPPORTS_MACCATALYST=YES
 
   commands+=("-archive" "$TEMPORARY_DIRECTORY/archives/Turf-$platform.xcarchive")
   commands+=("-framework" "Turf.framework")
