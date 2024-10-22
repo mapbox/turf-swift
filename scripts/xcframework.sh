@@ -2,6 +2,8 @@
 
 set -eou pipefail
 
+ZIP_OUTPUT_PATH=${1:-$(pwd)/Turf.xcframework.zip}
+
 TEMPORARY_DIRECTORY=$(mktemp -d)
 echo "Temporary directory: $TEMPORARY_DIRECTORY"
 

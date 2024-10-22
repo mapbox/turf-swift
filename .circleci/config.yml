@@ -12,6 +12,7 @@ jobs:
       - run:
           name: "Test"
           command: swift test
+
   build_and_test_macos:
     parameters:
       xcode_version:
@@ -26,6 +27,7 @@ jobs:
       - run:
           name: "Test"
           command: swift test
+
   test_simulator:
     parameters:
       destination:
@@ -42,6 +44,7 @@ jobs:
               -scheme Turf \
               -destination "<< parameters.destination >>" \
               -derivedDataPath build
+
   pod_spec_lint:
     macos:
       xcode: 15.2.0
@@ -50,6 +53,25 @@ jobs:
     - run:
         name: "Lint podspec"
         command: pod spec lint
+
+  calculate_and_commit_checksum:
+    macos:
+      xcode: 15.2.0
+    steps:
+      - checkout
+      - run:
+          name: "Build and create checksum"
+          command: ./scripts/calculate_checksum_and_commit.sh
+
+  create_xcframework:
+    macos:
+      xcode: 15.2.0
+    steps:
+      - checkout
+      - run:
+          name: "Build and create checksum"
+          command: ./scripts/xcframework.sh Turf.xcframework.zip
+
 
   build_for_library_evolution:
     macos:
@@ -64,15 +86,28 @@ jobs:
              -Xswiftc -emit-module-interface \
              -Xswiftc -enable-library-evolution
 
+  release_job:
+    macos:
+      xcode: 15.2.0
+    steps:
+      - checkout
+      - run:
+          name: "Make release"
+          command: ./scripts/draft-release.sh "$CIRCLE_TAG"
+
 workflows:
   build-and-test:
     jobs:
+      - create_xcframework
+      - calculate_and_commit_checksum:
+          requires:
+            - create_xcframework
       - build_for_library_evolution
       - build_and_test_linux
       - build_and_test_macos:
           matrix:
             parameters:
-              xcode_version: [14.3.1, 15.1.0]
+              xcode_version: [14.3.1, 15.2.0]
       - test_simulator:
           matrix:
             parameters:
@@ -80,3 +115,10 @@ workflows:
                 - "platform=visionOS Simulator,OS=1.0,name=Apple Vision Pro"
                 - "platform=iOS Simulator,OS=17.2,name=iPhone 15"
       - pod_spec_lint
+
+  release:
+    triggers:
+      - type: tag
+        tag: /^v[0-9]+\.[0-9]+\.[0-9]+$/
+    jobs:
+      - release_job
