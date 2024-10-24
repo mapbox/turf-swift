@@ -1,17 +1,6 @@
 version: 2.1
 
 jobs:
-  build_and_test_linux:
-    docker:
-      - image: swift:latest
-    steps:
-      - checkout
-      - run:
-          name: "Build"
-          command: swift build
-      - run:
-          name: "Test"
-          command: swift test
   build_and_test_macos:
     parameters:
       xcode_version:
@@ -22,10 +11,11 @@ jobs:
       - checkout
       - run:
           name: "Build"
-          command: swift build
+          command: xcodebuild -scheme Turf -configuration Debug -destination 'platform=macOS' build
       - run:
           name: "Test"
-          command: swift test
+          command: xcodebuild -scheme Turf -configuration Debug -destination 'platform=macOS' test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
   test_simulator:
     parameters:
       destination:
@@ -42,6 +32,7 @@ jobs:
               -scheme Turf \
               -destination "<< parameters.destination >>" \
               -derivedDataPath build
+
   pod_spec_lint:
     macos:
       xcode: 15.2.0
@@ -51,6 +42,27 @@ jobs:
         name: "Lint podspec"
         command: pod spec lint
 
+  create_xcframework:
+    macos:
+      xcode: 15.2.0
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - SHA256:+N0Z68Xv4pWOYv57DqtnjGzkBtV5xcKJ48MIMVjgEUw
+      - run:
+          name: "Download distribution certificate for codesigning"
+          command: |
+            bundle install
+            bundle exec fastlane setup_distribution_cert
+      - run:
+          name: "Build and create xcframework"
+          command: ./scripts/xcframework.sh build/Turf.xcframework.zip
+      - persist_to_workspace:
+          root: .
+          paths:
+            - xcframework_checksum.txt
+
   build_for_library_evolution:
     macos:
       xcode: 15.1.0
@@ -58,21 +70,44 @@ jobs:
       - checkout
       - run:
           name: "Build for library evolution"
-          command: |
-           swift build \
-             -c release \
-             -Xswiftc -emit-module-interface \
-             -Xswiftc -enable-library-evolution
+          command: xcodebuild -scheme Turf -configuration Release BUILD_LIBRARY_FOR_DISTRIBUTION=YES build
+
+  sync_release:
+    macos:
+      xcode: 15.2.0
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: "Sync release branch"
+          command: ./scripts/sync-release.sh
+    
+  release_job:
+    macos:
+      xcode: 15.2.0
+    steps:
+      - checkout
+      - run:
+          name: "Make release"
+          command: ./scripts/draft-release.sh "$CIRCLE_TAG"
 
 workflows:
   build-and-test:
     jobs:
+      - create_xcframework
+      - sync_release:
+          filters:
+            branches:
+              only:
+                - sapial/turf-release/0
+          requires:
+            - create_xcframework
       - build_for_library_evolution
-      - build_and_test_linux
       - build_and_test_macos:
           matrix:
             parameters:
-              xcode_version: [14.3.1, 15.1.0]
+              xcode_version: [14.3.1, 15.2.0]
       - test_simulator:
           matrix:
             parameters:
