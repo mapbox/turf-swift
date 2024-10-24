@@ -1,0 +1,5 @@
+git_url("git@github.com:mapbox/apple-certificates.git")
+type("appstore")
+readonly(true) 
+skip_provisioning_profiles(true)
+app_identifier([])

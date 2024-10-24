@@ -29,20 +29,17 @@ Pod::Spec.new do |s|
   # s.visionos.deployment_target = "1.0"
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-
-  s.source = { :git => "https://github.com/mapbox/turf-swift.git", :tag => "v#{s.version.to_s}" }
-
-  # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-
-  s.source_files = "Sources/**/*{.swift,.h}"
+  
+  s.source = {
+    :http => "https://github.com/mapbox/turf-swift/releases/download/v#{s.version.to_s}/Turf.xcframework.zip"
+  }
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   s.requires_arc = true
   s.module_name = "Turf"
-
   s.frameworks = 'CoreLocation'
-
   s.swift_version = "5.7"
+  s.vendored_frameworks = 'Turf.xcframework'
 
 end
