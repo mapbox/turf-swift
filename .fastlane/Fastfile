@@ -1,0 +1,8 @@
+default_platform(:ios)
+
+platform :ios do
+    lane :setup_distribution_cert do
+        setup_ci
+        match(type: "appstore")
+    end
+end
