@@ -1,17 +1,36 @@
 version: 2.1
 
-jobs:
-  build_and_test_linux:
-    docker:
-      - image: swift:latest
+parameters:
+  flow:
+    type: enum
+    enum: [build, pre-release, release]
+    default: build
+  version:
+    type: string
+    default: ""
+
+commands:
+  pod_spec_lint:
     steps:
-      - checkout
       - run:
-          name: "Build"
-          command: swift build
+          name: "Lint podspec"
+          command: pod spec lint --allow-warnings
+  setup_environment:
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - SHA256:+N0Z68Xv4pWOYv57DqtnjGzkBtV5xcKJ48MIMVjgEUw
       - run:
-          name: "Test"
-          command: swift test
+          name: "Download distribution certificate for codesigning"
+          command: |
+            bundle install
+            bundle exec fastlane setup_distribution_cert
+      - run:
+          name: "Install GH"
+          command: |
+            brew install gh
+
+jobs:
   build_and_test_macos:
     parameters:
       xcode_version:
@@ -22,10 +41,11 @@ jobs:
       - checkout
       - run:
           name: "Build"
-          command: swift build
+          command: xcodebuild -scheme Turf -configuration Debug -destination 'platform=macOS' build
       - run:
           name: "Test"
-          command: swift test
+          command: xcodebuild -scheme Turf -configuration Debug -destination 'platform=macOS' test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
   test_simulator:
     parameters:
       destination:
@@ -42,14 +62,21 @@ jobs:
               -scheme Turf \
               -destination "<< parameters.destination >>" \
               -derivedDataPath build
-  pod_spec_lint:
+
+  create_xcframework:
     macos:
       xcode: 15.2.0
     steps:
-    - checkout
-    - run:
-        name: "Lint podspec"
-        command: pod spec lint
+      - checkout
+      - setup_environment
+      - run:
+          name: "Build and create xcframework"
+          command: ./scripts/xcframework.sh ./Turf.xcframework.zip
+      - persist_to_workspace:
+          root: .
+          paths:
+            - xcframework_checksum.txt
+            - Turf.xcframework.zip
 
   build_for_library_evolution:
     macos:
@@ -58,25 +85,57 @@ jobs:
       - checkout
       - run:
           name: "Build for library evolution"
-          command: |
-           swift build \
-             -c release \
-             -Xswiftc -emit-module-interface \
-             -Xswiftc -enable-library-evolution
+          command: xcodebuild -scheme Turf -configuration Release BUILD_LIBRARY_FOR_DISTRIBUTION=YES build
+
+  pre-release-job:
+    macos:
+      xcode: 15.2.0
+    steps:
+      - checkout
+      - setup_environment
+      - run:
+          name: "Prepare branch for release and make PR"
+          command: ./scripts/pre-release.sh << pipeline.parameters.version >>
+    
+  release-job:
+    macos:
+      xcode: 15.2.0
+    steps:
+      - checkout
+      - setup_environment
+      # - run:
+      #     name: "Set tag"
+      #     command: git tag << pipeline.parameters.version >>
+      - pod_spec_lint
+      # - run:
+      #     name: "Push to Cocoapods"
+      #     command: pod trunk push
 
 workflows:
   build-and-test:
+    when:
+      equal: [ build, << pipeline.parameters.flow >> ]
     jobs:
+      - create_xcframework
       - build_for_library_evolution
-      - build_and_test_linux
       - build_and_test_macos:
           matrix:
             parameters:
-              xcode_version: [14.3.1, 15.1.0]
+              xcode_version: [14.3.1, 15.2.0]
       - test_simulator:
           matrix:
             parameters:
               destination:
                 - "platform=visionOS Simulator,OS=1.0,name=Apple Vision Pro"
                 - "platform=iOS Simulator,OS=17.2,name=iPhone 15"
-      - pod_spec_lint
+  pre-release:
+    when:
+      equal: [ pre-release, << pipeline.parameters.flow >> ]
+    jobs:
+      - pre-release-job
+
+  release:
+    when:
+      equal: [ release, << pipeline.parameters.flow >> ]
+    jobs:
+      - release-job
