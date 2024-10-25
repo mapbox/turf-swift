@@ -14,7 +14,7 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "Turf",
-            url: "https://github.com/mapbox/turf-swift/releases/download/v/Turf.xcframework.zip",
+            url: "https://github.com/mapbox/turf-swift/releases/download/v3.2.10/Turf.xcframework.zip",
             checksum: "" // checksum will be calculated and available in the release baranch from which actual SwiftPM release is done
         ),
     ]
