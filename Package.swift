@@ -11,6 +11,7 @@ let package = Package(
     products: [
         .library(
             name: "Turf",
+            type: .dynamic,
             targets: ["Turf"]
         ),
     ],
