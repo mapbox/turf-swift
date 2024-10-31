@@ -18,6 +18,11 @@ function checkout {
     git checkout -B "$BRANCH_NAME"
 }
 
+function setup_token {
+    GH_TOKEN=$(mbx-ci github reader token)
+    export GH_TOKEN
+}
+
 function update_versions {
     SEM_VERSION=${SEM_VERSION/#v}
     SHORT_VERSION=${SEM_VERSION%-*}
@@ -97,10 +102,11 @@ function commit {
 
 function create_pr {
     echo "Create PR"
-    gh pr create --base main --head "$BRANCH_NAME" --title "Update versions to v${SEM_VERSION}" --body "This PR updates versions for Turf to release version v${SEM_VERSION}."
+    gh pr create --base sapial/turf-release/2 --head "$BRANCH_NAME" --title "Update versions to v${SEM_VERSION}" --body "This PR updates versions for Turf to release version v${SEM_VERSION}."
 }
 
 checkout
+setup_token
 update_versions
 update_swift_package
 draft_release

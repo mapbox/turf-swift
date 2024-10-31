@@ -11,6 +11,11 @@ RELEASE_TAG=$1
 ARTIFACT_NAME="Turf.xcframework.zip"
 REPO="mapbox/turf-swift"
 
+function setup_token {
+    GH_TOKEN=$(mbx-ci github reader token)
+    export GH_TOKEN
+}
+
 function validate_release_artifact_checksum {
     echo "Fetching draft release with tag: $RELEASE_TAG"
     RELEASE_ID=$(gh release view "$RELEASE_TAG" --repo "$REPO" --json id -q '.id')
@@ -59,6 +64,7 @@ function publish_cocoapods_release {
     pod trunk push
 }
 
+setup_token
 validate_release_artifact_checksum
 publish_github_release
 validate_manifests
