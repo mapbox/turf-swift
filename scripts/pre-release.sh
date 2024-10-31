@@ -97,7 +97,7 @@ function commit {
 
 function create_pr {
     echo "Create PR"
-    gh pr create --base sapial/turf-release/0 --head "$BRANCH_NAME" --title "Update versions to v${SEM_VERSION}" --body "This PR updates versions for Turf to release version v${SEM_VERSION}."
+    gh pr create --base main --head "$BRANCH_NAME" --title "Update versions to v${SEM_VERSION}" --body "This PR updates versions for Turf to release version v${SEM_VERSION}."
 }
 
 checkout
