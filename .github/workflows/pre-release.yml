@@ -1,0 +1,23 @@
+name: Pre-release Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Semantic version (vX.Y.Z)'
+        required: true
+
+jobs:
+  pre-release-job:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Code Signing
+        run: |
+          bundle install
+          bundle exec fastlane setup_distribution_cert
+
+      - name: Prepare branch for release
+        run: ./scripts/pre-release.sh ${{ github.event.inputs.version }}
