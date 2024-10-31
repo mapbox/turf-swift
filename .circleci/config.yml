@@ -133,18 +133,18 @@ workflows:
     when:
       equal: [ pre-release, << pipeline.parameters.flow >> ]
     jobs:
-      - pre-release-job:
-          filters:
-            branches:
-              only:
-                - main
+      - pre-release-job
+          # filters:
+          #   branches:
+          #     only:
+          #       - main
 
   release:
     when:
       equal: [ release, << pipeline.parameters.flow >> ]
     jobs:
-      - release-job:
-          filters:
-            branches:
-              only:
-                - main
+      - release-job
+          # filters:
+          #   branches:
+          #     only:
+          #       - main

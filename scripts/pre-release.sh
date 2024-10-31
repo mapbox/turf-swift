@@ -13,14 +13,15 @@ CHECKSUM=""
 BRANCH_NAME="update-versions-$SEM_VERSION"
 
 function checkout {
-    git config --global user.name "MapboxCI"
-    git config --global user.email "no-reply@mapbox.com"
     git checkout -B "$BRANCH_NAME"
 }
 
 function setup_token {
-    GH_TOKEN=$(mbx-ci github reader token)
+    GH_TOKEN=$(mbx-ci github writer public token)
     export GH_TOKEN
+
+    git config user.email "release-bot@mapbox.com"
+    git config user.name "Release SDK bot"
 }
 
 function update_versions {

@@ -12,8 +12,11 @@ ARTIFACT_NAME="Turf.xcframework.zip"
 REPO="mapbox/turf-swift"
 
 function setup_token {
-    GH_TOKEN=$(mbx-ci github reader token)
+    GH_TOKEN=$(mbx-ci github writer public token)
     export GH_TOKEN
+
+    git config user.email "release-bot@mapbox.com"
+    git config user.name "Release SDK bot"
 }
 
 function validate_release_artifact_checksum {
@@ -68,4 +71,4 @@ setup_token
 validate_release_artifact_checksum
 publish_github_release
 validate_manifests
-publish_cocoapods_release
+# publish_cocoapods_release
