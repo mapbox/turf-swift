@@ -13,9 +13,12 @@ CHECKSUM=""
 BRANCH_NAME="update-versions-$SEM_VERSION"
 
 function checkout {
-    git config --global user.name "MapboxCI"
-    git config --global user.email "no-reply@mapbox.com"
     git checkout -B "$BRANCH_NAME"
+}
+
+function setup_token {
+    GH_TOKEN=$(mbx-ci github writer public token)
+    export GH_TOKEN
 }
 
 function update_versions {
@@ -101,6 +104,7 @@ function create_pr {
 }
 
 checkout
+setup_token
 update_versions
 update_swift_package
 draft_release

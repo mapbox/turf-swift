@@ -16,6 +16,11 @@ commands:
           name: "Install GH"
           command: |
             brew install gh
+      - run:
+          name: Install mbx-ci
+          command: |
+            curl -Ls https://mapbox-release-engineering.s3.amazonaws.com/mbx-ci/latest/mbx-ci-darwin-arm64 > /usr/local/bin/mbx-ci
+            chmod 755 /usr/local/bin/mbx-ci
   setup_environment:
     steps:
       - add_ssh_keys
@@ -103,7 +108,7 @@ jobs:
       - checkout
       - install-gh
       - run:
-          name: "Prepare branch for release and make PR"
+          name: "Validate cheksum, publish GitHub release, validate manifests, publish CocoaPods"
           command: ./scripts/release.sh << pipeline.parameters.version >>
 
 workflows:
