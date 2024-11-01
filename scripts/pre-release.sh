@@ -13,6 +13,8 @@ CHECKSUM=""
 BRANCH_NAME="update-versions-$SEM_VERSION"
 
 function checkout {
+    git config --global user.name "MapboxCI"
+    git config --global user.email "no-reply@mapbox.com"
     git checkout -B "$BRANCH_NAME"
 }
 
