@@ -84,7 +84,7 @@ jobs:
       - setup_environment
       - run:
           name: "Build and create xcframework"
-          command: ./scripts/xcframework.sh ./Turf.xcframework.zip
+          command: ./scripts/xcframework.sh .
       - persist_to_workspace:
           root: .
           paths:

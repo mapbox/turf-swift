@@ -31,7 +31,10 @@ codesign --timestamp -v --sign "Apple Distribution: Mapbox, Inc." "$BUILD_DIRECT
 
 ZIP_OUTPUT_PATH="$BUILD_DIRECTORY/Turf.xcframework.zip"
 rm -rf "$ZIP_OUTPUT_PATH"
-ditto -c -k --sequesterRsrc --keepParent "$BUILD_DIRECTORY/Turf.xcframework" "$ZIP_OUTPUT_PATH"
+
+zip --symlinks -r "$ZIP_OUTPUT_PATH" \
+    "$BUILD_DIRECTORY/Turf.xcframework" \
+    LICENSE.md
 
 CHECKSUM=$(swift package compute-checksum "$ZIP_OUTPUT_PATH")
 echo "$CHECKSUM" > "$BUILD_DIRECTORY/xcframework_checksum.txt"
