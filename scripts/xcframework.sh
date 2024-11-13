@@ -29,13 +29,16 @@ done
 xcodebuild -create-xcframework "${commands[@]}" -output "$BUILD_DIRECTORY/Turf.xcframework"
 codesign --timestamp -v --sign "Apple Distribution: Mapbox, Inc." "$BUILD_DIRECTORY/Turf.xcframework"
 
-ZIP_OUTPUT_PATH="$BUILD_DIRECTORY/Turf.xcframework.zip"
+cp "LICENSE.md" "$BUILD_DIRECTORY/LICENSE.md"
+cd "$BUILD_DIRECTORY"
+
+ZIP_OUTPUT_PATH="Turf.xcframework.zip"
 rm -rf "$ZIP_OUTPUT_PATH"
 
 zip --symlinks -r "$ZIP_OUTPUT_PATH" \
-    "$BUILD_DIRECTORY/Turf.xcframework" \
+    Turf.xcframework \
     LICENSE.md
 
 CHECKSUM=$(swift package compute-checksum "$ZIP_OUTPUT_PATH")
-echo "$CHECKSUM" > "$BUILD_DIRECTORY/xcframework_checksum.txt"
+echo "$CHECKSUM" > "xcframework_checksum.txt"
 echo "Checksum: $CHECKSUM"
