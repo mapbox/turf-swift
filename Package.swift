@@ -10,7 +10,7 @@ let targets: [Target] = [
     .binaryTarget(
         name: "Turf",
         url: "https://github.com/mapbox/turf-swift/releases/download/v4.0.0-rc.1/Turf.xcframework.zip",
-        checksum: "a846a91335e8ae4f6df29c9c72a621b642071de1b800c239d573b732622121e6"
+        checksum: "fd1de0f2f6867dc1bb415f7c92479b52f25a8d5ed7a9e557f8837b43213c1177"
     )
 ]
 #else
