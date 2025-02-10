@@ -61,7 +61,16 @@ To install Turf using the [Swift Package Manager](https://swift.org/package-mana
 ```swift
 .package(url: "https://github.com/mapbox/turf-swift.git", from: "4.0.0")
 ```
+Next, add the product to the target's dependencies. For example, for an executable linux app you need to add:
 
+```swift
+.executableTarget(name: "App",
+    dependencies: [
+        .product(name: "Turf", package: "turf-swift") // Add this
+    ],
+    path: "Sources/App"
+)
+```
 Then `import Turf` in any Swift file in your module.
 
 
