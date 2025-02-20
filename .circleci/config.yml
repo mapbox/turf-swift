@@ -103,8 +103,9 @@ jobs:
                     diff=$(( -diff ))
                 fi
 
+                echo "Size difference: $file (difference: $diff bytes)"
+
                 if (( diff > 2 )); then
-                    echo "Size difference exceeds 10 bytes: $file (difference: $diff bytes)"
                     error=1
                 fi
             done
