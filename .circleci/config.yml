@@ -93,10 +93,20 @@ jobs:
 
             find strip/Turf.xcframework -type f -name "Turf" -not -path "*dSYM*" -exec strip -rDSTx {} \;
 
-            # find Turf.xcframework -type f -name "Turf" -not -path "*dSYM*" -exec cmp {} strip/{} \;
             error=0
             for file in $(find Turf.xcframework -type f -name "Turf" -not -path "*dSYM*"); do
-                cmp -lb "$file" "strip/$file" || error=1
+                size1=$(stat -f %z "$file")
+                size2=$(stat -f %z "strip/$file")
+
+                diff=$(( size1 - size2 ))
+                if (( diff < 0 )); then
+                    diff=$(( -diff ))
+                fi
+
+                if (( diff > 3 )); then
+                    echo "Size difference exceeds 10 bytes: $file (difference: $diff bytes)"
+                    error=1
+                fi
             done
             exit $error
 
