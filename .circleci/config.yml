@@ -99,13 +99,9 @@ jobs:
                 size2=$(stat -f %z "strip/$file")
 
                 diff=$(( size1 - size2 ))
-                if (( diff < 0 )); then
-                    diff=$(( -diff ))
-                fi
 
-                echo "Size difference: $file (difference: $diff bytes)"
-
-                if (( diff > 1 )); then
+                if (( size1 != size2 )); then
+                    echo "File sizes differ: $file (original: $size1 bytes, strip: $size2 bytes)"
                     error=1
                 fi
             done
