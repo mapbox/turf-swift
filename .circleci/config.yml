@@ -91,7 +91,7 @@ jobs:
             mkdir strip
             cp -r Turf.xcframework strip
 
-            find strip/Turf.xcframework -type f -name "Turf" -not -path "*dSYM*" -exec strip -rSTx {} \;
+            find strip/Turf.xcframework -type f -name "Turf" -not -path "*dSYM*" -exec strip -rDSTx {} \;
 
             # find Turf.xcframework -type f -name "Turf" -not -path "*dSYM*" -exec cmp {} strip/{} \;
             error=0
