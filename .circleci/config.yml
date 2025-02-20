@@ -105,7 +105,7 @@ jobs:
 
                 echo "Size difference: $file (difference: $diff bytes)"
 
-                if (( diff > 2 )); then
+                if (( diff > 1 )); then
                     error=1
                 fi
             done
