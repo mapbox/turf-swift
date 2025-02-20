@@ -612,6 +612,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.turf;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				STRIPFLAGS = "-rS";
+				STRIP_STYLE = "non-global";
 				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator maccatalyst macosx watchos watchsimulator xros xrsimulator";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -635,6 +637,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.turf;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				STRIPFLAGS = "-rS";
+				STRIP_STYLE = "non-global";
 				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator maccatalyst macosx watchos watchsimulator xros xrsimulator";
 				SUPPORTS_MACCATALYST = YES;
 				TARGETED_DEVICE_FAMILY = 2;

@@ -85,6 +85,29 @@ jobs:
       - run:
           name: "Build and create xcframework"
           command: ./scripts/xcframework.sh build
+      - run:
+          name: Validate framework stripping
+          command: |
+            mkdir strip
+            cp -r Turf.xcframework strip
+
+            find strip/Turf.xcframework -type f -name "Turf" -not -path "*dSYM*" -exec strip -rDSTx {} \;
+
+            error=0
+            for file in $(find Turf.xcframework -type f -name "Turf" -not -path "*dSYM*"); do
+                size1=$(stat -f %z "$file")
+                size2=$(stat -f %z "strip/$file")
+
+                diff=$(( size1 - size2 ))
+
+                if (( size1 != size2 )); then
+                    echo "File sizes differ: $file (original: $size1 bytes, strip: $size2 bytes)"
+                    error=1
+                fi
+            done
+            exit $error
+
+          working_directory: build
       - persist_to_workspace:
           root: build
           paths:
@@ -100,7 +123,7 @@ jobs:
       - run:
           name: "Prepare branch for release and make PR"
           command: ./scripts/pre-release.sh << pipeline.parameters.version >>
-    
+
   release-job:
     macos:
       xcode: 15.2.0
