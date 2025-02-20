@@ -85,6 +85,18 @@ jobs:
       - run:
           name: "Build and create xcframework"
           command: ./scripts/xcframework.sh build
+      - run:
+          name: Validate framework stripping
+          command: |
+            mkdir strip
+            cp -r Turf.xcframework strip
+
+            find strip/Turf.xcframework -type f -name "Turf" -not -path "*dSYM*" -exec strip -rDSTx {} \;
+
+            find Turf.xcframework -type f -name "Turf" -not -path "*dSYM*" -exec cmp {} strip/{} \;
+
+
+          working_directory: build
       - persist_to_workspace:
           root: build
           paths:
