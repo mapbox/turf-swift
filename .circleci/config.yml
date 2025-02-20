@@ -93,8 +93,12 @@ jobs:
 
             find strip/Turf.xcframework -type f -name "Turf" -not -path "*dSYM*" -exec strip -rSTx {} \;
 
-            find Turf.xcframework -type f -name "Turf" -not -path "*dSYM*" -exec cmp {} strip/{} \;
-
+            # find Turf.xcframework -type f -name "Turf" -not -path "*dSYM*" -exec cmp {} strip/{} \;
+            error=0
+            for file in $(find Turf.xcframework -type f -name "Turf" -not -path "*dSYM*"); do
+                cmp -lb "$file" "strip/$file" || error=1
+            done
+            exit $error
 
           working_directory: build
       - persist_to_workspace:
@@ -112,7 +116,7 @@ jobs:
       - run:
           name: "Prepare branch for release and make PR"
           command: ./scripts/pre-release.sh << pipeline.parameters.version >>
-    
+
   release-job:
     macos:
       xcode: 15.2.0
