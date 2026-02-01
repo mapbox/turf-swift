@@ -189,12 +189,18 @@ extension LocationCoordinate2D: Equatable {
     
     /// Returns the direction from the receiver to the given coordinate.
     public func direction(to coordinate: LocationCoordinate2D) -> LocationDirection {
-        return RadianCoordinate2D(self).direction(to: RadianCoordinate2D(coordinate)).toDegrees()
+        return RadianCoordinate2D(self).direction(to: RadianCoordinate2D(coordinate)).converted(to: .degrees).value
     }
     
     /// Returns a coordinate a certain Haversine distance away in the given direction.
     public func coordinate(at distance: LocationDistance, facing direction: LocationDirection) -> LocationCoordinate2D {
-        let radianCoordinate = RadianCoordinate2D(self).coordinate(at: distance / metersPerRadian, facing: direction.toRadians())
+        let angle = Measurement(value: direction, unit: UnitAngle.degrees)
+        return coordinate(at: distance, facing: angle)
+    }
+
+    /// Returns a coordinate a certain Haversine distance away in the given direction.
+    public func coordinate(at distance: LocationDistance, facing direction: Measurement<UnitAngle>) -> LocationCoordinate2D {
+        let radianCoordinate = RadianCoordinate2D(self).coordinate(at: distance / metersPerRadian, facing: direction)
         return LocationCoordinate2D(radianCoordinate)
     }
     
