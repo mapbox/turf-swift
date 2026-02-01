@@ -108,33 +108,34 @@ extension LocationDegrees {
     }
 }
 
-struct LocationCoordinate2DCodable: Codable {
-    var latitude: LocationDegrees
-    var longitude: LocationDegrees
-    var decodedCoordinates: LocationCoordinate2D {
+public struct LocationCoordinate2DCodable: Codable {
+    public var latitude: LocationDegrees
+    public var longitude: LocationDegrees
+    public var decodedCoordinates: LocationCoordinate2D {
         return LocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
         try container.encode(longitude)
         try container.encode(latitude)
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         longitude = try container.decode(LocationDegrees.self)
         latitude = try container.decode(LocationDegrees.self)
     }
     
-    init(_ coordinate: LocationCoordinate2D) {
+    public init(_ coordinate: LocationCoordinate2D) {
         latitude = coordinate.latitude
         longitude = coordinate.longitude
     }
 }
 
+
 extension LocationCoordinate2D {
-    var codableCoordinates: LocationCoordinate2DCodable {
+    public var codableCoordinates: LocationCoordinate2DCodable {
         return LocationCoordinate2DCodable(self)
     }
 }
