@@ -25,15 +25,8 @@ commands:
     steps:
       - add_ssh_keys
       - run:
-          name: "Install Ruby 3.3.6"
-          command: |
-            rbenv install 3.3.6 --skip-existing
-            rbenv global 3.3.6
-            ruby --version
-      - run:
           name: "Download distribution certificate for codesigning"
           command: |
-            rbenv global 3.3.6
             bundle install
             bundle exec fastlane setup_distribution_cert
       - install-gh
