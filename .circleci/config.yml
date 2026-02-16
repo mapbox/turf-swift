@@ -25,8 +25,15 @@ commands:
     steps:
       - add_ssh_keys
       - run:
+          name: "Install Ruby 3.3.6"
+          command: |
+            rbenv install 3.3.6 --skip-existing
+            rbenv global 3.3.6
+            ruby --version
+      - run:
           name: "Download distribution certificate for codesigning"
           command: |
+            rbenv global 3.3.6
             bundle install
             bundle exec fastlane setup_distribution_cert
       - install-gh
@@ -153,8 +160,8 @@ workflows:
           matrix:
             parameters:
               destination:
-                - "platform=visionOS Simulator,OS=1.0,name=Apple Vision Pro"
-                - "platform=iOS Simulator,OS=17.2,name=iPhone 15"
+                - "platform=visionOS Simulator,OS=2.5,name=Apple Vision Pro"
+                - "platform=iOS Simulator,OS=17.5,name=iPhone 15"
 
   pre-release:
     when:
