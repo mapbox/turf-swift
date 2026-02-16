@@ -50,7 +50,7 @@ jobs:
         type: string
     macos:
       xcode: << parameters.xcode_version >>
-    resource_class: macos.m4pro.medium
+    resource_class: m4pro.medium
     steps:
       - checkout
       - run:
@@ -65,8 +65,8 @@ jobs:
       destination:
         type: string
     macos:
-      xcode: 15.4.0
-    resource_class: macos.m4pro.medium
+      xcode: 16.4.0
+    resource_class: m4pro.medium
     steps:
       - checkout
       - run:
@@ -79,8 +79,8 @@ jobs:
 
   create_xcframework:
     macos:
-      xcode: 15.4.0
-    resource_class: macos.m4pro.medium
+      xcode: 16.4.0
+    resource_class: m4pro.medium
     steps:
       - checkout
       - setup_environment
@@ -118,8 +118,8 @@ jobs:
 
   pre-release-job:
     macos:
-      xcode: 15.4.0
-    resource_class: macos.m4pro.medium
+      xcode: 16.4.0
+    resource_class: m4pro.medium
     steps:
       - checkout
       - setup_environment
@@ -129,8 +129,8 @@ jobs:
 
   release-job:
     macos:
-      xcode: 15.4.0
-    resource_class: macos.m4pro.medium
+      xcode: 16.4.0
+    resource_class: m4pro.medium
     steps:
       - checkout
       - install-gh
@@ -148,7 +148,7 @@ workflows:
       - build_and_test_macos:
           matrix:
             parameters:
-              xcode_version: [15.4.0]
+              xcode_version: ["16.4.0"]
       - test_simulator:
           matrix:
             parameters:
