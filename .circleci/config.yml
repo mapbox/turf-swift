@@ -50,6 +50,7 @@ jobs:
         type: string
     macos:
       xcode: << parameters.xcode_version >>
+    resource_class: m4pro.medium
     steps:
       - checkout
       - run:
@@ -64,8 +65,8 @@ jobs:
       destination:
         type: string
     macos:
-      xcode: 15.2.0
-    resource_class: macos.m1.medium.gen1
+      xcode: 16.4.0
+    resource_class: m4pro.medium
     steps:
       - checkout
       - run:
@@ -78,7 +79,8 @@ jobs:
 
   create_xcframework:
     macos:
-      xcode: 15.2.0
+      xcode: 16.4.0
+    resource_class: m4pro.medium
     steps:
       - checkout
       - setup_environment
@@ -116,7 +118,8 @@ jobs:
 
   pre-release-job:
     macos:
-      xcode: 15.2.0
+      xcode: 16.4.0
+    resource_class: m4pro.medium
     steps:
       - checkout
       - setup_environment
@@ -126,7 +129,8 @@ jobs:
 
   release-job:
     macos:
-      xcode: 15.2.0
+      xcode: 16.4.0
+    resource_class: m4pro.medium
     steps:
       - checkout
       - install-gh
@@ -144,13 +148,13 @@ workflows:
       - build_and_test_macos:
           matrix:
             parameters:
-              xcode_version: [14.3.1, 15.2.0]
+              xcode_version: ["16.4.0"]
       - test_simulator:
           matrix:
             parameters:
               destination:
-                - "platform=visionOS Simulator,OS=1.0,name=Apple Vision Pro"
-                - "platform=iOS Simulator,OS=17.2,name=iPhone 15"
+                - "platform=visionOS Simulator,OS=2.5,name=Apple Vision Pro"
+                - "platform=iOS Simulator,OS=17.5,name=iPhone 15"
 
   pre-release:
     when:
