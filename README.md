@@ -32,6 +32,13 @@ Releases are available for installation using any of the popular Swift dependenc
 
 ### CocoaPods
 
+> [!IMPORTANT]
+> **CocoaPods support is being sunset by December 2026.**
+>
+> Mapbox plans to discontinue distributing the Turf for Swift via CocoaPods by **December 2026**. After that date, no new releases will be published to CocoaPods and the existing podspec will no longer be maintained.
+>
+> We strongly recommend migrating to [Swift Package Manager (SPM)](https://www.swift.org/documentation/package-manager/), which is Mapbox's preferred and actively supported distribution channel for iOS. Please plan your migration ahead of the December 2026 deadline.
+
 To install Turf using [CocoaPods](https://cocoapods.org/):
 
 1. Specify the following dependency in your Podfile:
