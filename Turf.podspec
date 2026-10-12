@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "11.0"
   s.osx.deployment_target = "10.13"
   s.tvos.deployment_target = "11.0"
-  s.watchos.deployment_target = "4.0"
+  s.watchos.deployment_target = "9.0"
   # CocoaPods doesn't support releasing of visionOS pods yet, need to wait for v1.15.0 release of CocoaPods
   # with this fix https://github.com/CocoaPods/CocoaPods/pull/12159.
   # s.visionos.deployment_target = "1.0"
