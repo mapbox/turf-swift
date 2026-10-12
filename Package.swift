@@ -35,7 +35,7 @@ let targets: [Target] = [
 let package = Package(
     name: "Turf",
     platforms: [
-        .macOS(.v10_13), .iOS(.v11), .watchOS(.v4), .tvOS(.v11), .custom("visionos", versionString: "1.0")
+        .macOS(.v10_13), .iOS(.v11), .watchOS(.v9), .tvOS(.v11), .custom("visionos", versionString: "1.0")
     ],
     products: [
         .library(name: "Turf", targets: ["Turf"]),

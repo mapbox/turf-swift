@@ -19,7 +19,7 @@ Turf requires Xcode 14.1 or above and supports the following minimum deployment 
 * iOS 11.0 and above
 * macOS 10.13 (High Sierra) and above
 * tvOS 11.0 and above
-* watchOS 4.0 and above
+* watchOS 9.0 and above
 * visionOS 1.0 and above (not supported via CocoaPods)
 
 Alternatively, you can incorporate Turf into a command line tool without Xcode on any platform that [Swift](https://swift.org/download/) supports, including Linux.
