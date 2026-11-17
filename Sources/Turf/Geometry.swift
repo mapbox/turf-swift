@@ -173,6 +173,26 @@ public protocol GeometryConvertible: Sendable {
 
 extension Geometry: GeometryConvertible {
     public var geometry: Geometry { return self }
+    
+    /**
+     Returns all self-intersection coordinates within the geometry.
+     
+     This property is equivalent to the [turf-kinks](https://turfjs.org/docs/#kinks) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-kinks/)).
+     */
+    public var selfIntersections: [LocationCoordinate2D] {
+        switch self {
+        case .lineString(let lineString):
+            return lineString.selfIntersections
+        case .multiLineString(let multiLineString):
+            return multiLineString.selfIntersections
+        case .polygon(let polygon):
+            return polygon.selfIntersections
+        case .multiPolygon(let multiPolygon):
+            return multiPolygon.selfIntersections
+        case .point, .multiPoint, .geometryCollection:
+            return []
+        }
+    }
 }
 
 extension Point: GeometryConvertible {

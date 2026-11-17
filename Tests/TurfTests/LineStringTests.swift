@@ -441,4 +441,53 @@ class LineStringTests: XCTestCase {
         
         XCTAssertTrue(intersections.isEmpty, "Found impossible LineString intersection(s).")
     }
+    
+    func testLineStringSelfIntersections() {
+        let nonCrossing = LineString([
+            .init(latitude: 0, longitude: 0),
+            .init(latitude: 1, longitude: 1),
+            .init(latitude: 2, longitude: 0)
+        ])
+        XCTAssertTrue(nonCrossing.selfIntersections.isEmpty)
+        XCTAssertTrue(Turf.kinks(nonCrossing).isEmpty)
+
+        // Closed triangle (closing loop should not be counted as self-intersection)
+        let closedTriangle = LineString([
+            .init(latitude: 0, longitude: 0),
+            .init(latitude: 2, longitude: 0),
+            .init(latitude: 1, longitude: 2),
+            .init(latitude: 0, longitude: 0)
+        ])
+        XCTAssertTrue(closedTriangle.selfIntersections.isEmpty)
+
+        // Self-intersecting line crossing in the middle
+        let crossing = LineString([
+            .init(latitude: 0, longitude: 0),
+            .init(latitude: 2, longitude: 2),
+            .init(latitude: 0, longitude: 2),
+            .init(latitude: 2, longitude: 0)
+        ])
+        let intersections = crossing.selfIntersections
+        XCTAssertEqual(intersections.count, 1)
+        XCTAssertEqual(intersections.first?.latitude, 1.0)
+        XCTAssertEqual(intersections.first?.longitude, 1.0)
+        XCTAssertEqual(Turf.kinks(crossing), intersections)
+        
+        // MultiLineString with crossing components
+        let mls = MultiLineString([
+            [
+                .init(latitude: 0, longitude: 0),
+                .init(latitude: 2, longitude: 2)
+            ],
+            [
+                .init(latitude: 0, longitude: 2),
+                .init(latitude: 2, longitude: 0)
+            ]
+        ])
+        let mlsIntersections = mls.selfIntersections
+        XCTAssertEqual(mlsIntersections.count, 1)
+        XCTAssertEqual(mlsIntersections.first?.latitude, 1.0)
+        XCTAssertEqual(mlsIntersections.first?.longitude, 1.0)
+        XCTAssertEqual(Turf.kinks(mls), mlsIntersections)
+    }
 }

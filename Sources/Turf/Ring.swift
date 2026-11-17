@@ -103,6 +103,15 @@ public struct Ring: Sendable {
         }
         return isInside
     }
+    
+    /**
+     Returns all self-intersection coordinates within the linear ring.
+     
+     This property is equivalent to the [turf-kinks](https://turfjs.org/docs/#kinks) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-kinks/)).
+     */
+    public var selfIntersections: [LocationCoordinate2D] {
+        return Turf.selfIntersections(for: [coordinates], areClosed: true)
+    }
 }
 
 extension Ring: Codable {

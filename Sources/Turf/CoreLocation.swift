@@ -237,3 +237,18 @@ extension LocationCoordinate2D: Equatable {
     }
 }
 
+struct HashableCoordinate: Hashable {
+    let latitude: Double
+    let longitude: Double
+    
+    var locationCoordinate: LocationCoordinate2D {
+        return LocationCoordinate2D(latitude: latitude,
+                                    longitude: longitude)
+    }
+    
+    init(_ coordinate: LocationCoordinate2D) {
+        self.latitude = coordinate.latitude
+        self.longitude = coordinate.longitude
+    }
+}
+
