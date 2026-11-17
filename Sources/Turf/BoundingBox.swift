@@ -46,6 +46,36 @@ public struct BoundingBox: Sendable {
         self.northEast = northEast
     }
     
+    /// The southeasternmost position contained in the bounding box.
+    public var southEast: LocationCoordinate2D {
+        return LocationCoordinate2D(latitude: southWest.latitude, longitude: northEast.longitude)
+    }
+    
+    /// The northwesternmost position contained in the bounding box.
+    public var northWest: LocationCoordinate2D {
+        return LocationCoordinate2D(latitude: northEast.latitude, longitude: southWest.longitude)
+    }
+    
+    /**
+     The geographic center coordinate of the bounding box.
+     */
+    public var center: LocationCoordinate2D {
+        return LocationCoordinate2D(
+            latitude: (southWest.latitude + northEast.latitude) / 2.0,
+            longitude: (southWest.longitude + northEast.longitude) / 2.0
+        )
+    }
+    
+    /// The span along latitude, in degrees.
+    public var latitudeSpan: LocationDegrees {
+        return northEast.latitude - southWest.latitude
+    }
+    
+    /// The span along longitude, in degrees.
+    public var longitudeSpan: LocationDegrees {
+        return northEast.longitude - southWest.longitude
+    }
+    
     /**
      Returns a Boolean value indicating whether the bounding box contains the given position.
      
@@ -65,6 +95,87 @@ public struct BoundingBox: Sendable {
                 && southWest.longitude <= coordinate.longitude
                 && northEast.longitude >= coordinate.longitude
         }
+    }
+    
+    /**
+     Returns a Boolean value indicating whether this bounding box completely contains another bounding box.
+     
+     - parameter other: The bounding box that may or may not be contained by this bounding box.
+     - parameter ignoreBoundary: A Boolean value indicating whether bounding boxes sharing an edge should be considered contained. Defaults to `false`.
+     - returns: `true` if this bounding box contains the other bounding box; `false` otherwise.
+     */
+    public func contains(_ other: BoundingBox, ignoreBoundary: Bool = false) -> Bool {
+        if ignoreBoundary {
+            return southWest.latitude < other.southWest.latitude
+                && northEast.latitude > other.northEast.latitude
+                && southWest.longitude < other.southWest.longitude
+                && northEast.longitude > other.northEast.longitude
+        } else {
+            return southWest.latitude <= other.southWest.latitude
+                && northEast.latitude >= other.northEast.latitude
+                && southWest.longitude <= other.southWest.longitude
+                && northEast.longitude >= other.northEast.longitude
+        }
+    }
+    
+    /**
+     Returns a Boolean value indicating whether this bounding box intersects another bounding box.
+     
+     - parameter other: The other bounding box.
+     - parameter ignoreBoundary: A Boolean value indicating whether touching boundaries count as an intersection. Defaults to `false` (touching boundaries count).
+     - returns: `true` if the bounding boxes intersect; `false` otherwise.
+     */
+    public func intersects(_ other: BoundingBox, ignoreBoundary: Bool = false) -> Bool {
+        if ignoreBoundary {
+            return southWest.latitude < other.northEast.latitude
+                && northEast.latitude > other.southWest.latitude
+                && southWest.longitude < other.northEast.longitude
+                && northEast.longitude > other.southWest.longitude
+        } else {
+            return southWest.latitude <= other.northEast.latitude
+                && northEast.latitude >= other.southWest.latitude
+                && southWest.longitude <= other.northEast.longitude
+                && northEast.longitude >= other.southWest.longitude
+        }
+    }
+    
+    /**
+     Returns the smallest bounding box that contains both this bounding box and the given bounding box.
+     
+     - parameter other: The other bounding box to combine with this bounding box.
+     - returns: A bounding box that encompasses both bounding boxes.
+     */
+    public func union(_ other: BoundingBox) -> BoundingBox {
+        return BoundingBox(
+            southWest: LocationCoordinate2D(
+                latitude: min(southWest.latitude, other.southWest.latitude),
+                longitude: min(southWest.longitude, other.southWest.longitude)
+            ),
+            northEast: LocationCoordinate2D(
+                latitude: max(northEast.latitude, other.northEast.latitude),
+                longitude: max(northEast.longitude, other.northEast.longitude)
+            )
+        )
+    }
+    
+    /**
+     Returns the overlapping region of this bounding box and the given bounding box, if they intersect.
+     
+     - parameter other: The other bounding box.
+     - returns: The intersection bounding box, or `nil` if the bounding boxes do not intersect.
+     */
+    public func intersection(_ other: BoundingBox) -> BoundingBox? {
+        let minLat = max(southWest.latitude, other.southWest.latitude)
+        let maxLat = min(northEast.latitude, other.northEast.latitude)
+        let minLon = max(southWest.longitude, other.southWest.longitude)
+        let maxLon = min(northEast.longitude, other.northEast.longitude)
+        guard minLat <= maxLat && minLon <= maxLon else {
+            return nil
+        }
+        return BoundingBox(
+            southWest: LocationCoordinate2D(latitude: minLat, longitude: minLon),
+            northEast: LocationCoordinate2D(latitude: maxLat, longitude: maxLon)
+        )
     }
 }
 
