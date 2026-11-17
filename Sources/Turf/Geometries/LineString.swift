@@ -147,6 +147,45 @@ extension LineString {
     }
     
     /**
+     Divides a line string into chunks of a specified length.
+     
+     If the line is shorter than the segment length, the original line is returned as a single chunk.
+     
+     This method is equivalent to the [turf-line-chunk](https://turfjs.org/docs/#lineChunk) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-line-chunk/)).
+     
+     - parameter length: The maximum length of each chunk, in meters.
+     - parameter reversed: Whether to start chunking from the end of the line string back towards the start. Defaults to `false`.
+     - returns: A multi–line string containing each chunked line segment.
+     */
+    public func dividedIntoChunks(of length: LocationDistance, reversed: Bool = false) -> MultiLineString {
+        guard length > 0, !coordinates.isEmpty else {
+            return MultiLineString([])
+        }
+        
+        let targetLine = reversed ? LineString(coordinates.reversed()) : self
+        guard let totalDistance = targetLine.distance(), totalDistance > 0 else {
+            return MultiLineString([targetLine.coordinates])
+        }
+        
+        if totalDistance <= length {
+            return MultiLineString([targetLine.coordinates])
+        }
+        
+        var chunks: [[LocationCoordinate2D]] = []
+        var currentDistance: LocationDistance = 0
+        
+        while currentDistance < totalDistance {
+            let nextDistance = min(currentDistance + length, totalDistance)
+            if let slice = targetLine.trimmed(from: currentDistance, to: nextDistance), !slice.coordinates.isEmpty {
+                chunks.append(slice.coordinates)
+            }
+            currentDistance = nextDistance
+        }
+        
+        return MultiLineString(chunks)
+    }
+    
+    /**
      Returns the portion of the line string that begins at the given coordinate and extends the given distance along the line string.
      */
     public func trimmed(from coordinate: LocationCoordinate2D, distance: LocationDistance) -> LineString? {
