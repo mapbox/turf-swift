@@ -22,6 +22,15 @@ public struct MultiLineString: Equatable, ForeignMemberContainer {
     }
     
     /**
+     Initializes a multi–line string containing the given line strings.
+     
+     - parameter lineStrings: The line strings that comprise the multi–line string.
+     */
+    public init(lineStrings: [LineString]) {
+        self.coordinates = lineStrings.map { $0.coordinates }
+    }
+    
+    /**
      Initializes a multi–line string coincident to the given polygon’s linear rings.
      
      This initializer is equivalent to the [`polygon-to-line`](https://turfjs.org/docs/#polygonToLine) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-polygon-to-line/)).

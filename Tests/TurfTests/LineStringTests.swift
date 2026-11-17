@@ -441,4 +441,80 @@ class LineStringTests: XCTestCase {
         
         XCTAssertTrue(intersections.isEmpty, "Found impossible LineString intersection(s).")
     }
+
+    func testDividedIntoChunksShorter() {
+        let line = LineString([
+            LocationCoordinate2D(latitude: 0, longitude: 0),
+            LocationCoordinate2D(latitude: 0, longitude: 1)
+        ])
+        let totalDistance = line.distance()!
+        let chunked = line.dividedIntoChunks(of: totalDistance + 1000)
+        XCTAssertEqual(chunked.coordinates.count, 1)
+        XCTAssertEqual(chunked.coordinates.first!, line.coordinates)
+    }
+
+    func testDividedIntoChunksLonger() {
+        let coordinates = [
+            LocationCoordinate2D(latitude: 0, longitude: 0),
+            LocationCoordinate2D(latitude: 0, longitude: 1),
+            LocationCoordinate2D(latitude: 0, longitude: 2),
+            LocationCoordinate2D(latitude: 0, longitude: 3)
+        ]
+        let line = LineString(coordinates)
+        let totalDistance = line.distance()!
+        let chunkLength = totalDistance / 3.0
+        let chunked = line.dividedIntoChunks(of: chunkLength)
+        
+        XCTAssertEqual(chunked.coordinates.count, 3)
+        XCTAssertEqual(chunked.coordinates.first!.first!, line.coordinates.first!)
+        XCTAssertEqual(chunked.coordinates.last!.last!, line.coordinates.last!)
+        
+        // Ensure adjacent chunks connect continuously
+        for i in 0..<(chunked.coordinates.count - 1) {
+            let endOfCurrent = chunked.coordinates[i].last!
+            let startOfNext = chunked.coordinates[i + 1].first!
+            XCTAssertEqual(endOfCurrent.latitude, startOfNext.latitude, accuracy: 1e-6)
+            XCTAssertEqual(endOfCurrent.longitude, startOfNext.longitude, accuracy: 1e-6)
+        }
+    }
+
+    func testDividedIntoChunksReversed() {
+        let line = LineString([
+            LocationCoordinate2D(latitude: 0, longitude: 0),
+            LocationCoordinate2D(latitude: 0, longitude: 1),
+            LocationCoordinate2D(latitude: 0, longitude: 2)
+        ])
+        let totalDistance = line.distance()!
+        let chunkLength = totalDistance / 2.0
+        let chunked = line.dividedIntoChunks(of: chunkLength, reversed: true)
+        
+        XCTAssertEqual(chunked.coordinates.count, 2)
+        // First chunk should start at original endpoint (0, 2)
+        XCTAssertEqual(chunked.coordinates.first!.first!.latitude, 0, accuracy: 1e-6)
+        XCTAssertEqual(chunked.coordinates.first!.first!.longitude, 2, accuracy: 1e-6)
+        // Last chunk should end at original startpoint (0, 0)
+        XCTAssertEqual(chunked.coordinates.last!.last!.latitude, 0, accuracy: 1e-6)
+        XCTAssertEqual(chunked.coordinates.last!.last!.longitude, 0, accuracy: 1e-6)
+    }
+
+    func testDividedIntoChunksEmptyAndInvalid() {
+        let emptyLine = LineString([])
+        XCTAssertTrue(emptyLine.dividedIntoChunks(of: 100).coordinates.isEmpty)
+        
+        let validLine = LineString([
+            LocationCoordinate2D(latitude: 0, longitude: 0),
+            LocationCoordinate2D(latitude: 0, longitude: 1)
+        ])
+        XCTAssertTrue(validLine.dividedIntoChunks(of: 0).coordinates.isEmpty)
+        XCTAssertTrue(validLine.dividedIntoChunks(of: -50).coordinates.isEmpty)
+    }
+
+    func testMultiLineStringInitWithLineStrings() {
+        let line1 = LineString([LocationCoordinate2D(latitude: 0, longitude: 0), LocationCoordinate2D(latitude: 1, longitude: 1)])
+        let line2 = LineString([LocationCoordinate2D(latitude: 2, longitude: 2), LocationCoordinate2D(latitude: 3, longitude: 3)])
+        let multiLine = MultiLineString(lineStrings: [line1, line2])
+        XCTAssertEqual(multiLine.coordinates.count, 2)
+        XCTAssertEqual(multiLine.coordinates[0], line1.coordinates)
+        XCTAssertEqual(multiLine.coordinates[1], line2.coordinates)
+    }
 }
