@@ -342,4 +342,14 @@ extension Polygon {
             latitude: center.latitude + areaFactor * sum.latitude,
             longitude: center.longitude + areaFactor * sum.longitude
         ).normalized
-    }}
+    }
+    
+    /**
+     Returns all self-intersection coordinates within the polygon (including within the outer ring, within inner rings, and between rings).
+     
+     This property is equivalent to the [turf-kinks](https://turfjs.org/docs/#kinks) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-kinks/)).
+     */
+    public var selfIntersections: [LocationCoordinate2D] {
+        return Turf.selfIntersections(for: coordinates, areClosed: true)
+    }
+}

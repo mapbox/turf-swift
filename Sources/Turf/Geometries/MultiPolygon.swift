@@ -79,4 +79,14 @@ extension MultiPolygon {
             $0.contains(coordinate, ignoreBoundary: ignoreBoundary)
         }
     }
+    
+    /**
+     Returns all self-intersection coordinates within the multi-polygon (including within each polygon and between different polygons).
+     
+     This property is equivalent to the [turf-kinks](https://turfjs.org/docs/#kinks) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-kinks/)).
+     */
+    public var selfIntersections: [LocationCoordinate2D] {
+        let allRings = coordinates.flatMap { $0 }
+        return Turf.selfIntersections(for: allRings, areClosed: true)
+    }
 }

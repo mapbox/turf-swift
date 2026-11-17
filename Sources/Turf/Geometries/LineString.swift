@@ -398,18 +398,13 @@ extension LineString {
         return intersections.map { $0.locationCoordinate }
     }
     
-    private struct HashableCoordinate: Hashable {
-        let latitude: Double
-        let longitude: Double
-        
-        var locationCoordinate: LocationCoordinate2D {
-            return LocationCoordinate2D(latitude: latitude,
-                                        longitude: longitude)
-        }
-        
-        init(_ coordinate: LocationCoordinate2D) {
-            self.latitude = coordinate.latitude
-            self.longitude = coordinate.longitude
-        }
+    /**
+     Returns all self-intersection coordinates within the line string.
+     
+     This property is equivalent to the [turf-kinks](https://turfjs.org/docs/#kinks) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-kinks/)).
+     */
+    public var selfIntersections: [LocationCoordinate2D] {
+        let isClosed = coordinates.count > 2 && coordinates.first == coordinates.last
+        return Turf.selfIntersections(for: [coordinates], areClosed: isClosed)
     }
 }

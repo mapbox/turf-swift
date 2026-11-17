@@ -58,3 +58,14 @@ extension MultiLineString: Codable {
         try encodeForeignMembers(notKeyedBy: CodingKeys.self, to: encoder)
     }
 }
+
+extension MultiLineString {
+    /**
+     Returns all self-intersection coordinates within the multi-line string (including within each line string and between line strings).
+     
+     This property is equivalent to the [turf-kinks](https://turfjs.org/docs/#kinks) package of Turf.js ([source code](https://github.com/Turfjs/turf/tree/master/packages/turf-kinks/)).
+     */
+    public var selfIntersections: [LocationCoordinate2D] {
+        return Turf.selfIntersections(for: coordinates, areClosed: false)
+    }
+}

@@ -612,4 +612,54 @@ class PolygonTests: XCTestCase {
 
         XCTAssertEqual(smoothed.coordinates, expected)
     }
+    
+    func testSelfIntersections() {
+        // Non-intersecting convex polygon
+        let cleanPolygon = Polygon([[
+            LocationCoordinate2D(latitude: 0, longitude: 0),
+            LocationCoordinate2D(latitude: 2, longitude: 0),
+            LocationCoordinate2D(latitude: 2, longitude: 2),
+            LocationCoordinate2D(latitude: 0, longitude: 2),
+            LocationCoordinate2D(latitude: 0, longitude: 0),
+        ]])
+        XCTAssertTrue(cleanPolygon.selfIntersections.isEmpty)
+        XCTAssertTrue(cleanPolygon.outerRing.selfIntersections.isEmpty)
+        XCTAssertTrue(Turf.kinks(cleanPolygon).isEmpty)
+
+        // Bowtie / figure-8 self-intersecting polygon
+        let bowtie = Polygon([[
+            LocationCoordinate2D(latitude: 0, longitude: 0),
+            LocationCoordinate2D(latitude: 2, longitude: 2),
+            LocationCoordinate2D(latitude: 0, longitude: 2),
+            LocationCoordinate2D(latitude: 2, longitude: 0),
+            LocationCoordinate2D(latitude: 0, longitude: 0),
+        ]])
+        let bowtieIntersections = bowtie.selfIntersections
+        XCTAssertEqual(bowtieIntersections.count, 1)
+        XCTAssertEqual(bowtieIntersections.first?.latitude, 1.0)
+        XCTAssertEqual(bowtieIntersections.first?.longitude, 1.0)
+        XCTAssertEqual(Turf.kinks(bowtie), bowtieIntersections)
+
+        // Polygon with hole that intersects the outer ring
+        let intersectingHole = Polygon([
+            [
+                LocationCoordinate2D(latitude: 0, longitude: 0),
+                LocationCoordinate2D(latitude: 4, longitude: 0),
+                LocationCoordinate2D(latitude: 4, longitude: 4),
+                LocationCoordinate2D(latitude: 0, longitude: 4),
+                LocationCoordinate2D(latitude: 0, longitude: 0),
+            ],
+            [
+                LocationCoordinate2D(latitude: 3, longitude: 3),
+                LocationCoordinate2D(latitude: 5, longitude: 3),
+                LocationCoordinate2D(latitude: 5, longitude: 5),
+                LocationCoordinate2D(latitude: 3, longitude: 5),
+                LocationCoordinate2D(latitude: 3, longitude: 3),
+            ]
+        ])
+        let holeIntersections = intersectingHole.selfIntersections
+        XCTAssertEqual(holeIntersections.count, 2)
+        XCTAssertTrue(holeIntersections.contains(LocationCoordinate2D(latitude: 4, longitude: 3)))
+        XCTAssertTrue(holeIntersections.contains(LocationCoordinate2D(latitude: 3, longitude: 4)))
+    }
 }
