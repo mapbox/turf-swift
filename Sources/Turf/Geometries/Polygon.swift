@@ -271,11 +271,7 @@ extension Polygon {
      */
     public var center: LocationCoordinate2D? {
         // This implementation is a port of: https://github.com/Turfjs/turf/blob/89505bf5df83dfde95a96de7c9abcdfd22ce5f63/packages/turf-center/index.ts
-        return BoundingBox(from: outerRing.coordinates)
-            .map { .init(
-                latitude: ($0.southWest.latitude + $0.northEast.latitude) / 2,
-                longitude: ($0.southWest.longitude + $0.northEast.longitude) / 2
-            ) }
+        return BoundingBox(from: outerRing.coordinates)?.center
     }
 
     /**
